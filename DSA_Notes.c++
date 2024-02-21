@@ -17,6 +17,259 @@ public:
     }
 };
 
+2769. Find the Maximum Achievable Number
+class Solution {
+public:
+    int theMaximumAchievableX(int num, int t) 
+    {
+      return (num + (2*t));
+    }
+};
+
+2520. Count the Digits That Divide a Number
+class Solution {
+public:
+    int countDigits(int num) 
+    {
+        int ans = 0;
+        int temp = num;
+        while(temp > 0)
+        {
+            int mod = temp%10;
+            temp = temp/10; 
+            if(num%mod == 0)
+            {
+                ans++;
+            }
+        } 
+        return ans;   
+    }
+};
+
+1342. Number of Steps to Reduce a Number to Zero
+class Solution {
+public:
+    int numberOfSteps(int num) 
+    {
+        int ans = 0;
+        while(num != 0)
+        {
+            ans++;
+            if(num%2 == 0)
+            {
+                num = num/2;
+            }
+            else
+            {
+                num = num-1;
+            }    
+        }
+        return ans;
+    }
+};
+
+2180. Count Integers With Even Digit Sum
+class Solution {
+public:
+    int digitSum(int n)
+    {
+      int digit_sum = 0;
+      while(n > 0)
+      {
+        digit_sum = digit_sum + (n%10);
+        n = n/10;
+      }
+      return digit_sum;
+    }
+    int countEven(int num) 
+    {
+      int ans = 0;
+      while(num > 0)
+      {
+        int sum = digitSum(num);
+        if(sum%2 == 0)
+        {
+          ans++;
+        }
+        num--;
+      }
+      return ans; 
+    }
+};
+
+2119. A Number After a Double Reversal
+class Solution {
+public:
+    int reverseNumber(int n)
+    {
+      int reverse = 0;
+      while(n > 0)
+      {
+        reverse = reverse * 10 + (n%10);
+        n = n/10;
+      }
+      return reverse;
+    }
+    bool isSameAfterReversals(int num) 
+    {
+      int n = num;
+      n = reverseNumber(n);
+      n = reverseNumber(n);
+      if(n == num)
+      {
+        return true;
+      }
+      else
+      {
+        return false;
+      }
+    }
+};
+
+2544. Alternating Digit Sum
+class Solution {
+public:
+    int alternateDigitSum(int n) 
+    {
+        int ans = 0;
+        string s = to_string(n);
+        for(int i=0 ; i<s.size() ; i++)
+        {
+            int num = (s[i] - '0');
+            if(i%2 != 0)
+            {
+                ans = ans - s[i];
+            }
+            else
+            {  
+                ans = ans + s[i];
+            }
+        }  
+        return ans;  
+    }
+};
+
+1688. Count of Matches in Tournament
+class Solution {
+public:
+    int numberOfMatches(int n) 
+    {
+        int matches = 0;
+        while(n > 1)
+        {
+            if(n%2 == 0)
+            {
+                matches = matches + (n/2);
+                n = (n/2);
+            }
+            else
+            {
+                matches = matches + (n/2);
+                n = (n/2) + 1;
+            } 
+        }
+        return matches;   
+    }
+};
+
+1523. Count Odd Numbers in an Interval Range
+class Solution {
+public:
+    int countOdds(int low, int high) 
+    {
+      int ans = 0;
+      for(int i=low ; i<=high ; i++)
+      {
+        if(i%2 != 0)
+        {
+          ans++;
+        }
+      }  
+      return ans;  
+    }
+};
+
+2169. Count Operations to Obtain Zero
+class Solution {
+public:
+    int countOperations(int num1, int num2) 
+    {
+      int operation = 0;
+      while(num1 > 0 && num2 > 0)  
+      {
+        if(num1 > num2)
+        {
+          num1 = num1 - num2;
+          operation++;
+        }
+        else
+        {
+          num2 = num2 - num1;
+          operation++;
+        }
+      }
+      return operation;
+    }
+};
+
+2651. Calculate Delayed Arrival Time
+class Solution {
+public:
+    int findDelayedArrivalTime(int arrivalTime, int delayedTime) 
+    {
+        int ans = arrivalTime + delayedTime;
+        if (ans >= 24)
+        {
+            return (ans - 24);
+        } 
+        else
+        {
+            return ans;
+        }
+    }
+};
+
+1518. Water Bottles
+class Solution {
+public:
+    int numWaterBottles(int numBottles, int numExchange) 
+    {
+        int sum = numBottles;
+        while(numBottles >= numExchange)
+        {
+            int quotient = numBottles/numExchange;
+            int rem = numBottles%numExchange;
+            sum = sum + quotient;
+            numBottles = quotient + rem;
+        }  
+        return sum;  
+    }
+};
+
+507. Perfect Number
+class Solution {
+public:
+    bool checkPerfectNumber(int num) 
+    {
+      int sum = 0;
+      for(int i=1 ; i<num ; i++)
+      {
+        if(num % i == 0)
+        {
+          sum = sum + i;
+        }
+      }  
+      if(sum == num)  
+      {
+        return true;
+      }
+      else
+      {
+        return false;
+      }
+    }
+};
+
 231. Power of Two
 class Solution {
 public:
@@ -51,6 +304,25 @@ public:
         x = x / 10;
       }
       return ans;    
+    }
+};
+
+258. Add Digits
+class Solution {
+public:
+    int addDigits(int num) 
+    {
+      if(num / 10 == 0)
+      {
+        return num;
+      }
+      int sum = 0;
+      while(num > 0)
+      {
+        sum = sum + num % 10;
+        num = num / 10;
+      } 
+      return addDigits(sum);
     }
 };
 
@@ -144,6 +416,64 @@ public:
     }
 };
 
+728. Self Dividing Numbers
+class Solution {
+public:
+    vector<int> selfDividingNumbers(int left, int right) 
+    {
+      vector<int> ans;
+      for(int i=left ; i<=right ; i++)
+      {
+        int temp = i;
+        int flag = 0;
+        while(temp > 0)
+        {
+          int digit = temp%10;
+          if( digit == 0 || i%digit != 0)
+          {
+            flag = 1;
+            break;
+          }
+          else
+          {
+            temp = temp/10;
+          }
+        }
+        if(flag == 0)
+        {
+          ans.push_back(i);
+        }
+      }    
+      return ans;
+    }
+};
+
+2455. Average Value of Even Numbers That Are Divisible by Three
+class Solution {
+public:
+    int averageValue(vector<int>& nums) 
+    {
+      int sum = 0;
+      int n = 0;
+      for(int i=0 ; i<nums.size() ; i++)
+      {
+        if(nums[i]%2 == 0 && nums[i]%3 == 0)
+        {
+          sum = sum + nums[i];
+          n++;
+        }
+      }
+      if(n == 0)
+      {
+        return 0;
+      }
+      else
+      {
+        return (sum/n);   
+      }
+    }
+};
+
 268. Missing Number
 class Solution {
 public:
@@ -157,6 +487,26 @@ public:
             current_sum = current_sum + nums[i];
         }
         return (expected_sum - current_sum);
+    }
+};
+
+1979. Find Greatest Common Divisor of Array
+class Solution {
+public:
+    int gcd(int n1 , int n2)
+    {
+      while(n2 != 0)
+      {
+        int rem = n1 % n2;
+        n1 = n2;
+        n2 = rem;
+      }
+      return n1;
+    }
+    int findGCD(vector<int>& nums) 
+    {
+      sort( nums.begin() , nums.end() , greater<int>() );
+      return gcd( nums[0] , nums[nums.size()-1] );
     }
 };
 
@@ -176,6 +526,412 @@ public:
             ans = ans^nums[i];
         } 
         return ans; 
+    }
+};
+
+1287. Element Appearing More Than 25% In Sorted Array
+class Solution {
+public:
+    int findSpecialInteger(vector<int>& arr) 
+    {
+      int ans = 0;
+      for(int i=0 ; i<arr.size() ; i++)
+      {
+        int count = 0;
+        for(int j=i ; j<arr.size() ; j++)
+        {
+          if(arr[i] == arr[j])
+          {
+            count++;
+          }
+        }
+        if(count > arr.size()/4)
+        {
+          ans = arr[i];
+        }
+      }
+      return ans;    
+    }
+};
+
+1619. Mean of Array After Removing Some Elements
+class Solution {
+public:
+    double trimMean(vector<int>& arr) 
+    {
+      int start = arr.size()/20;
+      int end = arr.size() - start;
+      double sum = 0;
+      double count = arr.size() - arr.size()/10;
+      sort(arr.begin() , arr.end());
+      for(int i=start ; i<end ; i++)
+      {
+        sum = sum + arr[i];
+      }
+      return sum/count;
+    }
+};
+
+283. Move Zeroes
+class Solution {
+public:
+    void moveZeroes(vector<int>& nums) 
+    {
+      int left = 0;
+      int right = 0;
+      for(int i=0 ; i<nums.size() ; i++)
+      {
+        if(nums[right] == 0)
+        {
+          right++;
+        }  
+        else if(nums[right] != 0)
+        {
+          swap(nums[left] , nums[right]);
+          left++;
+          right++;
+        }
+      } 
+    }
+};
+
+169. Majority Element
+class Solution {
+public:
+    int majorityElement(vector<int>& nums) 
+    {
+      int majority_element = nums[0];
+      int count = 1;
+      for(int i=1 ; i<nums.size() ; i++)
+      {
+        if(nums[i] == majority_element)
+        {
+          count++;
+        }
+        else
+        {
+          count--;
+          if(count == 0)
+          {
+            majority_element = nums[i];
+            count++;
+          }
+        }
+      }
+      return majority_element;    
+    }
+};
+
+1491. Average Salary Excluding the Minimum and Maximum Salary
+class Solution {
+public:
+    double average(vector<int>& salary) 
+    {
+      double sum = 0;
+      double count = 0;
+      sort(salary.begin() , salary.end());
+      for(int i=1 ; i<salary.size()-1 ; i++)
+      {
+        sum = sum + salary[i];
+        count++;
+      }    
+      return sum/count;
+    }
+};
+
+2460. Apply Operations to an Array
+class Solution {
+public:
+    vector<int> applyOperations(vector<int>& nums) 
+    {
+      vector<int> ans;
+     for(int i=0 ; i<nums.size()-1 ; i++)
+     {
+       if(nums[i] == nums[i+1])
+       {
+         nums[i] = nums[i] * 2;
+         nums[i+1] = 0;
+       }
+     }
+     for(int i=0 ; i<nums.size() ; i++)
+     {
+      if(nums[i] != 0)
+      {
+        ans.push_back(nums[i]);
+      }
+     } 
+     for(int i=0 ; i<nums.size() ; i++)
+     {
+      if(nums[i] == 0)
+      {
+        ans.push_back(nums[i]);
+      }
+     }
+     return ans;  
+    }
+};
+
+2148. Count Elements With Strictly Smaller and Greater Elements 
+class Solution {
+public:
+    int countElements(vector<int>& nums) 
+    {
+      int count = 0;
+      sort(nums.begin() , nums.end());
+      for(int i=1 ; i<nums.size()-1 ; i++)
+      {
+        if(nums[0] < nums[i] && nums[i] < nums[nums.size()-1])
+        {
+          count++;
+        }
+      }
+      return count;    
+    }
+};
+
+1394. Find Lucky Integer in an Array
+class Solution {
+public:
+    int findLucky(vector<int>& arr) 
+    {
+      sort(arr.begin() , arr.end());
+      int ans = -1;
+      for(int i=0 ; i<arr.size() ; i++)
+      {
+        int count = 0;
+        for(int j=0 ; j<arr.size() ; j++)
+        {
+          if(arr[i] == arr[j])
+          {
+            count++;
+          }
+        }
+        if(count == arr[i])
+        {
+          ans = arr[i];
+        }
+      }
+      return ans;    
+    }
+};
+
+2778. Sum of Squares of Special Elements 
+class Solution {
+public:
+    int sumOfSquares(vector<int>& nums) 
+    {
+      int ans = 0;
+      int n = nums.size();
+      for(int i=0 ; i<n ; i++)
+      {
+        if(n % (i+1) == 0)
+        {
+          ans = ans + (nums[i] * nums[i]);
+        }
+      }
+      return ans;    
+    }
+};
+
+1748. Sum of Unique Elements
+class Solution {
+public:
+    int sumOfUnique(vector<int>& nums) {
+      int sum = 0;
+      for(int i=0 ; i<nums.size() ; i++)
+      {
+        int flag = 0;
+        for(int j=0 ; j<nums.size() ; j++)
+        {
+          if(nums[i] == nums[j])
+          {
+            flag++;
+          }
+        }
+        if(flag == 1)
+        {
+          sum = sum + nums[i];
+        }
+      }
+      return sum;
+    }
+};
+
+2656. Maximum Sum With Exactly K Elements 
+class Solution {
+public:
+    int maximizeSum(vector<int>& nums, int k) 
+    {
+      int sum = 0;
+      sort(nums.begin() , nums.end());
+      for(int i=0 ; i<k ; i++)
+      {
+        sum = sum + nums[nums.size()-1];
+        nums[nums.size()-1] = nums[nums.size()-1] + 1;
+      }
+      return sum;
+    }
+};
+
+2824. Count Pairs Whose Sum is Less than Target
+class Solution {
+public:
+    int countPairs(vector<int>& nums, int target) 
+    {
+      int count = 0;
+      for(int i=0 ; i<nums.size() ; i++)
+      {
+        for(int j=i+1 ; j<nums.size() ; j++)
+        {
+          if(nums[i] + nums[j] < target)
+          {
+            count++;
+          }
+        }
+      }
+      return count;    
+    }
+};
+
+2176. Count Equal and Divisible Pairs in an Array
+class Solution {
+public:
+    int countPairs(vector<int>& nums, int k) 
+    {
+      int ans = 0;
+      for(int i=0 ; i<nums.size() ; i++)
+      {
+        for(int j=i+1 ; j<nums.size() ; j++)
+        {
+          if( nums[i] == nums[j] && (i*j)%k ==0 )
+          {
+            ans++;
+          }
+        }
+      }
+      return ans;   
+    }
+};
+
+2006. Count Number of Pairs With Absolute Difference K
+class Solution {
+public:
+    int countKDifference(vector<int>& nums, int k) 
+    {
+      int ans = 0;
+      for(int i=0 ; i<nums.size() ; i++)
+      {
+        for(int j=i+1 ; j<nums.size() ; j++)
+        {
+          if( abs(nums[i] - nums[j]) == k )
+          {
+            ans++;
+          }
+        }
+      }
+      return ans;    
+    }
+};
+
+2485. Find the Pivot Integer
+class Solution {
+public:
+    int pivotInteger(int n) 
+    {
+      if(n == 1)
+      {
+        return 1;
+      }
+      int sum = n*(n+1)/2;
+      if( ceil(sqrt(sum)) == floor(sqrt(sum)) )
+      {
+        return sqrt(sum);
+      }
+      else
+      {
+        return -1;
+      }   
+    }
+};
+
+1450. Number of Students Doing Homework at a Given Time
+class Solution {
+public:
+    int busyStudent(vector<int>& startTime, vector<int>& endTime, int queryTime) 
+    {
+      int ans = 0;
+      for(int i=0 ; i<startTime.size() ; i++)
+      {
+        if(queryTime >= startTime[i] && queryTime <= endTime[i])
+        {
+          ans++;
+        }
+      }
+      return ans;    
+    }
+};
+
+2733. Neither Minimum nor Maximum
+class Solution {
+public:
+    int findNonMinOrMax(vector<int>& nums) 
+    {
+      sort(nums.begin() , nums.end());
+      for(int i=1 ; i<nums.size()-1 ; i++)
+      {
+        if(nums[i] > nums[0] && nums[i] < nums[nums.size()-1])
+        {
+          return nums[i];
+        }
+      }
+      return -1;    
+    }
+};
+
+1295. Find Numbers with Even Number of Digits
+class Solution {
+public:
+    int findNumbers(vector<int>& nums) 
+    {
+      int ans = 0;
+      for(int i=0 ; i<nums.size() ; i++)
+      {
+        int digits = 0;
+        while(nums[i] > 0)
+        {
+          digits++;
+          nums[i] = nums[i]/10;
+        }
+        if(digits % 2 == 0)
+        {
+          ans++;
+        }
+      }
+      return ans;    
+    }
+};
+
+238. Product of Array Except Self
+class Solution {
+public:
+    vector<int> productExceptSelf(vector<int>& nums) 
+    {
+      int product = 1;
+      int n = nums.size();
+      vector<int> ans;
+      for(int i=0 ; i<n ; i++)
+      {
+        product = product * nums[i];
+        ans.push_back(product);
+      }
+      product = 1;
+      for(int i=n-1 ; i>0 ; i--)
+      {
+        ans[i] = ans[i-1] * product;
+        product = product * nums[i];
+      }
+      ans[0] = product;
+      return ans; 
     }
 };
 
@@ -364,6 +1120,25 @@ public:
         }
       }
       return steps;      
+    }
+};
+
+1299. Replace Elements with Greatest Element on Right Side
+class Solution {
+public:
+    vector<int> replaceElements(vector<int>& arr) 
+    {
+      int greatest = -1;
+      for(int i=arr.size()-1 ; i>=0 ; i--)
+      {
+        int temp = arr[i];
+        arr[i] = greatest;
+        if(temp > greatest)
+        {
+          greatest = temp;
+        }
+      }
+      return arr;    
     }
 };
 
@@ -580,6 +1355,62 @@ public:
 // LEETCODE - MATRIX
 // LEETCODE - STRING
 
+1221. Split a String in Balanced Strings
+class Solution {
+public:
+    int balancedStringSplit(string s) 
+    {
+      int count_R = 0;
+      int count_L = 0;
+      int ans = 0;
+      for(int i=0 ; i<s.size() ; i++)
+      {
+        if(s[i] == 'R')
+        {
+          count_R++;
+        }
+        else
+        {
+          count_L++;
+        }
+        if(count_R == count_L)
+        {
+          ans++;
+        }
+      }
+      return ans;    
+    }
+};
+
+1945. Sum of Digits of String After Convert
+class Solution {
+public:
+    string sum_of_digits(string temp)
+    {
+      int sum = 0;
+      for(int i=0 ; i<temp.size() ; i++)
+      {
+        sum = sum + (temp[i] - 48);
+      }
+      return to_string(sum);
+    }
+
+    int getLucky(string s, int k) 
+    {
+      string temp;
+      for(int i=0 ; i<s.size() ; i++)
+      {
+        temp = temp + to_string(s[i] - 96);
+      } 
+      while(k > 0)
+      {
+        temp = sum_of_digits(temp);
+        k--;
+      } 
+      return stoi(temp);   
+    }
+};
+
 1844. Replace All Digits with Characters
 class Solution {
 public:
@@ -597,6 +1428,37 @@ public:
         }
       }
       return ans;
+    }
+};
+
+2496. Maximum Value of a String in an Array
+class Solution {
+public:
+    int maximumValue(vector<string>& strs) 
+    {
+      int max_length = 0;
+      for(int i=0 ; i<strs.size() ; i++)
+      {
+        int length = 0;
+        string s = strs[i];
+        for(int j=0 ; j<s.size() ; j++)
+        {
+          if( (s[j] >= 65 && s[j] <= 90) || (s[j] >= 97 && s[j] <= 122) )
+          {
+            length = s.length();
+            break;
+          }
+          else
+          {
+            length = stoi(s);
+          }
+        }
+        if(length > max_length)
+        {
+          max_length = length;
+        }
+      }
+      return max_length;    
     }
 };
 
@@ -633,6 +1495,40 @@ public:
 };
 
 // LEETCODE - LINKED LIST
+
+2807. Insert Greatest Common Divisors in Linked List
+class Solution {
+public:
+    int gcd(int n1 , int n2)
+    {
+      if(n2 == 0)
+      {
+        return n1;
+      }
+      return gcd(n2 , n1 % n2);
+    }
+    ListNode* insertGreatestCommonDivisors(ListNode* head) 
+    {
+      ListNode* ptr = head;
+      while(ptr->next != NULL)
+      {
+        ListNode* temp = new ListNode( gcd(ptr->val , ptr->next->val) );
+        temp->next = ptr->next;
+        ptr->next = temp;
+        ptr = temp->next;
+      }
+      return head;    
+    }
+};
+
+237. Delete Node in a Linked List
+class Solution {
+public:
+    void deleteNode(ListNode* node) {
+      node->val = node->next->val;
+      node->next = node->next->next;
+    }
+};
 
 141. Linked List Cycle
 class Solution {
@@ -820,8 +1716,188 @@ public:
 };
 
 // LEETCODE - QUEUES
+// LEETCODE - TREES
 
+222. Count Complete Tree Nodes
+class Solution {
+public:
+    int countNodes(TreeNode* root) 
+    {
+      if(root == NULL)
+      {
+        return 0;
+      }
+      else
+      {
+        return ( countNodes(root->left) + countNodes(root->right) + 1 );
+      }
+    }
+};
 
+104. Maximum Depth of Binary Tree
+class Solution {
+public:
+
+    int maxDepth(TreeNode* root) {
+        if(root == NULL)
+        {
+          return 0;
+        }
+        else
+        {
+          int left = maxDepth(root->left);
+          int right = maxDepth(root->right);
+          int ans = max(left , right) + 1;
+          return ans;
+        }
+    }
+};
+
+94. Binary Tree Inorder Traversal
+class Solution {
+public:
+    void InOrderTraversal(TreeNode* root)
+    {
+      if(root != NULL)
+      {
+        InOrderTraversal(root->left);
+        ans.push_back(root->val);
+        InOrderTraversal(root->right);
+      }
+    }
+    vector<int> ans;
+    vector<int> inorderTraversal(TreeNode* root) {
+      if(root == NULL)
+      {
+        return ans;
+      }
+      else
+      {
+        InOrderTraversal(root);
+        return ans;
+      }
+    }
+};
+
+144. Binary Tree Preorder Traversal
+class Solution {
+public:
+    void PreOrderTraversal(TreeNode* root)
+    {
+      if(root != NULL)
+      {
+        ans.push_back(root->val);
+        PreOrderTraversal(root->left);
+        PreOrderTraversal(root->right);
+      }
+    }
+    vector<int> ans;
+    vector<int> preorderTraversal(TreeNode* root) {
+      if(root == NULL)
+      {
+        return ans;
+      }
+      else
+      {
+        PreOrderTraversal(root);
+        return ans;
+      }
+    }
+};
+
+145. Binary Tree Postorder Traversal
+class Solution {
+public:
+    void PostOrderTraversal(TreeNode* root)
+    {
+      if(root != NULL)
+      {
+        PostOrderTraversal(root->left);
+        PostOrderTraversal(root->right);
+        ans.push_back(root->val);
+      }
+    }
+    vector<int> ans;
+    vector<int> postorderTraversal(TreeNode* root) {
+        if(root == NULL)
+        {
+          return ans;
+        }
+        else
+        {
+          PostOrderTraversal(root);
+          return ans;
+        }
+    }
+};
+
+110. Balanced Binary Tree
+class Solution {
+public:
+    int height(TreeNode* root)
+    {
+        if(root == NULL)
+        {
+          return 0;
+        }
+        else
+        {
+          int left = height(root->left);
+          int right = height(root->right);
+          int ans = max(left , right) + 1;
+          return ans;
+        }
+    }
+    bool isBalanced(TreeNode* root) 
+    {
+      if(root == NULL)
+      {
+        return true;
+      }  
+      bool left = isBalanced(root->left);
+      bool right = isBalanced(root->right);
+      bool difference = abs(height(root->left) - height(root->right)) <= 1;
+      if(left && right && difference)
+      {
+        return true;
+      }
+      else
+      {
+        return false;
+      }
+    }
+};
+
+938. Range Sum of BST
+class Solution {
+public:
+    int rangeSumBST(TreeNode* root, int low, int high) 
+    {
+      int ans = 0;
+      queue<TreeNode*> q;
+      q.push(root);
+      while(!q.empty())
+      {
+        TreeNode* temp = q.front();
+        if(temp->val >= low && temp->val <= high)
+        {
+          ans = ans + temp->val;
+        }
+        q.pop();
+
+        if(temp->left)
+        {
+          q.push(temp->left);
+        }
+
+        if(temp->right)
+        {
+          q.push(temp->right);
+        }
+      }
+      return ans;
+    }
+};
 
 
 
