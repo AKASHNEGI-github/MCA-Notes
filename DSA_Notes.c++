@@ -529,6 +529,41 @@ public:
     }
 };
 
+349. Intersection of Two Arrays
+class Solution {
+public:
+    bool search(vector<int> v , int key)
+    {
+        for(int i=0 ; i<v.size() ; i++)
+        {
+            if(v[i] == key)
+            {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    vector<int> intersection(vector<int>& nums1, vector<int>& nums2) 
+    {
+        vector<int> ans;
+        for(int i=0 ; i<nums1.size() ; i++)
+        {
+            for(int j=0 ; j<nums2.size() ; j++)
+            {
+                if(nums1[i] == nums2[j])
+                {
+                    if(! search(ans , nums1[i]))
+                    {
+                        ans.push_back(nums1[i]);
+                    }
+                }
+            }
+        }  
+        return ans;  
+    }
+};
+
 1287. Element Appearing More Than 25% In Sorted Array
 class Solution {
 public:
