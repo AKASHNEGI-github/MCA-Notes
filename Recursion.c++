@@ -51,6 +51,16 @@ int powerOfTwo(int n)
     return 2 * powerOfTwo(n-1);
 }
 
+void PrintDigits(int n)
+{
+    if(n == 0)
+    {
+        return;
+    }
+    PrintDigits(n/10);
+    cout << n%10 << " ";
+}
+
 int min(int arr[] , int size)
 {
     if(size == 1)
