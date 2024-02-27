@@ -61,48 +61,60 @@ void PrintDigits(int n)
     cout << n%10 << " ";
 }
 
-int min(int arr[] , int size)
+int climbStairs(int n)
 {
-    if(size == 1)
+    if(n == 0 || n == 1)
     {
-        return arr[0];
+        return 1;
     }
-    return min(arr[size-1] , min(arr , size-1));
+    return climbStairs(n-1) + climbStairs(n-2);
 }
 
-int max(int arr[] , int size)
+void printAray(int arr[] , int size , int i)
 {
-    if(size == 1)
+    if(i >= size)
     {
-        return arr[0];
+        return;
     }
-    return max(arr[size-1] , max(arr , size-1));
+    cout << arr[i] << " ";
+    printAray(arr , size , i+1);
 }
 
-/*
-int max(int arr[] , int size)
+int max(int arr[] , int size , int i , int maxi)
 {
-    int maxi = INT_MIN;
-    if(size == 0)
+    if(i >= size)
     {
         return maxi;
     }
-    if(arr[size-1] > max(arr , size-1))
+    if(arr[i] > maxi)
     {
-        return arr[size-1];
+        maxi = arr[i];
     }
+    return max(arr , size , i+1 , maxi);
 }
-*/
 
-int search(int arr[] , int size , int key)
+int min(int arr[] , int size , int i ,  int mini)
 {
-    if(size == 0)
+    if(i >= size)
+    {
+        return mini;
+    }
+    if(arr[i] < mini)
+    {
+        mini = arr[i];
+    }
+    return min(arr , size , i+1 , mini);
+}
+
+int search(int arr[] , int size , int i , int key)
+{
+    if(i >= size)
     {
         return -1;
     }
-    if(arr[size-1] == key)
+    if(arr[i] == key)
     {
-        return size-1;
+        return i;
     }
-    return search(arr , size-1 , key);
+    return search(arr , size , i+1 , key);
 }
