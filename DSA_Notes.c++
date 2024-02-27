@@ -390,6 +390,28 @@ public:
 
 // LEETCODE - ARRAYS
 
+2553. Separate the Digits in an Array
+class Solution {
+public:
+    vector<int> separateDigits(vector<int>& nums) {
+      vector<int> ans;
+      for(int i=0; i<nums.size(); i++)
+      {
+        vector<int> temp;
+        while(nums[i] > 0)
+        {
+          temp.push_back(nums[i]%10);
+          nums[i] = nums[i]/10;
+        }
+        for(int j=temp.size()-1; j>=0; j--)
+        {
+          ans.push_back(temp[j]);
+        }
+      }
+      return ans;
+    }
+};
+
 66. Plus One
 class Solution {
 public:
@@ -1693,6 +1715,51 @@ public:
 
 // LEETCODE - LINKED LIST
 
+1290. Convert Binary Number in a Linked List to Integer
+class Solution {
+public:
+    int getDecimalValue(ListNode* head) {
+      int ans = 0;
+      vector<int> v;
+      ListNode* ptr = head;
+      while(ptr != NULL)
+      {
+        v.push_back(ptr->val);
+        ptr = ptr->next;
+      }
+      int n = 0;
+      for(int i=v.size()-1; i>=0; i--)
+      {
+        ans = ans + ( pow(2 , n) * v[i] );
+        n++;
+      }
+      return ans;
+    }
+};
+
+328. Odd Even Linked List
+class Solution {
+public:
+    ListNode* oddEvenList(ListNode* head) {
+      if(head == NULL || head->next == NULL)
+      {
+        return head;
+      }
+      ListNode* odd = head;
+      ListNode* even = head->next;
+      ListNode* evenstart = even;
+      while(odd->next != NULL && even->next != NULL)
+      {
+        odd->next = even->next;
+        odd = odd->next;
+        even->next = odd->next;
+        even = even->next;
+      }
+      odd->next = evenstart;
+      return head;
+    }
+};
+
 2807. Insert Greatest Common Divisors in Linked List
 class Solution {
 public:
@@ -1724,6 +1791,50 @@ public:
     void deleteNode(ListNode* node) {
       node->val = node->next->val;
       node->next = node->next->next;
+    }
+};
+
+2095. Delete the Middle Node of a Linked List
+class Solution {
+public:
+    ListNode* deleteMiddle(ListNode* head) {
+      int count = 0;
+      ListNode* ptr = head;
+      if(head->next == NULL)
+      {
+        return NULL;
+      }
+      while(ptr != NULL)
+      {
+        count++;
+        ptr = ptr->next;
+      }
+      int mid = count/2;
+      count = 0;
+      ptr = head;
+      ListNode* preptr = ptr;
+      while(count != mid)
+      {
+        count++;
+        preptr = ptr;
+        ptr = ptr->next;
+      } 
+      preptr->next = ptr->next;
+      return head;
+    }
+};
+
+24. Swap Nodes in Pairs
+class Solution {
+public:
+    ListNode* swapPairs(ListNode* head) {
+      ListNode* ptr = head;
+      while(ptr != NULL && ptr->next != NULL)
+      {
+        swap(ptr->val , ptr->next->val);
+        ptr = ptr->next->next;
+      }
+      return head;
     }
 };
 
