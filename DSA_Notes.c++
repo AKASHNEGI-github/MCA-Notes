@@ -1032,6 +1032,34 @@ public:
     }
 };
 
+class Solution {
+public:
+    void sortColors(vector<int>& nums) 
+    {
+        int low = 0;
+        int mid = 0;
+        int high = nums.size()-1;
+        while(mid <= high)
+        {
+            if(nums[mid] == 0)
+            {
+                swap(nums[low] , nums[mid]);
+                low++;
+                mid++;
+            }
+            else if(nums[mid] == 1)
+            {
+                mid++;
+            }
+            else if(nums[mid] == 2)
+            {
+                swap(nums[mid] , nums[high]);
+                high--;
+            }
+        }
+    }
+};
+
 1877. Minimize Maximum Pair Sum in Array
 class Solution {
 public:
@@ -1389,6 +1417,140 @@ public:
 
 // LEETCODE - MATRIX
 // LEETCODE - STRING
+
+125. Valid Palindrome
+class Solution {
+public:
+    bool isPalindrome(string s) 
+    {
+        string temp;
+        for(int i=0 ; i<s.size() ; i++)
+        {
+            if( (s[i] >= 'a' && s[i] <= 'z') || (s[i] >= '0' && s[i] <= '9') )
+            {
+                temp.push_back(s[i]);
+            }
+            else if(s[i] >= 'A' && s[i] <= 'Z')
+            {
+                temp.push_back(s[i] - 'A' + 'a');
+            }
+        }   
+        int start = 0;
+        int end = temp.size()-1;
+        while(start <= end)
+        {
+            if(temp[start++] != temp[end--])
+            {
+                return false;
+            }
+        } 
+        return true;
+    }
+};
+
+680. Valid Palindrome II
+class Solution {
+public:
+    bool checkPalindrome(string s , int start , int end)
+    {
+        while(start <= end)
+        {
+            if(s[start++] != s[end--])
+            {
+                return false;
+            }
+        }  
+        return true;  
+    }
+
+    bool validPalindrome(string s) 
+    {
+        int start = 0;
+        int end = s.size()-1;
+        while(start <= end)
+        {
+            if(s[start] != s[end])
+            {
+                return ( checkPalindrome(s , start+1 , end) || checkPalindrome(s , start , end-1) );
+            }
+            else
+            {
+                start++;
+                end--;
+            }
+        }  
+        return true;  
+    }
+};
+
+2942. Find Words Containing Character
+class Solution {
+public:
+    bool searchCharacter(string s , char c)
+    {
+        for(int i=0 ; i<s.size() ; i++)
+        {
+            if(s[i] == c)
+            {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    vector<int> findWordsContaining(vector<string>& words, char x) 
+    {
+        vector<int> ans;
+        for(int i=0 ; i<words.size() ; i++)
+        {
+            if( searchCharacter(words[i] , x) )
+            {
+                ans.push_back(i);
+            }
+        }    
+        return ans;
+    }
+};
+
+917. Reverse Only Letters
+class Solution {
+public:
+    bool isLetter(char c)
+    {
+        if( (c >= 'A' && c <= 'Z') || (c >= 'a' && c <= 'z') )
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+
+    string reverseOnlyLetters(string s) 
+    {
+        int start = 0;
+        int end = s.size()-1;
+        while(start < end)
+        {
+            if( isLetter(s[start]) && isLetter(s[end]) )
+            {
+                swap(s[start] , s[end]);
+                start++;
+                end--;
+            }
+            else if( !isLetter(s[start]) )
+            {
+                start++;
+            }
+            else if( !isLetter(s[end]) )
+            {
+                end--;
+            }
+        }   
+        return s; 
+    }
+};
 
 1221. Split a String in Balanced Strings
 class Solution {
