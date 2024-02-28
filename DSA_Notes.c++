@@ -26,6 +26,48 @@ public:
     }
 };
 
+9. Palindrome Number
+class Solution {
+public:
+    bool isPalindrome(int x) {
+      int original = x;
+      long reverse = 0;
+      if(x < 0)
+      {
+        return false;
+      }
+      while(x > 0)
+        {
+          reverse = reverse*10 + (x%10);
+          x = x/10;
+        }
+      if(original == reverse)
+      {
+        return true;
+      }
+      else
+      {
+        return false;
+      }
+    }
+};
+
+509. Fibonacci Number
+class Solution {
+public:
+    int fib(int n) {
+      if(n == 0)
+      {
+        return 0;
+      }
+      if(n == 1)
+      {
+        return 1;
+      }
+      return fib(n-1) + fib(n-2);
+    }
+};
+
 2520. Count the Digits That Divide a Number
 class Solution {
 public:
@@ -390,6 +432,275 @@ public:
 
 // LEETCODE - ARRAYS
 
+412. Fizz Buzz
+class Solution {
+public:
+    vector<string> fizzBuzz(int n) {
+      vector<string> ans;
+      for(int i=1; i<=n; i++)
+      {
+        if( (i%3 == 0) && (i%5 == 0) )
+        {
+          ans.push_back("FizzBuzz");
+        }
+        else if(i%3 == 0)
+        {
+          ans.push_back("Fizz");
+        }
+        else if(i%5 == 0)
+        {
+          ans.push_back("Buzz");
+        }
+        else
+        {
+          ans.push_back(to_string(i));
+        }
+      }
+      return ans;  
+    }
+};
+
+2529. Maximum Count of Positive Integer and Negative Integer
+class Solution {
+public:
+    int maximumCount(vector<int>& nums) {
+      int positive = 0;
+      int negative = 0;
+      for(int i=0; i<nums.size(); i++)
+      {
+        if(nums[i] > 0)
+        {
+          positive++;
+        }
+        if(nums[i] < 0)
+        {
+          negative++;
+        }
+      }
+      return max(positive , negative); 
+    }
+};
+
+977. Squares of a Sorted Array
+class Solution {
+public:
+    vector<int> sortedSquares(vector<int>& nums) {
+      vector<int> ans;
+      for(int i=0; i<nums.size(); i++)
+      {
+        ans.push_back(nums[i] * nums[i]);
+      }
+      sort(ans.begin() , ans.end());
+      return ans; 
+    }
+};
+
+2089. Find Target Indices After Sorting Array
+class Solution {
+public:
+    vector<int> targetIndices(vector<int>& nums, int target) {
+      vector<int> ans;
+      sort(nums.begin() , nums.end());
+      for(int i=0; i<nums.size(); i++)
+      {
+        if(nums[i] == target)
+        {
+          ans.push_back(i);
+        }
+      }
+      return ans; 
+    }
+};
+
+1051. Height Checker
+class Solution {
+public:
+    int heightChecker(vector<int>& heights) {
+      int ans = 0;
+      vector<int> v = heights;
+      sort(heights.begin() , heights.end());
+      for(int i=0; i<heights.size(); i++)
+      {
+        if(v[i] != heights[i])
+        {
+          ans++;
+        }
+      }
+      return ans;
+    }
+};
+
+1913. Maximum Product Difference Between Two Pairs
+class Solution {
+public:
+    int maxProductDifference(vector<int>& nums) {
+      sort(nums.begin() , nums.end() , greater<int>());
+      return ( (nums[0]*nums[1]) - (nums[nums.size()-1]*nums[nums.size()-2]) );
+    }
+};
+
+2652. Sum Multiples
+class Solution {
+public:
+    int sumOfMultiples(int n) {
+      int sum = 0;
+      for(int i=1; i<=n; i++)
+      {
+        if( (i%3 == 0) || (i%5 == 0) || (i%7 == 0) )
+        {
+          sum = sum + i;
+        }
+      }
+      return sum;  
+    }
+};
+
+1464. Maximum Product of Two Elements in an Array
+class Solution {
+public:
+    int maxProduct(vector<int>& nums) {
+      sort(nums.begin() , nums.end() , greater<int>());
+      return ((nums[0]-1) * (nums[1]-1));
+    }
+};
+
+1470. Shuffle the Array
+class Solution {
+public:
+    vector<int> shuffle(vector<int>& nums, int n) {
+      vector<int> ans;
+      for(int i=0; i<n; i++)
+      {
+        ans.push_back(nums[i]);
+        ans.push_back(nums[i+n]);
+      }
+      return ans; 
+    }
+};
+
+1732. Find the Highest Altitude
+class Solution {
+public:
+    int largestAltitude(vector<int>& gain) {
+      vector<int> v;
+      int sum = 0;
+      for(int i=0; i<gain.size(); i++)
+      {
+        v.push_back(sum);
+        sum = sum + gain[i];
+      }
+      v.push_back(sum);
+      return *max_element(v.begin() , v.end());
+    }
+};
+
+2574. Left and Right Sum Differences
+class Solution {
+public:
+    vector<int> leftRightDifference(vector<int>& nums) {
+      vector<int> leftSumArray;
+      vector<int> rightSumArray;
+      vector<int> ans;
+      int sum = 0;
+      for(int i=0; i<nums.size(); i++)
+      {
+        leftSumArray.push_back(sum);
+        sum = sum + nums[i];
+      }
+      for(int i=0; i<nums.size(); i++)
+      {
+        sum = sum - nums[i];
+        rightSumArray.push_back(sum);
+      }
+      for(int i=0; i<nums.size(); i++)
+      {
+        ans.push_back(abs(leftSumArray[i] - rightSumArray[i]));
+      }
+      return ans;
+    }
+};
+
+1672. Richest Customer Wealth
+class Solution {
+public:
+    int maximumWealth(vector<vector<int>>& accounts) {
+      int maxSum = 0;
+      for(int i=0; i<accounts.size(); i++)
+      {
+        int sum = 0;
+        for(int j=0; j<accounts[0].size(); j++)
+        {
+          sum = sum + accounts[i][j];
+        }
+        maxSum = max(maxSum , sum);
+      }
+      return maxSum;
+    }
+};
+
+1929. Concatenation of Array
+class Solution {
+public:
+    vector<int> getConcatenation(vector<int>& nums) {
+      vector<int> ans;
+      for(int i=0; i<nums.size(); i++)
+      {
+        ans.push_back(nums[i]);
+      }
+      for(int i=0; i<nums.size(); i++)
+      {
+        ans.push_back(nums[i]);
+      }
+      return ans; 
+    }
+};
+
+1512. Number of Good Pairs
+class Solution {
+public:
+    int numIdenticalPairs(vector<int>& nums) {
+      int pairs = 0;
+      for(int i=0; i<nums.size(); i++)
+      {
+        for(int j=0; j<nums.size(); j++)
+        {
+          if(nums[i] == nums[j] && i<j)
+          {
+            pairs++;
+          }
+        }
+      }
+      return pairs; 
+    }
+};
+
+704. Binary Search
+class Solution {
+public:
+    int search(vector<int>& nums, int target) 
+    {
+        int start = 0;
+        int end = nums.size()-1;
+        while(start <= end)
+        {
+            int mid = start + (end-start)/2;
+            if(nums[mid] == target)
+            {
+                return mid;
+            }
+            else if(target > nums[mid])
+            {
+                start = mid + 1;
+            }
+            else if(target < nums[mid])
+            {
+                end = mid - 1;
+            }
+        } 
+        return -1;
+    }
+};
+
 2553. Separate the Digits in an Array
 class Solution {
 public:
@@ -407,6 +718,19 @@ public:
         {
           ans.push_back(temp[j]);
         }
+      }
+      return ans;
+    }
+};
+
+1389. Create Target Array in the Given Order
+class Solution {
+public:
+    vector<int> createTargetArray(vector<int>& nums, vector<int>& index) {
+      vector<int> ans;
+      for(int i=0; i<nums.size(); i++)
+      {
+        ans.insert(ans.begin()+index[i] , nums[i]);
       }
       return ans;
     }
@@ -1440,6 +1764,48 @@ public:
 // LEETCODE - MATRIX
 // LEETCODE - STRING
 
+2114. Maximum Number of Words Found in Sentences
+class Solution {
+public:
+    int mostWordsFound(vector<string>& sentences) {
+      int maxWords = 0;
+      for(int i=0; i<sentences.size(); i++)
+      {
+        string innerSentences = sentences[i];
+        int words = 0;
+        for(int j=0; j<=innerSentences.size(); j++)
+        {
+          if(innerSentences[j] == ' ' || innerSentences[j] == '\0')
+          {
+            words++;
+          }
+        }
+        maxWords = max(maxWords , words);
+      }
+      return maxWords;
+    }
+};
+
+2011. Final Value of Variable After Performing Operations
+class Solution {
+public:
+    int finalValueAfterOperations(vector<string>& operations) {
+      int ans = 0;
+      for(int i=0; i<operations.size(); i++)
+      {
+        if(operations[i] == "++X" || operations[i] == "X++")
+        {
+          ans++;
+        }
+        else
+        {
+          ans--;
+        }
+      }
+      return ans; 
+    }
+};
+
 125. Valid Palindrome
 class Solution {
 public:
@@ -1650,6 +2016,112 @@ public:
     }
 };
 
+2586. Count the Number of Vowel Strings in Range
+class Solution {
+public:
+    int vowelStrings(vector<string>& words, int left, int right) {
+      int ans = 0;
+      for(int i=left; i<=right; i++)
+      {
+        string s = words[i];
+        if( (s[0] == 'a' || s[0] == 'e' || s[0] == 'i' || s[0] == 'o' || s[0] == 'u') && (s[s.size()-1] == 'a' || s[s.size()-1] == 'e' || s[s.size()-1] == 'i' || s[s.size()-1] == 'o' || s[s.size()-1] == 'u') )
+        {
+          ans++;
+        }
+      }
+      return ans; 
+    }
+};
+
+816. Truncate Sentence
+class Solution {
+public:
+    string truncateSentence(string s, int k) {
+      int count = 0;
+      string ans;
+      for(int i=0; i<s.size(); i++)
+      {
+        if(s[i] == ' ')
+        {
+          count++;
+        }
+        if(count == k)
+        {
+          break;
+        }
+        ans.push_back(s[i]);
+      }
+      return ans;
+    }
+};
+
+1313. Decompress Run-Length Encoded List
+class Solution {
+public:
+    vector<int> decompressRLElist(vector<int>& nums) {
+      vector<int> ans;
+      for(int i=0; i<nums.size()-1; i=i+2)
+      {
+        for(int j=0; j<nums[i]; j++)
+        {
+          ans.push_back(nums[i+1]);
+        }
+      }
+      return ans;  
+    }
+};
+
+1662. Check If Two String Arrays are Equivalent
+class Solution {
+public:
+    bool arrayStringsAreEqual(vector<string>& word1, vector<string>& word2) {
+      string w1;
+      string w2;
+      for(int i=0; i<word1.size(); i++)
+      {
+        w1 = w1 + word1[i];
+      }
+      for(int i=0; i<word2.size(); i++)
+      {
+        w2 = w2 + word2[i];
+      }
+      if(w1 == w2)
+      {
+        return true;
+      } 
+      else
+      {
+        return false;
+      }
+    }
+};
+
+344. Reverse String
+class Solution {
+public:
+    void reverseString(vector<char>& s) {
+      int start = 0;
+      int end = s.size()-1;
+      while(start <  end)
+      {
+        swap(s[start++] , s[end--]);
+      }
+    }
+};
+
+1528. Shuffle String
+class Solution {
+public:
+    string restoreString(string s, vector<int>& indices) {
+      string ans = s;
+      for(int i=0; i<s.size(); i++)
+      {
+        s[indices[i]] = ans[i];
+      }
+      return s;  
+    }
+};
+
 2496. Maximum Value of a String in an Array
 class Solution {
 public:
@@ -1715,6 +2187,51 @@ public:
 
 // LEETCODE - LINKED LIST
 
+876. Middle of the Linked List
+class Solution {
+public:
+    ListNode* middleNode(ListNode* head) {
+      if(head == NULL || head->next == NULL)
+      {
+        return head;
+      }
+      if(head->next->next == NULL)
+      {
+        return head->next;
+      }
+      ListNode* slow = head;
+      ListNode* fast = head->next;
+      while(fast != NULL)
+      {
+        fast = fast->next;
+        if(fast != NULL)
+        {
+          fast = fast->next;
+        }
+        slow = slow->next;
+      }
+      return slow;
+    }
+};
+
+206. Reverse Linked List
+class Solution {
+public:
+    ListNode* reverseList(ListNode* head) {
+      ListNode* curr = head;
+      ListNode* next = NULL;
+      ListNode* prev = NULL;
+      while(curr != NULL)
+      {
+        next = curr->next;
+        curr->next = prev;
+        prev = curr;
+        curr = next;
+      }
+      return prev;
+    }
+};
+
 1290. Convert Binary Number in a Linked List to Integer
 class Solution {
 public:
@@ -1734,6 +2251,84 @@ public:
         n++;
       }
       return ans;
+    }
+};
+
+234. Palindrome Linked List
+class Solution {
+public:
+    bool isPalindrome(ListNode* head) {
+      if(head == NULL || head->next == NULL)
+      {
+        return head;
+      }
+      ListNode* reverse_head = NULL;
+      ListNode* ptr = head;
+      while(ptr != NULL)
+      {
+        ListNode* new_node = new ListNode(ptr->val);
+        new_node->next = reverse_head;
+        reverse_head = new_node;
+        ptr = ptr->next;
+      }
+      while(head != NULL && reverse_head != NULL)
+      {
+        if(head->val != reverse_head->val)
+        {
+          return false;
+        }
+        head = head->next;
+        reverse_head = reverse_head->next;
+      }
+      return true;
+    }
+};
+
+83. Remove Duplicates from Sorted List
+class Solution {
+public:
+    ListNode* deleteDuplicates(ListNode* head) {
+      ListNode* ptr = head;
+      while(ptr != NULL && ptr->next != NULL)
+      {
+        if(ptr->val == ptr->next->val)
+        {
+          ptr->next = ptr->next->next;
+        }
+        else
+        {
+          ptr = ptr->next;
+        }
+      }
+      return head;
+    }
+};
+
+203. Remove Linked List Elements
+class Solution {
+public:
+    ListNode* removeElements(ListNode* head, int val) {
+      if(head == NULL)
+      {
+        return head;
+      }
+      while(head != NULL && head->val == val)
+      {
+        head = head->next;
+      }
+      ListNode* ptr = head;
+      while(ptr != NULL && ptr->next != NULL)
+      {
+        if(ptr->next->val == val)
+        {
+          ptr->next = ptr->next->next;
+        }
+        else
+        {
+          ptr = ptr->next;
+        }
+      }
+      return head;
     }
 };
 
