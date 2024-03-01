@@ -2,6 +2,57 @@
 
 // LEETCODE - GENERAL
 
+2235. Add Two Integers
+class Solution {
+public:
+    int sum(int num1, int num2) {
+        return (num1 + num2);
+    }
+};
+
+2413. Smallest Even Multiple
+class Solution {
+public:
+    int smallestEvenMultiple(int n) {
+        if(n%2 == 0)  //if n is even then return n.
+        {
+          return n;
+        }
+        else  // if n is odd then make it even.
+        {
+          return 2*n;
+        }
+    }
+};
+
+2469. Convert the Temperature
+class Solution {
+public:
+    vector<double> convertTemperature(double celsius) {
+        vector<double> ans;
+        ans.push_back(celsius + 273.15);
+        ans.push_back(celsius * 1.80 + 32.00);
+        return ans;
+    }
+};
+
+1281. Subtract the Product and Sum of Digits of an Integer
+class Solution {
+public:
+    int subtractProductAndSum(int n) {
+      int product = 1;
+      int sum = 0;
+      while(n > 0)
+      {
+        int mod = n%10;
+        n = n/10;
+        product = product * mod;
+        sum = sum + mod;
+      }
+      return (product - sum);
+    }
+};
+
 371. Sum of Two Integers
 class Solution {
 public:
@@ -432,6 +483,177 @@ public:
 
 // LEETCODE - ARRAYS
 
+1929. Concatenation of Array
+class Solution {
+public:
+    vector<int> getConcatenation(vector<int>& nums) {
+      vector<int> ans;
+      for(int i=0; i<nums.size(); i++)
+      {
+        ans.push_back(nums[i]);
+      }
+      for(int i=0; i<nums.size(); i++)
+      {
+        ans.push_back(nums[i]);
+      }
+      return ans; 
+    }
+};
+
+1480. Running Sum of 1d Array
+class Solution {
+public:
+    vector<int> runningSum(vector<int>& nums) {
+      int sum = 0;
+      for(int i=0; i<nums.size(); i++)
+      {
+        sum = sum + nums[i];
+        nums[i] = sum;
+      }
+      return nums; 
+    }
+};
+
+2798. Number of Employees Who Met the Target
+class Solution {
+public:
+    int numberOfEmployeesWhoMetTarget(vector<int>& hours, int target) {
+      int ans = 0;
+      for(int i=0; i<hours.size(); i++)
+      {
+        if(hours[i] >= target)
+        {
+          ans++;
+        }
+      }
+      return ans;
+    }
+};
+
+1365. How Many Numbers Are Smaller Than the Current Number
+class Solution {
+public:
+    vector<int> smallerNumbersThanCurrent(vector<int>& nums) {
+      vector<int> ans;
+      for(int i=0; i<nums.size(); i++)
+      {
+        int count = 0;
+        for(int j=0; j<nums.size(); j++)
+        {
+          if(nums[i] > nums[j])
+          {
+            count++;
+          }
+        }
+        ans.push_back(count);
+      }
+       return ans; 
+    }
+};
+
+1. Two Sum
+class Solution {
+public:
+    vector<int> twoSum(vector<int>& nums, int target) {
+      vector<int> ans;
+      for(int i=0; i<nums.size(); i++)
+      {
+        for(int j=i+1; j<nums.size(); j++)
+        {
+          if(nums[i]+nums[j] == target)
+          {
+            ans.push_back(i);
+            ans.push_back(j);
+          }
+        }
+      }
+       return ans; 
+    }
+};
+
+1431. Kids With the Greatest Number of Candies
+class Solution {
+public:
+    vector<bool> kidsWithCandies(vector<int>& candies, int extraCandies) {
+      vector<bool> ans;
+      int max = *max_element(candies.begin() , candies.end());
+      for(int i=0; i<candies.size(); i++)
+      {
+        if(candies[i]+extraCandies >= max)
+        {
+          ans.push_back(true);
+        }
+        else
+        {
+          ans.push_back(false);
+        }
+      }
+       return ans; 
+    }
+};
+
+905. Sort Array By Parity
+class Solution {
+public:
+    vector<int> sortArrayByParity(vector<int>& nums) {
+      vector<int> v;
+      for(int i=0; i<nums.size(); i++)
+      {
+        if(nums[i]%2 == 0)
+        {
+          v.push_back(nums[i]);
+        }
+      }
+      for(int i=0; i<nums.size(); i++)
+      {
+        if(nums[i]%2 != 0)
+        {
+          v.push_back(nums[i]);
+        }
+      }
+      return v; 
+    }
+};
+
+1512. Number of Good Pairs
+class Solution {
+public:
+    int numIdenticalPairs(vector<int>& nums) {
+      int pairs = 0;
+      for(int i=0; i<nums.size(); i++)
+      {
+        for(int j=0; j<nums.size(); j++)
+        {
+          if(nums[i] == nums[j] && i<j)
+          {
+            pairs++;
+          }
+        }
+      }
+      return pairs; 
+    }
+};
+
+2535. Difference Between Element Sum and Digit Sum of an Array
+class Solution {
+public:
+    int differenceOfSum(vector<int>& nums) {
+        int e_sum = 0;
+        int d_sum = 0;
+        for(int i=0; i<nums.size(); i++)
+        {
+          e_sum = e_sum + nums[i];
+          while(nums[i] > 0)
+          {
+            d_sum = d_sum + nums[i]%10;
+            nums[i] = nums[i]/10;
+          }
+        }
+        return abs(e_sum - d_sum);
+    }
+};
+
+
 412. Fizz Buzz
 class Solution {
 public:
@@ -635,42 +857,6 @@ public:
         maxSum = max(maxSum , sum);
       }
       return maxSum;
-    }
-};
-
-1929. Concatenation of Array
-class Solution {
-public:
-    vector<int> getConcatenation(vector<int>& nums) {
-      vector<int> ans;
-      for(int i=0; i<nums.size(); i++)
-      {
-        ans.push_back(nums[i]);
-      }
-      for(int i=0; i<nums.size(); i++)
-      {
-        ans.push_back(nums[i]);
-      }
-      return ans; 
-    }
-};
-
-1512. Number of Good Pairs
-class Solution {
-public:
-    int numIdenticalPairs(vector<int>& nums) {
-      int pairs = 0;
-      for(int i=0; i<nums.size(); i++)
-      {
-        for(int j=0; j<nums.size(); j++)
-        {
-          if(nums[i] == nums[j] && i<j)
-          {
-            pairs++;
-          }
-        }
-      }
-      return pairs; 
     }
 };
 
@@ -1764,6 +1950,96 @@ public:
 // LEETCODE - MATRIX
 // LEETCODE - STRING
 
+1323. Maximum 69 Number
+class Solution {
+public:
+    int maximum69Number (int num) {
+        string s = to_string(num);
+        for(int i=0; i<s.size(); i++)
+        {
+          if(s[i] == '6')
+          {
+            s[i] = '9';
+            break;
+          }
+        }
+        return stoi(s);
+    }
+};
+
+1108. Defanging an IP Address
+class Solution {
+public:
+    string defangIPaddr(string address) {
+      string ans;
+      for(int i=0; i<address.size(); i++)
+      {
+        if(address[i] == '.')
+        {
+          ans.push_back('[');
+          ans.push_back('.');
+          ans.push_back(']');
+        }
+        else
+        {
+          ans.push_back(address[i]);
+        }
+      }
+      return ans;
+    }
+};
+
+771. Jewels and Stones
+class Solution {
+public:
+    int numJewelsInStones(string jewels, string stones) {
+      int ans = 0;
+      for(int i=0; i<jewels.size(); i++)
+      {
+        for(int j=0; j<stones.size(); j++)
+        {
+          if(jewels[i] == stones[j])
+          {
+            ans++;
+          }
+        }
+      }
+      return ans;
+    }
+};
+
+709. To Lower Case
+class Solution {
+public:
+    string toLowerCase(string s) {
+      for(int i=0; i<s.size(); i++)
+      {
+        if(s[i]>='A' && s[i]<='Z')
+        {
+          s[i] = s[i] - 'A' + 'a';
+        }
+      }
+      return s; 
+    }
+};
+
+2678. Number of Senior Citizens
+class Solution {
+public:
+    int countSeniors(vector<string>& details) {
+      int ans = 0;
+      for(int i=0; i<details.size(); i++)
+      {
+        int age = stoi(details[i].substr(11 , 2));
+        if(age > 60)
+        {
+          ans++;
+        }
+      }
+      return ans;
+    }
+};
+
 2114. Maximum Number of Words Found in Sentences
 class Solution {
 public:
@@ -1783,6 +2059,48 @@ public:
         maxWords = max(maxWords , words);
       }
       return maxWords;
+    }
+};
+
+242. Valid Anagram
+class Solution {
+public:
+    bool isAnagram(string s, string t) 
+    {
+        sort(s.begin() , s.end());
+        sort(t.begin() , t.end());
+        return s == t;
+    }
+};
+
+2108. Find First Palindromic String in the Array
+class Solution {
+public:
+    bool isPalindrome(string s)
+    {
+        int start = 0;
+        int end = s.size()-1;
+        while(start <= end)
+        {
+            if(s[start++] != s[end--])
+            {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    string firstPalindrome(vector<string>& words) 
+    {
+        string ans = "";
+        for(int i=0 ; i<words.size() ; i++)
+        {
+            if( isPalindrome(words[i]) )
+            {
+                return words[i];
+            }
+        }
+        return ans;
     }
 };
 
