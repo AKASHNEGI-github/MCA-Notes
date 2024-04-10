@@ -1,10 +1,16 @@
 
+OBJECT-ORIENTED PROGRAMMING IN C++
+
+********************************************************************************************************************************************************************************************
+
 // # CLASS
 
 * It is like a Blueprint for an Object.
 * It is a user-defined data-type that has Data Members(Data Variables) and Member Functions(Functions used to manipulate these variables) , these Data Members and Member Functions define the properties of the Objects in a Class. 
 * In Example of class Car , the Data Members are speed-limit , mileage and Member Functions are applying brakes , increasing speed.
 * When a class is defined , only the specification for the object is defined ; No Memory is allocated.
+
+********************************************************************************************************************************************************************************************
 
 // # OBJECT
 
@@ -41,6 +47,8 @@ class ClassName
         Member Functions;
 };
 
+********************************************************************************************************************************************************************************************
+
 // # ACCESSING DATA MEMBERS
 
 * The data members and member functions of the class can be accessed using the dot(‘.’) operator with the object.
@@ -67,6 +75,8 @@ int main()
 
     return 0;
 }
+
+********************************************************************************************************************************************************************************************
 
 // # MEMBER FUNCTION IN CLASS
 
@@ -144,12 +154,14 @@ int main()
     return 0;
 }
 
+********************************************************************************************************************************************************************************************
+
 // # ACCESS MODIFIERS
 
 * Access modifiers are used to implement an important aspect of Object-Oriented Programming known as Data Hiding.
 * There are 3 types of access modifiers available in C++: 
-1- Public(Default)
-2- Private
+1- Public
+2- Private (Default)
 3- Protected
 
 1- Public : All the class members declared under the public specifier will be available to everyone.
@@ -276,6 +288,8 @@ int main()
 
     return 0;
 }
+
+********************************************************************************************************************************************************************************************
 
 // # CONSTRUCTOR
 
@@ -560,6 +574,8 @@ int main()
     return 0;
 }
 
+********************************************************************************************************************************************************************************************
+
 // # DESTRUCTOR
 
 * A Destructor is also a special member function like a constructor.Destructor destroys the class objects created by the constructor.
@@ -634,6 +650,8 @@ A delete operator is called.
 
 Question- Can a destructor be virtual ?
 Answer- Yes, In fact, it is always a good idea to make destructors virtual in the base class when we have a virtual function.
+
+********************************************************************************************************************************************************************************************
 
 // # FRIEND
 
@@ -867,10 +885,11 @@ int main()
 * Friendship is not inherited.
 * The concept of friends is not in Java.
 
+********************************************************************************************************************************************************************************************
+
 // # STATIC
 
-
-
+********************************************************************************************************************************************************************************************
 
 // # ENCAPSULATION
 
@@ -938,6 +957,8 @@ int main()
 
     return 0;
 }
+
+********************************************************************************************************************************************************************************************
 
 // # ABSTRACTION
 
@@ -1009,6 +1030,8 @@ int main()
 
     return 0;
 }
+
+********************************************************************************************************************************************************************************************
 
 // # POLYMORPHISM
 
@@ -1252,6 +1275,7 @@ B- Virtual Function
 * A virtual function is called during Runtime.
 
 
+********************************************************************************************************************************************************************************************
 
 // # INHERITANCE
 
@@ -1318,6 +1342,7 @@ int main()
 4- Hierarchical inheritance 
 5- Hybrid inheritance
 
+********************************************************************************************************************************************************************************************
 
 
 
