@@ -541,6 +541,22 @@ public:
     }
 };
 
+1313. Decompress Run-Length Encoded List
+class Solution {
+public:
+    vector<int> decompressRLElist(vector<int>& nums) {
+      vector<int> ans;
+      for(int i=0; i<nums.size()-1; i=i+2)
+      {
+        for(int j=0; j<nums[i]; j++)
+        {
+          ans.push_back(nums[i+1]);
+        }
+      }
+      return ans;  
+    }
+};
+
 2798. Number of Employees Who Met the Target
 class Solution {
 public:
@@ -2381,7 +2397,7 @@ public:
     }
 };
 
-816. Truncate Sentence
+1816. Truncate Sentence
 class Solution {
 public:
     string truncateSentence(string s, int k) {
@@ -2400,22 +2416,6 @@ public:
         ans.push_back(s[i]);
       }
       return ans;
-    }
-};
-
-1313. Decompress Run-Length Encoded List
-class Solution {
-public:
-    vector<int> decompressRLElist(vector<int>& nums) {
-      vector<int> ans;
-      for(int i=0; i<nums.size()-1; i=i+2)
-      {
-        for(int j=0; j<nums[i]; j++)
-        {
-          ans.push_back(nums[i+1]);
-        }
-      }
-      return ans;  
     }
 };
 
