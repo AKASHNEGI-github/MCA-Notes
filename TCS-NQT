@@ -1,0 +1,16 @@
+NUMBER SYSTEM
+
+int binaryToDecimal(int binary)
+{
+    int decimal = 0;
+    int n = 0;
+    while(binary > 0)
+    {
+        decimal = decimal + pow(2 , n) * (binary % 10); 
+        binary = binary/10;
+        n++;
+    }
+    return decimal;
+}
+
+*******************************************************************************************************************************************************
