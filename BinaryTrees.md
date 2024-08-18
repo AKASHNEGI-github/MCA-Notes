@@ -249,31 +249,28 @@ vector <int> postOrder(Node* root)
     return ans;
 }
 ```
-- Count Non-Leaf Nodes in Tree
+- Count Leaves in Binary Tree
 ```c++
-class Solution {
-  public:
-    void preOrderTraversal(Node* root , int &count)
+void preOrderTraversal(Node* root , int &count)
+{
+    if(root == NULL)
     {
-        if(root == NULL)
-        {
-            return;
-        }
-        if(root->left != NULL || root->right != NULL)
-        {
-            count++;
-        }
-        preOrderTraversal(root->left , count);
-        preOrderTraversal(root->right , count);
+        return;
     }
-  
-    int countNonLeafNodes(Node* root) 
+    if(root->left == NULL && root->right == NULL)
     {
-        int count = 0;
-        preOrderTraversal(root , count);
-        return count;
+        count++;
     }
-};
+    preOrderTraversal(root->left , count);
+    preOrderTraversal(root->right , count);
+}
+   
+int countLeaves(Node* root)
+{
+    int count = 0;
+    preOrderTraversal(root , count);
+    return count;
+}
 ```
 - Count Non-Leaf Nodes in Tree
 ```c++
