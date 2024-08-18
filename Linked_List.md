@@ -1,3 +1,9 @@
+# LINKED LIST
+
+---
+
+### Single Linked List
+```c++
 // SINGLE LINKED LIST
 
 #include<bits/stdc++.h>
@@ -226,3 +232,9 @@ int main()
 
     return 0;
 }
+```
+
+### Double Linked List
+```c++
+
+```
