@@ -1,3 +1,5 @@
+### STACK USING ARRAYS
+```c++
 // STACK USING ARRAYS
 
 #include<bits/stdc++.h>
@@ -83,3 +85,12 @@ class Stack
         return top + 1;
     }
 };
+```
+
+### STACK USING Linked List
+```c++
+
+```
+
+### Questions
+
