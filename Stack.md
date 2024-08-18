@@ -2,7 +2,7 @@
 
 ---
 
-### Stacks using Arrays
+### Stack using Array
 ```c++
 // STACK USING ARRAYS
 
@@ -91,7 +91,7 @@ class Stack
 };
 ```
 
-### Stacks using Linked List
+### Stack using Linked List
 ```c++
 // STACK USING LINKED LIST
 
