@@ -1,5 +1,7 @@
 # 2D-ARRAY | MATRIX
 
+---
+
 ### Implementation
 ```c++
 // 2D-ARRAY | MATRIX
