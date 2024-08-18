@@ -1,4 +1,6 @@
-# Binary Trees
+# BINARY TREE
+
+---
 
 ### Implementation
 ```c++
