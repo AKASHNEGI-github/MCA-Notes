@@ -1992,7 +1992,41 @@ public:
 
 // LEETCODE - MATRIX
 
-********************************************************************************************************************************************************************************************
+
+2373. Largest Local Values in a Matrix
+class Solution {
+public:
+    int getMax(vector<vector<int>>& grid , int rowStart , int colStart)
+    {
+        int maxi = INT_MIN;
+        for(int i=rowStart ; i<(rowStart+3) ; i++)
+        {
+            for(int j=colStart ; j<(colStart+3) ; j++)
+            {
+                maxi = max(maxi , grid[i][j]);
+            }
+        }
+        return maxi;
+    }
+
+    vector<vector<int>> largestLocal(vector<vector<int>>& grid) 
+    {
+        int n = grid.size();
+        int row = (n-2);
+        int col = (n-2);
+        vector<vector<int>>  maxLocal( row , vector<int>(col) );
+        for(int i=0 ; i<row ; i++)
+        {
+            for(int j=0 ; j<col ; j++)
+            {
+                maxLocal[i][j] = getMax(grid , i , j);
+            }
+        }
+        return maxLocal;
+    }
+};
+
+*****************************************************************************************************************************************************************************************
 
 // LEETCODE - STRING
 
