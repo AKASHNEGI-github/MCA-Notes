@@ -157,6 +157,48 @@ public:
 };
 ```
 
+- Flipping an Image
+```c++
+class Solution {
+public:
+    void flip(vector<int>& row)
+    {
+        int start = 0;
+        int end = row.size()-1;
+        while(start < end)
+        {
+            swap(row[start++] , row[end--]);
+        }
+    }
+
+    void invert(vector<int>& row)
+    {
+        for(int i=0 ; i<row.size() ; i++)
+        {
+            if(row[i] == 0)
+            {
+                row[i] = 1;
+            }
+            else if(row[i] == 1)
+            {
+                row[i] = 0;
+            }
+        }
+    }
+
+    vector<vector<int>> flipAndInvertImage(vector<vector<int>>& image) 
+    {
+        int n = image.size();
+        for(int i=0 ; i<n ; i++)
+        {
+            flip(image[i]);
+            invert(image[i]);
+        }
+        return image;
+    }
+};
+```
+
 - Largest Local Values in a Matrix
 ```c++
 class Solution {
