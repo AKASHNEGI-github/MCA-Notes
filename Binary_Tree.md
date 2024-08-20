@@ -382,7 +382,8 @@ class Solution
          return ans;
     }
     
-    int diameter(Node* root) {
+    int diameter(Node* root)
+    {
         return diameterFast(root).first;
     }
 };
