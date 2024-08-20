@@ -340,12 +340,12 @@ class Solution
         {
             return false;
         }
-        
+
+        bool data = r1->data == r2->data;
         bool leftSubTree = isIdentical(r1->left , r2->left);
         bool rightSubTree = isIdentical(r1->right , r2->right);
-        bool data = r1->data == r2->data;
         
-        if(leftSubTree && rightSubTree && data)
+        if(data && leftSubTree && rightSubTree)
         {
             return true;
         }
@@ -369,6 +369,7 @@ class Solution
             pair<int , int> p = make_pair(0 , 0);
             return p;
         }
+
         pair<int , int> leftSubTree = diameterFast(root->left);
         pair<int , int> rightSubTree = diameterFast(root->right);
         
@@ -379,6 +380,7 @@ class Solution
          pair<int , int> ans;
          ans.first = max( totalHeight , max(diameterLeftSubTree , diameterRightSubTree) );
          ans.second = max(leftSubTree.second , rightSubTree.second) + 1;
+
          return ans;
     }
     
@@ -388,6 +390,101 @@ class Solution
     }
 };
 ```
+
+- Balanced Tree Check
+```c++
+class Solution
+{
+    public:
+    pair<bool , int> isBalancedFast(Node *root)
+    {
+        if(root == NULL)
+        {
+            pair<bool , int> p = make_pair(true , 0);
+            return p;
+        }
+
+        pair<bool , int> leftSubTree = isBalancedFast(root->left);
+        pair<bool , int> rightSubTree = isBalancedFast(root->right);
+        
+        bool balancedLeftSubTree = leftSubTree.first;
+        bool balancedRightSubTree = rightSubTree.first;
+        bool differenceHeight = abs(leftSubTree.second - rightSubTree.second) <= 1;
+        
+         pair<bool , int> ans;
+         if(balancedLeftSubTree && balancedRightSubTree && differenceHeight)
+         {
+             ans.first = true;
+         }
+         else
+         {
+             ans.first = false;
+         }
+         ans.second = max(leftSubTree.second , rightSubTree.second) + 1;
+
+         return ans;
+    }
+    
+    bool isBalanced(Node *root)
+    {
+        return isBalancedFast(root).first;
+    }
+};
+```
+
+- Sum Tree
+```c++
+class Solution 
+{
+  public:
+    pair<bool , int> isSumTreeFast(Node* root)
+    {
+        if(root == NULL)
+        {
+            pair<bool , int> p = make_pair(true , 0);
+            return p;
+        }
+        
+        if(root->left == NULL && root->right == NULL)
+        {
+            pair<bool , int> p = make_pair(true , root->data);
+            return p;
+        }
+        
+        pair<bool , int> leftSubTree = isSumTreeFast(root->left);
+        pair<bool , int> rightSubTree = isSumTreeFast(root->right);
+        
+        bool sumLeftSubTree = leftSubTree.first;
+        bool sumRightSubTree = rightSubTree.first;
+        bool sumEqual = root->data == (leftSubTree.second + rightSubTree.second);
+        
+        pair<bool , int> ans;
+        if(sumLeftSubTree && sumRightSubTree && sumEqual)
+        {
+            ans.first = true;
+        }
+        else
+        {
+            ans.first = false;
+        }
+        ans.second = root->data + leftSubTree.second + rightSubTree.second;
+        
+        return ans;
+    }
+  
+    bool isSumTree(Node* root) 
+    {
+        return isSumTreeFast(root).first;
+    }
+};
+```
+
+
+
+
+
+
+
 
 
 
