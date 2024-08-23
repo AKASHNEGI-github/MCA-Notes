@@ -17,11 +17,11 @@ public:
             {
                 return mid;
             }
-            else if(target > nums[mid])
+            else if(nums[mid] < target)
             {
                 start = mid + 1;
             }
-            else if(target < nums[mid])
+            else if(nums[mid] > target)
             {
                 end = mid - 1;
             }
