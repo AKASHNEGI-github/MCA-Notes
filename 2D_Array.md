@@ -234,6 +234,28 @@ public:
 };
 ```
 
+- Rotate Image
+```c++
+class Solution {
+public:
+    void rotate(vector<vector<int>>& matrix) 
+    {
+        int n = matrix.size();
+        for(int i=0 ; i<(n-1) ; i++) // Transpose Matrix
+        {
+            for(int j=(i+1) ; j<n ; j++)
+            {
+                swap(matrix[i][j] , matrix[j][i]);
+            }
+        }
+        for(int i=0 ; i<n ; i++) // Reverse Rows
+        {
+            reverse(matrix[i].begin() , matrix[i].end());
+        }
+    }
+};
+```
+
 - Search a 2D Matrix
 ```c++
 class Solution {
