@@ -247,3 +247,35 @@ int main()
 ```
 
 ### Questions
+
+- Validate Binary Search Tree
+```c++
+class Solution {
+public:
+    bool isBST(TreeNode* root , long min , long max)
+    {
+        if(root == NULL)
+        {
+            return true;
+        }
+        if(root->val > min && root->val < max)
+        {
+            bool leftSubTree = isBST(root->left , min , root->val);
+            bool rightSubTree = isBST(root->right , root->val , max);
+            return (leftSubTree && rightSubTree);
+        }
+        else
+        {
+            return false;
+        }   
+    }
+
+    bool isValidBST(TreeNode* root) 
+    {
+        return isBST(root , LONG_MIN , LONG_MAX);
+    }
+};
+```
+
+
+
