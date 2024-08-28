@@ -248,6 +248,65 @@ int main()
 
 ### Questions
 
+- Range Sum of BST
+```c++
+class Solution {
+public:
+    int rangeSumBST(TreeNode* root, int low, int high) 
+    {
+      int ans = 0;
+      queue<TreeNode*> q;
+      q.push(root);
+      while(!q.empty())
+      {
+        TreeNode* temp = q.front();
+        if(temp->val >= low && temp->val <= high)
+        {
+          ans = ans + temp->val;
+        }
+        q.pop();
+
+        if(temp->left)
+        {
+          q.push(temp->left);
+        }
+
+        if(temp->right)
+        {
+          q.push(temp->right);
+        }
+      }
+      return ans;
+    }
+};
+```
+
+- Range Sum of BST
+```c++
+class Solution {
+public:
+    void preOrderTraversal(TreeNode* root , int low , int high , int &sum)
+    {
+        if(root != NULL)
+        {
+            if(root->val >= low && root->val <= high)
+            {
+                sum = sum + root->val;
+            }
+            preOrderTraversal(root->left , low , high , sum);
+            preOrderTraversal(root->right , low , high , sum);
+        }
+    }
+
+    int rangeSumBST(TreeNode* root, int low, int high) 
+    {
+        int sum = 0;
+        preOrderTraversal(root , low , high , sum);
+        return sum;
+    }
+};
+```
+
 - Search in a Binary Search Tree
 ```c++
 class Solution {
