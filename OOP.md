@@ -1124,7 +1124,7 @@ It is implemented by **try{ }** and **catch( ){ }** statements.
 | Shallow Copy stores the copy of the original object and points the references to the objects. | Deep copy stores the copy of the original object and recursively copies the objects as well. |
 | A shallow copy is faster. | Deep copy is comparatively slower. |
   
-### What is Garbage Collection ?
+### What is Garbage Collection 
 Garbage collection refers to this mechanism of handling the memory in the program. Through garbage collection, the unwanted memory is freed up by removing the objects that are no longer needed.
 
 ---
