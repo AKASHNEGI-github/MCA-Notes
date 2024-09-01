@@ -615,6 +615,12 @@ Example -
 
 ### What are the types of Inheritance
 
+| Access Specifier | Public | Protected | Private |
+| ---------------- | ------ | --------- | ------- |
+| Public | Public | Protected | Private |
+| Protected | Protected | Protected | Private |
+| Private | X | X | X |
+
 **Single Inheritance** : Child class derived directly from the base class.
 ```c++
 class Parent
@@ -1112,6 +1118,7 @@ It is implemented by **try{ }** and **catch( ){ }** statements.
 - **Deep Copy** - Creates a new object and recursively copies all nested objects, so the original and copied objects are completely independent.
 
 | Shallow Copy | Deep Copy |
+| ------------ | --------- |
 | Shallow Copy stores the references of objects to the original memory address. | Deep copy stores copies of the object’s value. |
 | Shallow Copy reflects changes made to the new/copied object in the original object. | Deep copy doesn’t reflect changes made to the new/copied object in the original object. |
 | Shallow Copy stores the copy of the original object and points the references to the objects. | Deep copy stores the copy of the original object and recursively copies the objects as well. |
