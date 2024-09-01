@@ -18,9 +18,10 @@ OOP refers to Object-Oriented Programming. It is the programming paradigm that i
 - Even very big software can be easily written and managed easily using OOPs.
 
 ### Why OOP is so popular
-OOP programming paradigm is considered as a better style of programming. Not only it helps in writing a complex piece of code easily, but it also allows users to handle and maintain them easily as well. Not only that, the main pillar of OOP - Data Abstraction, Encapsulation, Inheritance, and Polymorphism, makes it easy for programmers to solve complex scenarios. As a result of these, OOP is so popular.
+OOP programming paradigm is considered as a better style of programming because it helps in writing a complex piece of code easily and it also allows users to handle and maintain them easily as well. The main pillar of OOP - Data Abstraction, Encapsulation, Inheritance, and Polymorphism, makes it easy for programmers to solve complex scenarios. As a result of these, OOP is so popular.
 
 ### What are the advantages of using OOP
+The advantages of OOP are - 
 - OOP is very helpful in solving very complex problems. 
 - Highly complex programs can be created, handled, and maintained easily using object-oriented programming. 
 - OOP promotes code reuse, thereby reducing redundancy. 
@@ -29,6 +30,7 @@ OOP programming paradigm is considered as a better style of programming. Not onl
 - Polymorphism offers a lot of flexibility in OOPs.
 
 ### What are the dis-advantages of using OOP
+The dis-advantages of OOP are - 
 - Complexity
 - Overhead
 - Slower Execution
@@ -88,7 +90,7 @@ Access Modifiers are of 3 types -
 - Private (Default)
 - Protected
 
-**Public** – All the class members declared under the public specifier will be available to everyone.
+**Public** – The class members declared as public will be available to everyone.
 
 ```c++
 class Student 
@@ -135,7 +137,7 @@ int main()
 }
 ```
 
-**Protected** – It can be accessed if and only if the accessor is the derived class.
+**Protected** – The class members declared as protected can be accessed only by the derived class.
 
 ```c++
 class Parent 
@@ -611,7 +613,7 @@ int main()
 - Polymorphism 
 
 ### What is Encapsulation
-Encapsulation is the process of binding data members and methods of a program together to do a specific job, without revealing unnecessary details.
+Encapsulation refers to the process of binding data members and methods of a program together to do a specific job, without revealing unnecessary details.
 Example -
 
 ```c++
@@ -619,7 +621,7 @@ Example -
 ```
 
 ### What is Abstraction
-Abstraction is the process of showing only the necessary details and hiding unnecessary details from the user. 
+Abstraction refers to the process of showing only the necessary details and hiding unnecessary details from the user. 
 Example - Consider a car. We only need to know how to run a car, and not how the wires are connected inside it. This is obtained using Abstraction.
 
 ```c++
@@ -765,7 +767,7 @@ int main()
 ```
 
 ### What is Virtual Function
-A virtual function is a member function that is declared within a base class and is re-defined (overridden) by a derived class. In C++, a virtual function is declared using the virtual keyword.
+A virtual function is a member function that is declared within a base class and is re-defined (overridden) by a derived class. In C++, a virtual function is declared using the virtual keyword. It is used to tell the compiler to perform dynamic linkage or late binding on the function. When the function is made virtual, C++ determines which function is to be invoked at the runtime based on the type of the object pointed by the base class pointer.
 
 ```c++
 class Parent
@@ -935,7 +937,7 @@ int main()
 ```
 
 ### What is Pure Virtual Function
-In c++, A pure virtual function (or abstract function) is a virtual function that doesn’t contain any statements, But we must override that function in the derived class, otherwise, the derived class will also become an abstract class. A pure virtual function is declared by assigning 0 in the declaration.
+In c++, A pure virtual function (or abstract function) is a virtual function that doesn’t contain any statements and is declared by assigning 0 in the declaration. We must override that function in the derived class, otherwise, the derived class will also become an abstract class.
 
 ```c++
 class Parent // Abstract Class
@@ -1015,7 +1017,7 @@ int main()
 ```
 
 ### What is an Exception
-Conditions responsible for creating errors during the execution of a program are known as Exceptions. These errors can interrupt the execution of the program and if the program can’t handle these exceptions then the OS handles them and the program is terminated abruptly.
+Exceptions are the conditions which are responsible for creating errors during the execution of a program. These errors can interrupt the execution of the program and if the program can’t handle these exceptions then the OS handles them and the program is terminated abruptly.
 Types - 
 - Synchronous Exceptions
 - Asynchronous Exceptions
@@ -1042,6 +1044,6 @@ It is implemented by **try{ }** and **catch( ){ }** statements.
 - The **catch** statement allows you to define a block of code to be executed if an error occurs in the try block. 
 
 ### What is Garbage Collection ?
-Object-oriented programming revolves around entities like objects. Each object consumes memory and there can be multiple objects of a class. So if these objects and their memories are not handled properly, then it might lead to certain memory related errors and the system might fail. Garbage collection refers to this mechanism of handling the memory in the program Through garbage collection, the unwanted memory is freed up by removing the objects that are no longer needed.
+Garbage collection refers to this mechanism of handling the memory in the program. Through garbage collection, the unwanted memory is freed up by removing the objects that are no longer needed.
 
 ---
