@@ -723,7 +723,45 @@ int main()
 ### What is Diamond Problem
 The Diamond Problem is an ambiguity error that arises in multiple inheritance when a derived class inherits from two or more base classes that share a common ancestor. This results in the inheritance hierarchy forming a diamond shape, hence the name “Diamond Problem.” The ambiguity arises because the derived class has multiple paths to access members or methods inherited from the common ancestor, leading to confusion during method resolution and member access.
 ```c++
+class A
+{
+    public:
+        void fun()
+        {
+            cout << "Class - A" << endl;
+        }
+};
 
+class B1 : virtual public A
+{
+    public:
+        void fun()
+        {
+            cout << "Class - B1" << endl;
+        }
+};
+
+class B2 : virtual public A
+{
+    public:
+        void fun()
+        {
+            cout << "Class - B2" << endl;
+        }
+};
+
+class C : public B1 , public B2
+{};
+
+int main()
+{
+    C c1;
+    c1.fun(); // error: request for member 'fun' is ambiguous
+    c1.A::fun(); // Class - A
+    c1.B1::fun(); // Class - B1
+    c1.B2::fun(); // Class - B2
+    return 0;
+}
 ```
 
 ### What are the limitations of Inheritance
