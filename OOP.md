@@ -614,10 +614,10 @@ Inheritance refers to the idea that a class is derived from another class and us
 Example -
 
 ### What are the types of Inheritance
-| Access Specifier| Public    | Protected | Private |
-| Public          | Public    | Protected | Private |
-| Protected       | Protected | Protected | Private |
-| Private         |     X     |     X     |    X    |
+| Access Specifier| Public | Protected | Private |
+| Public | Public | Protected | Private |
+| Protected | Protected | Protected | Private |
+| Private | X | X | X |
 
 **Single Inheritance** : Child class derived directly from the base class.
 ```c++
