@@ -588,8 +588,8 @@ int main()
     Object destroyed : 1
 
 ### What are the features of OOP
-- Data Abstraction 
-- Encapsulation 
+- Encapsulation
+- Abstraction  
 - Inheritance 
 - Polymorphism 
 
@@ -614,10 +614,6 @@ Inheritance refers to the idea that a class is derived from another class and us
 Example -
 
 ### What are the types of Inheritance
-| Access Specifier| Public | Protected | Private |
-| Public | Public | Protected | Private |
-| Protected | Protected | Protected | Private |
-| Private | X | X | X |
 
 **Single Inheritance** : Child class derived directly from the base class.
 ```c++
@@ -1111,6 +1107,16 @@ It is implemented by **try{ }** and **catch( ){ }** statements.
 - The **throw** keyword throws an exception when a problem is detected, which lets us create a custom error. 
 - The **catch** statement allows you to define a block of code to be executed if an error occurs in the try block. 
 
+### What is Deep Copy and Shallow Copy
+- **Shallow Copy** - Creates a new object but does not create copies of nested objects; instead, it copies references to the nested objects. Thus, changes to nested objects affect both the original and the copied objects.
+- **Deep Copy** - Creates a new object and recursively copies all nested objects, so the original and copied objects are completely independent.
+
+| Shallow Copy | Deep Copy |
+| Shallow Copy stores the references of objects to the original memory address. | Deep copy stores copies of the object’s value. |
+| Shallow Copy reflects changes made to the new/copied object in the original object. | Deep copy doesn’t reflect changes made to the new/copied object in the original object. |
+| Shallow Copy stores the copy of the original object and points the references to the objects. | Deep copy stores the copy of the original object and recursively copies the objects as well. |
+| A shallow copy is faster. | Deep copy is comparatively slower. |
+  
 ### What is Garbage Collection ?
 Garbage collection refers to this mechanism of handling the memory in the program. Through garbage collection, the unwanted memory is freed up by removing the objects that are no longer needed.
 
