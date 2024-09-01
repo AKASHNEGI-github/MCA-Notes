@@ -64,8 +64,7 @@ Structured Programming refers to the method of programming which consists of a c
 
 ### What is a Class
 A class is a user-defined data-type. It is like a blueprint for an object that contains data-members and member-functions.
-Example - 
-
+Example - First a Car's template is created and then multiple unites of cars are created on the basis of that template.
 ```c++
 class ClassName
 {
@@ -77,7 +76,6 @@ class ClassName
 
 ### What is an Object
 An object refers to the instance of the class, which contains the instance of the members and behaviors defined in the class template. Data members and methods of a class cannot be used directly. We need to create an object (or instance) of the class to use them. 
-
 ```c++
 class Student
 {}s1;
@@ -91,7 +89,6 @@ Access Modifiers are of 3 types -
 - Protected
 
 **Public** – The class members declared as public will be available to everyone.
-
 ```c++
 class Student 
 {
@@ -109,7 +106,6 @@ int main()
 ```
 
 **Private** – The class members declared as private can be accessed only by the member functions inside the class.
-
 ```c++
 class Student 
 {
@@ -138,7 +134,6 @@ int main()
 ```
 
 **Protected** – The class members declared as protected can be accessed only by the derived class.
-
 ```c++
 class Parent 
 {
@@ -171,7 +166,6 @@ int main()
 
 ### What is a Friend Class
 A friend class is a class that can access both the protected and private variables of the classes where it is declared as a friend. 
-
 ```c++
 class Student
 {
@@ -213,7 +207,6 @@ The advantage of a friend function is that it is not bound to the scope of the c
 Considering all the mentioned points we can say that a friend function is a global function.
 
 **Global Function as Friend Function**
-
 ```c++
 class Student
 {
@@ -245,13 +238,11 @@ int main()
 ```
 
 **Member Function of Another Class as Friend Function**
-
 ```c++
 
 ```
 
 **A Function Friendly to Multiple Classes**
-
 ```c++
 class B; // Forward Declaration of class B
 
@@ -312,7 +303,6 @@ int main()
 'this' is a pointer that points to the object for which the function is called. The 'this' pointer holds the address of the current object, allowing access to the object's members.
 
 **Note** - **Scope resolution operator** is for accessing static or class members and **this** pointer is for accessing object members when there is a local variable with the same name.
-
 ```c++
 class Student
 {
@@ -351,7 +341,6 @@ Static data members are class members that are declared using static keywords. A
 - Only one copy of that member is created for the entire class and is shared by all the objects of that class.
 - It is initialized before any object of this class is created, even before the main starts.
 - It is visible only within the class, but its lifetime is the entire program.
-
 ```c++
 static int count = 0; // Static Variable
 static string college = "GEHU"; // Static Variable
@@ -381,7 +370,6 @@ int main()
 
 ### Explain 'static' member Functions
 Static member functions of a class can only access static member variables and other static member functions. They do not have access to non-static members because they are not tied to any particular instance of the class.
-
 ```c++
 class Student
 {
@@ -413,7 +401,6 @@ Types of Constructors
 
 ### What is Default Constructor
 The default constructor is a constructor that doesn’t take any arguments. It is a non-parameterized constructor that is automatically defined by the compiler when no explicit constructor definition is provided.
-
 ```c++
 class Student
 {
@@ -435,7 +422,6 @@ int main()
 
 ### What is Parameterized Constructor
 The constructors that take some arguments are known as parameterized constructors. 
-
 ```c++
 class Student
 {
@@ -458,7 +444,6 @@ int main()
 
 ### What is Copy Constructor
 A copy constructor is a member function that initializes an object using another object of the same class.
-
 ```c++
 class Student
 {
@@ -492,7 +477,6 @@ Types -
 
 **Default Copy Constructor**
 The Default Copy Constructor does only Shallow Copy.
-
 ```c++
 class Student
 {
@@ -514,7 +498,6 @@ int main()
 
 **User-Defined Copy Constructor**
 The User-Defined Copy Constructor does Deep Copy.
-
 ```c++
 class Student
 {
@@ -544,7 +527,6 @@ int main()
 
 ### What is a Destructor
 Destructors are also special methods. But destructors free up the resources and memory occupied by an object. Destructors are automatically called when an object is being destroyed. Destructors have the same name as the class preceded by a tilde (~) sign.
-
 ```c++
 class Student
 {
@@ -570,7 +552,6 @@ int main()
 ```
 
 **Note** - Objects are destroyed in the reverse order of their creation.
-
 ```c++
 static int Count = 0;
 
@@ -615,7 +596,6 @@ int main()
 ### What is Encapsulation
 Encapsulation refers to the process of binding data members and methods of a program together to do a specific job, without revealing unnecessary details.
 Example -
-
 ```c++
 
 ```
@@ -623,7 +603,6 @@ Example -
 ### What is Abstraction
 Abstraction refers to the process of showing only the necessary details and hiding unnecessary details from the user. 
 Example - Consider a car. We only need to know how to run a car, and not how the wires are connected inside it. This is obtained using Abstraction.
-
 ```c++
 
 ```
@@ -635,14 +614,112 @@ Inheritance refers to the idea that a class is derived from another class and us
 Example -
 
 ### What are the types of Inheritance
+| Access Specifier| Public    | Protected | Private |
+| Public          | Public    | Protected | Private |
+| Protected       | Protected | Protected | Private |
+| Private         |     X     |     X     |    X    |
+
 **Single Inheritance** : Child class derived directly from the base class.
+```c++
+class Parent
+{
+    public:
+        string Name = "Parent - Class";
+};
+
+class Child : public Parent
+{};
+
+int main()
+{
+    Child c1;
+    cout << c1.Name << endl; // Parent - Class
+    return 0;
+}
+```
+
 **Multiple Inheritance** : Child class derived from multiple base classes.
+```c++
+class Parent1
+{
+    public:
+        string Name = "Parent1 - Class";
+};
+
+class Parent2
+{
+    public:
+        string Name = "Parent2 - Class";
+};
+
+class Child : public Parent1 , public Parent2
+{};
+
+int main()
+{
+    Child c1;
+    cout << c1.Parent1::Name << endl; // Parent1 - Class
+    cout << c1.Parent2::Name << endl; // Parent2 - Class
+    return 0;
+}
+```
+
 **Multilevel Inheritance** : Child class derived from the class which is also derived from another base class.
+```c++
+class Parent1
+{
+    public:
+        int id_parent1 = 1;
+};
+
+class Parent2 : public Parent1
+{
+    public:
+        int id_parent2 = 2;
+};
+
+class Child : public Parent2
+{};
+
+int main()
+{
+    Child c1;
+    cout << c1.id_parent1 << endl; // 1
+    cout << c1.id_parent2 << endl; // 2
+    return 0;
+}
+```
+
 **Hierarchical Inheritance** : Multiple child classes derived from a single base class.
+```c++
+class Parent1
+{
+    public:
+        int id_parent1 = 1;
+};
+
+class Parent2
+{
+    public:
+        int id_parent2 = 2;
+};
+
+class Child : public Parent1 , public Parent2
+{};
+
+int main()
+{
+    Child c1;
+    cout << c1.id_parent1 << endl; // 1
+    cout << c1.id_parent2 << endl; // 2
+    return 0;
+}
+```
+
 **Hybrid Inheritance** : Inheritance consisting of multiple inheritance types of the above specified.
 
 ### What is Diamond Problem
-
+The Diamond Problem is an ambiguity error that arises in multiple inheritance when a derived class inherits from two or more base classes that share a common ancestor. This results in the inheritance hierarchy forming a diamond shape, hence the name “Diamond Problem.” The ambiguity arises because the derived class has multiple paths to access members or methods inherited from the common ancestor, leading to confusion during method resolution and member access.
 ```c++
 
 ```
@@ -674,7 +751,6 @@ Example -
 
 ### What is Method Overloading
 When there are multiple functions with the same name but different parameters then this is known as Method (Function) Overloading.
-
 ```c++
 class Math
 {
@@ -701,7 +777,6 @@ int main()
 
 ### What is Operator Overloading
 It is a practice of giving a special meaning to the existing meaning of an operator or in simple terms redefining the pre-redefined meaning of the operator.
-
 ```c++
 class Math
 {
@@ -726,7 +801,6 @@ int main()
 
 ### What is Method Overriding
 When a base class member function is redefined in a derived class with the same arguments and return type then this is known as Method (Function) Overriding.
-
 ```c++
 class Parent
 {
@@ -768,7 +842,6 @@ int main()
 
 ### What is Virtual Function
 A virtual function is a member function that is declared within a base class and is re-defined (overridden) by a derived class. In C++, a virtual function is declared using the virtual keyword. It is used to tell the compiler to perform dynamic linkage or late binding on the function. When the function is made virtual, C++ determines which function is to be invoked at the runtime based on the type of the object pointed by the base class pointer.
-
 ```c++
 class Parent
 {
@@ -819,7 +892,6 @@ If a class contains a virtual function then the compiler itself does two things.
 2. Irrespective of whether the object is created or not, the class contains as a member a static array of function pointers called VTABLE. Cells of this table store the address of each virtual function contained in that class.
 
 - Parent class pointer -> Parent class object
-
 ```c++
 class Parent
 {
@@ -878,7 +950,6 @@ int main()
 ```
 
 - Parent class pointer -> Child class object
-
 ```c++
 class Parent
 {
@@ -938,7 +1009,6 @@ int main()
 
 ### What is Pure Virtual Function
 In c++, A pure virtual function (or abstract function) is a virtual function that doesn’t contain any statements and is declared by assigning 0 in the declaration. We must override that function in the derived class, otherwise, the derived class will also become an abstract class.
-
 ```c++
 class Parent // Abstract Class
 {
@@ -949,7 +1019,6 @@ class Parent // Abstract Class
 
 ### What is an Abstract Class
 In C++, an abstract class is a class that contains at least one pure virtual function. An abstract class can consist of both abstract and non-abstract methods. The significance of abstract class is that the abstract methods inside it are not implemented and only declared. So as a result, when a subclass inherits the abstract class and needs to use its abstract methods, they need to define and implement them. Abstract Class is inherited.
-
 ```c++
 class Parent // Abstract Class
 {
@@ -987,7 +1056,6 @@ Interface refers to a special type of class, which contains methods, but not the
 
 ### What is an Inline Function
 An inline function in C++ is a function where the compiler attempts to expand the function's code at each point where the function is called, rather than generating a standard function call. This can reduce the overhead of function calls, especially for small, frequently called functions. The inline keyword is used to request the compiler to make a function inline.
-
 ```c++
 class Rectangle
 {
