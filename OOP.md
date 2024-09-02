@@ -450,9 +450,6 @@ class Student
     public:
         string name = "Akash Negi";
 
-        Student() // Non-Parameterized Constructor
-        {}
-
         Student(Student &t) // Copy Constructor
         {
             name = t.name;
@@ -503,9 +500,6 @@ class Student
 {
     public:
         string name = "Akash Negi";
-
-        Student() // Non-Parameterized Constructor
-        {}
 
         Student(Student &t) // User-Defined Copy Constructor
         {
@@ -694,26 +688,24 @@ int main()
 
 **Hierarchical Inheritance** : Multiple child classes derived from a single base class.
 ```c++
-class Parent1
+class Parent
 {
     public:
-        int id_parent1 = 1;
+        string name = "Akash Negi";
 };
 
-class Parent2
-{
-    public:
-        int id_parent2 = 2;
-};
+class Child1 : public Parent
+{};
 
-class Child : public Parent1 , public Parent2
+class Child2 : public Parent
 {};
 
 int main()
 {
-    Child c1;
-    cout << c1.id_parent1 << endl; // 1
-    cout << c1.id_parent2 << endl; // 2
+    Child1 c1;
+    Child2 c2;
+    cout << c1.name << endl; // Akash Negi
+    cout << c2.name << endl; // Akash Negi
     return 0;
 }
 ```
