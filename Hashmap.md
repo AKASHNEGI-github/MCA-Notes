@@ -23,6 +23,13 @@ int main()
         cout << i.first << " " << i.second << endl;
     }
 
+    /*
+    Unordered Map
+    C 3
+    B 2
+    A 1
+    */
+
     cout << "Search : " << m["A"] << endl; // 1
     cout << "Search : " << m.at("A") << endl; // 1
 
@@ -33,10 +40,6 @@ int main()
     return 0;
 }
 ```
-  Unordered Map
-  C 3
-  B 2
-  A 1
 
 ### Ordered Map
 ```c++
@@ -61,6 +64,13 @@ int main()
         it++;
     }
 
+    /*
+    Ordered Map
+    A 1
+    B 2
+    C 3
+    */
+
     cout << "Search : " << m["A"] << endl; // 1
     cout << "Search : " << m.at("A") << endl; // 1
 
@@ -71,9 +81,5 @@ int main()
     return 0;
 }
 ```
-  Ordered Map
-  A 1
-  B 2
-  C 3
 
 ### Questions
