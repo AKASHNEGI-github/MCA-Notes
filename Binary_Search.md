@@ -1,6 +1,8 @@
-BINARY SEARCH
+# BINARY SEARCH
 
 ---
+
+### Questions
 
 - Binary Search
 ```c++
@@ -140,3 +142,5 @@ public:
     }
 };
 ```
+
+---
