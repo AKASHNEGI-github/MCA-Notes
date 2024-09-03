@@ -510,6 +510,35 @@ public:
 };
 ```
 
+- Rotate List
+```c++
+class Solution {
+public:
+    ListNode* rotateRight(ListNode* head, int k) 
+    {
+        vector<int> v1;
+        ListNode* ptr = head;
+        while(ptr != NULL)
+        {
+            v1.push_back(ptr->val);
+            ptr = ptr->next;
+        }    
+        vector<int> v2(v1.size());
+        for(int i=0 ; i<v1.size() ; i++)
+        {
+            v2[(i+k)%v1.size()] = v1[i];
+        }
+        ptr = head;
+        for(int i=0 ; i<v2.size() ; i++)
+        {
+            ptr->val = v2[i];
+            ptr = ptr->next;
+        }
+        return head;
+    }
+};
+```
+
 - Linked List Cycle
 ```c++
 class Solution {
