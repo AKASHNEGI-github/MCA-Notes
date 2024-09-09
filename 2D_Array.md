@@ -135,6 +135,34 @@ int main()
 
 ### Questions
 
+- Count Negative Numbers in a Sorted Matrix
+```c++
+class Solution {
+public:
+    int countNegatives(vector<vector<int>>& grid) 
+    {
+        int row = grid.size();
+        int col = grid[0].size();
+        int count = 0;
+        int i = 0;
+        int j = col-1;
+        while(i<row && j>=0)
+        {
+            if(grid[i][j] < 0)
+            {
+                count = count + (row-i);
+                j--;
+            }
+            else
+            {
+                i++;
+            }
+        }
+        return count;
+    }
+};
+```
+
 - Matrix Diagonal Sum
 ```c++
 class Solution {
