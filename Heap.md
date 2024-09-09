@@ -60,7 +60,7 @@ class Heap
             int i = 1;
             while(i < size)
             {
-                int leftIndex = 2*1;
+                int leftIndex = 2*i;
                 int rightIndex = 2*i + 1;
                 if(leftIndex < size && arr[i] < arr[leftIndex])
                 {
