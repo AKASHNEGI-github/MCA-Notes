@@ -1,4 +1,4 @@
-# HEAP
+# HEAP | PRIORITY QUEUE
 
 ---
 
