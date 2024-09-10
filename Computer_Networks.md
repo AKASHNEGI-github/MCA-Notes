@@ -10,7 +10,7 @@
 ---
 
 ### What is a Network
-A network is a set of devices that are connected with a physical media link. In a network, two or more nodes are connected by a physical link or two or more networks are connected by one or more nodes. A network is a collection of devices connected to each other to allow the sharing of data.Example of a network is an internet. An internet connects the millions of people across the world.
+A network is a collection of devices connected to each other with a physical media link to allow the sharing of data.Example of a network is an internet. An internet connects the millions of people across the world.
 
 Types of Network - 
 - **PAN (Personal Area Network)** - Let devices connect and communicate over the range of a person like connecting Bluetooth devices.
@@ -31,7 +31,7 @@ Types of Network Topology -
 - **Hybrid Topology** - It is a combination of different topologies to form a new topology. It helps to ignore the drawback of a particular topology and helps to pick the strengths from other.
 
 ### What are Nodes and Links
-- **Nodes** - Any communicating device in a network is called a Node. It can send/receive data and information within a network. 
+- **Nodes** - Any communicating device that can send/receive data and information within a network is called a Node.
 Example - computers, laptops, printers, servers, modems.
 - **Links** - A link or edge refers to the connectivity between two nodes in the network. It includes the type of connectivity (wired or wireless) between the nodes and protocols used for one node to be able to communicate with the other.
 
