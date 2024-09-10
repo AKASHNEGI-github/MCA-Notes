@@ -20,7 +20,7 @@ A database is an organized collection of data stored in a computer system and us
 A DataBase Management System (DBMS) is a software system that is designed to manage and organize data in a structured manner. It allows users to create, modify, and query a database, as well as manage the security and access controls for that database.
 
 ### What is RDBMS
-RDBMS stands for Relational Database Management Systems. It is a program that allows us to create, delete, and update a relational database. A Relational Database is a database system that stores and retrieves data in a tabular format organized in the form of rows and columns. It is a smaller subset of DBMS which was designed by E.F Codd in the 1970s. The major DBMSs like SQL, My-SQL, and ORACLE are all based on the principles of relational DBMS. 
+RDBMS stands for Relational Database Management Systems. A Relational Database is a database system that stores and retrieves data in a tabular format organized in the form of rows and columns. It is a program that allows us to create, delete, and update a relational database.  It is a smaller subset of DBMS which was designed by E.F Codd in the 1970s. The major DBMSs like SQL, My-SQL, and ORACLE are all based on the principles of relational DBMS. 
 
 ### What are the Advantages of DBMS
 - **Data organization** : A DBMS allows for the organization and storage of data in a structured manner, making it easy to retrieve and query the data as needed.
@@ -61,7 +61,7 @@ RDBMS stands for Relational Database Management Systems. It is a program that al
 - **DDL (Data Definition Language)** : It contains commands which are required to define the database.
 Example -  CREATE, ALTER, DROP, TRUNCATE, RENAME.
 - **DML (Data Manipulation Language)** : It contains commands which are required to manipulate the data present in the database.
-Example - SELECT, UPDATE, INSERT, DELETE.
+Example - SELECT, INSERT, UPDATE, DELETE.
 - **DCL (Data Control Language)** : It contains commands which are required to deal with the user permissions and controls of the database system.
 Example - GRANT and REVOKE.
 - **TCL (Transaction Control Language)** : It contains commands which are required to deal with the transaction of the database.
@@ -79,7 +79,7 @@ Example – Designing registration form which contains a text box, label, button
 The process of hiding irrelevant details from users is known as Data Abstraction. 
 
 Data Abstraction can be divided into 3 levels -
-- **Physical Level** : It is the lowest level and is managed by DBMS. This level consists of data storage descriptions and the details of this level are typically hidden from system admins, developers, and users.
+- **Physical Level** : It is the lowest level and is managed by DBMS. It determines **HOW** data is stored in the database. This level consists of data storage descriptions and the details of this level are typically hidden from system admins, developers, and users.
 - **Conceptual or Logical level** : It is the level on which developers and system admins work and it determines **WHAT** data is stored in the database and what is the relationship between the data points.
 - **External or View level** : It is the level that describes only part of the database and hides the details of the table schema and its physical storage from the users. The result of a query is an example of View level data abstraction. A view is a virtual table created by selecting fields from one or more tables present in the database.
 
