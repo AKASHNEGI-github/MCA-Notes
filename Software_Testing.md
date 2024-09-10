@@ -121,7 +121,7 @@ Types of Software Testing -
 - Purpose: Identify defects that are not found in structured testing.
 - When to Use: When there’s limited time, or for quick checks.
 
-### What is Test Cases
+### What are Test Cases
 A Test Case is a detailed set of conditions or steps used to test a specific aspect of the software system. It includes input conditions, execution steps, and expected results to determine whether a particular feature or function of the software is working as intended.
 
 Components of a Test Case -
@@ -149,6 +149,7 @@ Test case design techniques are methods used to create effective and efficient t
 - Path Coverage : This technique ensures that all possible paths in the code, including loops and conditions, are covered.
 - Error Guessing : Based on the tester’s experience, they “guess” which parts of the software may be more prone to errors and design test cases around those areas.
 - Exploratory Testing : This involves exploring the software without predefined test cases. The tester simultaneously learns about the system, designs tests, and executes them.
+
 
 
 ---
