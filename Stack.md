@@ -171,58 +171,6 @@ class Stack
 
 ### Questions
 
-- Valid Parentheses
-```c++
-class Solution {
-public:
-    bool isValid(string s) 
-    {
-        stack<int> st;
-        for(int i=0 ; i<s.size() ; i++)
-        {
-            if(s[i] == '(' || s[i] == '{' || s[i] == '[')
-            {
-                st.push(s[i]);
-            }
-            else
-            {
-                if(! st.empty())
-                {
-                    if(s[i] == ')' && st.top() == '(')
-                    {
-                        st.pop();
-                    }
-                    else if(s[i] == '}' && st.top() == '{')
-                    {
-                        st.pop();
-                    }
-                    else if(s[i] == ']' && st.top() == '[')
-                    {
-                        st.pop();
-                    }
-                    else
-                    {
-                        return false;
-                    }
-                }
-                else
-                {
-                    return false;
-                }
-            }
-        }
-        if(st.empty())
-        {
-            return true;
-        } 
-        else
-        {
-            return false;
-        }
-    }
-};
-```
-
 - Implement two stacks in an array
 ```c++
 class twoStacks 
@@ -294,13 +242,112 @@ class twoStacks
 };
 ```
 
+- Valid Parentheses
+```c++
+class Solution {
+public:
+    bool isValid(string s) 
+    {
+        stack<int> st;
+        for(int i=0 ; i<s.size() ; i++)
+        {
+            if(s[i] == '(' || s[i] == '{' || s[i] == '[')
+            {
+                st.push(s[i]);
+            }
+            else
+            {
+                if(! st.empty())
+                {
+                    if(s[i] == ')' && st.top() == '(')
+                    {
+                        st.pop();
+                    }
+                    else if(s[i] == '}' && st.top() == '{')
+                    {
+                        st.pop();
+                    }
+                    else if(s[i] == ']' && st.top() == '[')
+                    {
+                        st.pop();
+                    }
+                    else
+                    {
+                        return false;
+                    }
+                }
+                else
+                {
+                    return false;
+                }
+            }
+        }
+        if(st.empty())
+        {
+            return true;
+        } 
+        else
+        {
+            return false;
+        }
+    }
+};
+```
 
+- Delete Mid of a Stack
+```c++
+class Solution 
+{
+    public:
+    void deleteMiddleElement(stack<int>& s , int sizeOfStack , int count)
+    {
+        if(count == sizeOfStack/2)
+        {
+            s.pop();
+            return;
+        }
+        int num = s.top();
+        s.pop();
+        count++;
+        deleteMiddleElement(s , sizeOfStack , count);
+        s.push(num);
+    }
+    
+    void deleteMid(stack<int>& s, int sizeOfStack) 
+    {
+        int count = 0;
+        deleteMiddleElement(s , sizeOfStack , count);
+    }
+};
+```
 
+- Sort a stack
+```c++
+void sortStackElements(stack<int>& s , int num)
+{
+    if( (s.empty()) || (!s.empty() && s.top() < num) )
+    {
+        s.push(num);
+        return;
+    }
+    int n = s.top();
+    s.pop();
+    sortStackElements(s , num);
+    s.push(n);
+}
 
-
-
-
-
+void SortedStack :: sort()
+{
+    if(s.empty())
+    {
+        return;
+    }
+    int num = s.top();
+    s.pop();
+    sort();
+    sortStackElements(s , num);
+}
+```
 
 
 
