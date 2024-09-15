@@ -171,6 +171,118 @@ class Stack
 
 ### Questions
 
+- Remove All Adjacent Duplicates In String
+```c++
+class Solution {
+public:
+    string removeDuplicates(string s) 
+    {
+        stack<char> st;
+        for(int i=0 ; i<s.size() ; i++)
+        {
+            if(!st.empty() && s[i] == st.top())
+            {
+                st.pop();
+            }
+            else
+            {
+                st.push(s[i]);
+            }
+        }   
+        s = "";
+        while(!st.empty())
+        {
+            s = s + st.top();
+            st.pop();
+        }
+        reverse(s.begin() , s.end());
+        return s;
+    }
+};
+```
+
+- Clear Digits
+```c++
+class Solution {
+public:
+    string clearDigits(string s) 
+    {
+        stack<char> st;
+        for(int i=0 ; i<s.size() ; i++)
+        {
+            if(s[i] >= 'a' && s[i] <= 'z')
+            {
+                st.push(s[i]);
+            }
+            else
+            {
+                st.pop();
+            }
+        }   
+        s = "";
+        while(!st.empty())
+        {
+            s = s + st.top();
+            st.pop();
+        } 
+        reverse(s.begin() , s.end());
+        return s;
+    }
+};
+```
+
+- Valid Parentheses
+```c++
+class Solution {
+public:
+    bool isValid(string s) 
+    {
+        stack<int> st;
+        for(int i=0 ; i<s.size() ; i++)
+        {
+            if(s[i] == '(' || s[i] == '{' || s[i] == '[')
+            {
+                st.push(s[i]);
+            }
+            else
+            {
+                if(! st.empty())
+                {
+                    if(s[i] == ')' && st.top() == '(')
+                    {
+                        st.pop();
+                    }
+                    else if(s[i] == '}' && st.top() == '{')
+                    {
+                        st.pop();
+                    }
+                    else if(s[i] == ']' && st.top() == '[')
+                    {
+                        st.pop();
+                    }
+                    else
+                    {
+                        return false;
+                    }
+                }
+                else
+                {
+                    return false;
+                }
+            }
+        }
+        if(st.empty())
+        {
+            return true;
+        } 
+        else
+        {
+            return false;
+        }
+    }
+};
+```
+
 - Implement two stacks in an array
 ```c++
 class twoStacks 
@@ -239,58 +351,6 @@ class twoStacks
                 return -1;
             }
         }
-};
-```
-
-- Valid Parentheses
-```c++
-class Solution {
-public:
-    bool isValid(string s) 
-    {
-        stack<int> st;
-        for(int i=0 ; i<s.size() ; i++)
-        {
-            if(s[i] == '(' || s[i] == '{' || s[i] == '[')
-            {
-                st.push(s[i]);
-            }
-            else
-            {
-                if(! st.empty())
-                {
-                    if(s[i] == ')' && st.top() == '(')
-                    {
-                        st.pop();
-                    }
-                    else if(s[i] == '}' && st.top() == '{')
-                    {
-                        st.pop();
-                    }
-                    else if(s[i] == ']' && st.top() == '[')
-                    {
-                        st.pop();
-                    }
-                    else
-                    {
-                        return false;
-                    }
-                }
-                else
-                {
-                    return false;
-                }
-            }
-        }
-        if(st.empty())
-        {
-            return true;
-        } 
-        else
-        {
-            return false;
-        }
-    }
 };
 ```
 
