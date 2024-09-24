@@ -346,6 +346,36 @@ public:
 };
 ```
 
+- Reorder List
+```c++
+class Solution {
+public:
+    void reorderList(ListNode* head) 
+    {
+        vector<int> v;
+        ListNode* ptr = head;
+        while(ptr != NULL)
+        {
+            v.push_back(ptr->val);
+            ptr = ptr->next;
+        }
+        int start = 0;
+        int end = v.size()-1;
+        while(start < end)
+        {
+            head->val = v[start++];
+            head = head->next;
+            head->val = v[end--];
+            head = head->next;
+        }
+        if(start == end)
+        {
+            head->val = v[start];
+        }
+    }
+};
+```
+
 - Remove Duplicates from Sorted List
 
 ```c++
