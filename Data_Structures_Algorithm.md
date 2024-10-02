@@ -26,6 +26,32 @@ int reverseNumberSTOI(int num)
 }
 ```
 
+- Sum of Digits of a Number
+```c++
+int sumOfDigits(int num)
+{
+    int sum = 0;
+    while(num > 0)
+    {
+        sum = sum + (num % 10);
+        num = num/10;
+    }
+    return sum;
+}
+```
+
+- Check Leap Year
+```c++
+isLeapYear(int year)
+{
+    if( ((year % 4 == 0) && (year % 100 != 0)) || (year % 400 == 0) )
+    {
+        return true;
+    }
+    return false;
+}
+```
+
 - Check Prime
 ```c++
 bool isPrime(int num)
@@ -39,6 +65,25 @@ bool isPrime(int num)
                 return false;
             }
         }
+        return true;
+    }
+    return false;
+}
+```
+
+- Check Palindrome
+```c++
+bool isPalindrome(int num)
+{
+    int original = num;
+    int reversed = 0;
+    while(num > 0 )
+    {
+        reversed = (reversed*10) + (num%10);
+        num = num/10;
+    }
+    if(original == reversed)
+    {
         return true;
     }
     return false;
@@ -77,6 +122,92 @@ int BinaryToDecimal(int num)
 }
 ```
 
+- Power of a Number
+```c++
+int powerOfNumber(int x , int n)
+{
+    int ans = 1;
+    for (int i = 0; i < n; i++) 
+    {
+        ans = ans * x;
+    }
+    return ans;
+}
+```
+
+- Add two Fractions
+- GCD of two Numbers
+- LCM of two Numbers
+- Roots of a Quadratic Equation
+- Factorial of a Number
+- Check Armstrong Number
+- Check Perfect Number
+- Check Abundant Number 
+- Check Even or Odd
+- Check Positive or Negative
+- Sum of first N natural numbers
+- Sum of AP Series
+- Sum of GP Series
+
+
+### Arrays
+
+- Find the smallest number in an array
+Find the largest number in an array
+Second Smallest and Second Largest element in an array
+Reverse a given array
+Count frequency of each element in an array
+Rearrange array in increasing-decreasing order
+Calculate sum of the elements of the array
+Rotate array by K elements - Block Swap Algorithm
+Average of all elements in an array
+Find the median of the given array
+Remove duplicates from a sorted array
+Remove duplicates from unsorted array
+Adding Element in an array
+Find all repeating elements in an array
+Find all non-repeating elements in an array
+Find all symmetric pairs in array
+Maximum product subarray in an array
+Replace each element of the array by its rank in the array
+Sorting elements of an array by frequency
+Rotation of elements of array- left and right
+Finding equilibrium index of an array
+Finding Circular rotation of an array by K positions
+Sort an array according to the order defined by another array
+Search an element in an array
+Check if Array is a subset of another array or not
+
+### Strings
+
+- Check if a given string is palindrome or not
+Count number of vowels, consonants, spaces in String
+Find the ASCII value of a character
+Remove all vowels from the string
+Remove spaces from a string
+Remove characters from a string except alphabets
+Reverse a String
+Remove brackets from an algebraic expression
+Sum of the numbers in a String
+Capitalize first and last character of each word
+Calculate frequency of characters in a string
+Find Non-repeating characters of a String
+Check if two strings are anagram of each other
+Count common sub-sequence in two strings
+Check if two strings match where one string contains wildcard characters
+Return maximum occurring character in the input string
+Remove all duplicates from the input string.
+Print all the duplicates in the input string.
+Remove characters from first string present in the second string
+Change every letter with the next lexicographic alphabet in the given string
+Write a program to find the largest word in a given string.
+Write a program to sort characters in a string
+Count number of words in a given string
+Write a program to find a word in a given string which has the highest number of repeated letters
+Change case of each character in a string
+Concatenate one string to another
+Write a program to find a substring within a string. If found display its starting position
+Reverse words in a string
 
 
 
