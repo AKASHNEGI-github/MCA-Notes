@@ -4,6 +4,8 @@
 
 ### Queue using Array
 ```c++
+// QUEUE USING ARRAYS
+
 #include<bits/stdc++.h>
 using namespace std;
 
