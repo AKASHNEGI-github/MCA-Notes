@@ -2,6 +2,47 @@
 
 ### Numbers
 
+- Check Even or Odd
+```c++
+{
+    if(n % 2 == 0)
+    {
+        cout << "Even" << endl;
+    }
+    else
+    {
+        cout << "Odd" << endl;
+    }
+}
+```
+
+- Sum of first N natural numbers
+```c++
+int sumNaturalNumbers(int n)
+{
+    return n*(n+1)/2;
+}
+```
+
+- Swap two numbers
+```c++
+void swap(int &n1 , int &n2)
+{
+    n1 = n1 + n2;
+    n2 = n1 - n2;
+    n1 = n1 - n2;
+}
+```
+
+```c++
+void swap(int &n1 , int &n2)
+{
+    n1 = n1 ^ n2;
+    n2 = n1 ^ n2;
+    n1 = n1 ^ n2;
+}
+```
+
 - Reverse Integer
 ```c++
 int reverseNumber(int num)
@@ -135,17 +176,99 @@ int powerOfNumber(int x , int n)
 }
 ```
 
-- Add two Fractions
 - GCD of two Numbers
+```c++
+int GCD(int n1 , int n2)
+{
+    while(n1 > 0 && n2 > 0)
+    {
+        if(n1 > n2) 
+        {
+            n1 = n1 % n2;
+        }
+        else
+        {
+            n2 = n2 % n1; 
+        }
+    }
+    if(n1 == 0)
+    {
+        return n2;
+    }
+    return n1;
+}
+```
+
 - LCM of two Numbers
-- Roots of a Quadratic Equation
+```c++
+int GCD(int n1, int n2) 
+{
+    if(n2 == 0)
+    {
+		return n1;
+	}
+	return GCD(n1 , n1%n2);
+}
+
+int LCM(int n1 , int n2)
+{
+	return (n1*n2) / GCD(n1 , n2);
+}
+```
+
 - Factorial of a Number
+```c++
+int factorial(int n)
+{
+   int ans = 1;
+   for(int i = 1; i <= n; i++)
+   {
+        ans = ans * i;
+   }
+   return ans;
+}
+```
+
+```c++
+int factorial(int n)
+{
+   if(n == 0)
+   {
+       return 1;
+   }
+   return ( n * factorial(n-1) );
+
+}
+```
+
 - Check Armstrong Number
+```c++
+bool isArmstrong(int n)
+{
+    int k = to_string(n).length();
+    int sum = 0;
+    int num = n;
+    while(num > 0)
+    {
+        int mod = num%10;
+        sum = sum + pow(mod , k);
+        num = num/10;
+    }
+    if(sum == n)
+    {
+        return true;
+    }
+    return false;
+}
+```
+
+- Add two Fractions
+
+- Roots of a Quadratic Equation
+
+
 - Check Perfect Number
 - Check Abundant Number 
-- Check Even or Odd
-- Check Positive or Negative
-- Sum of first N natural numbers
 - Sum of AP Series
 - Sum of GP Series
 
