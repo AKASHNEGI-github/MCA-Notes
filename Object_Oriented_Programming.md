@@ -1185,6 +1185,16 @@ Exception Handling is implemented by **try{ }** and **catch( ){ }** statements.
 | Shallow Copy reflects changes made to the new/copied object in the original object. | Deep copy doesn’t reflect changes made to the new/copied object in the original object. |
 | Shallow Copy stores the copy of the original object and points the references to the objects. | Deep copy stores the copy of the original object and recursively copies the objects as well. |
 | A shallow copy is faster. | Deep copy is comparatively slower. |
+
+### What is Multithreading
+Multithreading in C++ refers to the ability of a program to execute multiple threads concurrently. Each thread runs independently, and multiple threads can run in parallel or concurrently on different cores of a processor. This is especially useful for tasks that can be broken down into smaller, independent operations, improving the performance and responsiveness of the program.
+
+In C++, multithreading is supported by the <thread> library introduced in C++11, which provides a clean and easy-to-use interface for thread management.
+
+**Key Concepts in Multithreading**
+- Thread : A thread is the smallest unit of execution in a process. In multithreading, multiple threads run within the same process and share the same address space.
+- Concurrency: Running multiple threads seemingly at the same time. The operating system schedules these threads for execution.
+- Parallelism: Running multiple threads at the exact same time on multiple CPU cores.
   
 ### What is Garbage Collection 
 Garbage collection refers to this mechanism of handling the memory in the program. Through garbage collection, the unwanted memory is freed up by removing the objects that are no longer needed.
