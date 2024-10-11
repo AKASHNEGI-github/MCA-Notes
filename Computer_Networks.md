@@ -112,6 +112,29 @@ Layers of TCP/IP Model
 - **Network Access Layer** - Decides which links such as serial lines or classic Ethernet must be used to meet the needs of the connectionless internet layer.
 
 ### Explain OSI Reference Model v/s TCP/IP Reference Model
+The OSI (Open Systems Interconnection) model and the TCP/IP (Transmission Control Protocol/Internet Protocol) model are both conceptual frameworks used to describe how different network protocols interact to provide communication between computers over a network. However, they differ in their structure, origin, and purpose. Here’s a comparison of the two models:
+
+**OSI Model**
+The OSI model was developed by the International Organization for Standardization (ISO) and is a theoretical framework that describes networking systems in seven distinct layers.
+
+7 Layers of the OSI Model:
+Physical Layer: Deals with the transmission of raw data bits over a physical medium (e.g., cables, wireless).
+Data Link Layer: Responsible for node-to-node data transfer, error detection, and handling (e.g., Ethernet, MAC addresses).
+Network Layer: Manages the routing and forwarding of data packets across networks (e.g., IP, routers).
+Transport Layer: Ensures reliable data transfer between two hosts (e.g., TCP, UDP).
+Session Layer: Manages sessions and controls dialogues between computers (e.g., managing a session in a video call).
+Presentation Layer: Translates data between the application layer and the network, handling data encryption, decryption, compression, etc.
+Application Layer: Provides network services directly to end-user applications (e.g., HTTP, FTP, DNS).
+
+**TCP/IP Model**
+The TCP/IP model was developed by the Department of Defense (DoD) to enable communication across different types of networks. Unlike the OSI model, the TCP/IP model is based on protocols that are widely used on the Internet. It has fewer layers (4 instead of 7).
+
+4 Layers of the TCP/IP Model:
+Link Layer (Network Interface): Corresponds to the physical and data link layers of the OSI model, handling data transmission across the network (e.g., Ethernet, Wi-Fi).
+Internet Layer: Handles logical addressing and routing of data packets across networks (e.g., IP).
+Transport Layer: Ensures end-to-end communication and data flow control between hosts (e.g., TCP, UDP).
+Application Layer: Combines the functions of the OSI’s session, presentation, and application layers, providing services such as file transfers, email, and network management (e.g., HTTP, FTP, DNS).
+
 | TCP/IP | OSI |
 | ------ | --- |
 | TCP refers to Transmission Control Protocol. | OSI refers to Open Systems Interconnection. |
