@@ -7,8 +7,8 @@
 ### What is a Pionter
 A pointer in C++ is a variable that stores the memory address of another variable. Instead of holding a direct value like an integer or a character, it holds the address where that value is stored in memory.
 
-Address-of Operator (&) : This operator returns the memory address of a variable.
-Dereference Operator (*) : This operator is used to access the value at the memory address stored by the pointer.
+- Address-of Operator (&) : This operator returns the memory address of a variable.
+- Dereference Operator (*) : This operator is used to access the value at the memory address stored by the pointer.
 
 **Types of Pointers in C++**
 
