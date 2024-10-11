@@ -1085,6 +1085,39 @@ int main()
 
 ### What is an Interface
 Interface refers to a special type of class, which contains methods, but not their definition. Only the declaration of methods is allowed inside an interface. To use an interface, you cannot create objects. Instead, you need to implement that interface and define the methods for their implementation.
+```c++
+class MyInterface
+{
+public:
+  // Empty virtual destructor for proper cleanup
+  virtual ~MyInterface() {}
+
+  virtual void Method1() = 0;
+  virtual void Method2() = 0;
+};
+
+
+class MyAbstractClass
+{
+public:
+  virtual ~MyAbstractClass();
+
+  virtual void Method1();
+  virtual void Method2();
+  void Method3();
+
+  virtual void Method4() = 0; // make MyAbstractClass not instantiable
+};
+```
+
+| Abstract Class | Interface |
+| ------------- | --------- |
+| Abstract class does not support multiple inheritance | Interface support multiple implementations |
+| Abstract class contains Data Member | Interface does not contain Data Member |
+| Abstract class contains Constructors | Interface does not contain Constructors |
+| An abstract class Contains both incomplete (abstract) and complete member | An interface Contains only incomplete member (signature of member) |
+| An abstract class can contain access modifiers for the subs, functions, properties | An interface cannot have access modifiers by default everything is assumed as public |
+| Only Complete Member of abstract class can be Static | Member of interface can not be Static |
 
 ### What is an Inline Function
 An inline function in C++ is a function where the compiler attempts to expand the function's code at each point where the function is called, rather than generating a standard function call. This can reduce the overhead of function calls, especially for small, frequently called functions. The inline keyword is used to request the compiler to make a function inline.
@@ -1129,19 +1162,18 @@ Synchronous exceptions are the exceptions that occur at a particular instruction
 Asynchronous exceptions are the exceptions that create errors that are not controllable by the program. For example-hardware malfunctions, disk failure, etc.
 
 ### What is Exception Handling
-Conditions responsible for creating errors during the execution of a program are known as Exceptions. Handling these exceptions by either removing these conditions or by using some other operations than normal operations is known as exception handling.
+Exceptions are the conditions responsible for creating errors during the execution of a program. Handling these exceptions by either removing these conditions or by using some other operations than normal operations is known as exception handling.
+
+Exception Handling is implemented by **try{ }** and **catch( ){ }** statements. 
+- The **try** statement allows you to define a block of code to be tested for errors while it is being executed. 
+- The **throw** keyword throws an exception when a problem is detected, which lets us create a custom error. 
+- The **catch** statement allows you to define a block of code to be executed if an error occurs in the try block. 
 
 ### Why do we need Exception Handling
 - Separate Error code from Normal code to help us understand errors easily. 
 - Functions/Methods can be handled only by the exceptions they choose. The exceptions not chosen will be handled by the caller.
 - Exceptional handling allows the grouping of error types which helps in categorizing them. 
 - It makes the program’s error type easy to understand. 
-
-### How to implement Exception Handling
-It is implemented by **try{ }** and **catch( ){ }** statements. 
-- The **try** statement allows you to define a block of code to be tested for errors while it is being executed. 
-- The **throw** keyword throws an exception when a problem is detected, which lets us create a custom error. 
-- The **catch** statement allows you to define a block of code to be executed if an error occurs in the try block. 
 
 ### What is Deep Copy and Shallow Copy
 - **Shallow Copy** - Creates a new object but does not create copies of nested objects; instead, it copies references to the nested objects. Thus, changes to nested objects affect both the original and the copied objects.
