@@ -2,6 +2,7 @@
 
 ---
 
+### Implementation
 ```c++
 // TRIE
 
@@ -98,3 +99,9 @@ int main()
 }
 ````
 
+### Questions
+
+-
+```c++
+
+```
