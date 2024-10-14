@@ -84,6 +84,49 @@ int main()
 
 ### Questions
 
+- Move Zeroes
+```c++
+class Solution {
+public:
+    void moveZeroes(vector<int>& nums) 
+    {
+        int j = -1;
+        for(int i=0 ; i<nums.size() ; i++)
+        {
+            if(nums[i] == 0)
+            {
+                j = i;
+                break;
+            }
+        }    
+        for(int i=(j+1) ; i<nums.size() ; i++)
+        {
+            if(nums[i] != 0 && j != -1)
+            {
+                swap(nums[i] , nums[j]);
+                j++;
+            }
+        }
+    }
+};
+```
+
+- Rotate Array
+```c++
+class Solution {
+public:
+    void rotate(vector<int>& nums, int k) 
+    {
+      vector<int> v(nums.size());
+      for(int i=0 ; i<nums.size() ; i++)
+      {
+        v[(i+k) % nums.size()] = nums[i];
+      }    
+      nums = v;
+    }
+};
+```
+
 - Remove Duplicates from Sorted Array
 ```c++
 class Solution {
@@ -104,21 +147,11 @@ public:
 };
 ```
 
-- Rotate Array
+- Remove Duplicates from Unsorted Array
 ```c++
-class Solution {
-public:
-    void rotate(vector<int>& nums, int k) 
-    {
-      vector<int> v(nums.size());
-      for(int i=0 ; i<nums.size() ; i++)
-      {
-        v[(i+k) % nums.size()] = nums[i];
-      }    
-      nums = v;
-    }
-};
+
 ```
+
 
 
 
