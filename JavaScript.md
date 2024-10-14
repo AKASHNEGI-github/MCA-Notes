@@ -151,6 +151,16 @@ inviteEmployee2("Hello", "How are you?"); // Hello Jimmy Baily, How are you?
 
 ### What is Scope in Javacript
 Scope is the accessibility of variables, functions, and objects in some particular part of your code during runtime. In other words, scope determines the visibility of variables and other resources in areas of your code.
+```js
+if(true){
+    let n1 = 10;
+    const n2 = 20;
+    var n3 = 30;
+}
+console.log(`n1 : ${n1}`); // ReferenceError: n1 is not defined
+console.log(`n2 : ${n2}`); // ReferenceError: n2 is not defined
+console.log(`n3 : ${n3}`); // n3 : 30
+```
 
 ### What is the purpose of the let keyword
 The let statement declares a block scope local variable. Hence the variables defined with let keyword are limited in scope to the block, statement, or expression on which it is used. Whereas variables declared with the var keyword used to define a variable globally, or locally to an entire function regardless of block scope.
@@ -226,6 +236,13 @@ function message(name) {
 
 ### What are Lambda Expressions or Arrow Functions
 An arrow function is a shorter/concise syntax for a function expression and does not have its own this, arguments, super, or new.target. 
+```jsconst addTwo = (n1 , n2) => {
+    return (n1 + n2);
+}
+
+console.log(`Sum : ${addTwo(2,3)}`); // 5
+```
+
 ```js
 const arrowFunc1 = (a, b) => a + b; // Multiple parameters
 const arrowFunc2 = a => a * 10; // Single parameter
@@ -263,8 +280,8 @@ higherOrder(firstOrderFunc);
 ### What is an IIFE (Immediately Invoked Function Expression)
 IIFE (Immediately Invoked Function Expression) is a JavaScript function that runs as soon as it is defined. 
 ```js
-(function () {
-  // logic here
+(function IIFE(){
+    console.log("Hello"); // Hello
 })();
 ```
 
@@ -426,22 +443,79 @@ A Promise is in one of these states -
 - Rejected : meaning that the operation failed.
 
 ```js
-const promise = new Promise(function (resolve, reject) {
-  // promise description
+const promise1 = new Promise(function(resolve , reject){
+    setTimeout(function(){
+        console.log("Async task is completed");
+        resolve();
+    }, 1000);
+});
+
+promise1.then(function(){
+    console.log("Promise completed");
 });
 ```
 
 ```js
-const promise = new Promise(
-  (resolve) => {
-    setTimeout(() => {
-      resolve("I'm a Promise!");
-    }, 5000);
-  },
-  (reject) => {}
-);
+const promise2 = new Promise(function(resolve , reject){
+    setTimeout(function(){
+        resolve({name:"Akash" , course:"MCA"});
+    }, 1000);
+});
 
-promise.then((value) => console.log(value));
+promise2.then(function(user){
+    console.log(user); // { name: 'Akash', course: 'MCA' }
+});
+```
+
+```js
+const promise3 = new Promise(function(resolve , reject){
+    setTimeout(function(){
+        let error = false;
+        if(!error){
+            resolve({name:"Akash" , course:"MCA"});
+        }
+        else{
+            reject("ERROR");
+        }
+    }, 1000)
+});
+
+promise3.then((user) => {
+    console.log(user); // { name: 'Akash', course: 'MCA' }
+    return user.name;
+}).then((username) => {
+    console.log(username); // Akash
+}).catch(function(error){
+    console.log(error);
+}).finally(() => {
+    console.log("FINALLY"); // FINALLY
+});
+```
+
+```js
+const promise4 = new Promise(function(resolve , reject){
+    setTimeout(function(){
+        let error = false;
+        if(!error){
+            resolve({name:"Akash" , course:"MCA"});
+        }
+        else{
+            reject("ERROR");
+        }
+    }, 1000)
+});
+
+async function consumePromise4(){
+    try{
+        const response = await promise4
+        console.log(response); // { name: 'Akash', course: 'MCA' }
+    }
+    catch(error){
+        console.log(error);
+    }
+}
+
+consumePromise4();
 ```
 
 ### Why do you need a Promise
