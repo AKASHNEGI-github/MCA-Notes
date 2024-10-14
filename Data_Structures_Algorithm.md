@@ -275,21 +275,89 @@ bool isArmstrong(int n)
 
 ### Arrays
 
-- Find the smallest number in an array
-Find the largest number in an array
-Second Smallest and Second Largest element in an array
-Reverse a given array
+- Second Smallest
+```c++
+int secondSmallest(int arr[] , int n)
+{
+    int smallest = arr[0];
+    int secSmallest = -1;
+    for(int i=1 ; i<n ; i++)
+    {
+        if(arr[i] < smallest)
+        {
+            secSmallest = smallest;
+            smallest = arr[i];
+        }
+        else if(arr[i] < secSmallest && arr[i] != smallest)
+        {
+            secSmallest = arr[i];
+        }
+    }
+    return secSmallest;
+}
+```
+- Second Largest
+```c++
+int secondLargest(int arr[] , int n)
+{
+    int largest = arr[0];
+    int secLargest = -1;
+    for(int i=1 ; i<n ; i++)
+    {
+        if(arr[i] > largest)
+        {
+            secLargest = largest;
+            largest = arr[i];
+        }
+        else if(arr[i] > secLargest && arr[i] != largest)
+        {
+            secLargest = arr[i];
+        }
+    }
+    return secLargest;
+}
+```
+
+- Remove duplicates from a sorted array
+```c++
+
+```
+- Remove duplicates from unsorted array
+```c++
+
+```
+
+- Find the median of the given array
+```c++
+
+```
+
 Count frequency of each element in an array
+```c++
+
+```
+
 Rearrange array in increasing-decreasing order
-Calculate sum of the elements of the array
 Rotate array by K elements - Block Swap Algorithm
-Average of all elements in an array
-Find the median of the given array
-Remove duplicates from a sorted array
-Remove duplicates from unsorted array
+```c++
+
+```
+
 Adding Element in an array
+```c++
+
+```
+
 Find all repeating elements in an array
+```c++
+
+```
+
 Find all non-repeating elements in an array
+```c++
+
+```
+
 Find all symmetric pairs in array
 Maximum product subarray in an array
 Replace each element of the array by its rank in the array
@@ -298,7 +366,6 @@ Rotation of elements of array- left and right
 Finding equilibrium index of an array
 Finding Circular rotation of an array by K positions
 Sort an array according to the order defined by another array
-Search an element in an array
 Check if Array is a subset of another array or not
 
 ### Strings
