@@ -154,7 +154,7 @@ void HeapifyMin(int arr[] , int n , int i)
     if(smallest != i)
     {
         swap(arr[smallest] , arr[i]);
-        HeapifyMax(arr , n , smallest);
+        HeapifyMin(arr , n , smallest);
     }
 }
 
