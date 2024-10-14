@@ -60,6 +60,14 @@ Example - Scientific experiments, medical imaging systems, industrial control sy
 | Its efficiency is moderate. | Its efficiency is maximum. |
 | It is of two types: Single user multitasking and Multiple user multitasking. | It is of two types: Symmetric Multiprocessing and Asymmetric Multiprocessing.  |
 
+### What is Intension (Schema)
+Intension refers to the structure or schema of the database. It describes the set of attributes (columns) and relationships that define the database's design, but not the actual data stored in it.
+Example : A table definition, such as the definition of a table "Employees" with attributes like EmployeeID, Name, Age, and Salary, is part of the intension.
+
+### What is Extension (Instance)
+Extension refers to the actual data or set of tuples (rows) present in a database table at a given point in time. It is the collection of records in the table that conforms to the schema (intension).
+Example : The actual rows (data) in the "Employees" table, such as specific employee details, make up the extension.
+
 ### What is GUI
 GUI (Graphical User Interface) is basically a type of user interface that allows users to use graphics to interact with OS. GUI is created because it is more user-friendly, less complex, and easier to understand rather than a command-line interface. Its main goal is to increase efficiency and ease of use. 
 
@@ -210,7 +218,19 @@ Necessary Conditions for Deadlock -
 - **Circular Wait** : A set of processes waiting for each other in circular form.
 
 ### What is Deadlock Detection
-Deadlock detection is a process in computing where the system checks if there are any sets of processes that are stuck waiting for each other indefinitely, preventing them from moving forward. In simple words, deadlock detection is the process of finding out whether any process are stuck in loop or not. 
+Deadlock detection in an operating system refers to the process of identifying situations where two or more processes are unable to proceed because each one is waiting for a resource held by another process, leading to a state where none of the processes can execute further. Deadlock detection is one of the strategies used to handle deadlocks, alongside prevention and avoidance.
+
+**Deadlock Detection Algorithm** : For deadlock detection, the operating system may use the resource allocation graph or the wait-for graph.
+- Resource Allocation Graph (RAG) : It is a directed graph where nodes represent processes and resources. Edges show resource requests and assignments between processes and resources. If a circular wait is found in this graph, it indicates a deadlock.
+- Wait-for Graph : This is a simpler graph derived from the RAG, where only processes are represented as nodes. An edge from process P1 to process P2 means that P1 is waiting for a resource currently held by P2. A cycle in the wait-for graph indicates a deadlock.
+- Banker’s Algorithm (for multi-resource systems) : Similar to the deadlock avoidance algorithm, the system can run the Banker's Algorithm periodically to detect unsafe states and identify potential deadlocks.
+
+### What is Deadlock Prevention
+To prevent deadlock, the operating system must ensure that at least one of the above four conditions cannot hold. 
+- Mutual Exclusion : Make some resources sharable where possible.
+- Hold and Wait : Ensure processes request all required resources upfront or release held resources before making new requests.
+- No Preemption : Preempt resources if necessary to avoid deadlock.
+- Circular Wait : Impose a strict order in which processes can request resources.
 
 ### What is Semaphore
 Semaphores are just normal variables used to coordinate the activities of multiple processes in a computer system. They are used to enforce mutual exclusion, avoid race conditions, and implement synchronization between processes. Semaphore is a signaling mechanism. It only holds one positive integer value. It is simply used to solve the problem or issue of critical sections in the synchronization process by using two atomic operations i.e., wait() and signal().
