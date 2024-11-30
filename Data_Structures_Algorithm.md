@@ -2,9 +2,10 @@
 
 ### Star Pattern 
 
-  	* * * 
- 	* * * 
-  	* * *
+  	* * * *
+ 	* * * *
+  	* * * *
+   	* * * *
 ```c++
 void nForest(int n) 
 {
@@ -22,6 +23,7 @@ void nForest(int n)
 	*
 	* *
 	* * *
+ 	* * * *
 ```c++
 void nForest(int n) 
 {
@@ -39,11 +41,39 @@ void nForest(int n)
 	1
  	1 2
   	1 2 3
+   	1 2 3 4
+```c++
+void nForest(int n) 
+{
+	for(int i=0 ; i<n ; i++)
+	{
+		for(int j=0 ; j<=i ; j++)
+		{
+			cout << (j+1) << " ";
+		}
+		cout << endl;
+	}	
+}
+```
 
 	1
  	2 2
   	3 3 3
-   
+   	4 4 4 4
+ ```c++
+void nForest(int n) 
+{
+	for(int i=0 ; i<n ; i++)
+	{
+		for(int j=0 ; j<=i ; j++)
+		{
+			cout << (i+1) << " ";
+		}
+		cout << endl;
+	}	
+}
+```
+
 
 ### Numbers
 
