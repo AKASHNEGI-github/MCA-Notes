@@ -2,7 +2,81 @@
 
 ---
 
+
+What is Tokens
+What is Identifiers
+What is Keywords
+Difference between Keyword and Identifier
+What is Variables and Constants
+What is Variables
+What is Constants
+Scope of C++ Variables
+What is Storage Classes
+What is Static Variables
+What is Data Types and Literals
+What is Data Types
+What is Literals
+
+C++ Data Type Ranges and Their Macros
+C++ Type Modifiers
+C++ Data Type Conversion
+C++ Typecasting Operators
+What is Operators
+
+What is Control Statements
+
+What is Loops
+
+
+What is Functions
+
+What is Parameter Passing Techniques
+Difference between Call by Value and Call by Reference
+C++ Default Arguments
+C++ Recursion
+
+What is Lambda Expression
+
+What is References
+Can references refer to an invalid location in C++?
+Difference Between Pointers and References in C++
+Passing by pointer Vs Passing by Reference in C++
+When do we pass arguments by reference or pointer?
+C++ Arrays
+C++ Arrays
+C++ Multidimensional Arrays
+C++ Pointer to an Array
+Size of Array parameter
+Passing Arrays to Functions in C++
+What is Array Decay in C++? How can it be prevented?
+C++ Strings
+C++ Strings
+C++ std::string Class
+C++ Array of Strings
+C++ String Functions
+C++ String Concatenation
+Tokenizing a String in C++
+C++ Substring
+C++ Structures and Unions
+C++ Structures, Unions, and Enumerations
+C++ Structures
+C++ Pointer to Structure
+C++ Self-Referential Structures
+Difference Between C Structures and C++ Structures
+C++ Unions
+C++ Bit Fields
+C++ Enumeration
+C++ typedef
+Array of Structures vs Array within a Structure in C/C++
+C++ Dynamic Memory Management
+C++ Dynamic Memory Management
+C++ new and delete Operators
+new vs malloc() and free() vs delete in C++
+Memory leak in C++
+Difference between Static and Dynamic Memory Allocation in C++
+
 ### What is C++
+C++ is a general-purpose programming language that was developed as an enhancement of the C language to include object-oriented paradigm. It is an imperative and a compiled language. 
 
 ### What is a Pionter
 A pointer in C++ is a variable that stores the memory address of another variable. Instead of holding a direct value like an integer or a character, it holds the address where that value is stored in memory.
