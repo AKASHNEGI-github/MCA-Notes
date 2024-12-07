@@ -102,7 +102,7 @@ States of Process -
 - **Ready** : In this state, the process has all resources available that are required to run but it waits to get assigned to a processor because CPUs are not working currently on instructions passed by the process.
 - **Terminate** : In this state, the process is completed I.e., the process has finished execution.
 
-### What is Zimbie Process
+### What is Zombie Process
 Zombie process, referred to as a defunct process, is basically a process that is terminated or completed but the whole process control block is not cleaned up from the main memory because it still has an entry in the process table to report to its parent process. It does not consume any of the resources and is dead, but it still exists. It also shows that resources are held by process and are not free.
 
 ### What is Orphan Process
