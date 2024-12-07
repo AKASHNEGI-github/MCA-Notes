@@ -3,19 +3,58 @@
 ---
 
 
-What is Tokens
-What is Identifiers
-What is Keywords
-Difference between Keyword and Identifier
-What is Variables and Constants
-What is Variables
-What is Constants
-Scope of C++ Variables
-What is Storage Classes
-What is Static Variables
-What is Data Types and Literals
-What is Data Types
-What is Literals
+### What are Tokens
+In C++, tokens can be defined as the smallest building block of C++ programs that the compiler understands. Every word in a C++ source code can be considered a token.
+
+**Types of Tokens in C++**
+- Identifiers
+- Keywords
+- Constants
+- Strings
+- Special Symbols
+- Operators
+
+  
+## What are Identifiers
+Identifiers are the unique names assigned to variables, functions, classes, structs, or other entities within the program. 
+
+## What are Keywords
+Keywords(also known as reserved words)  have special meanings to the C++ compiler and are always written or typed in short(lower) cases. 
+
+## What are Variables
+Variable is a name given to a memory location.
+
+## What is Constants
+Constants are the read-only variables whose values cannot be modified once they are declared in the program. The const keyword is used to define the constants.
+
+## Scope of C++ Variables
+Scope of a variable is defined as the extent of the program code within which the variable can be accessed or declared or worked with. 
+- Local Variables : Local Variables are declared within a function or inside a block.
+- Global Variables : Global Variables can be accessed from any part of the program.
+
+## What are Storage Classes
+Storage Classes are used to describe the characteristics of a variable/function. It determines the lifetime, visibility, default value, and storage location which helps us to trace the existence of a particular variable during the runtime of a program.
+C++ uses 6 storage classes -
+- auto 
+- register
+- extern 
+- static 
+- mutable 
+- thread_local 
+
+## What are Static Variables
+
+## What are Data Types
+
+- Primitive Data Types : These data types are built-in or predefined data types and can be used directly by the user to declare variables.
+Example : int, char, float, bool, etc.
+- Derived Data Types : Derived data types that are derived from the primitive or built-in datatypes.
+Example : Function, Array, Pointer, Reference, etc.
+- User-Defined Data Types : User-Defined data types are defined by the user itself.
+Example : Class, Structure, Union, Enumeration, Typedef defined Datatype, etc.
+
+## What are Literals
+Literals are the constant values that are assigned to the variables. Literals represent fixed values that cannot be modified. Literals contain memory but they do not have references as variables. Example : “const int = 5;“, is a constant expression and the value 5 is referred to as a constant integer literal.
 
 C++ Data Type Ranges and Their Macros
 C++ Type Modifiers
