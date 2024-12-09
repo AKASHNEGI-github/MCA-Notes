@@ -240,6 +240,30 @@ int main()
 
 ### Questions
 
+- Kth Smallest Element in an Array
+```c++
+class Solution {
+public:
+    int kthSmallest(vector<int> &arr, int k) 
+    {
+        priority_queue<int> max_heap;
+        for(int i=0 ; i<k ; i++)
+        {
+            max_heap.push(arr[i]);
+        }
+        for(int i=k ; i<arr.size() ; i++)
+        {
+            if(arr[i] < max_heap.top())
+            {
+                max_heap.pop();
+                max_heap.push(arr[i]);
+            }
+        }
+        return max_heap.top();
+    }
+};
+```
+
 - Kth Largest Element in an Array
 ```c++
 class Solution {
