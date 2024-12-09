@@ -1,5 +1,7 @@
 # GRAPH
 
+## Graph Using Adjacency Matrix
+
 ### Un-Directed & Un-Weighted Graph
 ```c++
 #include<bits/stdc++.h>
@@ -153,5 +155,7 @@ int main()
     return 0;
 }
 ```
+
+## Graph Using Adjacency List
 
 ---
