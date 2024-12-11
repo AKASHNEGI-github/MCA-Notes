@@ -2,14 +2,14 @@
 
 ## Graph Using Adjacency Matrix
 
-### Un-Directed & Un-Weighted Graph
+### Un-Directed & Un-Weighted Graph Using Adjacency Matrix
 ```c++
 #include<bits/stdc++.h>
 using namespace std;
 
 int main()
 {
-    // UN-DIRECTED & UN-WEIGHTED GRAPH
+    // UN-DIRECTED & UN-WEIGHTED GRAPH USING ADJACENCY MATRIX
 
     int vertex, edges;
     cout << "Vertex : ";
@@ -20,6 +20,7 @@ int main()
     vector<vector<bool>> Adj_Matrix(vertex , vector<bool>(vertex , 0));
 
     int u, v;
+    cout << "U" << " " << "V" << endl;
     for(int i=0 ; i<edges ; i++)
     {
         cin >> u >> v;
@@ -27,7 +28,7 @@ int main()
         Adj_Matrix[v][u] = 1;
     }
 
-    cout << "Un-Directed & Un-Weighted Graph" << endl;
+    cout << "Un-Directed & Un-Weighted Graph Using Adjacency Matrix" << endl;
     for(int i=0 ; i<vertex ; i++)
     {
         for(int j=0 ; j<vertex ; j++)
@@ -41,14 +42,14 @@ int main()
 }
 ```
 
-### Un-Directed & Weighted Graph
+### Un-Directed & Weighted Graph Using Adjacency Matrix
 ```c++
 #include<bits/stdc++.h>
 using namespace std;
 
 int main()
 {
-    // UN-DIRECTED & WEIGHTED GRAPH
+    // UN-DIRECTED & WEIGHTED GRAPH USING ADJACENCY MATRIX
 
     int vertex, edges;
     cout << "Vertex : ";
@@ -59,6 +60,7 @@ int main()
     vector<vector<int>> Adj_Matrix(vertex , vector<int>(vertex , 0));
 
     int u, v, weight;
+    cout << "U" << " " << "V" << " " << "W" << endl;
     for(int i=0 ; i<edges ; i++)
     {
         cin >> u >> v >> weight;
@@ -66,7 +68,7 @@ int main()
         Adj_Matrix[v][u] = weight;
     }
 
-    cout << "Un-Directed & Weighted Graph" << endl;
+    cout << "Un-Directed & Weighted Graph Using Adjacency Matrix" << endl;
     for(int i=0 ; i<vertex ; i++)
     {
         for(int j=0 ; j<vertex ; j++)
@@ -80,14 +82,14 @@ int main()
 }
 ```
 
-### Directed & Un-Weighted Graph
+### Directed & Un-Weighted Graph Using Adjacency Matrix
 ```c++
 #include<bits/stdc++.h>
 using namespace std;
 
 int main()
 {
-    // DIRECTED & UN-WEIGHTED GRAPH
+    // DIRECTED & UN-WEIGHTED GRAPH USING ADJACENCY MATRIX
 
     int vertex, edges;
     cout << "Vertex : ";
@@ -98,13 +100,14 @@ int main()
     vector<vector<bool>> Adj_Matrix(vertex , vector<bool>(vertex , 0));
 
     int u, v;
+    cout << "U" << " " << "V" << endl;
     for(int i=0 ; i<edges ; i++)
     {
         cin >> u >> v;
         Adj_Matrix[u][v] = 1;
     }
 
-    cout << "Directed & Un-Weighted Graph" << endl;
+    cout << "Directed & Un-Weighted Graph Using Adjacency Matrix" << endl;
     for(int i=0 ; i<vertex ; i++)
     {
         for(int j=0 ; j<vertex ; j++)
@@ -118,14 +121,14 @@ int main()
 }
 ```
 
-### Directed & Weighted Graph
+### Directed & Weighted Graph Using Adjacency Matrix
 ```c++
 #include<bits/stdc++.h>
 using namespace std;
 
 int main()
 {
-    // DIRECTED & WEIGHTED GRAPH
+    // DIRECTED & WEIGHTED GRAPH USING ADJACENCY MATRIX
 
     int vertex, edges;
     cout << "Vertex : ";
@@ -136,13 +139,14 @@ int main()
     vector<vector<int>> Adj_Matrix(vertex , vector<int>(vertex , 0));
 
     int u, v, weight;
+    cout << "U" << " " << "V" << " " << "W" << endl;
     for(int i=0 ; i<edges ; i++)
     {
         cin >> u >> v >> weight;
         Adj_Matrix[u][v] = weight;
     }
 
-    cout << "Directed & Weighted Graph" << endl;
+    cout << "Directed & Weighted Graph Using Adjacency Matrix" << endl;
     for(int i=0 ; i<vertex ; i++)
     {
         for(int j=0 ; j<vertex ; j++)
@@ -157,5 +161,88 @@ int main()
 ```
 
 ## Graph Using Adjacency List
+
+### Un-Directed & Un-Weighted Graph Using Adjacency List
+```c++
+#include<bits/stdc++.h>
+using namespace std;
+
+int main()
+{
+    // UN-DIRECTED & UN-WEIGHTED GRAPH USING ADJACENCY LIST
+
+    int vertex, edges;
+    cout << "Vertex : ";
+    cin >> vertex;
+    cout << "Edges : ";
+    cin >> edges;
+
+    vector<int> Adj_List[vertex];
+
+    int u, v;
+    cout << "U" << " " << "V" << endl;
+    for(int i=0 ; i<edges ; i++)
+    {
+        cin >> u >> v;
+        Adj_List[u].push_back(v);
+        Adj_List[v].push_back(u);
+    }
+
+    cout << "Un-Directed & Un-Weighted Graph Using Adjacency List" << endl;
+    for(int i=0 ; i<vertex ; i++)
+    {
+        cout << i << " -> ";
+        for(int j=0 ; j<Adj_List[i].size() ; j++)
+        {
+            cout << Adj_List[i][j] << "  ";
+        }
+        cout << endl;
+    }
+
+    return 0;
+}
+```
+
+### Un-Directed & Weighted Graph Using Adjacency List
+```c++
+#include<bits/stdc++.h>
+using namespace std;
+
+int main()
+{
+    // UN-DIRECTED & WEIGHTED GRAPH USING ADJACENCY LIST
+
+    int vertex, edges;
+    cout << "Vertex : ";
+    cin >> vertex;
+    cout << "Edges : ";
+    cin >> edges;
+
+    vector<pair<int , int>> Adj_List[vertex];
+
+    int u, v, weight;
+    cout << "U" << " " << "V" << " " << "W" << endl;
+    for(int i=0 ; i<edges ; i++)
+    {
+        cin >> u >> v >> weight;
+        Adj_List[u].push_back(make_pair(v , weight));
+        Adj_List[v].push_back(make_pair(u , weight));
+    }
+
+    cout << "Un-Directed & Weighted Graph Using Adjacency List" << endl;
+    for(int i=0 ; i<vertex ; i++)
+    {
+        cout << i << " -> ";
+        for(int j=0 ; j<Adj_List[i].size() ; j++)
+        {
+            cout << Adj_List[i][j].first << "  " << Adj_List[i][j].second << "  ";
+        }
+        cout << endl;
+    }
+
+    return 0;
+}
+```
+
 
 ---
