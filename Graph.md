@@ -244,5 +244,38 @@ int main()
 }
 ```
 
+### Questions
+
+- BFS of Graph
+```c++
+class Solution {
+public:
+    vector<int> bfsOfGraph(vector<vector<int>> &adj) 
+    {
+        queue<int> q;
+        q.push(0);
+        
+        vector<bool> visited(adj.size() , 0);
+        visited[0] = 1;
+        
+        vector<int> ans;
+        while(!q.empty())
+        {
+            int temp = q.front();
+            q.pop();
+            ans.push_back(temp);
+            for(int j=0 ; j<adj[temp].size() ; j++)
+            {
+                if(!visited[adj[temp][j]])
+                {
+                    visited[adj[temp][j]] = 1;
+                    q.push(adj[temp][j]);
+                }
+            }
+        }
+        return ans;
+    }
+};
+```
 
 ---
