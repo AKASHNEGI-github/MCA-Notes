@@ -1,6 +1,6 @@
 # GRAPH
 
-## Graph Using Adjacency Matrix
+### Adjacency Matrix
 
 ### Un-Directed & Un-Weighted Graph Using Adjacency Matrix
 ```c++
@@ -160,7 +160,7 @@ int main()
 }
 ```
 
-## Graph Using Adjacency List
+### Adjacency List
 
 ### Un-Directed & Un-Weighted Graph Using Adjacency List
 ```c++
@@ -277,5 +277,12 @@ public:
     }
 };
 ```
+
+- DFS of Graph
+```c++
+
+```
+
+
 
 ---
