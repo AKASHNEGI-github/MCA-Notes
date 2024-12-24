@@ -55,7 +55,7 @@ public:
 ```C++
 class Solution{
 public:
-    long long int findSubarray(vector<long long int> &arr) 
+    long long int findSubarray(vector<int> &arr) 
     {
         long long int count = 0;
         long long int prefixSum = 0;
@@ -78,6 +78,13 @@ public:
     }
 };    
 ```
+
+
+
+
+
+
+
 
 
 
