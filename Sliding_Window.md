@@ -79,8 +79,33 @@ public:
 };    
 ```
 
-
-
+- Subarray Sum Equals K
+```c++
+class Solution {
+public:
+    int subarraySum(vector<int>& nums, int k) 
+    {
+        int count = 0;
+        int prefixSum = 0;
+        unordered_map<int , int> m;
+        m[0] = 1;
+        for(int i=0 ; i<nums.size() ; i++)
+        {
+            prefixSum = prefixSum + nums[i];
+            if(m.count(prefixSum-k))
+            {
+                count = count + m[prefixSum-k];
+                m[prefixSum]++;
+            }
+            else
+            {
+                m[prefixSum]++;
+            }
+        }
+        return count;  
+    }
+};
+```
 
 
 
