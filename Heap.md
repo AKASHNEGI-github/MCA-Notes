@@ -166,7 +166,7 @@ int main()
     {
         HeapifyMin(arr , n , i);
     }
-    cout << "Heapify Min" << endl; // 50 55 54 52 53 
+    cout << "Heapify Min" << endl; // 50 52 55 54 53 
     for(int i=1 ; i<=n ; i++)
     {
         cout << arr[i] << " ";
