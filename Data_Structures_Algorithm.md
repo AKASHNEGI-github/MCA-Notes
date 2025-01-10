@@ -129,6 +129,64 @@ void nForest(int n)
 }
 ```
 
+	A 
+	A B 
+	A B C 
+	A B C D 
+```c++
+void nForest(int n) 
+{
+	for(int i=0 ; i<n ; i++)
+	{
+	    char count = 'A';
+		for(int j=0 ; j<=i ; j++)
+		{
+			cout << count++ << " ";
+		}
+		cout << endl;
+	}	
+}
+```
+
+	A 
+	B B 
+	C C C 
+	D D D D 
+```c++
+void nForest(int n) 
+{
+    char count = 'A';
+	for(int i=0 ; i<n ; i++)
+	{
+		for(int j=0 ; j<=i ; j++)
+		{
+			cout << count << " ";
+		}
+		count++;
+		cout << endl;
+	}	
+}
+```
+
+	A B C D 
+	A B C 
+	A B 
+	A 
+```c++
+void nForest(int n) 
+{
+	for(int i=0 ; i<n ; i++)
+	{
+	    char count = 'A';
+		for(int j=0 ; j<(n-i) ; j++)
+		{
+			cout << count++ << " ";
+		}
+		cout << endl;
+	}	
+}
+```
+
 
 ### Numbers
 
