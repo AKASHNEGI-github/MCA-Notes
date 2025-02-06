@@ -283,7 +283,7 @@ public:
 
 ```
 
--Detect Cycle using DSU
+- Detect Cycle using DSU
 ```c++
 class Solution{
 public:
