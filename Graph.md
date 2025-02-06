@@ -283,6 +283,90 @@ public:
 
 ```
 
+-Detect Cycle using DSU
+```c++
+class Solution{
+public:
+    bool detectCycleDFS(int node , int parent , vector<int>adj[] , vector<bool>&visited)
+    {
+        visited[node] = 1;
+        for(int j=0 ; j<adj[node].size() ; j++)
+        {
+            if(adj[node][j] == parent)
+            {
+                continue;
+            }
+            if(visited[adj[node][j]])
+            {
+                return true;
+            }
+            if(detectCycleDFS(adj[node][j] , node , adj , visited))
+            {
+                return true;
+            }
+        }
+        return false;
+    }
+    
+	int detectCycle(int V, vector<int>adj[])
+	{
+	    vector<bool> visited(V , 0);
+	    for(int i=0 ; i<V ; i++)
+	    {
+	        if(!visited[i] && detectCycleDFS(i , -1 , adj , visited))
+	        {
+	            return 1;
+	        }
+	    }
+	    return 0;
+    }
+};
+```
+
+```c++
+class Solution{
+public:
+    bool detectCycleBFS(int vertex , vector<int>adj[] , vector<bool>&visited)
+    {
+        visited[vertex] = 1;
+        queue<pair<int , int>> q;
+        q.push(make_pair(vertex , -1));
+        while(!q.empty())
+        {
+            int node = q.front().first;
+            int parent = q.front().second;
+            q.pop();
+            for(int j=0 ; j<adj[node].size() ; j++)
+            {
+                if(adj[node][j] == parent)
+                {
+                    continue;
+                }
+                if(visited[adj[node][j]])
+                {
+                    return true;
+                }
+                visited[adj[node][j]] = 1;
+                q.push(make_pair(adj[node][j] , node));
+            }
+        }
+        return false;
+    }
+    
+	int detectCycle(int V, vector<int>adj[])
+	{
+	    vector<bool> visited(V , 0);
+	    for(int i=0 ; i<V ; i++)
+	    {
+	        if(!visited[i] && detectCycleBFS(i , adj , visited))
+	        {
+	            return 1;
+	        }
+	    }
+	    return 0;
+    }
+};
+```
 
 
 ---
