@@ -1169,6 +1169,26 @@ Exception Handling is implemented by **try{ }** and **catch( ){ }** statements.
 - The **throw** keyword throws an exception when a problem is detected, which lets us create a custom error. 
 - The **catch** statement allows you to define a block of code to be executed if an error occurs in the try block. 
 
+```c++
+void divide(int N , int D)
+{
+    try
+    {
+        if(D == 0)
+        {
+            throw invalid_argument("Error : Division by zero is not allowed!");
+        }
+        else
+        {
+            cout << "Result : " << N/D;
+        }
+    }
+    catch(const invalid_argument& e)
+    {
+        cout << e.what();   
+    }
+}
+```
 ### Why do we need Exception Handling
 - Separate Error code from Normal code to help us understand errors easily. 
 - Functions/Methods can be handled only by the exceptions they choose. The exceptions not chosen will be handled by the caller.
