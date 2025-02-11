@@ -84,33 +84,6 @@ int main()
 
 ### Questions
 
-- Move Zeroes
-```c++
-class Solution {
-public:
-    void moveZeroes(vector<int>& nums) 
-    {
-        int j = -1;
-        for(int i=0 ; i<nums.size() ; i++)
-        {
-            if(nums[i] == 0)
-            {
-                j = i;
-                break;
-            }
-        }    
-        for(int i=(j+1) ; i<nums.size() ; i++)
-        {
-            if(nums[i] != 0 && j != -1)
-            {
-                swap(nums[i] , nums[j]);
-                j++;
-            }
-        }
-    }
-};
-```
-
 - Rotate Array
 ```c++
 class Solution {
@@ -152,9 +125,111 @@ public:
 
 ```
 
+- Merge Sorted Array
+```c++
+class Solution {
+public:
+    void merge(vector<int>& nums1, int m, vector<int>& nums2, int n) 
+    {
+        int i = m-1;
+        int j = n-1;
+        int index = m+n-1;
+        while(i >= 0 && j >= 0)
+        {
+            if(nums1[i] >= nums2[j])
+            {
+                nums1[index] = nums1[i];
+                i--;
+                index--;
+            }
+            else
+            {
+                nums1[index] = nums2[j];
+                j--;
+                index--;
+            }
+        }
+        while(j >= 0)
+        {
+            nums1[index] = nums2[j];
+            j--;
+            index--;  
+        }
+    }
+};
+```
 
+- Move Zeroes
+```c++
+class Solution {
+public:
+    void moveZeroes(vector<int>& nums) 
+    {
+        int j = -1;
+        for(int i=0 ; i<nums.size() ; i++)
+        {
+            if(nums[i] == 0)
+            {
+                j = i;
+                break;
+            }
+        }    
+        for(int i=(j+1) ; i<nums.size() ; i++)
+        {
+            if(nums[i] != 0 && j != -1)
+            {
+                swap(nums[i] , nums[j]);
+                j++;
+            }
+        }
+    }
+};
+```
 
+- Next Permutation
+```c++
+class Solution {
+public:
+    void nextPermutation(vector<int>& nums) 
+    {
+        next_permutation(nums.begin() , nums.end());    
+    }
+};
+```
 
+```c++
+class Solution {
+public:
+    void nextPermutation(vector<int>& nums) 
+    {
+        int pivot = -1;
+        for(int i=nums.size()-2 ; i>=0 ; i--)
+        {
+            if(nums[i] < nums[i+1])
+            {
+                pivot = i;
+                break;
+            }
+        }
+        if(pivot != -1)
+        {
+            for(int i=nums.size()-1 ; i>pivot ; i--)
+            {
+                if(nums[i] > nums[pivot])
+                {
+                    swap(nums[i] , nums[pivot]);
+                    break;
+                }
+            }
+            reverse(nums.begin()+pivot+1 , nums.end());
+        }
+        else
+        {
+            reverse(nums.begin() , nums.end());
+        }
+    }
+};
+```
 
 
 
