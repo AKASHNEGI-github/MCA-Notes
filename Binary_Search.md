@@ -186,4 +186,69 @@ public:
 };
 ```
 
+- Search in Rotated Sorted Array II
+```c++
+
+```
+
+- Find Minimum in Rotated Sorted Array
+```c++
+class Solution {
+public:
+    int findMin(vector<int>& nums) 
+    {
+        int mini = nums[0];
+        int start = 0;
+        int end = nums.size()-1;
+        while(start < end)
+        {
+            int mid = start + (end-start)/2;
+            if(nums[start] <= nums[mid]) // Left-Half Sorted
+            {
+                mini = min(mini , nums[start]);
+                start = mid+1;
+            }
+            else if(nums[mid] <= nums[end]) // Right-Half Sorted
+            {
+                mini = min(mini , nums[mid]);
+                end = mid-1;
+            }
+        }
+        if(start == end)
+        {
+            mini = min(mini , nums[start]);
+        }
+        return mini;
+    }
+};
+```
+
+- Find Minimum in Rotated Sorted Array II
+```c++
+
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 ---
