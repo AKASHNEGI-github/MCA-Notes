@@ -158,7 +158,7 @@ public:
             {
                 return mid;
             }
-            else if(nums[start] <= nums[mid])   // Left-Half Sorted
+            else if(nums[start] <= nums[mid]) // Left-Half Sorted
             {
                 if(nums[start] <= target && target <= nums[mid])
                 {
