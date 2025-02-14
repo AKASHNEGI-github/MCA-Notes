@@ -21,3 +21,6 @@
     Remove all occurrences of substring
     Remove all adjacent duplicates
     String Compression
+    Check that a string is a palindrome
+    Permutation of string
+    Rreplace spaces
