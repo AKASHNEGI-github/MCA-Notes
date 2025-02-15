@@ -245,7 +245,8 @@ int main()
 ```c++
 class Solution {
 public:
-    ListNode* middleNode(ListNode* head) {
+    ListNode* middleNode(ListNode* head)
+    {
       if(head == NULL || head->next == NULL)
       {
         return head;
@@ -274,7 +275,8 @@ public:
 ```c++
 class Solution {
 public:
-    ListNode* reverseList(ListNode* head) {
+    ListNode* reverseList(ListNode* head)
+    {
       ListNode* curr = head;
       ListNode* next = NULL;
       ListNode* prev = NULL;
@@ -294,7 +296,8 @@ public:
 ```c++
 class Solution {
 public:
-    int getDecimalValue(ListNode* head) {
+    int getDecimalValue(ListNode* head)
+    {
       int ans = 0;
       vector<int> v;
       ListNode* ptr = head;
@@ -354,7 +357,8 @@ public:
 ```c++
 class Solution {
 public:
-    bool isPalindrome(ListNode* head) {
+    bool isPalindrome(ListNode* head)
+    {
       if(head == NULL || head->next == NULL)
       {
         return head;
@@ -417,7 +421,8 @@ public:
 ```c++
 class Solution {
 public:
-    ListNode* deleteDuplicates(ListNode* head) {
+    ListNode* deleteDuplicates(ListNode* head)
+    {
       ListNode* ptr = head;
       while(ptr != NULL && ptr->next != NULL)
       {
@@ -439,7 +444,8 @@ public:
 ```c++
 class Solution {
 public:
-    ListNode* removeElements(ListNode* head, int val) {
+    ListNode* removeElements(ListNode* head, int val)
+    {
       if(head == NULL)
       {
         return head;
@@ -469,7 +475,8 @@ public:
 ```c++
 class Solution {
 public:
-    ListNode* oddEvenList(ListNode* head) {
+    ListNode* oddEvenList(ListNode* head)
+    {
       if(head == NULL || head->next == NULL)
       {
         return head;
@@ -521,7 +528,8 @@ public:
 ```c++
 class Solution {
 public:
-    void deleteNode(ListNode* node) {
+    void deleteNode(ListNode* node)
+    {
       node->val = node->next->val;
       node->next = node->next->next;
     }
@@ -532,7 +540,8 @@ public:
 ```c++
 class Solution {
 public:
-    ListNode* deleteMiddle(ListNode* head) {
+    ListNode* deleteMiddle(ListNode* head)
+    {
       int count = 0;
       ListNode* ptr = head;
       if(head->next == NULL)
@@ -564,7 +573,8 @@ public:
 ```c++
 class Solution {
 public:
-    ListNode* swapPairs(ListNode* head) {
+    ListNode* swapPairs(ListNode* head)
+    {
       ListNode* ptr = head;
       while(ptr != NULL && ptr->next != NULL)
       {
@@ -601,6 +611,70 @@ public:
             ptr = ptr->next;
         }
         return head;
+    }
+};
+```
+
+- Sort List
+```c++
+class Solution {
+public:
+    ListNode* middleNode(ListNode* head) 
+    {
+      ListNode* slow = head;
+      ListNode* fast = head->next;
+      while(fast != NULL && fast->next != NULL)
+      {
+        slow = slow->next;
+        fast = fast->next->next;
+      }
+      return slow;
+    }
+
+    ListNode* mergeTwoLists(ListNode* list1, ListNode* list2) 
+    {
+        ListNode* ansHead = new ListNode(-1);
+        ListNode* temp = ansHead;
+        while(list1 != NULL && list2 != NULL)
+        {
+            if(list1->val <= list2->val)
+            {
+                temp->next = list1;
+                list1 = list1->next;
+                temp = temp->next;
+            }
+            else
+            {
+                temp->next = list2;
+                list2 = list2->next;
+                temp = temp->next;
+            }
+        }
+        if(list1)
+        {
+            temp->next = list1;
+        }
+        else
+        {
+            temp->next = list2;
+        }
+        return ansHead->next;
+    }
+
+    ListNode* sortList(ListNode* head) 
+    {
+        if(head == NULL || head->next == NULL)
+        {
+            return head;
+        }
+        ListNode* left = head;
+        ListNode* middle = middleNode(head); 
+        ListNode* right = middle->next;
+        middle->next = NULL;
+
+        left = sortList(left);
+        right = sortList(right);
+        return mergeTwoLists(left , right); 
     }
 };
 ```
