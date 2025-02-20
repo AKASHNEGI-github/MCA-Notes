@@ -1,6 +1,33 @@
 # SLIDING WINDOW
 
 --- 
+### questions
+
+- Maximum Points You Can Obtain from Cards
+```c++
+class Solution {
+public:
+    int maxScore(vector<int>& cardPoints, int k) 
+    {
+        int leftSum = 0;
+        int rightSum = 0;
+        for(int i=0 ; i<k ; i++)
+        {
+            leftSum = leftSum + cardPoints[i];
+        }   
+        int maxSum = leftSum + rightSum;
+        int end = cardPoints.size()-1;
+        for(int i=(k-1) ; i>=0 ; i--)
+        {
+            leftSum = leftSum - cardPoints[i];
+            rightSum = rightSum + cardPoints[end];
+            maxSum = max(maxSum , (leftSum+rightSum));
+            end--;
+        }
+        return maxSum;
+    }
+};
+```
 
 - Zero Sum Subarrays 
 ```C++
