@@ -235,6 +235,15 @@ ACID stands for Atomicity, Consistency, Isolation, and Durability in a DBMS. The
 - **Isolation** - Isolation specifies that multiple transactions can occur concurrently without leading to the inconsistency of the database state. Transactions occur independently without interference. 
 - **Durability** - Durability specifies that once the transaction has completed execution, the updates and modifications to the database are stored in and written to disk and they persist even if a system failure occurs.
 
+### What is Concurrency Control
+Concurrency control in a Database Management System (DBMS) is the process of managing simultaneous transactions to ensure that they do not conflict with each other and maintain the integrity, consistency, and isolation of the database. It ensures that multiple users or processes can access and modify the database at the same time without causing errors, data corruption or inconsistencies.
+
+### What is Concurrency Control Protocol
+Concurrency control protocols are the set of rules which are maintained in order to solve the concurrency control problems in the database. It ensures that the concurrent transactions can execute properly while maintaining the database consistency. The concurrent execution of a transaction is provided with atomicity, consistency, isolation, durability, and serializability via the concurrency control protocols.
+**Types** :
+- Locked based concurrency control protocol
+- Timestamp based concurrency control protocol
+
 ### Explain Locks in DBMS
 A database lock is a mechanism to protect a shared piece of data from getting updated by two or more database users at the same time. When a single database user or session has acquired a lock then no other database user or session can modify that data until the lock is released.
 
