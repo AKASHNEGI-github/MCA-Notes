@@ -30,6 +30,21 @@ DROP TABLE;
 
 ### Questions
 
+- Duplicate Emails
+```sql
+SELECT email AS Email
+FROM Person
+GROUP BY email
+HAVING COUNT(email) > 1;
+```
+
+```sql
+SELECT email AS Email
+FROM Person
+GROUP BY email
+HAVING COUNT(id) > 1;
+```
+
 - Combine Two Tables
 ```sql
 SELECT P.firstName , P.lastName , A.city , A.state
