@@ -240,6 +240,7 @@ Concurrency control in a Database Management System (DBMS) is the process of man
 
 ### What is Concurrency Control Protocol
 Concurrency control protocols are the set of rules which are maintained in order to solve the concurrency control problems in the database. It ensures that the concurrent transactions can execute properly while maintaining the database consistency. The concurrent execution of a transaction is provided with atomicity, consistency, isolation, durability, and serializability via the concurrency control protocols.
+
 **Types** :
 - Locked based concurrency control protocol
 - Timestamp based concurrency control protocol
