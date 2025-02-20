@@ -77,7 +77,34 @@ ON E1.managerId = E2.id
 WHERE E1.salary > E2.salary;
 ```
 
--
+- Customers Who Never Order
 ```sql
+SELECT C.name AS Customers
+FROM Customers AS C
+LEFT JOIN Orders AS O
+ON C.id = O.customerId
+WHERE O.customerId Is NULL;
+```
+
+```sql
+SELECT C.name AS Customers
+FROM Customers AS C
+WHERE C.id NOT IN
+(
+    SELECT C.id
+    FROM Customers AS C
+    INNER JOIN Orders AS O
+    ON C.id = O.customerId
+);
+```
+
+
+
+
+
+
+
+
+
 
 ```
