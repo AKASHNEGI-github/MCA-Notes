@@ -1,7 +1,7 @@
 # SLIDING WINDOW
 
 --- 
-### questions
+### Questions
 
 - Maximum Points You Can Obtain from Cards
 ```c++
