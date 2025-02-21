@@ -77,6 +77,22 @@ ON E1.managerId = E2.id
 WHERE E1.salary > E2.salary;
 ```
 
+` Find Customer Referee
+```sql
+SELECT name 
+FROM Customer
+WHERE referee_id != 2 OR referee_id IS NULL;
+```
+
+` Employee Bonus
+```sql
+SELECT E.name , B.bonus
+FROM Employee AS E
+LEFT JOIN Bonus AS B
+ON E.empId = B.empId
+WHERE B.bonus < 1000 OR B.bonus IS NULL;
+```
+
 - Customers Who Never Order
 ```sql
 SELECT C.name AS Customers
