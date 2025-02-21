@@ -30,6 +30,20 @@ DROP TABLE;
 
 ### Questions
 
+- Big Countries
+```sql
+SELECT name , population , area
+FROM World
+WHERE area >= 3000000 OR population >= 25000000;
+```
+
+- Classes More Than 5 Students
+```sql
+SELECT class
+FROM Courses
+GROUP BY class
+HAVING COUNT(student) >= 5;
+```
 - Duplicate Emails
 ```sql
 SELECT email AS Email
