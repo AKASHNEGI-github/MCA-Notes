@@ -1,6 +1,7 @@
 # SLIDING WINDOW
 
 --- 
+
 ### Questions
 
 - Maximum Points You Can Obtain from Cards
@@ -25,6 +26,30 @@ public:
             end--;
         }
         return maxSum;
+    }
+};
+```
+
+- Longest Substring Without Repeating Characters
+```c++
+class Solution {
+public:
+    int lengthOfLongestSubstring(string s) 
+    {
+        int start = 0;
+        int maxLength = 0;
+        vector<int> charIndex(128 , -1);
+        for(int end=0 ; end<s.size() ; end++)
+        {
+            //if((charIndex[s[end]] != -1) && (start <= charIndex[s[end]]))
+            if(start <= charIndex[s[end]])
+            {
+                start = charIndex[s[end]] + 1;
+            }
+            charIndex[s[end]] = end;
+            maxLength = max(maxLength , end-start+1);
+        }    
+        return maxLength;
     }
 };
 ```
