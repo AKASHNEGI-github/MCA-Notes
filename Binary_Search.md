@@ -271,6 +271,51 @@ public:
 
 ```
 
+- Split Array Largest Sum
+```c++
+class Solution {
+public:
+    int countSubarray(vector<int>& nums , int mid)
+    {
+        int sumSubarray = 0;
+        int countSubarray = 1; 
+        for(int i=0 ; i<nums.size() ; i++)
+        {
+            if(sumSubarray+nums[i] <= mid)
+            {
+                sumSubarray = sumSubarray + nums[i];
+            }
+            else
+            {
+                countSubarray++;
+                sumSubarray = nums[i];
+            }
+        }
+        return countSubarray;
+    }
+
+    int splitArray(vector<int>& nums, int k) // Book Allocation Problem
+    {
+        int low = *max_element(nums.begin() , nums.end());
+        int high = accumulate(nums.begin() , nums.end() , 0);;
+        while(low < high)
+        {
+            int mid = low + (high-low)/2;
+            int subarrays = countSubarray(nums , mid);
+            if(subarrays > k)
+            {
+                low = mid + 1;
+            }
+            else
+            {
+                high = mid;
+            }
+
+        }
+        return high; // return low
+    }
+};
+```
 
 
 
