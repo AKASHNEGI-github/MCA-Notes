@@ -37,6 +37,14 @@ FROM World
 WHERE area >= 3000000 OR population >= 25000000;
 ```
 
+- Not Boring Movies
+```sql
+SELECT *
+FROM Cinema
+WHERE (id%2 != 0) AND (description != "boring")
+ORDER BY rating DESC;
+```
+
 - Classes More Than 5 Students
 ```sql
 SELECT class
@@ -57,6 +65,14 @@ SELECT email AS Email
 FROM Person
 GROUP BY email
 HAVING COUNT(id) > 1;
+```
+
+- Actors and Directors Who Cooperated At Least Three Times
+```sql
+SELECT actor_id , director_id
+FROM ActorDirector 
+GROUP BY actor_id , director_id
+HAVING COUNT(timestamp) >= 3;
 ```
 
 - Combine Two Tables
