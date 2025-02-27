@@ -354,6 +354,45 @@ class twoStacks
 };
 ```
 
+- Min Stack
+```c++
+class MinStack 
+{
+    vector<pair<int , int>> stack;
+
+    public:
+    MinStack() 
+    {}
+    
+    void push(int val) 
+    {   
+        if(stack.empty())
+        {
+            stack.push_back({val , val});
+        }
+        else
+        {
+            stack.push_back({val , min(stack.back().second,val)});    
+        }
+    }
+    
+    void pop() 
+    {
+        stack.pop_back();
+    }
+    
+    int top() 
+    {
+        return stack.back().first;
+    }
+    
+    int getMin() 
+    {
+        return stack.back().second; 
+    }
+};
+```
+
 - Next Greater Element I
 ```c++
 class Solution {
