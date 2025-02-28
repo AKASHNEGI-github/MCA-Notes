@@ -378,6 +378,56 @@ public:
 };
 ```
 
+- Find a Peak Element II
+```c++
+class Solution {
+public:
+    int findMaxRowIndex(vector<vector<int>>& mat , int row , int col , int mid)
+    {
+        int maxi = -1;
+        int maxiIndex = -1;
+        for(int i=0 ; i<row ; i++)
+        {
+            if(mat[i][mid] > maxi)
+            {
+                maxi = mat[i][mid];
+                maxiIndex = i;
+            }
+        }
+        return maxiIndex;
+    }
+
+    vector<int> findPeakGrid(vector<vector<int>>& mat) 
+    {
+        int row = mat.size();
+        int col = mat[0].size();    
+
+        int start = 0;
+        int end = col - 1;
+        while(start <= end)
+        {
+            int mid = start + (end-start)/2;
+            int maxRowIndex = findMaxRowIndex(mat , row , col , mid);
+            int left = (mid - 1 >= 0) ? mat[maxRowIndex][mid-1] : -1;
+            int right = (mid + 1 < col) ? mat[maxRowIndex][mid+1] : -1;
+            if(mat[maxRowIndex][mid] > left && mat[maxRowIndex][mid] > right)
+            {
+                return {maxRowIndex , mid};
+            }
+            else if(mat[maxRowIndex][mid] < right)
+            {
+                start = mid + 1;
+            }
+            else
+            {
+                end = mid - 1;
+            }
+        }
+        return {-1 , -1};
+    }
+};
+```
+
 - Wave Matrix
 ```c++
 
