@@ -135,6 +135,37 @@ int main()
 
 ### Questions
 
+- Row With Maximum Ones
+```c++
+class Solution {
+public:
+    vector<int> rowAndMaximumOnes(vector<vector<int>>& mat) 
+    {
+        int row = mat.size();
+        int col = mat[0].size();
+        int rowIndex = 0;
+        int maxCountOne = 0;
+        for(int i=0 ; i<row ; i++)
+        {
+            int countOne = 0;
+            for(int j=0 ; j<col ; j++)
+            {
+                if(mat[i][j] == 1)
+                {
+                    countOne++;
+                }
+            }
+            if(countOne > maxCountOne)
+            {
+                rowIndex = i;
+                maxCountOne = countOne;
+            }
+        }
+        return {rowIndex , maxCountOne};
+    }
+};
+```
+
 - Count Negative Numbers in a Sorted Matrix
 ```c++
 class Solution {
