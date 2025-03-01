@@ -155,6 +155,35 @@ public:
 };
 ```
 
+- Container With Most Water
+```c++
+class Solution {
+public:
+    int maxArea(vector<int>& height) 
+    {
+        int maxWater = 0;
+        int left = 0;
+        int right = height.size()-1;
+        while(left < right)
+        {
+            int widths = right - left;
+            int heights = min(height[left] , height[right]);
+            int area = widths * heights;
+            maxWater = max(area , maxWater);
+            if(height[left] < height[right])
+            {
+                left++;
+            }
+            else
+            {
+                right--;
+            }
+        }
+        return maxWater;
+    }
+};
+```
+
 - Remove Duplicates from Sorted Array
 ```c++
 class Solution {
