@@ -300,6 +300,51 @@ public:
 
 ```
 
+- Capacity To Ship Packages Within D Days
+```c++
+class Solution {
+public:
+    int countDays(vector<int>& weights , int averageCapacity)
+    {
+        int sumWeight = 0;
+        int totalDays = 1;
+        for(int i=0 ; i<weights.size() ; i++)
+        {
+            if(sumWeight + weights[i] <= averageCapacity)
+            {
+                sumWeight = sumWeight + weights[i]; 
+            }
+            else
+            {
+                totalDays++;
+                sumWeight = weights[i];
+            }
+        }
+        return totalDays;
+    }
+
+    int shipWithinDays(vector<int>& weights, int days) 
+    {
+        int low = *max_element(weights.begin() , weights.end());
+        int high = accumulate(weights.begin() , weights.end() , 0);
+        while(low < high)
+        {
+            int averageCapacity = low + (high - low)/2;
+            int totalDays = countDays(weights , averageCapacity);
+            if(totalDays > days)
+            {
+                low = averageCapacity + 1;
+            }
+            else
+            {
+                high = averageCapacity;
+            }
+        }
+        return high; // return low
+    }
+};
+```
+
 - Split Array Largest Sum
 ```c++
 class Solution {
@@ -310,7 +355,7 @@ public:
         int countSubarray = 1; 
         for(int i=0 ; i<nums.size() ; i++)
         {
-            if(sumSubarray+nums[i] <= mid)
+            if(sumSubarray + nums[i] <= mid)
             {
                 sumSubarray = sumSubarray + nums[i];
             }
@@ -326,10 +371,10 @@ public:
     int splitArray(vector<int>& nums, int k) // Book Allocation Problem
     {
         int low = *max_element(nums.begin() , nums.end());
-        int high = accumulate(nums.begin() , nums.end() , 0);;
+        int high = accumulate(nums.begin() , nums.end() , 0);
         while(low < high)
         {
-            int mid = low + (high-low)/2;
+            int mid = low + (high - low)/2;
             int subarrays = countSubarray(nums , mid);
             if(subarrays > k)
             {
