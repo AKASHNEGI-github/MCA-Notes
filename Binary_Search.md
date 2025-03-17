@@ -300,6 +300,84 @@ public:
 
 ```
 
+- Maximum Candies Allocated to K Children
+```c++
+class Solution {
+public:
+    long long countChildren(vector<int>& candies , int mid)
+    {
+        long long children = 0;
+        for(int i=0 ; i<candies.size() ; i++)
+        {
+            children = children + (candies[i]/mid);
+        }
+        return children;
+    }
+
+    int maximumCandies(vector<int>& candies, long long k) 
+    {
+        int maxChildren = 0;
+        int low = 1;
+        int high = *max_element(candies.begin() , candies.end());
+        while(low <= high)
+        {
+            int mid = low + (high - low)/2;
+            long long children = countChildren(candies , mid);
+            if(children >= k)
+            {
+                maxChildren = mid;
+                low = mid + 1;
+            }
+            else
+            {
+                high = mid - 1;
+            }
+        }
+        return maxChildren;
+    }
+};
+```
+
+- Koko Eating Bananas
+```c++
+class Solution {
+public:
+    long long countHours(vector<int>& piles , int BananasPerHour)
+    {
+        long long totalHours = 0;
+        for(int i=0 ; i<piles.size() ; i++)
+        {
+            totalHours = totalHours + (piles[i]/BananasPerHour); 
+            if(piles[i] % BananasPerHour != 0)
+            {
+                totalHours++;
+            }
+        }
+        return totalHours;
+    }
+
+    int minEatingSpeed(vector<int>& piles, int h) 
+    {
+        int low = 1;
+        int high = *max_element(piles.begin() , piles.end());
+        while(low <= high)
+        {
+            int BananasPerHour = low + (high - low)/2;
+            long long totalHours = countHours(piles , BananasPerHour);
+            if(totalHours <= h)
+            {
+                high = BananasPerHour - 1;
+            }
+            else
+            {
+                low = BananasPerHour + 1;
+            }
+        }
+        return low;
+    }
+};
+```
+
 - Capacity To Ship Packages Within D Days
 ```c++
 class Solution {
