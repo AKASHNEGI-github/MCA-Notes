@@ -328,23 +328,21 @@ class Solution
     public:
     bool isIdentical(Node *r1, Node *r2)
     {
-        if(r1==NULL && r2==NULL)
+        if(r1 == NULL && r2 == NULL)
         {
             return true;
         }
-        else if(r1==NULL && r2!=NULL)
+        else if(r1 == NULL && r2 != NULL)
         {
             return false;
         }
-        else if(r1!=NULL && r2==NULL)
+        else if(r1 != NULL && r2 == NULL)
         {
             return false;
         }
-
         bool data = r1->data == r2->data;
         bool leftSubTree = isIdentical(r1->left , r2->left);
         bool rightSubTree = isIdentical(r1->right , r2->right);
-        
         if(data && leftSubTree && rightSubTree)
         {
             return true;
@@ -353,6 +351,48 @@ class Solution
         {
             return false;
         }
+    }
+};
+```
+
+- Symmetric Tree
+```c++
+class Solution {
+public:
+    bool isSymmetricFast(TreeNode* l , TreeNode* r)
+    {
+        if(l == NULL && r == NULL)
+        {
+            return true;
+        }
+        else if(l == NULL && r != NULL)
+        {
+            return false;
+        }
+        else if(l != NULL && r == NULL)
+        {
+            return false;
+        }
+        bool data = l->val == r->val;
+        bool first = isSymmetricFast(l->left , r->right);
+        bool second = isSymmetricFast(l->right , r->left);
+        if(data && first && second)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+
+    bool isSymmetric(TreeNode* root) 
+    {
+        if(root == NULL)
+        {
+            return true;
+        }
+        return isSymmetricFast(root->left , root->right);
     }
 };
 ```
@@ -595,8 +635,75 @@ public:
 };
 ```
 
+- Vertical Order Traversal of a Binary Tree
+```c++
+class Solution {
+public:
+    vector<vector<int>> verticalTraversal(TreeNode* root) 
+    {
+        map<int , map<int , vector<int>>> Nodes;
+        queue<pair<TreeNode* , pair<int , int>>> q;
+        q.push(make_pair(root , make_pair(0 , 0)));
+        while(!q.empty())
+        {
+            pair<TreeNode* , pair<int , int>> temp = q.front();
+            q.pop();
+            TreeNode* frontNode = temp.first;
+            int axis = temp.second.first;
+            int level = temp.second.second;
+            Nodes[axis][level].push_back(frontNode->val);
+            if(frontNode->left)
+            {
+                q.push(make_pair(frontNode->left , make_pair(axis-1 , level+1)));
+            }
+            if(frontNode->right)
+            {
+                q.push(make_pair(frontNode->right , make_pair(axis+1 , level+1)));
+            }
+        }
+        vector<vector<int>> ans;
+        for(auto i:Nodes)
+        {
+            vector<int> v;
+            for(auto j:i.second)
+            {
+                sort(j.second.begin() , j.second.end());
+                for(auto k:j.second)
+                {
+                    v.push_back(k);
+                }
+            }
+            ans.push_back(v);
+        }
+        return ans;
+    }
+};
+```
 
+- Binary Tree Maximum Path Sum
+```c++
+class Solution {
+public:
+    int pathSum(TreeNode* root , int &maxi)
+    {
+        if(root == NULL)
+        {
+            return 0;
+        }
+        int leftPathSum = max(0 , pathSum(root->left , maxi));
+        int rightPathSum = max(0 , pathSum(root->right , maxi));
+        maxi = max(maxi , root->val + leftPathSum + rightPathSum);
+        return (root->val + max(leftPathSum , rightPathSum));
+    }
 
+    int maxPathSum(TreeNode* root) 
+    {
+        int maxi = INT_MIN;
+        pathSum(root , maxi);
+        return maxi;
+    }
+};
+```
 
 
 
