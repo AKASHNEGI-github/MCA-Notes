@@ -2,6 +2,20 @@
 
 ---
 
+### Questions
+
+- Print name N times
+- Forward Counting
+- Forward Counting (Backtracking)
+- Backward Counting
+- Backward Counting (Backtracking)
+- Sum of first N natural numbers
+- Factorial of N
+- Reverse an array
+- Check Palinddrome
+- Fibonacci Series
+
+  
 void forwardCounting(int n)
 {
     if(n == 0)
