@@ -113,6 +113,29 @@ public:
 };
 ```
 
+```c++
+class Solution {
+public:
+    vector<int> sortArray(vector<int>& nums) // Count Sort
+    {
+        map<int , int> countMap;
+        for(int i=0 ; i<nums.size() ; i++) 
+        {
+            countMap[nums[i]]++;
+        }
+        int arrIndex = 0;
+        for(auto const& [key , val] : countMap) 
+        {
+            for(int i=0 ; i<val ; i++) 
+            {
+                nums[arrIndex++] = key;
+            }
+        }
+        return nums;  
+    }
+};
+```
+
 - Two Sum
 ```c++
 class Solution {
