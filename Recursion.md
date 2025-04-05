@@ -1,4 +1,6 @@
-// RECURSION
+# RECURSION
+
+---
 
 void forwardCounting(int n)
 {
@@ -118,3 +120,11 @@ int search(int arr[] , int size , int i , int key)
     }
     return search(arr , size , i+1 , key);
 }
+
+
+
+
+
+
+
+---
