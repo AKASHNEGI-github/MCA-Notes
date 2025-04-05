@@ -91,6 +91,35 @@ void bubbleSort(int arr[] , int n)
 }
 ```
 
+### Sort an Array
+```c++
+class Solution {
+public:
+    vector<int> sortArray(vector<int>& nums) // Counting Sort
+    {
+        int mini = *min_element(nums.begin() , nums.end());
+        int maxi = *max_element(nums.begin() , nums.end());
+        int range = maxi - mini + 1;
+        vector<int> countArray(range , 0);
+        for(int i=0 ; i<nums.size() ; i++) 
+        {
+            countArray[nums[i] - mini]++;
+        }
+        int index = 0;
+        for(int i=0 ; i<range ; i++) 
+        {
+            while(countArray[i] > 0) 
+            {
+                nums[index] = i + mini;
+                countArray[i]--;
+                index++;
+            }
+        }
+        return nums;
+    }
+};
+```
+
 ### Merge Sort
 ```c++
 void merge(int arr[] , int start , int mid , int end)
