@@ -680,6 +680,79 @@ public:
 };
 ```
 
+- Sum of nodes on the longest path
+```c++
+class Solution {
+public:
+    void solve(Node *root , int sum , int &maxSum , int level , int &maxLevel)
+    {
+        if(root == NULL)
+        {
+            if(level > maxLevel)
+            {
+                maxLevel = level;
+                maxSum = sum;
+            }
+            else if(level == maxLevel)
+            {
+                maxSum = max(sum , maxSum);
+            }
+            return;
+        }
+        sum = sum + root->data;
+        solve(root->left , sum , maxSum , level+1 , maxLevel);
+        solve(root->right , sum , maxSum , level+1 , maxLevel);
+    }
+
+    int sumOfLongRootToLeafPath(Node *root) 
+    {
+        int sum = 0;
+        int maxSum = 0;
+        int level = 0;
+        int maxLevel = 0;
+        solve(root , sum , maxSum , level , maxLevel);
+        return maxSum;
+    }
+};
+```
+
+- Lowest Common Ancestor of a Binary Tree
+```c++
+class Solution {
+public:
+    TreeNode* lowestCommonAncestor(TreeNode* root, TreeNode* p, TreeNode* q) 
+    {
+        if(root == NULL)
+        {
+            return NULL;
+        }    
+        else if(root->val == p->val || root->val == q->val)
+        {
+            return root;
+        }
+
+        TreeNode* leftAns = lowestCommonAncestor(root->left , p , q);
+        TreeNode* rightAns = lowestCommonAncestor(root->right , p , q);
+        if(leftAns != NULL && rightAns != NULL)
+        {
+            return root;
+        }
+        else if(leftAns != NULL && rightAns == NULL)
+        {
+            return leftAns;
+        }
+        else if(leftAns == NULL && rightAns != NULL)
+        {
+            return rightAns;
+        }
+        else
+        {
+            return NULL;
+        }
+    }
+};
+```
+
 - Binary Tree Maximum Path Sum
 ```c++
 class Solution {
