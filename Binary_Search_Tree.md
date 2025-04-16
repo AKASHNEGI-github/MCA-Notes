@@ -281,7 +281,6 @@ public:
 };
 ```
 
-- Range Sum of BST
 ```c++
 class Solution {
 public:
