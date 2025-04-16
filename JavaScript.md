@@ -47,7 +47,7 @@ x = 3.14; // This will cause an error because x is not declared
 x = 3.14; // This will not cause an error.
 myFunction();
 
-function myFunction() {
+function myFunction(){
   "use strict";
   y = 3.14; // This will cause an error
 }
@@ -166,7 +166,7 @@ console.log(`n3 : ${n3}`); // n3 : 30
 The let statement declares a block scope local variable. Hence the variables defined with let keyword are limited in scope to the block, statement, or expression on which it is used. Whereas variables declared with the var keyword used to define a variable globally, or locally to an entire function regardless of block scope.
 ```js
 let counter = 30;
-if (counter === 30) {
+if(counter === 30){
   let counter = 31;
   console.log(counter); // 31
 }
@@ -182,8 +182,8 @@ console.log(counter); // 30 (because the variable in if block won't exist here)
 | It is possible to re-declare the variable in the same scope | It is not possible to re-declare the variable |
 
 ```js
-function userDetails(username) {
-  if (username) {
+function userDetails(username){
+  if(username){
     console.log(salary); // undefined due to hoisting
     console.log(age); // ReferenceError: Cannot access 'age' before initialization
     let age = 30;
@@ -197,19 +197,19 @@ userDetails("John");
 
 ### What is the use of setTimeout
 The setTimeout() method is used to call a function or evaluate an expression after a specified number of milliseconds.
-Example - let's log a message after 2 seconds using setTimeout method.
+Example - Let's log a message after 2 seconds using setTimeout method.
 ```js
-setTimeout(function () {
-  console.log("Good morning");
+setTimeout(() => {
+  console.log("Good morning"); // Good morning (only once)
 }, 2000);
 ```
 
 ### What is the use of setInterval
 The setInterval() method is used to call a function or evaluate an expression at specified intervals (in milliseconds). 
-Example - let's log a message after 2 seconds using setInterval method.
+Example - Let's log a message after every 2 seconds using setInterval method.
 ```js
-setInterval(function () {
-  console.log("Good morning");
+setInterval(() => {
+  console.log("Good morning"); // Good morning (after every 2 seconds)
 }, 2000);
 ```
 
