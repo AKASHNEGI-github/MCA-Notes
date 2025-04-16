@@ -228,25 +228,24 @@ message = "The variable Has been hoisted";
 In the same fashion, function declarations are hoisted too.
 ```js
 message("Good morning"); //Good morning
-
-function message(name) {
+function message(name){
   console.log(name);
 }
 ```
 
-### What are Lambda Expressions or Arrow Functions
-An arrow function is a shorter/concise syntax for a function expression and does not have its own this, arguments, super, or new.target. 
-```jsconst addTwo = (n1 , n2) => {
-    return (n1 + n2);
+### What is an Arrow Function Lambda Expression
+An Arrow Function is a shorter/concise syntax for a function expression and does not have its own this, arguments, super, or new.target. 
+```js
+const addTwo = (n1 , n2) => {
+  return (n1 + n2);
 }
-
 console.log(`Sum : ${addTwo(2,3)}`); // 5
 ```
 
 ```js
-const arrowFunc1 = (a, b) => a + b; // Multiple parameters
+const arrowFunc3 = () => {} // No parameters
 const arrowFunc2 = a => a * 10; // Single parameter
-const arrowFunc3 = () => {} // no parameters
+const arrowFunc1 = (a , b) => a + b; // Multiple parameters
 ```
 
 ### What is a First Class Function
