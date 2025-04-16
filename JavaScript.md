@@ -9,7 +9,7 @@ JavaScript was created by Brendan Eich in 1995 during his time at Netscape Commu
 JavaScript is a single-threaded language. Because the language specification does not allow the programmer to write code so that the interpreter can run parts of it in parallel in multiple threads or processes. Whereas languages like java, go, C++ can make multi-threaded and multi-process programs.
 
 ### Is JavaScript a compiled or interpreted language
-JavaScript is an interpreted language, not a compiled language. An interpreter in the browser reads over the JavaScript code, interprets each line, and runs it. Nowadays modern browsers 
+JavaScript is an interpreted language, not a compiled language. An interpreter in the browser reads over the JavaScript code, interprets each line, and runs it. 
 
 ### Is JavaScript a case-sensitive language
 Yes, JavaScript is a case sensitive language. The language keywords, variables, function & object names, and any other identifiers must always be typed with a consistent capitalization of letters.
@@ -86,16 +86,16 @@ let arrayIntegersOriginal1 = [1, 2, 3, 4, 5];
 let arrayIntegersOriginal2 = [1, 2, 3, 4, 5];
 let arrayIntegersOriginal3 = [1, 2, 3, 4, 5];
 
-let arrayIntegers1 = arrayIntegersOriginal1.splice(0, 2); // returns [1, 2]; original array: [3, 4, 5]
-let arrayIntegers2 = arrayIntegersOriginal2.splice(3); // returns [4, 5]; original array: [1, 2, 3]
-let arrayIntegers3 = arrayIntegersOriginal3.splice(3, 1, "a", "b", "c"); //returns [4]; original array: [1, 2, 3, "a", "b", "c", 5]
+let arrayIntegers1 = arrayIntegersOriginal1.splice(0, 2); // returns [1, 2], original array: [3, 4, 5]
+let arrayIntegers2 = arrayIntegersOriginal2.splice(3); // returns [4, 5], original array: [1, 2, 3]
+let arrayIntegers3 = arrayIntegersOriginal3.splice(3, 1, "a", "b", "c"); //returns [4], original array: [1, 2, 3, "a", "b", "c", 5]
 ```
 
 ### What is the difference between slice and splice
 | Slice | Splice |
 | ----- | ------ |
-| Doesn't modify the original array (immutable) | Modifies the original array (mutable) |
 | Returns the subset of original array | Returns the deleted elements as array |
+| Doesn't modify the original array (immutable) | Modifies the original array (mutable) |
 | Used to pick the elements from array | Used to insert/delete elements to/from array |
 
 ### What is the difference between Call , Apply and Bind
