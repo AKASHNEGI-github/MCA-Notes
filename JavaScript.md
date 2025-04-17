@@ -803,6 +803,46 @@ form.addEventListener(
 );
 ```
 
+---
+
+### JavaScript Projects
+
+- Background Color Changer (Closure)
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Closure</title>
+    <style>
+        .container 
+        {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <button id="red">Red</button>
+        <button id="yellow">Yellow</button>
+        <button id="green">Green</button>
+    </div>
+</body>
+<script>
+    function clickHandler(color){
+        return function(){
+            document.body.style.backgroundColor = `${color}`;
+        }
+    }
+    document.getElementById("red").onclick = clickHandler("red");
+    document.getElementById("yellow").onclick = clickHandler("yellow");
+    document.getElementById("green").onclick = clickHandler("green");
+</script>
+</html>
+```
 
 
 
