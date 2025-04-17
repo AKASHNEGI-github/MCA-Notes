@@ -152,14 +152,40 @@ inviteEmployee2("Hello", "How are you?"); // Hello Jimmy Baily, How are you?
 ### What is Scope in Javacript
 Scope is the accessibility of variables, functions, and objects in some particular part of your code during runtime. In other words, scope determines the visibility of variables and other resources in areas of your code.
 ```js
-if(true){
-    let n1 = 10;
-    const n2 = 20;
-    var n3 = 30;
+console.log(addOne(5)); // 6
+function addOne(num){
+  return (num + 1);
 }
-console.log(`n1 : ${n1}`); // ReferenceError: n1 is not defined
-console.log(`n2 : ${n2}`); // ReferenceError: n2 is not defined
-console.log(`n3 : ${n3}`); // n3 : 30
+```
+
+```js
+console.log(addTwo(5)); // ReferenceError: Cannot access 'addTwo' before initialization
+const addTwo = function(num){
+  return (num + 2);
+}
+```
+
+### What is Lexical Scope
+```js
+function outer(){
+  let outerVar = "Outer Variable";
+  console.log(outerVar); // Outer Variable
+
+  function innerOne(){
+    let innerOneVar = "Inner Variable One";
+    console.log(outerVar); // Outer Variable
+  }
+
+  function innerTwo(){
+    let innerTwoVar = "Inner Variable One";
+    console.log(innerOneVar); // ReferenceError: innerOneVar is not defined
+  }
+
+  innerOne();
+  innerTwo();
+}
+outer();
+console.log(outerVar); // ReferenceError: outerVar is not defined
 ```
 
 ### What is the purpose of the let keyword
@@ -170,7 +196,7 @@ if(counter === 30){
   let counter = 31;
   console.log(counter); // 31
 }
-console.log(counter); // 30 (because the variable in if block won't exist here)
+console.log(counter); // 30
 ```
 
 ### What is the difference between let and var
@@ -182,17 +208,18 @@ console.log(counter); // 30 (because the variable in if block won't exist here)
 | It is possible to re-declare the variable in the same scope | It is not possible to re-declare the variable |
 
 ```js
-function userDetails(username){
-  if(username){
-    console.log(salary); // undefined due to hoisting
-    console.log(age); // ReferenceError: Cannot access 'age' before initialization
-    let age = 30;
-    var salary = 10000;
-  }
-  console.log(salary); // 10000 (accessible due to function scope)
-  console.log(age); // error: age is not defined(due to block scope)
+var c = 300;
+if(true)
+{
+  let a = 10;
+  const b = 20;
+  var c = 30;
+  d = 40;
 }
-userDetails("John");
+console.log(a); // ReferenceError: a is not defined
+console.log(b); // ReferenceError: b is not defined
+console.log(c); // 30
+console.log(d); // 40
 ```
 
 ### What is the use of setTimeout
@@ -216,7 +243,7 @@ setInterval(() => {
 ### What is Hoisting
 Hoisting is a JavaScript mechanism where variables, function declarations and classes are moved to the top of their scope before code execution. Remember that JavaScript only hoists declarations, not initialisation. This hoisting makes functions to be safely used in code before they are declared.
 ```js
-console.log(message); //output : undefined
+console.log(message); //  undefined
 var message = "The variable Has been hoisted";
 ```
 The above code looks like as below to the interpreter.
@@ -233,19 +260,81 @@ function message(name){
 }
 ```
 
-### What is an Arrow Function Lambda Expression
-An Arrow Function is a shorter/concise syntax for a function expression and does not have its own this, arguments, super, or new.target. 
+### Explain 'this' keyword in JavaScript
 ```js
-const addTwo = (n1 , n2) => {
-  return (n1 + n2);
+const student = {
+  name : "Akash",
+  printName : function(){
+    console.log(`Name : ${this.name}`);
+  }
 }
-console.log(`Sum : ${addTwo(2,3)}`); // 5
+student.printName(); // Name : Akash
 ```
 
 ```js
-const arrowFunc3 = () => {} // No parameters
-const arrowFunc2 = a => a * 10; // Single parameter
-const arrowFunc1 = (a , b) => a + b; // Multiple parameters
+const student = {
+  name : "Akash",
+  printName : function(){
+    console.log(this);
+  }
+}
+student.printName(); // { name: 'Akash', printName: [Function: printName] }
+```
+
+```js
+function print(){
+  let name = "Akash";
+  console.log(this.name);
+}
+print(); // undefined
+```
+
+```js
+function print(){
+  console.log(this);
+}
+print(); // Object [global]
+```
+
+```js
+console.log(this); // {}
+```
+
+```js
+console.log(this); // window(Object)
+```
+
+### What is an Arrow Function Lambda Expression
+An Arrow Function is a shorter/concise syntax for a function expression and does not have its own this, arguments, super, or new.target. 
+```js
+const addTwo = (num1 , num2) => {
+  return (num1 + num2);
+}
+console.log(addTwo(2,3)); // 5
+```
+
+```js
+const addTwo = (num1 , num2) => num1 + num2;
+console.log(addTwo(2,3)); // 5
+```
+```js
+const addTwo = (num1 , num2) => (num1 + num2);
+console.log(addTwo(2,3)); // 5
+```
+
+```js
+const addTwo = (num1 , num2) => {num1 + num2};
+console.log(addTwo(2,3)); // undefined
+```
+
+```js
+const addTwo = (num1 , num2) => {name : "Akash"};
+console.log(addTwo(2,3)); // undefined
+```
+
+```js
+const addTwo = (num1 , num2) => ({name : "Akash"}); 
+console.log(addTwo(2,3)); // { name: 'Akash' }
 ```
 
 ### What is a First Class Function
@@ -279,18 +368,21 @@ higherOrder(firstOrderFunc);
 ### What is an IIFE (Immediately Invoked Function Expression)
 IIFE (Immediately Invoked Function Expression) is a JavaScript function that runs as soon as it is defined. 
 ```js
-(function IIFE(){
-    console.log("Hello"); // Hello
+(function print(){
+  console.log("Akash Negi");
 })();
 ```
 
-The primary reason to use an IIFE is to obtain data privacy because any variables declared within the IIFE cannot be accessed by the outside world. i.e, If you try to access variables from the IIFE then it throws an error as below.
 ```js
-(function () {
-  var message = "IIFE";
-  console.log(message);
-})();
-console.log(message); //Error: message is not defined
+(() => {
+  console.log("Akash");
+})(); // Akash
+```
+
+```js
+((name) => {
+  console.log(`Name : ${name}`);
+})("Akash"); // Name : Akash
 ```
 
 ### What is a Unary Function
@@ -369,15 +461,15 @@ console.log(addition(20)); //output: 40 cached
 ### What are Closures
 A closure is the combination of a function bundled(enclosed) together with its lexical environment within which that function was declared. i.e, It is an inner function that has access to the outer or enclosing function’s variables, functions and other data even after the outer function has finished its execution.
 ```js
-function Welcome(name) {
-  var greetingInfo = function (message) {
-    console.log(message + " " + name);
-  };
-  return greetingInfo;
+function outer(){
+  const name = "Outer Function";
+  function displayName(){
+    console.log(name);
+  }
+  return displayName;
 }
-var myFunction = Welcome("John");
-myFunction("Welcome "); //Output: Welcome John
-myFunction("Hello Mr."); //output: Hello Mr. John
+const call = outer();
+call(); // Outer Function
 ```
 
 ### What is a Callback Function
@@ -710,6 +802,12 @@ form.addEventListener(
   false
 );
 ```
+
+
+
+
+
+
 
 
 
