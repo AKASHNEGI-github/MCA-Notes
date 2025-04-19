@@ -844,6 +844,85 @@ form.addEventListener(
 </html>
 ```
 
+- What is Document Object Model
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DOM</title>
+</head>
+<body>
+    <div>
+        <h3>Months</h3>
+        <ul id="months-list">
+            <li>January</li>
+            <li>February</li>
+            <li>March</li>
+            <li>April</li>
+            <li>May</li>
+            <li>June</li>
+            <li>July</li>
+            <li>August</li>
+        </ul>
+    </div>
+    <div>
+        <h3>Days</h3>
+        <ul id="days-list">
+            <li>Thursday</li>
+            <li>Friday</li>
+            <li>Saturday</li>
+            <li>Sunday</li>
+        </ul>
+    </div>
+
+    <script>
+        // Create Element
+        const monthsList = document.getElementById("months-list");
+        const september = document.createElement("li");
+        september.innerText = "September";
+        monthsList.appendChild(september);
+        
+        const october = document.createElement("li");
+        october.appendChild(document.createTextNode("October"));
+        monthsList.appendChild(october);
+
+        // Add Element
+        function addNewMonth(month){
+            const november = document.createElement("li");
+            november.innerHTML = `${month}`;
+            document.querySelector("#months-list").appendChild(november);
+        }
+        addNewMonth("November");
+
+        function addNewMonthOptimized(month){
+            const december = document.createElement("li");
+            december.appendChild(document.createTextNode(month));
+            document.querySelector("#months-list").appendChild(december);
+        }
+        addNewMonthOptimized("December");
+
+        // Edit Element
+        const thursday = document.querySelector("#days-list li:first-child");
+        thursday.innerHTML = "Monday";
+
+        const friday = document.querySelector("#days-list li:nth-child(2)");
+        const tuesday = document.querySelector("li");
+        tuesday.textContent = "Tuesday";
+        friday.replaceWith(tuesday);
+
+        const saturday = document.querySelector("#days-list li:nth-child(3)");
+        saturday.outerHTML = "<li>Wednesday</li>";
+
+        // Remove Element
+        const sunday = document.querySelector("#days-list li:last-child");
+        sunday.remove();
+    </script> 
+</body>
+</html>
+```
+
 
 
 
