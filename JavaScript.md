@@ -729,7 +729,7 @@ By default, Event Handlers triggered in event bubbling phase.
     </ul>
 
     <script>
-        // Event Bubbling
+        // Event Bubbling (Inside -> Outside)
         document.querySelector("#parent").addEventListener("click" , function(){
             console.log("Parent Clicked");
         } , false);
@@ -763,7 +763,7 @@ You need to pass true value for addEventListener method to trigger event handler
     </ul>
 
     <script>
-        // Event Capturing
+        // Event Capturing (Outside -> Inside)
         document.querySelector("#parent").addEventListener("click" , function(){
             console.log("Parent Clicked");
         } , true);
@@ -797,7 +797,7 @@ Example - Prevent form submission when clicking on submit button and prevent ope
     </ul>
 
     <script>
-        // Prevent Default
+        // Prevent Default (Stop Default Behaviour)
         document.querySelector("#child").addEventListener("click" , function(event){
             console.log("Google Clicked");
             event.preventDefault();
@@ -827,7 +827,7 @@ Example - The below nested divs with stopPropagation method prevents default eve
     </ul>
 
     <script>
-        // Stop Propogation
+        // Stop Propogation (Stop Event Bubbling)
         document.querySelector("#parent").addEventListener("click" , function(){
             console.log("Parent Clicked");
         } , false);
