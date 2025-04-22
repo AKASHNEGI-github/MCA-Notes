@@ -678,19 +678,29 @@ Some of the examples of HTML events are -
 - Web page has finished loading
 - Input field was changed
 - Button was clicked
-```js
-<!doctype html>
-<html>
- <head>
-   <script>
-     function greeting() {
-       alert('Hello! Good morning');
-     }
-   </script>
- </head>
- <body>
-   <button type="button" onclick="greeting()">Click me</button>
- </body>
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Events</title>
+</head>
+<body>
+    <ul id="parent">
+        <button id="child">Click Me</button>
+    </ul>
+
+    <script>
+        // Events
+        document.querySelector("button").addEventListener("click" , function(event){
+            console.log("Button Clicked");
+        } , false);
+
+        // Button Clicked
+    </script>
+</body>
 </html>
 ```
 
@@ -704,86 +714,133 @@ There are two ways of event flow
 ### What is Event Bubbling
 Event bubbling is a type of event propagation where the event first triggers on the innermost target element, and then successively triggers on the ancestors (parents) of the target element in the same nesting hierarchy till it reaches the outermost DOM element(i.e, global window object).
 By default, Event Handlers triggered in event bubbling phase.
-```js
-<div>
-  <button class="child">Hello</button>
-</div>
 
-<script>
-  const parent = document.querySelector("div");
-  const child = document.querySelector(".child");
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Event Bubbling</title>
+</head>
+<body>
+    <ul id="parent">
+        <button id="child">Click Me</button>
+    </ul>
 
-  parent.addEventListener("click",
-    function () {
-      console.log("Parent");
-    }
-  );
+    <script>
+        // Event Bubbling
+        document.querySelector("#parent").addEventListener("click" , function(){
+            console.log("Parent Clicked");
+        } , false);
 
-  child.addEventListener("click", function () {
-    console.log("Child");
-  });
-</script>
-// Child
-// Parent
+        document.querySelector("#child").addEventListener("click" , function(){
+            console.log("Child Clicked");
+        } , false);
+
+        // Child Clicked
+        // Parent Clicked
+    </script>
+</body>
+</html>
 ```
 
 ### What is Event Capturing
 Event capturing is a type of event propagation where the event is first captured by the outermost element, and then successively triggers on the descendants (children) of the target element in the same nesting hierarchy till it reaches the innermost target DOM element.
 You need to pass true value for addEventListener method to trigger event handlers in event capturing phase.
-```js
-<div>
-  <button class="child">Hello</button>
-</div>
 
-<script>
-  const parent = document.querySelector("div");
-  const child = document.querySelector(".child");
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Event Capturing</title>
+</head>
+<body>
+    <ul id="parent">
+        <button id="child">Click Me</button>
+    </ul>
 
-  parent.addEventListener("click",
-    function () {
-      console.log("Parent");
-    },
-    true
-  );
+    <script>
+        // Event Capturing
+        document.querySelector("#parent").addEventListener("click" , function(){
+            console.log("Parent Clicked");
+        } , true);
 
-  child.addEventListener("click", function () {
-    console.log("Child");
-  });
-</script>
-// Parent
-// Child
+        document.querySelector("#child").addEventListener("click" , function(){
+            console.log("Child Clicked");
+        } , true);
+
+        // Parent Clicked
+        // Child Clicked
+    </script>
+</body>
+</html>
 ```
 
 ### What is the use of preventDefault method
 The preventDefault() method cancels the event if it is cancelable, meaning that the default action or behaviour that belongs to the event will not occur.
 Example - Prevent form submission when clicking on submit button and prevent opening the page URL when clicking on hyperlink are some common use cases. Remember that not all events are cancelable.
-```js
-document
-  .getElementById("link")
-  .addEventListener("click", function (event) {
-    event.preventDefault();
-  });
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prevent Default</title>
+</head>
+<body>
+    <ul id="parent">
+        <a id="child" href="https://www.google.com/">Click Me</a>
+    </ul>
+
+    <script>
+        // Prevent Default
+        document.querySelector("#child").addEventListener("click" , function(event){
+            console.log("Google Clicked");
+            event.preventDefault();
+        } , true);
+
+        // Google Clicked
+    </script>
+</body>
+</html>
 ```
 
 ### What is the use of stopPropagation method
 The stopPropagation method is used to stop the event from bubbling up the event chain. 
 Example - The below nested divs with stopPropagation method prevents default event propagation when clicking on nested div(Div1).
-```js
-<p>Click DIV1 Element</p>
-<div onclick="secondFunc()">DIV 2
-  <div onclick="firstFunc(event)">DIV 1</div>
-</div>
 
-<script>
-function firstFunc(event) {
-  alert("DIV 1");
-  event.stopPropagation();
-}
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stop Propogation</title>
+</head>
+<body>
+    <ul id="parent">
+        <button id="child">Click Me</button>
+    </ul>
 
-function secondFunc() {
-  alert("DIV 2");
-}
-</script>
+    <script>
+        // Stop Propogation
+        document.querySelector("#parent").addEventListener("click" , function(){
+            console.log("Parent Clicked");
+        } , false);
+
+        document.querySelector("#child").addEventListener("click" , function(event){
+            console.log("Child Clicked");
+            event.stopPropagation();
+        } , false);
+
+        // Child Clicked
+    </script>
+</body>
+</html>
 ```
 
 ### What is an Event Delegation
