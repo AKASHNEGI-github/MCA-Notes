@@ -680,7 +680,7 @@ With the Fetch API, you make a request by calling fetch(), which is available as
 
 The fetch() function returns a Promise which is fulfilled with a Response object representing the server's response. You can then check the request status and extract the body of the response in various formats, including text and JSON, by calling the appropriate method on the response.
 
-- fetch using .then
+- fetch() using .then
 ```js
 const API = "https://jsonplaceholder.typicode.com/users";
 fetch(API).then((response) => {
