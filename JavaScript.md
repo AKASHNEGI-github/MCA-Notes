@@ -671,6 +671,43 @@ Promise.race([promise1, promise2]).then(function (value) {
 });
 ```
 
+### Explain Fetch API
+The Fetch API provides a JavaScript interface for making HTTP requests and processing the responses.
+
+Fetch is the modern replacement for XMLHttpRequest: unlike XMLHttpRequest, which uses callbacks, Fetch is promise-based and is integrated with features of the modern web such as service workers and Cross-Origin Resource Sharing (CORS).
+
+With the Fetch API, you make a request by calling fetch(), which is available as a global function in both window and worker contexts. You pass it a Request object or a string containing the URL to fetch, along with an optional argument to configure the request.
+
+The fetch() function returns a Promise which is fulfilled with a Response object representing the server's response. You can then check the request status and extract the body of the response in various formats, including text and JSON, by calling the appropriate method on the response.
+
+- fetch using .then
+```js
+const API = "https://jsonplaceholder.typicode.com/users";
+fetch(API).then((response) => {
+    return response.json();
+}).then((data) => {
+    console.log(data); // (data is the response from the API)
+}).catch((error) => {
+    console.log(error);
+})
+```
+
+- fetch() using async-await
+```js
+const API = "https://jsonplaceholder.typicode.com/users";
+async function getAPI() {
+    try{
+        const response = await fetch(API);
+        const data = await response.json();
+        console.log(data); 
+    }
+    catch(error){
+        console.log(error);
+    }
+}
+getAPI(); // (data is the response from the API)
+```
+
 ### What are Events
 Events are "things" that happen to HTML elements. When JavaScript is used in HTML pages, JavaScript can react on these events. 
 
