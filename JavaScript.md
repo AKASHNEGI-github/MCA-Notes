@@ -459,21 +459,21 @@ console.log(addition(20)); //output: 40 cached
 ```
 
 ### What are Closures
-A closure is the combination of a function bundled(enclosed) together with its lexical environment within which that function was declared. i.e, It is an inner function that has access to the outer or enclosing function’s variables, functions and other data even after the outer function has finished its execution.
+A closure is the combination of a function bundled together (enclosed) with references to its surrounding state (the lexical environment). In other words, a closure gives a function access to its outer scope. In JavaScript, closures are created every time a function is created, at function creation time.
 ```js
-function outer(){
-  const name = "Outer Function";
-  function displayName(){
-    console.log(name);
-  }
-  return displayName;
+function outerFunction(){
+    let name = "Akash";
+    function innerFunction(){
+        console.log(name);
+    }
+    return innerFunction;
 }
-const call = outer();
-call(); // Outer Function
+let inner = outerFunction();
+inner(); // Akash
 ```
 
 ### What is a Callback Function
-A callback function is a function passed into another function as an argument. This function is invoked inside the outer function to complete an action. 
+A callback function is a function passed into another function as an argument, which is then invoked inside the outer function to complete some kind of routine or action.
 ```js
 function callbackFunction(name) {
   console.log("Hello " + name);
@@ -524,7 +524,7 @@ async1(function(){
 ```
 
 ### What is a Promise
-The Promise is an object that represents the eventual completion (or failure) of an asynchronous operation and its resulting value. 
+The Promise object represents the eventual completion (or failure) of an asynchronous operation and its resulting value.
 
 A Promise is a proxy for a value not necessarily known when the promise is created. It allows you to associate handlers with an asynchronous action's eventual success value or failure reason. This lets asynchronous methods return values like synchronous methods: instead of immediately returning the final value, the asynchronous method returns a promise to supply the value at some point in the future.
 
