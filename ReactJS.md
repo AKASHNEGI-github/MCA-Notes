@@ -2,7 +2,7 @@
 
 ---
 
-### Rect Setup
+### Rect-Vite Setup
 ![React-Vite-Setup](https://github.com/AKASHNEGI-github/MCA-Notes/blob/main/Images/React-Vite-Setup.png)
 
 ### What is React
