@@ -241,22 +241,37 @@ setInterval(() => {
 ```
 
 ### What is Hoisting
-Hoisting is a JavaScript mechanism where variables, function declarations and classes are moved to the top of their scope before code execution. Remember that JavaScript only hoists declarations, not initialisation. This hoisting makes functions to be safely used in code before they are declared.
+JavaScript Hoisting refers to the process whereby the interpreter appears to move the declaration of functions, variables, classes, or imports to the top of their scope, prior to execution of the code.
 ```js
-console.log(message); //  undefined
-var message = "The variable Has been hoisted";
-```
-The above code looks like as below to the interpreter.
-```js
-var message;
-console.log(message);
-message = "The variable Has been hoisted";
-```
-In the same fashion, function declarations are hoisted too.
-```js
-message("Good morning"); //Good morning
-function message(name){
-  console.log(name);
+//console.log(a); // ReferenceError: Cannot access 'a' before initialization
+//console.log(b); // ReferenceError: Cannot access 'b' before initialization
+//console.log(c); // undefined
+//console.log(d); // undefined
+
+//fun1(); // Function-1
+//fun2(); // ReferenceError: Cannot access 'fun2' before initialization
+//fun3(); // ReferenceError: Cannot access 'fun3' before initialization
+
+//console.log(fun1); // [Function: fun1]
+//console.log(fun2); // ReferenceError: Cannot access 'fun2' before initialization
+//console.log(fun3); // ReferenceError: Cannot access 'fun3' before initialization
+
+let a;
+let b = 10;
+
+var c;
+var d = 20;
+
+function fun1(){
+    console.log("Function-1");
+}
+
+let fun2 = function(){
+    console.log("Function-2");
+}
+
+let fun3 = () => {
+    console.log("Function-3");
 }
 ```
 
@@ -475,16 +490,16 @@ inner(); // Akash
 ### What is a Callback Function
 A callback function is a function passed into another function as an argument, which is then invoked inside the outer function to complete some kind of routine or action.
 ```js
-function callbackFunction(name) {
+function callbackFunction(name){
   console.log("Hello " + name);
 }
 
-function outerFunction(callback) {
-  let name = prompt("Please enter your name.");
-  callback(name);
+function outerFunction(callbackFunction){
+  let name = "Akash";
+  callbackFunction(name);
 }
 
-outerFunction(callbackFunction);
+outerFunction(callbackFunction); // Hello Akash
 ```
 
 ### Why do we need Callbacks
@@ -512,15 +527,35 @@ As observed from the output, javascript didn't wait for the response of the firs
 ### What is a Callback Hell
 Callback Hell is an anti-pattern with multiple nested callbacks which makes code hard to read and debug when dealing with asynchronous logic.
 ```js
-async1(function(){
-    async2(function(){
-        async3(function(){
-            async4(function(){
-                ....
-            });
+function task1(callback){
+    console.log("Task-1");
+    callback();
+}
+
+function task2(callback){
+    console.log("Task-2");
+    callback();
+}
+
+function task3(callback){
+    console.log("Task-3");
+    callback();
+}
+
+task1(function(){
+    task2(function(){
+        task3(function(){
+            console.log("All Tasks Completed");
         });
     });
 });
+```
+
+```
+Task-1
+Task-2
+Task-3
+All Tasks Completed
 ```
 
 ### What is a Promise
