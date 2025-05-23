@@ -353,31 +353,57 @@ console.log(addTwo(2,3)); // { name: 'Akash' }
 ```
 
 ### What is a First Class Function
-In Javascript, functions are first class objects. First-Class functions means when functions are treated like any other variable.
-For example, in such a language, a function can be passed as an argument to other functions, can be returned by another function and can be assigned as a value to a variable.
+A programming language is said to have First-class functions when functions in that language are treated like any other variable. For example, in such a language, a function can be passed as an argument to other functions, can be returned by another function and can be assigned as a value to a variable.
+
+- Assigning a function to a variable
 ```js
-const handler = () => console.log("This is a click handler function");
-document.addEventListener("click", handler);
+let f1 = function(){
+  console.log("Function-1");
+};
+
+f1(); // Function-1
 ```
 
-### What is a First Order Function
-A function that doesn’t accept another function as an argument and doesn’t return a function as its return value.
+- Passing a function as an argument
 ```js
-const firstOrder = () => console.log("I am a first order function!");
+function hi() {
+  return ("Hi-");
+}
+
+function f2(hi, name) {
+  console.log(hi() + name);
+}
+
+f2(hi, "Akash"); // Hi-Akash
+```
+
+- Returning a function
+```js
+function f3() {
+  return function(){
+    console.log("Function-3");
+  };
+}
+
+let x = f3();
+x(); // Function-3
 ```
 
 ### What is a Higher Order Function
 A higher-order function is a function that accepts another function as an argument or returns a function as a return value or both. The higher order function is helpful to write the modular and reusable code.
 ```js
-const firstOrderFunc = () =>
-{
-  console.log("Hello, I am a First order function");
+function areaCircle(radius){ // Function Statement/Declaration/Definition
+    return (Math.PI * radius * radius);
 }
-const higherOrder = (ReturnFirstOrderFunc) =>
-{
-  ReturnFirstOrderFunc();
+
+function calculate(radius , areaCircle){ // Higher Order Function
+    return function(){
+        console.log("Area of Circle :" , areaCircle(radius));
+    }
 }
-higherOrder(firstOrderFunc);
+
+let f1 = calculate(3 , areaCircle); // Function Expression
+f1(); // Area of Circle : 28.274333882308138
 ```
 
 ### What is an IIFE (Immediately Invoked Function Expression)
