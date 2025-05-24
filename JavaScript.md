@@ -468,35 +468,49 @@ curryUnaryFunction(1)(2)(3); // returns the number 6
 ### What is the Temporal Dead Zone
 The Temporal Dead Zone (TDZ) is a specific period or area of a block where a variable is inaccessible until it has been initialized with a value. This behavior in JavaScript that occurs when declaring a variable with the let and const keywords, but not with var. In ECMAScript 6, accessing a let or const variable before its declaration (within its scope) causes a ReferenceError.
 ```js
-function somemethod() {
-  console.log(counter1); // undefined
-  console.log(counter2); // ReferenceError
-  var counter1 = 1;
-  let counter2 = 2;
+//console.log(a); // ReferenceError: Cannot access 'a' before initialization
+//console.log(b); // ReferenceError: Cannot access 'b' before initialization
+//console.log(c); // undefined
+//console.log(d); // undefined
+//fun1(); // Function-1
+
+let a;
+let b = 10;
+
+var c;
+var d = 20;
+
+function fun1(){
+    console.log("Function-1");
 }
 ```
 
 ### What is Memoization
 Memoization is a functional programming technique which attempts to increase a function’s performance by caching its previously computed results. Each time a memoized function is called, its parameters are used to index the cache. If the data is present, then it can be returned, without executing the entire function. Otherwise the function is executed and then the result is added to the cache.
 ```js
-const memoizAddition = () => {
+function multiply(n){
+  return (n * 10);
+}
+
+function memoized(multiply){
   let cache = {};
-  return (value) => {
-    if (value in cache) {
-      console.log("Fetching from cache");
-      return cache[value]; // Here, cache.value cannot be used as property name starts with the number which is not a valid JavaScript  identifier. Hence, can only be accessed using the square bracket notation.
-    } else {
-      console.log("Calculating result");
-      let result = value + 20;
-      cache[value] = result;
+  return function(x){
+    if(cache[x]){
+      console.log("Return from Cache");
+      return cache[x];
+    }
+    else{
+      console.log("Add to Cache")
+      const result = multiply(x);
+      cache[x] = result;
       return result;
     }
-  };
-};
-// returned function from memoizAddition
-const addition = memoizAddition();
-console.log(addition(20)); //output: 40 calculated
-console.log(addition(20)); //output: 40 cached
+  }
+}
+
+let calculate = memoized(multiply);
+console.log(calculate(5)); // Add to Cache-50
+console.log(calculate(5)); // Return from Cache-50
 ```
 
 ### What are Closures
