@@ -456,13 +456,15 @@ Remember that Pure functions are important as they simplify unit testing without
 ### What is the Currying Function
 Currying is the process of taking a function with multiple arguments and turning it into a sequence of functions each with only a single argument. Currying is named after a mathematician Haskell Curry. By applying currying, an n-ary function turns into a unary function.
 ```js
-const multiArgFunction = (a, b, c) => a + b + c;
-console.log(multiArgFunction(1, 2, 3)); // 6
+function sum(n1){
+    return function(n2){
+        return function(n3){
+            return (n1 + n2 + n3);
+        }
+    }
+}
 
-const curryUnaryFunction = (a) => (b) => (c) => a + b + c;
-curryUnaryFunction(1); // returns a function: b => c =>  1 + b + c
-curryUnaryFunction(1)(2); // returns a function: c => 3 + c
-curryUnaryFunction(1)(2)(3); // returns the number 6
+console.log("Sum :" , sum(1)(2)(3)); // Sum : 6
 ```
 
 ### What is the Temporal Dead Zone
