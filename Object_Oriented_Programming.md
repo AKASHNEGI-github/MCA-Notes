@@ -1176,6 +1176,33 @@ void divide(int N , int D)
     {
         if(D == 0)
         {
+            throw "Error : Division by zero is not allowed!";
+        }
+        else
+        {
+            cout << "Result : " << N/D;
+        }
+    }
+    catch(const char *e)
+    {
+        cout << e;   
+    }
+}
+
+int main()
+{
+    divide(4 , 0); // "Error : Division by zero is not allowed!"
+    return 0;
+}
+```
+
+```c++
+void divide(int N , int D)
+{
+    try
+    {
+        if(D == 0)
+        {
             throw invalid_argument("Error : Division by zero is not allowed!");
         }
         else
@@ -1183,12 +1210,56 @@ void divide(int N , int D)
             cout << "Result : " << N/D;
         }
     }
-    catch(const invalid_argument& e)
+    catch(const invalid_argument &e)
     {
         cout << e.what();   
     }
 }
+
+int main()
+{
+    divide(4 , 0); // "Error : Division by zero is not allowed!"
+    return 0;
+}
 ```
+
+```c++
+class Divide_By_Zero_Exception : public exception
+{
+    public:
+        const char * what()
+        {
+            return "Divide By Zero Exception";
+        }
+};
+
+void divide(int N , int D)
+{
+    try
+    {
+        if(D == 0)
+        {
+            Divide_By_Zero_Exception obj1;
+            throw obj1;
+        }
+        else
+        {
+            cout << "Result : " << N/D;
+        }
+    }
+    catch(Divide_By_Zero_Exception e)
+    {
+        cout << e.what();   
+    }
+}
+
+int main()
+{
+    divide(4 , 0); // Divide By Zero Exception
+    return 0;
+}
+```
+
 ### Why do we need Exception Handling
 - Separate Error code from Normal code to help us understand errors easily. 
 - Functions/Methods can be handled only by the exceptions they choose. The exceptions not chosen will be handled by the caller.
