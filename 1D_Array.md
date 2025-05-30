@@ -367,6 +367,70 @@ public:
 };
 ```
 
+- Majority Element
+```c++
+class Solution {
+public:
+    int majorityElement(vector<int>& nums) 
+    {
+        sort(nums.begin() , nums.end());
+        int n = nums.size();
+        return nums[n/2];    
+    }
+};
+```
+
+```c++
+class Solution {
+public:
+    int majorityElement(vector<int>& nums) 
+    {
+        int n = nums.size();
+        unordered_map<int , int> map;
+        for(int i=0 ; i<n ; i++)
+        {
+            map[nums[i]]++;
+        }  
+        for(auto it:map)
+        {
+            if(it.second > n/2)
+            {
+                return it.first;
+            }
+        }
+        return -1;
+    }
+};
+```
+
+```c++
+class Solution {
+public:
+    int majorityElement(vector<int>& nums) // Moore's Voting Algorithm
+    {
+        int element = -1;
+        int count = 0;
+        for(int i=0 ;  i<nums.size() ; i++)
+        {
+            if(count == 0)
+            {
+                element = nums[i];
+                count = 1;
+            }
+            else if(nums[i] == element) 
+            {
+                count++;
+            }
+            else
+            {
+                count--;
+            }
+        }
+        return element;
+    }
+};
+```
+
 - Next Permutation
 ```c++
 class Solution {
