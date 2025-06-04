@@ -703,21 +703,23 @@ Cons :
 ### What is Promise Chaining
 The process of executing a sequence of asynchronous tasks one after another using promises is known as Promise chaining.
 ```js
-new Promise(function (resolve, reject) {
-  setTimeout(() => resolve(1), 1000);
-})
-  .then(function (result) {
+new Promise(function(resolve , reject){
+    setTimeout(() => {resolve(1)}, 2000);
+}).then(function(result){
     console.log(result); // 1
-    return result * 2;
-  })
-  .then(function (result) {
+    return (result * 2);
+}).then(function(result){
     console.log(result); // 2
-    return result * 3;
-  })
-  .then(function (result) {
+    return (result * 3);
+}).then(function(result){
     console.log(result); // 6
-    return result * 4;
-  });
+    return (result * 4);
+}).then(function(result){
+    console.log(result); // 24
+    return (result * 5);
+}).then(function(result){
+    console.log(result); // 120
+});
 ```
 
 In the above handlers, the result is passed to the chain of .then() handlers with the below work flow - 
@@ -729,7 +731,29 @@ In the above handlers, the result is passed to the chain of .then() handlers wit
 ### What is promise.all
 Promise.all is a promise that takes an array of promises as an input (an iterable), and it gets resolved when all the promises get resolved or any one of them gets rejected. 
 ```js
-Promise.all([Promise1, Promise2, Promise3]) .then(result) => {   console.log(result) }) .catch(error => console.log(`Error in promises ${error}`))
+const promise1 = new Promise(function(resolve , reject){
+    setTimeout(function(){
+        resolve("Promise-1");
+    }, 1000);
+});
+
+const promise2 = new Promise(function(resolve , reject){
+    setTimeout(function(){
+        resolve("Promise-2");
+    }, 1000);
+});
+
+const promise3 = new Promise(function(resolve , reject){
+    setTimeout(function(){
+        resolve("Promise-3");
+    }, 1000);
+});
+
+Promise.all([promise1, promise2, promise3]).then(function(result){
+    console.log(result); // [ 'Promise-1', 'Promise-2', 'Promise-3' ]
+}).catch(function(error){
+    console.log(error);
+});
 ```
 
 ### What is the purpose of the race method in Promise
