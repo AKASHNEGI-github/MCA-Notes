@@ -548,21 +548,20 @@ outerFunction(callbackFunction); // Hello Akash
 The callbacks are needed because javascript is an event driven language. That means instead of waiting for a response javascript will keep executing while listening for other events.
 Example - The first function invoking an API call(simulated by setTimeout) and the next function which logs the message.
 ```js
-function firstFunction() {
-  // Simulate a code delay
-  setTimeout(function () {
-    console.log("First function called");
-  }, 1000);
+function fun1(){
+  setTimeout(function(){ // Simulate a code delay
+    console.log("Function-1");
+  } , 2000);
 }
-function secondFunction() {
-  console.log("Second function called");
-}
-firstFunction();
-secondFunction();
 
-Output;
-// Second function called
-// First function called
+function fun2(){
+    console.log("Function-2");
+}
+
+fun1();
+fun2();
+// Function-2
+// Function-1
 ```
 As observed from the output, javascript didn't wait for the response of the first function and the remaining code block got executed. So callbacks are used in a way to make sure that certain code doesn’t execute until the other code finishes execution.
 
