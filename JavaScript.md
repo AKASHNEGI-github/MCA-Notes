@@ -177,7 +177,7 @@ function outer(){
   }
 
   function innerTwo(){
-    let innerTwoVar = "Inner Variable One";
+    let innerTwoVar = "Inner Variable Two";
     console.log(innerOneVar); // ReferenceError: innerOneVar is not defined
   }
 
