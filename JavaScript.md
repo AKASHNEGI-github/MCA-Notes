@@ -98,6 +98,59 @@ let arrayIntegers3 = arrayIntegersOriginal3.splice(3, 1, "a", "b", "c"); //retur
 | Doesn't modify the original array (immutable) | Modifies the original array (mutable) |
 | Used to pick the elements from array | Used to insert/delete elements to/from array |
 
+### What is Filter
+The filter() method is an iterative method. It calls a provided callbackFn function once for each element in an array, and constructs a new array of all the values for which callbackFn returns a truthy value. Array elements which do not pass the callbackFn test are not included in the new array. 
+```js
+const arr = [1,2,3,4,5,6,7,8,9];
+let newArr = arr.filter((num) => num > 5);
+console.log(newArr); // [ 6, 7, 8, 9 ]
+```
+
+```js
+const arr = [1,2,3,4,5,6,7,8,9];
+const newArr = arr.filter((num) => {
+    for(let i=0 ; i<num ; i++){
+        return (num % 2 == 0);
+    }
+})
+console.log(newArr); // [ 2, 4, 6, 8 ]
+```
+
+### What is Map
+The map() method is an iterative method. It calls a provided callbackFn function once for each element in an array and constructs a new array from the results.
+```js
+const arr = [1,2,3,4,5,6,7,8,9];
+const newArr = arr.map((num) => {
+    return (num+10);
+})
+console.log(newArr); // [11, 12, 13, 14, 15, 16, 17, 18, 19]
+```
+
+```js
+const arr = [1,2,3,4,5,6,7,8,9];
+const newArr = arr
+    .map((num) => num*10)
+    .map((num) => num+1)
+    .filter((num) => num > 50);
+console.log(newArr); // [ 51, 61, 71, 81, 91 ]
+```
+
+### What is reduce
+The reduce() method is an iterative method. It runs a "reducer" callback function over all elements in the array, in ascending-index order, and accumulates them into a single value. Every time, the return value of callbackFn is passed into callbackFn again on next invocation as accumulator. The final value of accumulator (which is the value returned from callbackFn on the final iteration of the array) becomes the return value of reduce(). 
+```js
+const arr = [1,2,3];
+const initialValue = 0;
+const sum = arr.reduce(function(accumulator , currentValue){
+    console.log(`Accumulator : ${accumulator} & CurrentValue : ${currentValue}`);
+    return (accumulator + currentValue);
+} , initialValue);
+console.log("Sum :" , sum); 
+// Accumulator : 0 & CurrentValue : 1
+// Accumulator : 1 & CurrentValue : 2
+// Accumulator : 3 & CurrentValue : 3
+// Sum : 6
+```
+
 ### What is the difference between Call , Apply and Bind
 Call and Apply are pretty much interchangeable. Both execute the current function immediately. You need to decide whether it’s easier to send in an array or a comma separated list of arguments. You can remember by treating Call is for comma (separated list) and Apply is for Array.
 Bind creates a new function that will have this set to the first parameter passed to bind().
@@ -725,10 +778,11 @@ In the above handlers, the result is passed to the chain of .then() handlers wit
 - The initial promise resolves in 1 second,
 - After that .then handler is called by logging the result(1) and then return a promise with the value of result * 2.
 - After that the value passed to the next .then handler by logging the result(2) and return a promise with result * 3.
-- Finally the value passed to the last .then handler by logging the result(6) and return a promise with result * 4.
+- After that the value passed to the next .then handler by logging the result(2) and return a promise with result * 4.
+- Finally the value passed to the last .then handler by logging the result(6) and return a promise with result * 5.
 
 ### What is promise.all
-Promise.all is a promise that takes an array of promises as an input (an iterable), and it gets resolved when all the promises get resolved or any one of them gets rejected. 
+The Promise.all() static method takes an iterable of promises as input and returns a single Promise. This returned promise fulfills when all of the input's promises fulfill (including when an empty iterable is passed), with an array of the fulfillment values. It rejects when any of the input's promises rejects, with this first rejection reason.
 ```js
 const promise1 = new Promise(function(resolve , reject){
     setTimeout(function(){
