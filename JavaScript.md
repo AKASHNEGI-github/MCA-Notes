@@ -98,6 +98,24 @@ let arrayIntegers3 = arrayIntegersOriginal3.splice(3, 1, "a", "b", "c"); //retur
 | Doesn't modify the original array (immutable) | Modifies the original array (mutable) |
 | Used to pick the elements from array | Used to insert/delete elements to/from array |
 
+### What is the use of setTimeout
+The setTimeout() method is used to call a function or evaluate an expression after a specified number of milliseconds.
+Example - Let's log a message after 2 seconds using setTimeout method.
+```js
+setTimeout(() => {
+  console.log("Good morning"); // Good morning (only once)
+}, 2000);
+```
+
+### What is the use of setInterval
+The setInterval() method is used to call a function or evaluate an expression at specified intervals (in milliseconds). 
+Example - Let's log a message after every 2 seconds using setInterval method.
+```js
+setInterval(() => {
+  console.log("Good morning"); // Good morning (after every 2 seconds)
+}, 2000);
+```
+
 ### What is Filter
 The filter() method is an iterative method. It calls a provided callbackFn function once for each element in an array, and constructs a new array of all the values for which callbackFn returns a truthy value. Array elements which do not pass the callbackFn test are not included in the new array. 
 ```js
@@ -202,6 +220,40 @@ inviteEmployee1("Hello", "How are you?"); // Hello John Rodson, How are you?
 inviteEmployee2("Hello", "How are you?"); // Hello Jimmy Baily, How are you?
 ```
 
+### What is the purpose of the let keyword
+The let statement declares a block scope local variable. Hence the variables defined with let keyword are limited in scope to the block, statement, or expression on which it is used. Whereas variables declared with the var keyword used to define a variable globally, or locally to an entire function regardless of block scope.
+```js
+let counter = 30;
+if(counter === 30){
+  let counter = 31;
+  console.log(counter); // 31
+}
+console.log(counter); // 30
+```
+
+### What is the difference between let and var
+| var | let |
+| --- | --- |
+| It has been available from the beginning of JavaScript | Introduced as part of ES6 |
+| It has function scope | It has block scope |
+| Variable declaration will be hoisted, initialized as undefined	 | Hoisted but not initialized |
+| It is possible to re-declare the variable in the same scope | It is not possible to re-declare the variable |
+
+```js
+var c = 300;
+if(true)
+{
+  let a = 10;
+  const b = 20;
+  var c = 30;
+  d = 40;
+}
+console.log(a); // ReferenceError: a is not defined
+console.log(b); // ReferenceError: b is not defined
+console.log(c); // 30
+console.log(d); // 40
+```
+
 ### What is Scope in Javacript
 Scope is the accessibility of variables, functions, and objects in some particular part of your code during runtime. In other words, scope determines the visibility of variables and other resources in areas of your code.
 ```js
@@ -241,56 +293,18 @@ outer();
 console.log(outerVar); // ReferenceError: outerVar is not defined
 ```
 
-### What is the purpose of the let keyword
-The let statement declares a block scope local variable. Hence the variables defined with let keyword are limited in scope to the block, statement, or expression on which it is used. Whereas variables declared with the var keyword used to define a variable globally, or locally to an entire function regardless of block scope.
+### What are Closures
+A closure is the combination of a function bundled together (enclosed) with references to its surrounding state (the lexical environment). In other words, a closure gives a function access to its outer scope. In JavaScript, closures are created every time a function is created, at function creation time.
 ```js
-let counter = 30;
-if(counter === 30){
-  let counter = 31;
-  console.log(counter); // 31
+function outerFunction(){
+    let name = "Akash";
+    function innerFunction(){
+        console.log(name);
+    }
+    return innerFunction;
 }
-console.log(counter); // 30
-```
-
-### What is the difference between let and var
-| var | let |
-| --- | --- |
-| It has been available from the beginning of JavaScript | Introduced as part of ES6 |
-| It has function scope | It has block scope |
-| Variable declaration will be hoisted, initialized as undefined	 | Hoisted but not initialized |
-| It is possible to re-declare the variable in the same scope | It is not possible to re-declare the variable |
-
-```js
-var c = 300;
-if(true)
-{
-  let a = 10;
-  const b = 20;
-  var c = 30;
-  d = 40;
-}
-console.log(a); // ReferenceError: a is not defined
-console.log(b); // ReferenceError: b is not defined
-console.log(c); // 30
-console.log(d); // 40
-```
-
-### What is the use of setTimeout
-The setTimeout() method is used to call a function or evaluate an expression after a specified number of milliseconds.
-Example - Let's log a message after 2 seconds using setTimeout method.
-```js
-setTimeout(() => {
-  console.log("Good morning"); // Good morning (only once)
-}, 2000);
-```
-
-### What is the use of setInterval
-The setInterval() method is used to call a function or evaluate an expression at specified intervals (in milliseconds). 
-Example - Let's log a message after every 2 seconds using setInterval method.
-```js
-setInterval(() => {
-  console.log("Good morning"); // Good morning (after every 2 seconds)
-}, 2000);
+let inner = outerFunction();
+inner(); // Akash
 ```
 
 ### What is Hoisting
@@ -328,48 +342,24 @@ let fun3 = () => {
 }
 ```
 
-### Explain 'this' keyword in JavaScript
+### What is the Temporal Dead Zone
+The Temporal Dead Zone (TDZ) is a specific period or area of a block where a variable is inaccessible until it has been initialized with a value. This behavior in JavaScript that occurs when declaring a variable with the let and const keywords, but not with var. In ECMAScript 6, accessing a let or const variable before its declaration (within its scope) causes a ReferenceError.
 ```js
-const student = {
-  name : "Akash",
-  printName : function(){
-    console.log(`Name : ${this.name}`);
-  }
+//console.log(a); // ReferenceError: Cannot access 'a' before initialization
+//console.log(b); // ReferenceError: Cannot access 'b' before initialization
+//console.log(c); // undefined
+//console.log(d); // undefined
+//fun1(); // Function-1
+
+let a;
+let b = 10;
+
+var c;
+var d = 20;
+
+function fun1(){
+    console.log("Function-1");
 }
-student.printName(); // Name : Akash
-```
-
-```js
-const student = {
-  name : "Akash",
-  printName : function(){
-    console.log(this);
-  }
-}
-student.printName(); // { name: 'Akash', printName: [Function: printName] }
-```
-
-```js
-function print(){
-  let name = "Akash";
-  console.log(this.name);
-}
-print(); // undefined
-```
-
-```js
-function print(){
-  console.log(this);
-}
-print(); // Object [global]
-```
-
-```js
-console.log(this); // {}
-```
-
-```js
-console.log(this); // window(Object)
 ```
 
 ### What is an Arrow Function Lambda Expression
@@ -403,6 +393,68 @@ console.log(addTwo(2,3)); // undefined
 ```js
 const addTwo = (num1 , num2) => ({name : "Akash"}); 
 console.log(addTwo(2,3)); // { name: 'Akash' }
+```
+
+### What is an IIFE (Immediately Invoked Function Expression)
+IIFE (Immediately Invoked Function Expression) is a JavaScript function that runs as soon as it is defined. 
+```js
+(function print(){
+  console.log("Akash Negi");
+})();
+```
+
+```js
+(() => {
+  console.log("Akash");
+})(); // Akash
+```
+
+```js
+((name) => {
+  console.log(`Name : ${name}`);
+})("Akash"); // Name : Akash
+```
+
+### What is the Currying Function
+Currying is the process of taking a function with multiple arguments and turning it into a sequence of functions each with only a single argument. Currying is named after a mathematician Haskell Curry. By applying currying, an n-ary function turns into a unary function.
+```js
+function sum(n1){
+    return function(n2){
+        return function(n3){
+            return (n1 + n2 + n3);
+        }
+    }
+}
+
+console.log("Sum :" , sum(1)(2)(3)); // Sum : 6
+```
+
+### What is Memoization
+Memoization is a functional programming technique which attempts to increase a function’s performance by caching its previously computed results. Each time a memoized function is called, its parameters are used to index the cache. If the data is present, then it can be returned, without executing the entire function. Otherwise the function is executed and then the result is added to the cache.
+```js
+function multiply(n){
+  return (n * 10);
+}
+
+function memoized(multiply){
+  let cache = {};
+  return function(x){
+    if(cache[x]){
+      console.log("Return from Cache");
+      return cache[x];
+    }
+    else{
+      console.log("Add to Cache")
+      const result = multiply(x);
+      cache[x] = result;
+      return result;
+    }
+  }
+}
+
+let calculate = memoized(multiply);
+console.log(calculate(5)); // Add to Cache-50
+console.log(calculate(5)); // Return from Cache-50
 ```
 
 ### What is a First Class Function
@@ -457,129 +509,6 @@ function calculate(radius , areaCircle){ // Higher Order Function
 
 let f1 = calculate(3 , areaCircle); // Function Expression
 f1(); // Area of Circle : 28.274333882308138
-```
-
-### What is an IIFE (Immediately Invoked Function Expression)
-IIFE (Immediately Invoked Function Expression) is a JavaScript function that runs as soon as it is defined. 
-```js
-(function print(){
-  console.log("Akash Negi");
-})();
-```
-
-```js
-(() => {
-  console.log("Akash");
-})(); // Akash
-```
-
-```js
-((name) => {
-  console.log(`Name : ${name}`);
-})("Akash"); // Name : Akash
-```
-
-### What is a Unary Function
-A unary function (i.e. monadic) is a function that accepts exactly one argument. It stands for a single argument accepted by a function.
-```js
-const unaryFunction = (a) => console.log(a + 10); // Add 10 to the given argument and display the value
-```
-
-### What is a Pure Function
-A Pure function is a function where the return value is only determined by its arguments without any side effects. i.e, If you call a function with the same arguments 'n' number of times and 'n' number of places in the application then it will always return the same value.
-```js
-//Impure
-let numberArray = [];
-const impureAddNumber = (number) => numberArray.push(number);
-//Pure
-const pureAddNumber = (number) => (argNumberArray) =>
-  argNumberArray.concat([number]);
-
-//Display the results
-console.log(impureAddNumber(6)); // returns 1
-console.log(numberArray); // returns [6]
-console.log(pureAddNumber(7)(numberArray)); // returns [6, 7]
-console.log(numberArray); // returns [6]
-```
-
-As per the above code snippets, the Push function is impure itself by altering the array and returning a push number index independent of the parameter value, whereas Concat on the other hand takes the array and concatenates it with the other array producing a whole new array without side effects. Also, the return value is a concatenation of the previous array.
-
-Remember that Pure functions are important as they simplify unit testing without any side effects and no need for dependency injection. They also avoid tight coupling and make it harder to break your application by not having any side effects. These principles are coming together with the Immutability concept of ES6: giving preference to const over let usage.
-
-### What is the Currying Function
-Currying is the process of taking a function with multiple arguments and turning it into a sequence of functions each with only a single argument. Currying is named after a mathematician Haskell Curry. By applying currying, an n-ary function turns into a unary function.
-```js
-function sum(n1){
-    return function(n2){
-        return function(n3){
-            return (n1 + n2 + n3);
-        }
-    }
-}
-
-console.log("Sum :" , sum(1)(2)(3)); // Sum : 6
-```
-
-### What is the Temporal Dead Zone
-The Temporal Dead Zone (TDZ) is a specific period or area of a block where a variable is inaccessible until it has been initialized with a value. This behavior in JavaScript that occurs when declaring a variable with the let and const keywords, but not with var. In ECMAScript 6, accessing a let or const variable before its declaration (within its scope) causes a ReferenceError.
-```js
-//console.log(a); // ReferenceError: Cannot access 'a' before initialization
-//console.log(b); // ReferenceError: Cannot access 'b' before initialization
-//console.log(c); // undefined
-//console.log(d); // undefined
-//fun1(); // Function-1
-
-let a;
-let b = 10;
-
-var c;
-var d = 20;
-
-function fun1(){
-    console.log("Function-1");
-}
-```
-
-### What is Memoization
-Memoization is a functional programming technique which attempts to increase a function’s performance by caching its previously computed results. Each time a memoized function is called, its parameters are used to index the cache. If the data is present, then it can be returned, without executing the entire function. Otherwise the function is executed and then the result is added to the cache.
-```js
-function multiply(n){
-  return (n * 10);
-}
-
-function memoized(multiply){
-  let cache = {};
-  return function(x){
-    if(cache[x]){
-      console.log("Return from Cache");
-      return cache[x];
-    }
-    else{
-      console.log("Add to Cache")
-      const result = multiply(x);
-      cache[x] = result;
-      return result;
-    }
-  }
-}
-
-let calculate = memoized(multiply);
-console.log(calculate(5)); // Add to Cache-50
-console.log(calculate(5)); // Return from Cache-50
-```
-
-### What are Closures
-A closure is the combination of a function bundled together (enclosed) with references to its surrounding state (the lexical environment). In other words, a closure gives a function access to its outer scope. In JavaScript, closures are created every time a function is created, at function creation time.
-```js
-function outerFunction(){
-    let name = "Akash";
-    function innerFunction(){
-        console.log(name);
-    }
-    return innerFunction;
-}
-let inner = outerFunction();
-inner(); // Akash
 ```
 
 ### What is a Callback Function
@@ -809,22 +738,6 @@ Promise.all([promise1, promise2, promise3]).then(function(result){
 });
 ```
 
-### What is the purpose of the race method in Promise
-Promise.race() method will return the promise instance which is firstly resolved or rejected. 
-Example - race() method where promise2 is resolved first.
-```js
-var promise1 = new Promise(function (resolve, reject) {
-  setTimeout(resolve, 500, "one");
-});
-var promise2 = new Promise(function (resolve, reject) {
-  setTimeout(resolve, 100, "two");
-});
-
-Promise.race([promise1, promise2]).then(function (value) {
-  console.log(value); // "two" // Both promises will resolve, but promise2 is faster
-});
-```
-
 ### Explain Fetch API
 The Fetch API provides a JavaScript interface for making HTTP requests and processing the responses.
 
@@ -1050,6 +963,93 @@ form.addEventListener(
   false
 );
 ```
+
+### What is the purpose of the race method in Promise
+Promise.race() method will return the promise instance which is firstly resolved or rejected. 
+Example - race() method where promise2 is resolved first.
+```js
+var promise1 = new Promise(function (resolve, reject) {
+  setTimeout(resolve, 500, "one");
+});
+var promise2 = new Promise(function (resolve, reject) {
+  setTimeout(resolve, 100, "two");
+});
+
+Promise.race([promise1, promise2]).then(function (value) {
+  console.log(value); // "two" // Both promises will resolve, but promise2 is faster
+});
+```
+
+### Explain 'this' keyword in JavaScript
+```js
+const student = {
+  name : "Akash",
+  printName : function(){
+    console.log(`Name : ${this.name}`);
+  }
+}
+student.printName(); // Name : Akash
+```
+
+```js
+const student = {
+  name : "Akash",
+  printName : function(){
+    console.log(this);
+  }
+}
+student.printName(); // { name: 'Akash', printName: [Function: printName] }
+```
+
+```js
+function print(){
+  let name = "Akash";
+  console.log(this.name);
+}
+print(); // undefined
+```
+
+```js
+function print(){
+  console.log(this);
+}
+print(); // Object [global]
+```
+
+```js
+console.log(this); // {}
+```
+
+```js
+console.log(this); // window(Object)
+```
+
+### What is a Unary Function
+A unary function (i.e. monadic) is a function that accepts exactly one argument. It stands for a single argument accepted by a function.
+```js
+const unaryFunction = (a) => console.log(a + 10); // Add 10 to the given argument and display the value
+```
+
+### What is a Pure Function
+A Pure function is a function where the return value is only determined by its arguments without any side effects. i.e, If you call a function with the same arguments 'n' number of times and 'n' number of places in the application then it will always return the same value.
+```js
+//Impure
+let numberArray = [];
+const impureAddNumber = (number) => numberArray.push(number);
+//Pure
+const pureAddNumber = (number) => (argNumberArray) =>
+  argNumberArray.concat([number]);
+
+//Display the results
+console.log(impureAddNumber(6)); // returns 1
+console.log(numberArray); // returns [6]
+console.log(pureAddNumber(7)(numberArray)); // returns [6, 7]
+console.log(numberArray); // returns [6]
+```
+
+As per the above code snippets, the Push function is impure itself by altering the array and returning a push number index independent of the parameter value, whereas Concat on the other hand takes the array and concatenates it with the other array producing a whole new array without side effects. Also, the return value is a concatenation of the previous array.
+
+Remember that Pure functions are important as they simplify unit testing without any side effects and no need for dependency injection. They also avoid tight coupling and make it harder to break your application by not having any side effects. These principles are coming together with the Immutability concept of ES6: giving preference to const over let usage.
 
 ---
 
