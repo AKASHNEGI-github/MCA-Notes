@@ -130,7 +130,7 @@ console.log(arr.indexOf(5)); // 4
 console.log(arr.includes(3)); // true
 ```
 
-- Dynamic array
+- Dynamic Array
 ```js
 const arr = new Array(1,2,3,4,5);
 arr.unshift(0);
