@@ -116,6 +116,91 @@ setInterval(() => {
 }, 2000);
 ```
 
+### What are Arrays
+The Array object enables storing a collection of multiple items under a single variable name, and has members for performing common array operations.
+
+- Array
+```js
+const arr = [1,2,3,4,5];
+arr.push(6);
+console.log(arr); // [ 1, 2, 3, 4, 5, 6 ]
+arr.pop();
+console.log(arr); // [ 1, 2, 3, 4, 5 ]
+console.log(arr.indexOf(5)); // 4
+console.log(arr.includes(3)); // true
+```
+
+- Dynamic array
+```js
+const arr = new Array(1,2,3,4,5);
+arr.unshift(0);
+console.log(arr); // [ 0, 1, 2, 3, 4, 5 ]
+arr.shift();
+console.log(arr); // [ 1, 2, 3, 4, 5 ]
+```
+
+- Array inside Array
+```js
+const arr1 = [1,2,3];
+const arr2 = [11,12,13];
+arr1.push(arr2);
+console.log(arr1); // [ 1, 2, 3, [ 11, 12, 13 ] ]
+```
+
+- Join
+```js
+arr1 = [1,2,3];
+arr2 = arr1.join();
+console.log(arr2); // 1,2,3
+console.log(typeof(arr2)); // string
+```
+
+- Slice
+```js
+const arr1 = [1,2,3,4,5]
+const arr2 = arr1.slice(1,3);
+console.log(arr1); // [ 1, 2, 3, 4, 5 ]
+console.log(arr2); // [ 2, 3 ]
+```
+
+- Splice
+```js
+const arr1 = [1,2,3,4,5]
+const arr2 = arr1.splice(1,3);
+console.log(arr1); // [ 1, 5 ]
+console.log(arr2); // [ 2, 3, 4 ]
+```
+- Concat
+```js
+const arr1 = [1,2,3];
+const arr2 = [11,12,13];
+const arr3 = arr1.concat(arr2);
+console.log(arr3); // [ 1, 2, 3, 11, 12, 13 ]
+```
+
+- Spread
+```js
+const arr1 = [1,2,3];
+const arr2 = [11,12,13];
+const arr3 = [21,22,23];
+const arr4 = [...arr1,...arr2,...arr3];
+console.log(arr4); // [1,  2,  3, 11, 12, 13, 21, 22, 23]
+```
+
+- Flat
+```js
+arr1 = [1,2,3,[4,5],6,[7,8,[9,10]]];
+arr2 = arr1.flat(Infinity);
+console.log(arr2); // [1, 2, 3, 4,  5, 6, 7, 8, 9, 10]
+```
+
+```js
+let a=100 , b=200 , c=300;
+console.log(Array.of(a,b,c)); // [ 100, 200, 300 ]
+console.log(Array.isArray("AKASH")); // false
+console.log(Array.from("AKASH")); // [ 'A', 'K', 'A', 'S', 'H' ]
+```
+
 ### What is Filter
 The filter() method is an iterative method. It calls a provided callbackFn function once for each element in an array, and constructs a new array of all the values for which callbackFn returns a truthy value. Array elements which do not pass the callbackFn test are not included in the new array. 
 ```js
@@ -153,7 +238,7 @@ const newArr = arr
 console.log(newArr); // [ 51, 61, 71, 81, 91 ]
 ```
 
-### What is reduce
+### What is Reduce
 The reduce() method is an iterative method. It runs a "reducer" callback function over all elements in the array, in ascending-index order, and accumulates them into a single value. Every time, the return value of callbackFn is passed into callbackFn again on next invocation as accumulator. The final value of accumulator (which is the value returned from callbackFn on the final iteration of the array) becomes the return value of reduce(). 
 ```js
 const arr = [1,2,3];
@@ -169,66 +254,72 @@ console.log("Sum :" , sum);
 // Sum : 6
 ```
 
-### What is the difference between Call , Apply and Bind
-Call and Apply are pretty much interchangeable. Both execute the current function immediately. You need to decide whether it’s easier to send in an array or a comma separated list of arguments. You can remember by treating Call is for comma (separated list) and Apply is for Array.
-Bind creates a new function that will have this set to the first parameter passed to bind().
-
-- Call : The call() method invokes a function with a given this value and arguments provided one by one.
+### What is Call
 ```js
-var employee1 = { firstName: "John", lastName: "Rodson" };
-var employee2 = { firstName: "Jimmy", lastName: "Baily" };
-
-function invite(greeting1, greeting2) {
-  console.log(
-    greeting1 + " " + this.firstName + " " + this.lastName + ", " + greeting2
-  );
-}
-
-invite.call(employee1, "Hello", "How are you?"); // Hello John Rodson, How are you?
-invite.call(employee2, "Hello", "How are you?"); // Hello Jimmy Baily, How are you?
+let user = {
+    name:"Akash",
+    print:function(){
+        console.log(this.name);
+    }
+};
+user.print(); // Akash
 ```
 
-- Apply : Invokes the function with a given this value and allows you to pass in arguments as an array.
 ```js
-var employee1 = { firstName: "John", lastName: "Rodson" };
-var employee2 = { firstName: "Jimmy", lastName: "Baily" };
-
-function invite(greeting1, greeting2) {
-  console.log(
-    greeting1 + " " + this.firstName + " " + this.lastName + ", " + greeting2
-  );
-}
-
-invite.apply(employee1, ["Hello", "How are you?"]); // Hello John Rodson, How are you?
-invite.apply(employee2, ["Hello", "How are you?"]); // Hello Jimmy Baily, How are you?
+let user1 = {
+    name:"Akash",
+    print:function(){
+        console.log(this.name);
+    }
+};
+let user2 = {
+    name:"Aman",
+};
+// Function Borrowing
+user1.print.call(user2); // Aman
 ```
 
-- Bind : returns a new function, allowing you to pass any number of arguments.
 ```js
-var employee1 = { firstName: "John", lastName: "Rodson" };
-var employee2 = { firstName: "Jimmy", lastName: "Baily" };
-
-function invite(greeting1, greeting2) {
-  console.log(
-    greeting1 + " " + this.firstName + " " + this.lastName + ", " + greeting2
-  );
+let user = {
+    name:"Akash"
+};
+let print = function(){ // Generic Function
+    console.log(this.name);
 }
-
-var inviteEmployee1 = invite.bind(employee1);
-var inviteEmployee2 = invite.bind(employee2);
-inviteEmployee1("Hello", "How are you?"); // Hello John Rodson, How are you?
-inviteEmployee2("Hello", "How are you?"); // Hello Jimmy Baily, How are you?
+print.call(user); // Akash
 ```
 
-### What is the purpose of the let keyword
-The let statement declares a block scope local variable. Hence the variables defined with let keyword are limited in scope to the block, statement, or expression on which it is used. Whereas variables declared with the var keyword used to define a variable globally, or locally to an entire function regardless of block scope.
 ```js
-let counter = 30;
-if(counter === 30){
-  let counter = 31;
-  console.log(counter); // 31
+let user = {
+    name:"Akash"
+};
+let print = function(city , country){ // Generic Function
+    console.log(this.name , city , country);
 }
-console.log(counter); // 30
+print.call(user , "Dehradun" , "India"); // Akash Dehradun India
+```
+
+### What is Apply
+```js
+let user = {
+    name:"Akash"
+};
+let print = function(city , country){ // Generic Function
+    console.log(this.name , city , country);
+}
+print.apply(user , ["Dehradun" , "India"]); // Akash Dehradun India
+```
+
+### What is Bind
+```js
+let user = {
+    name:"Akash"
+};
+let print = function(city , country){ // Generic Function
+    console.log(this.name , city , country);
+}
+const fun = print.bind(user , "Dehradun" , "India"); 
+fun(); // Akash Dehradun India
 ```
 
 ### What is the difference between let and var
