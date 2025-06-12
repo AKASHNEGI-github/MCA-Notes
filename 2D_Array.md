@@ -135,6 +135,41 @@ int main()
 
 ### Questions
 
+- Multiply 2 matrices
+```c++
+class Solution {
+  public:
+    void Multiply(vector<vector<int>>& matrixA, vector<vector<int>>& matrixB) 
+    {
+        int row1 = matrixA.size();
+        int col1 = matrixA[0].size();
+        
+        int row2 = matrixB.size();
+        int col2 = matrixB[0].size();
+        
+        vector<vector<int>> matrixC;
+        if(col1 == row2)
+        {
+            for(int i=0 ; i<row1 ; i++)
+            {
+                vector<int> temp;
+                for(int j=0 ; j<col2 ; j++)
+                {
+                    int sum = 0;
+                    for(int k=0 ; k<col1 ; k++)
+                    {
+                        sum = sum + (matrixA[i][k] * matrixB[k][j]);
+                    }
+                    temp.push_back(sum);
+                }
+                matrixC.push_back(temp);
+            }
+        }
+        matrixA = matrixC;
+    }
+};
+```
+
 - Row With Maximum Ones
 ```c++
 class Solution {
