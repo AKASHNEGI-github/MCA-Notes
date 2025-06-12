@@ -288,6 +288,49 @@ public:
 };
 ```
 
+- Check Completeness of a Binary Tree
+```c++
+class Solution {
+public:
+    int countTreeNodes(TreeNode* root)
+    {
+        if(root == NULL)
+        {
+            return 0;
+        }
+        int countNodesLeftSubTree = countTreeNodes(root->left);
+        int countNodesRighttSubTree = countTreeNodes(root->right);
+        int totalTreeNodes = countNodesLeftSubTree + countNodesRighttSubTree + 1;
+        return totalTreeNodes;
+    }
+
+    bool isCompleteBinaryTree(TreeNode* root , int index , int totalTreeNodes)
+    {
+        if(root == NULL)
+        {
+            return true;
+        }
+        if(index >= totalTreeNodes)
+        {
+            return false;
+        }
+        bool leftSubTree = isCompleteBinaryTree(root->left , 2*index+1 , totalTreeNodes);
+        bool rightSubTree = isCompleteBinaryTree(root->right , 2*index+2 , totalTreeNodes);
+        return (leftSubTree && rightSubTree);
+    }
+
+    bool isCompleteTree(TreeNode* root)
+    {
+        if(root == NULL)
+        {
+            return true;
+        }
+        int index = 0;
+        int totalTreeNodes = countTreeNodes(root);
+        return isCompleteBinaryTree(root , index , totalTreeNodes);
+    }
+};
+```
 
 
 ---
