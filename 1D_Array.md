@@ -25,6 +25,18 @@ void Print(int arr[] , int size)
     }
 }
 
+int LinearSearch(int arr[] , int size , int key)
+{
+    for(int i=0 ; i<size ; i++)
+    {
+        if(arr[i] == key)
+        {
+            return i;
+        }
+    }
+    return -1;
+}
+
 void Reverse(int arr[] , int size)
 {
     int start = 0;
@@ -73,6 +85,7 @@ int main()
     int arr[size];
     Input(arr , size); // 1 2 3 4 5
     Print(arr , size);
+    cout << "Key Index : " << LinearSearch(arr , size , 4) << endl; // Key Index : 3
     cout << "Sum : " << Sum(arr , size) << endl; // Sum : 15
     cout << "Minimum : " << Min(arr , size) << endl; // Minimum : 1
     cout << "Maximum : " << Max(arr , size) << endl; // Maximum : 5
