@@ -829,6 +829,26 @@ Promise.all([promise1, promise2, promise3]).then(function(result){
 });
 ```
 
+```js
+const promise1 = new Promise(function(resolve , reject){
+    setTimeout(function(){
+        resolve("Promise-1");
+    }, 1000);
+});
+
+const promise2 = new Promise(function(resolve , reject){
+    setTimeout(function(){
+        reject("Rejected : Promise-2");
+    }, 1000);
+});
+
+Promise.all([promise1, promise2]).then(function(result){
+    console.log(result);
+}).catch(function(error){
+    console.log(error); // Rejected : Promise-2
+});
+```
+
 ### Explain Fetch API
 The Fetch API provides a JavaScript interface for making HTTP requests and processing the responses.
 
