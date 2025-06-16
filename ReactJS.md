@@ -37,7 +37,33 @@ _JSX_ stands for _JavaScript XML_ and it is an XML-like syntax extension to ECMA
 ### What are Components in React
 Components are the JavaScript functions or reusable piece of code which helps in creating User Interface (UI) in React.
 - **Functional Component** - These are the pure JavaScript functions that accept prop object as one and only one parameter and return React element to render output.
+```jsx
+function App() {
+  return (
+    <>
+      <h1>Akash Negi</h1>
+    </>
+  )
+}
+export default App
+```
+
+
 - **Class Component** - These components defiened using class keyword and include extends React.Component and render function.
+```jsx
+class App extends React.Component {
+  render(){
+    return(
+      <>
+        <h1>Akash Negi</h1>
+      </>
+    )
+  }
+}
+
+export default App
+```
+
 
 ### What are Hooks in React
 Hooks are the reusable functions that provides access to state of the components in React Application. Hooks allow to use state and other React features without writing a class.
@@ -76,6 +102,29 @@ The Virtual DOM is a concept implemented by libraries in JavaScript on top of br
 
 ### What are Fragments
 It's a common pattern or practice in React for a component to return multiple elements. Fragments allow to group a list of children without adding extra nodes to the DOM. You need to use either <Fragment> or a shorter syntax having empty tag (<></>).
+```jsx
+function App() {
+  return (
+    <> {/*Fragments*/}
+      <h1>Akash Negi</h1>
+    </>
+  )
+}
+
+export default App
+```
+
+```jsx
+function App() {
+  return (
+    <React.Fragment> {/*Fragments*/}
+      <h1>Akash Negi</h1>
+    </React.Fragment>
+  )
+}
+
+export default App
+```
 
 ### Why Fragments are better than container divs
 - Fragments are a bit faster and use less memory by not creating an extra DOM node. This only has a real benefit on very large and deep trees.
