@@ -340,12 +340,12 @@ int main()
 
 ### Questions
 
--
+- Implement Stack using Queues
 ```c++
 
 ```
 
--
+- Implement Queue using Stacks
 ```c++
 
 ```
