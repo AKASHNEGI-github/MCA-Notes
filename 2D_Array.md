@@ -135,6 +135,33 @@ int main()
 
 ### Questions
 
+- Sum of upper and lower triangles
+```c++
+class Solution {
+  public:
+    vector<int> sumTriangles(const vector<vector<int> >& matrix, int matrixSize) 
+    {
+        int upperTriangleSum = 0;
+        int lowerTriangleSum = 0;
+        for(int i=0 ; i<matrixSize ; i++)
+        {
+            for(int j=0 ; j<matrixSize ; j++)
+            {
+                if(j>=i && j<matrixSize)
+                {
+                    upperTriangleSum = upperTriangleSum + matrix[i][j];
+                }
+                if(j>=0 && j<=i)
+                {
+                    lowerTriangleSum = lowerTriangleSum + matrix[i][j];
+                }
+            }
+        }
+        return {upperTriangleSum , lowerTriangleSum};
+    }
+};
+```
+
 - Multiply 2 matrices
 ```c++
 class Solution {
