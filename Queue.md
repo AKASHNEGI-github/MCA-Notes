@@ -428,17 +428,92 @@ public:
 };
 ```
 
--
+- Design Circular Queue
+```c++
+class MyCircularQueue {
+public:
+    int *arr;
+    int front;
+    int rear;
+    int capacity;
+    int currentSize;
+
+    MyCircularQueue(int k) 
+    {
+        arr = new int[k];
+        capacity = k;
+        currentSize = 0;
+        front = 0;
+        rear = -1;
+    }
+    
+    bool enQueue(int value) 
+    {
+        if(isFull())
+        {
+            return false;
+        }
+        rear = (rear+1)%capacity;
+        arr[rear] = value;
+        currentSize++;
+        return true;
+    }
+    
+    bool deQueue() 
+    {
+        if(isEmpty())
+        {
+            return false;
+        }
+        front = (front+1)%capacity;
+        currentSize--;
+        return true;
+    }
+    
+    int Front() 
+    {
+        if(isEmpty())
+        {
+            return -1;
+        }
+        return arr[front];    
+    }
+    
+    int Rear()
+    {
+        if(isEmpty())
+        {
+            return -1;
+        }
+        return arr[rear]; 
+    }
+    
+    bool isEmpty() 
+    {
+        if(currentSize == 0)
+        {
+            return true;
+        }
+        return false;
+    }
+    
+    bool isFull() 
+    {
+        if(currentSize == capacity)
+        {
+            return true;
+        }
+        return false;
+    }
+};
+```
+
+- Design Circular Deque
 ```c++
 
 ```
 
--
-```c++
-
-```
-
--
+- Design Front Middle Back Queue
 ```c++
 
 ```
