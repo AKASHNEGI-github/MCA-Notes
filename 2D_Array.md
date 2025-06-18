@@ -101,17 +101,6 @@ bool search(int matrix[][3] , int row , int col , int key)
     return false;
 }
 
-void transposeMatrix(int matrix[][3] , int row , int col)
-{
-    for(int i=0 ; i<row ; i++)
-    {
-        for(int j=(i+1) ; j<col ; j++)
-        {
-            swap(matrix[i][j] , matrix[j][i]);
-        }
-    }
-}
-
 int main()
 {
     int row = 3;
@@ -125,7 +114,6 @@ int main()
     //cout << "Minimum : " << minimum(matrix , row , col);
     //cout << "Maximum : " << maximum(matrix , row , col);
     //cout << "Key present : " << search(matrix , row , col , 5);
-    //transposeMatrix(matrix , row , col);
     //printMatrix(matrix , row , col);
 
     return 0;
@@ -134,6 +122,27 @@ int main()
 ```
 
 ### Questions
+
+- Transpose Matrix
+```c++
+class Solution {
+public:
+    vector<vector<int>> transpose(vector<vector<int>>& matrix) 
+    {
+        int row = matrix.size();
+        int col = matrix[0].size();
+        vector<vector<int>> ans(col , vector<int>(row));
+        for(int i=0 ; i<row ; i++)
+        {
+            for(int j=0 ; j<col ; j++)
+            {
+                ans[j][i] = matrix[i][j];
+            }
+        }
+        return ans;
+    }
+};
+```
 
 - Sum of upper and lower triangles
 ```c++
