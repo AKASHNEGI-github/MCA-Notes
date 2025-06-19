@@ -510,7 +510,105 @@ public:
 
 - Design Circular Deque
 ```c++
+class MyCircularDeque {
+public:
+    int *arr;
+    int front;
+    int rear;
+    int capacity;
+    int currentSize;
 
+    MyCircularDeque(int k) 
+    {
+        arr = new int[k];
+        capacity = k;
+        currentSize = 0;
+        front = 0;
+        rear = k-1;
+    }
+    
+    bool insertFront(int value) 
+    {
+        if(isFull())
+        {
+            return false;
+        }
+        front = (front-1+capacity)%capacity;
+        arr[front] = value;
+        currentSize++;
+        return true;
+    }
+    
+    bool insertLast(int value) 
+    {
+        if(isFull())
+        {
+            return false;
+        }
+        rear = (rear+1)%capacity;
+        arr[rear] = value;
+        currentSize++;
+        return true;
+    }
+    
+    bool deleteFront() 
+    {
+        if(isEmpty())
+        {
+            return false;
+        }
+        front = (front+1)%capacity;
+        currentSize--;
+        return true;
+    }
+    
+    bool deleteLast() 
+    {
+        if(isEmpty())
+        {
+            return false;
+        }
+        rear = (rear-1+capacity)%capacity;
+        currentSize--;
+        return true;
+    }
+    
+    int getFront() 
+    {
+        if(isEmpty())
+        {
+            return -1;
+        }
+        return arr[front];
+    }
+    
+    int getRear() 
+    {
+        if(isEmpty())
+        {
+            return -1;
+        }
+        return arr[rear]; 
+    }
+    
+    bool isEmpty() 
+    {
+        if(currentSize == 0)
+        {
+            return true;
+        }
+        return false;
+    }
+    
+    bool isFull() 
+    {
+        if(currentSize == capacity)
+        {
+            return true;
+        }
+        return false;
+    }
+};
 ```
 
 - Design Front Middle Back Queue
