@@ -620,42 +620,28 @@ Example -
 class Parent
 {
     public:
-        string Name = "Parent - Class";
+        void Display()
+        {
+            cout << "Parent Class" << endl;
+        }
 };
 
 class Child : public Parent
-{};
+{
+    public:
+        void Display()
+        {
+            cout << "Child Class";
+        }
+};
 
 int main()
 {
-    Child c1;
-    cout << c1.Name << endl; // Parent - Class
-    return 0;
-}
-```
+    Child c;
+    c.Display(); // Child Class
 
-**Multiple Inheritance** : Child class derived from multiple base classes.
-```c++
-class Parent1
-{
-    public:
-        string Name = "Parent1 - Class";
-};
-
-class Parent2
-{
-    public:
-        string Name = "Parent2 - Class";
-};
-
-class Child : public Parent1 , public Parent2
-{};
-
-int main()
-{
-    Child c1;
-    cout << c1.Parent1::Name << endl; // Parent1 - Class
-    cout << c1.Parent2::Name << endl; // Parent2 - Class
+    Parent *p = new Child();
+    p->Display(); // Parent Class
     return 0;
 }
 ```
@@ -665,23 +651,75 @@ int main()
 class Parent1
 {
     public:
-        int id_parent1 = 1;
+        void Display()
+        {
+            cout << "Parent Class - 1";
+        }
 };
 
 class Parent2 : public Parent1
 {
     public:
-        int id_parent2 = 2;
+        void Display()
+        {
+            cout << "Parent Class - 2";
+        }
 };
 
 class Child : public Parent2
-{};
+{
+    public:
+        void Display()
+        {
+            cout << "Child Class";
+        }
+};
 
 int main()
 {
-    Child c1;
-    cout << c1.id_parent1 << endl; // 1
-    cout << c1.id_parent2 << endl; // 2
+    Child c;
+    c.Display(); // Child Class
+    c.Parent2::Display(); // Parent Class - 2
+    c.Parent1::Display(); // Parent Class - 1
+    return 0;
+}
+```
+
+**Multiple Inheritance** : Child class derived from multiple base classes.
+```c++
+class Parent1
+{
+    public:
+        void Display()
+        {
+            cout << "Parent Class - 1";
+        }
+};
+
+class Parent2
+{
+    public:
+        void Display()
+        {
+            cout << "Parent Class - 2";
+        }
+};
+
+class Child : public Parent1 , public Parent2
+{
+    public:
+        void Display()
+        {
+            cout << "Child Class";
+        }
+};
+
+int main()
+{
+    Child c;
+    c.Display(); // Child Class
+    c.Parent1::Display(); // Parent Class - 1
+    c.Parent2::Display(); // Parent Class - 2
     return 0;
 }
 ```
@@ -691,21 +729,38 @@ int main()
 class Parent
 {
     public:
-        string name = "Akash Negi";
+        void Display()
+        {
+            cout << "Parent Class" << endl;
+        }
 };
 
 class Child1 : public Parent
-{};
+{
+    public:
+        void Display()
+        {
+            cout << "Child Class - 1";
+        }
+};
 
 class Child2 : public Parent
-{};
+{
+    public:
+        void Display()
+        {
+            cout << "Child Class - 2";
+        }
+};
 
 int main()
 {
     Child1 c1;
+    c1.Display(); // Child Class - 1
+    c1.Parent::Display(); // Parent Class
     Child2 c2;
-    cout << c1.name << endl; // Akash Negi
-    cout << c2.name << endl; // Akash Negi
+    c2.Display(); // Child Class - 2
+    c2.Parent::Display(); // Parent Class
     return 0;
 }
 ```
