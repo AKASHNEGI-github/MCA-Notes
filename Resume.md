@@ -154,6 +154,213 @@ Role: **index**: Tracks which question is currently being presented to the user.
 Purpose: The useRef hook is used to persist references to DOM elements (or other mutable values) across renders without causing re-renders.
 Role: Answer Highlighting: The useRef hook allows direct access to the answer option DOM elements. This is used in the checkAnswer function to add the "correct" or "wrong" CSS class to the selected answer, visually indicating whether the user's selection is correct. Resetting Classes: When moving to the next question, the useRef hook allows the removal of CSS classes (like "correct" and "wrong") from the previous answer options, resetting them for the new question.
 
+```jsx
+import './PasswordGenerator.css'
+import { useState , useCallback, useEffect , useRef} from 'react'
+
+function PasswordGenerator() {
+
+    const [length , setLength] = useState(5)
+    const [numberAllowed , setNumberAllowed] = useState(false)
+    const [lowercaseAllowed , setLowercaseAllowed] = useState(false)
+    const [uppercaseAllowed , setUppercaseAllowed] = useState(false)
+    const [specialCharacterAllowed , setspecialCharacterAllowed] = useState(false)
+    const [password , setPassword] = useState("")
+  
+    const passwordRef = useRef(null)
+  
+    const passwordGenerator = useCallback(() => 
+    {
+      let pass = ""
+      let str = ""
+      
+      if(numberAllowed)
+      {
+        str = str + "0123456789"
+      }
+
+      if(lowercaseAllowed)
+      {
+        str = str + "abcdefghijklmnopqrstuvwxyz"
+      }
+
+      if(uppercaseAllowed)
+      {
+        str = str + "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+      }
+  
+      if(specialCharacterAllowed)
+      {
+        str = str + "!@#$%^&*()-_=+[]{}"
+      }
+  
+      for(let i=1 ; i<=length ; i++)
+      {
+        let char = Math.floor(Math.random() * str.length + 1)
+        pass = pass + str.charAt(char)
+      }
+      
+      setPassword(pass)
+    } , [length , numberAllowed , lowercaseAllowed , uppercaseAllowed , specialCharacterAllowed , setPassword])
+  
+    const copyPasswordToClipboard = useCallback(() => 
+    {
+      passwordRef.current?.select();
+      passwordRef.current?.setSelectionRange(0 , 10);
+      window.navigator.clipboard.writeText(password)
+    } , [password])
+  
+    useEffect(() => {passwordGenerator()} , [length , numberAllowed , lowercaseAllowed , uppercaseAllowed , specialCharacterAllowed , passwordGenerator])
+  
+    return (
+      <>
+        <div className="container">
+          <h1>Password Generator</h1>
+          <hr></hr>
+
+          <div className="password">
+            <input type="text" value={password} placeholder="Password" readOnly ref={passwordRef}/>
+            <button onClick={copyPasswordToClipboard}>copy</button>
+          </div>
+
+          <div className="length">
+            <input type="range" min={5} max={10} value={length} onChange={(e) => {setLength(e.target.value)}}/>
+            <label>Length : {length}</label>
+          </div>
+  
+          <div className="checkboxes">
+            <input type="checkbox" defaultChecked={numberAllowed} id="numberInput" onChange={() => {setNumberAllowed((prev) => !prev);}}/>
+            <label htmlFor="numberInput">Numbers</label>
+          </div>
+
+          <div className="checkboxes">
+            <input type="checkbox" defaultChecked={lowercaseAllowed} id="numberInput" onChange={() => {setLowercaseAllowed((prev) => !prev);}}/>
+            <label htmlFor="numberInput">Lowercase [a - z]</label>
+          </div>
+
+          <div className="checkboxes">
+            <input type="checkbox" defaultChecked={uppercaseAllowed} id="numberInput" onChange={() => {setUppercaseAllowed((prev) => !prev);}}/>
+            <label htmlFor="numberInput">Uppercase [A - Z]</label>
+          </div>
+  
+          <div className="checkboxes">
+            <input type="checkbox" defaultChecked={specialCharacterAllowed} id="characterInput" onChange={() => {setspecialCharacterAllowed((prev) => !prev)}}/>
+            <label htmlFor="characterInput">Special Characters</label>
+          </div>
+          
+          <h6>© Copyright 2024 <span class="akashnegi">Akash Negi</span>. All rights reserved.</h6>
+        </div>
+      </>
+    )
+  }
+
+export default PasswordGenerator
+```
+
+```jsx
+import { useRef, useState } from 'react'
+import './Quiz.css'
+import { data } from '../../assets/data'
+
+function Quiz() {
+
+    let [index , setIndex] = useState(0)
+    let [lock , setLock] = useState(false)
+    let [questions , setQuestions] = useState(data[index])
+    let [score , setScore] = useState(0)
+    let [result , setResult] = useState(false)
+
+    let option1 = useRef(null)
+    let option2 = useRef(null)
+    let option3 = useRef(null)
+    let option4 = useRef(null)
+
+    let options = [option1 , option2 , option3 , option4]
+
+    const checkAnswer = (e , ans) =>
+    {
+        if(lock === false)
+        {
+            if(questions.ans === ans)
+            {
+                e.target.classList.add("correct")
+                setScore(++score)
+            }
+            else
+            {  
+                e.target.classList.add("wrong")
+                options[questions.ans - 1].current.classList.add("correct")
+            }
+            setLock(true)
+        }
+    }
+
+    const next = () =>
+    {
+        if(lock === true)
+        {
+            if(index === data.length - 1)
+            {
+                setResult(true)
+                return 0
+            }
+            setIndex(++index)
+            setQuestions(data[index])
+            setLock(false)
+            options.map((Option) =>
+            {
+                Option.current.classList.remove("wrong")
+                Option.current.classList.remove("correct")
+                return null
+            })
+        }
+    }
+
+    const reset = () =>
+    {
+        setIndex(0)
+        setQuestions(data[0])
+        setScore(0)
+        setLock(false)
+        setResult(false)
+    }
+
+    return (
+      <>
+        <div className="container">
+            <h1>Quiz App</h1>
+            <hr />
+            {
+                result? <></> : 
+                <>
+                <h2>{index + 1}. {questions.question}</h2>
+                <ul>
+                    <li ref={option1} onClick={(e) => {checkAnswer(e , 1)}} >{questions.option1}</li>
+                    <li ref={option2} onClick={(e) => {checkAnswer(e , 2)}} >{questions.option2}</li>
+                    <li ref={option3} onClick={(e) => {checkAnswer(e , 3)}} >{questions.option3}</li>
+                    <li ref={option4} onClick={(e) => {checkAnswer(e , 4)}} >{questions.option4}</li>
+                </ul>
+                <button onClick={next}>Next</button>
+                <div className="index">{index + 1} of {data.length} Questions</div>
+                <h6>© Copyright 2024 <span class="akashnegi">Akash Negi</span>. All rights reserved.</h6>
+                </>
+            }
+            {
+                result? 
+                <>
+                <h2 className="score">Score : {score} out of {data.length}</h2>
+                <button onClick={reset}>Reset</button>
+                <h6>© Copyright 2024 <span class="akashnegi">Akash Negi</span>. All rights reserved.</h6>
+                </> : <></>
+            }
+        </div>
+      </>
+    )
+  }
+
+  export default Quiz
+```
+
 ## Companies 
 
 ### Cogizant
