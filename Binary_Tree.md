@@ -2,6 +2,7 @@
 ---
 
 | Table of Content |
+| ---------------- |
 | Implementation |
 | Preorder Traversal |
 | Inorder Traversal |
