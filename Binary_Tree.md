@@ -1,7 +1,10 @@
 # BINARY TREE
-
 ---
 
+| Table of Content |
+|
+
+---
 ### Implementation
 ```c++
 #include<bits/stdc++.h>
@@ -213,6 +216,7 @@ vector<int> preorder(Node* root)
     return ans;
 }
 ```
+
 - Inorder Traversal
 ```c++
 void inOrderTraversal(Node* root , vector<int> &ans)
@@ -232,6 +236,7 @@ vector<int> inOrder(Node* root)
     return ans;
 }
 ```
+
 - Postorder Traversal
 ```c++
 void postOrderTraversal(Node* root , vector<int> &ans)
@@ -251,6 +256,7 @@ vector <int> postOrder(Node* root)
     return ans;
 }
 ```
+
 - Count Leaves in Binary Tree
 ```c++
 void preOrderTraversal(Node* root , int &count)
@@ -274,6 +280,7 @@ int countLeaves(Node* root)
     return count;
 }
 ```
+
 - Count Non-Leaf Nodes in Tree
 ```c++
 class Solution
@@ -298,25 +305,6 @@ class Solution
         int count = 0;
         preOrderTraversal(root , count);
         return count;
-    }
-};
-```
-
-- Height of Binary Tree
-```c++
-class Solution
-{
-    public:
-    int height(struct Node* node)
-    {
-        if(node == NULL)
-        {
-            return 0;
-        }
-        int heightLeftSubTree = height(node->left);
-        int heightRightSubTree = height(node->right);
-        int ans = max(heightLeftSubTree , heightRightSubTree) + 1;
-        return ans;
     }
 };
 ```
@@ -393,6 +381,25 @@ public:
             return true;
         }
         return isSymmetricFast(root->left , root->right);
+    }
+};
+```
+
+- Height of Binary Tree
+```c++
+class Solution
+{
+    public:
+    int height(struct Node* node)
+    {
+        if(node == NULL)
+        {
+            return 0;
+        }
+        int heightLeftSubTree = height(node->left);
+        int heightRightSubTree = height(node->right);
+        int ans = max(heightLeftSubTree , heightRightSubTree) + 1;
+        return ans;
     }
 };
 ```
