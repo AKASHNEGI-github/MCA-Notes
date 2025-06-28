@@ -1,5 +1,4 @@
 # QUEUE
-
 ---
 
 | Table Of Content |
@@ -13,7 +12,6 @@
 | Design Front Middle Back Queue |
 
 ---
-
 ### Queue using Array
 ```c++
 // QUEUE USING ARRAYS
