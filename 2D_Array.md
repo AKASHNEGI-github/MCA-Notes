@@ -1,7 +1,18 @@
 # 2D-ARRAY | MATRIX
-
 ---
 
+| Table Of Content |
+| Implementation |
+| Transpose Matrix |
+| Sum of upper and lower triangles |
+| Multiply 2 matrices |
+| Search a 2D Matrix |
+| Search a 2D Matrix II |
+| Find a Peak Element II |
+| Wave Matrix |
+| Spiral Matrix |
+
+---
 ### Implementation
 ```c++
 // 2D-ARRAY | MATRIX
