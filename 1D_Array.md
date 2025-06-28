@@ -1,7 +1,12 @@
 # 1D-Array
-
 ---
 
+| Table Of Content |
+| ---------------- |
+| Implementation |
+| Two Sum |
+
+---
 ### Implementation
 ```c++
 #include<bits/stdc++.h>
