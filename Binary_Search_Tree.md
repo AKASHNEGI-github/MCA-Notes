@@ -1,7 +1,17 @@
 # BINARY SEARCH TREE
-
 ---
 
+| Table Of Content |
+| ---------------- |
+| Implementation |
+| Range Sum of BST |
+| Search in a Binary Search Tree |
+| Validate Binary Search Tree |
+| Kth Smallest Element in a BST |
+| Lowest Common Ancestor of a Binary Search Tree |
+| Inorder predecessor and successor in BST |
+
+---
 ### Implementation
 ```c++
 #include<bits/stdc++.h>
@@ -361,6 +371,65 @@ public:
     }
 };
 ```
+
+- Kth Smallest Element in a BST
+```c++
+class Solution {
+public:
+    void findKthSmallest(TreeNode* root , int k , int& count , int& ans)
+    {
+        if(root == NULL)
+        {
+            return;
+        }
+        findKthSmallest(root->left , k , count , ans);
+        count++;
+        if(count == k)
+        {
+            ans = root->val;
+            return;
+        }
+        findKthSmallest(root->right , k , count , ans);
+    }
+
+    int kthSmallest(TreeNode* root, int k) 
+    {
+        int ans = 0;
+        int count = 0;
+        findKthSmallest(root , k , count , ans);
+        return ans;
+    }
+};
+```
+
+- Lowest Common Ancestor of a Binary Search Tree
+```c++
+class Solution {
+public:
+    TreeNode* lowestCommonAncestor(TreeNode* root, TreeNode* p, TreeNode* q)
+    {
+        if(root == NULL)
+        {
+            return NULL;
+        }    
+        else if(root->val > p->val && root->val > q->val)
+        {
+            return lowestCommonAncestor(root->left , p , q);
+        }
+        else if(root->val < p->val && root->val < q->val)
+        {
+            return lowestCommonAncestor(root->right , p , q);
+        }
+        return root;
+    }
+};
+```
+
+- Inorder predecessor and successor in BST
+```c++
+
+```
+
 
 
 
