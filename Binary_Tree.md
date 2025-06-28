@@ -2,7 +2,18 @@
 ---
 
 | Table of Content |
-|
+| Implementation |
+| Preorder Traversal |
+| Inorder Traversal |
+| Postorder Traversal |
+| Count Leaves in Binary Tree |
+| Count Non-Leaf Nodes in Tree |
+| Identical Trees |
+| Symmetric Tree |
+| Height of Binary Tree |
+| Diameter of a Binary Tree |
+| Balanced Tree Check |
+| Sum Tree |
 
 ---
 ### Implementation
