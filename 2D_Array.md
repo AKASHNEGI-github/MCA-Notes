@@ -2,6 +2,7 @@
 ---
 
 | Table Of Content |
+| ---------------- |
 | Implementation |
 | Transpose Matrix |
 | Sum of upper and lower triangles |
