@@ -10,6 +10,9 @@
 | Kth Smallest Element in a BST |
 | Lowest Common Ancestor of a Binary Search Tree |
 | Inorder predecessor and successor in BST |
+| Two Sum IV - Input is a BST |
+| Flatten BST to sorted list |
+| Flatten Binary Tree to Linked List |
 
 ---
 ### Implementation
@@ -429,6 +432,108 @@ public:
 ```c++
 
 ```
+
+- Two Sum IV - Input is a BST
+```c++
+class Solution {
+public:
+    void inOrderTraversal(TreeNode* root , vector<int> &v)
+    {
+        if(root == NULL)
+        {
+            return;   
+        }
+        inOrderTraversal(root->left , v);
+        v.push_back(root->val);
+        inOrderTraversal(root->right , v);
+    }
+
+    bool findTarget(TreeNode* root, int k) 
+    {
+        vector<int> v;
+        inOrderTraversal(root , v);
+        int start = 0;
+        int end = v.size()-1;
+        while(start < end)
+        {
+            int sum = v[start] + v[end];
+            if(sum == k)
+            {
+                return true;
+            }
+            else if(sum < k)
+            {
+                start++;
+            }
+            else if(sum > k)
+            {
+                end--;
+            }
+        }
+        return false;
+    }
+};
+```
+
+- Flatten BST to sorted list
+```c++
+class Solution {
+  public:
+    void inOrderTraversal(Node* root , vector<int> &v)
+    {
+        if(root == NULL)
+        {
+            return;   
+        }
+        inOrderTraversal(root->left , v);
+        v.push_back(root->data);
+        inOrderTraversal(root->right , v);
+    }
+  
+    Node *flattenBST(Node *root) 
+    {
+        vector<int> v;
+        inOrderTraversal(root , v);
+        Node* rootAns = new Node(v[0]);
+        Node* current = rootAns;
+        for(int i=1 ; i<v.size() ; i++)
+        {
+            Node* new_node = new Node(v[i]);
+            current->left = NULL;
+            current->right = new_node;
+            current = new_node;
+        }
+        current->left = NULL;
+        current->right = NULL;
+        return rootAns;
+    }
+};
+```
+
+- Flatten Binary Tree to Linked List
+```c++
+class Solution {
+public:
+    TreeNode* lastVisitedNode = NULL;
+
+    void flatten(TreeNode* root) 
+    {
+        if(root == NULL)
+        {
+            return;
+        }
+        flatten(root->right);
+        flatten(root->left);
+        root->left = NULL;
+        root->right = lastVisitedNode;
+        lastVisitedNode = root;
+    }
+};
+```
+
+
+
+
 
 
 
