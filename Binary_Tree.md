@@ -15,6 +15,7 @@
 | Diameter of a Binary Tree |
 | Balanced Tree Check |
 | Sum Tree |
+| Construct Binary Tree from Preorder and Inorder Traversal |
 
 ---
 ### Implementation
@@ -768,6 +769,47 @@ public:
         {
             return NULL;
         }
+    }
+};
+```
+
+- Construct Binary Tree from Preorder and Inorder Traversal
+```c++
+class Solution {
+public:
+    int searchInorder(vector<int>& inorder , int startInorder , int endInorder , int value)
+    {
+        for(int i=startInorder ; i<=endInorder ; i++)
+        {
+            if(inorder[i] == value)
+            {
+                return i;
+            }
+        }
+        return -1;
+    }
+
+    TreeNode* constructTree(vector<int>& preorder , vector<int>& inorder , int &indexPreorder , int startInorder , int endInorder)
+    {
+        if(startInorder > endInorder)
+        {
+            return NULL;
+        }
+        int value = preorder[indexPreorder++];
+        TreeNode* root = new TreeNode(value);
+        int indexInorder = searchInorder(inorder , startInorder , endInorder , value);
+        root->left = constructTree(preorder , inorder , indexPreorder , startInorder , indexInorder-1);
+        root->right = constructTree(preorder , inorder , indexPreorder , indexInorder+1 , endInorder);
+        return root;
+    } 
+
+    TreeNode* buildTree(vector<int>& preorder , vector<int>& inorder) 
+    {
+        int indexPreorder = 0;
+        int startInorder = 0;
+        int endInorder = inorder.size()-1;
+        TreeNode* ansTree = constructTree(preorder , inorder , indexPreorder , startInorder , endInorder);
+        return ansTree;
     }
 };
 ```
