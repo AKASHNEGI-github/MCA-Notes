@@ -13,6 +13,7 @@
 | Two Sum IV - Input is a BST |
 | Flatten BST to sorted list |
 | Flatten Binary Tree to Linked List |
+| Construct Binary Search Tree from Preorder Traversal |
 
 ---
 ### Implementation
@@ -527,6 +528,38 @@ public:
         root->left = NULL;
         root->right = lastVisitedNode;
         lastVisitedNode = root;
+    }
+};
+```
+
+- Construct Binary Search Tree from Preorder Traversal
+```c++
+class Solution {
+public:
+    TreeNode* constructTree(vector<int>& preorder , int mini , int maxi , int &index)
+    {
+        if(index >= preorder.size())
+        {
+            return NULL;
+        }
+        else if(preorder[index] < mini || preorder[index] > maxi)
+        {
+            return NULL;
+        }
+        int value = preorder[index++];
+        TreeNode* root = new TreeNode(value);
+        root->left = constructTree(preorder , mini , root->val , index);
+        root->right = constructTree(preorder , root->val , maxi , index);
+        return root;
+    }
+
+    TreeNode* bstFromPreorder(vector<int>& preorder) 
+    {
+        int index = 0;
+        int mini = INT_MIN;
+        int maxi = INT_MAX;
+        TreeNode* ansTree = constructTree(preorder , mini , maxi , index);
+        return ansTree;
     }
 };
 ```
