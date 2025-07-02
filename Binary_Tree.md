@@ -16,6 +16,7 @@
 | Balanced Tree Check |
 | Sum Tree |
 | Construct Binary Tree from Preorder and Inorder Traversal |
+| Construct Binary Tree from Inorder and Postorder Traversal |
 
 ---
 ### Implementation
@@ -809,6 +810,47 @@ public:
         int startInorder = 0;
         int endInorder = inorder.size()-1;
         TreeNode* ansTree = constructTree(preorder , inorder , indexPreorder , startInorder , endInorder);
+        return ansTree;
+    }
+};
+```
+
+- Construct Binary Tree from Inorder and Postorder Traversal
+```c++
+class Solution {
+public:
+    int searchInorder(vector<int>& inorder , int startInorder , int endInorder , int value)
+    {
+        for(int i=startInorder ; i<=endInorder ; i++)
+        {
+            if(inorder[i] == value)
+            {
+                return i;
+            }
+        }
+        return -1;
+    }
+
+    TreeNode* constructTree(vector<int>& postorder , vector<int>& inorder , int &indexPostorder , int startInorder , int endInorder)
+    {
+        if(startInorder > endInorder)
+        {
+            return NULL;
+        }
+        int value = postorder[indexPostorder--];
+        TreeNode* root = new TreeNode(value);
+        int indexInorder = searchInorder(inorder , startInorder , endInorder , value);
+        root->right = constructTree(postorder , inorder , indexPostorder , indexInorder+1 , endInorder);
+        root->left = constructTree(postorder , inorder , indexPostorder , startInorder , indexInorder-1);
+        return root;
+    }
+
+    TreeNode* buildTree(vector<int>& inorder, vector<int>& postorder) 
+    {
+        int indexPostorder = postorder.size()-1;
+        int startInorder = 0;
+        int endInorder = inorder.size()-1;
+        TreeNode* ansTree = constructTree(postorder , inorder , indexPostorder , startInorder , endInorder);
         return ansTree;
     }
 };
