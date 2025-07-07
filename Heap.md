@@ -1,7 +1,20 @@
 # HEAP | PRIORITY QUEUE
-
 ---
 
+| HEAP |
+| ---- |
+| Implementation |
+| Max Heap |
+| Min Heap |
+| Heap Sort |
+| Kth Smallest Element in an Array |
+| Kth Largest Element in an Array |
+| Minimum Cost of ropes |
+| Merge two binary Max heaps |
+| Check Completeness of a Binary Tree |
+| Is Binary Tree Heap |
+
+---
 ### Implementation
 ```c++
 #include<bits/stdc++.h>
