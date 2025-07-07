@@ -1,8 +1,8 @@
 # BINARY SEARCH TREE
 ---
 
-| Table Of Content |
-| ---------------- |
+| BINARY SEARCH TREE |
+| ------------------ |
 | Implementation |
 | Range Sum of BST |
 | Search in a Binary Search Tree |
