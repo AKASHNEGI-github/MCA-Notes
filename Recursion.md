@@ -1,139 +1,98 @@
 # RECURSION
-
 ---
 
+| RECURSION |
+| Reverse String |
+| Fibonacci Number |
+| Climbing Stairs |
+| Binary Search |
+
+---
 ### Questions
 
-- Print name N times
-- Forward Counting
-- Forward Counting (Backtracking)
-- Backward Counting
-- Backward Counting (Backtracking)
-- Sum of first N natural numbers
-- Factorial of N
-- Reverse an array
-- Check Palinddrome
-- Fibonacci Series
+- Reverse String
+```c++
+class Solution {
+public:
+    void reverse(vector<char>& s , int start , int end)
+    {
+        if(start >= end)
+        {
+            return;
+        }
+        swap(s[start] , s[end]);
+        reverse(s , start+1 , end-1);
+    }
+    void reverseString(vector<char>& s) 
+    {
+        int start = 0;
+        int end = s.size()-1;
+        reverse(s , start , end);
+    }
+};
+```
 
-  
-void forwardCounting(int n)
-{
-    if(n == 0)
+- Fibonacci Number
+```c++
+class Solution {
+public:
+    int fib(int n) 
     {
-        return;
+        if(n == 0 || n == 1)
+        {
+            return n;
+        }
+        return fib(n-1) + fib(n-2);
     }
-    forwardCounting(n-1);
-    cout << n << " ";
-}
+};
+```
 
-void backwardCounting(int n)
-{
-    if(n == 0)
+- Climbing Stairs
+```c++
+class Solution {
+public:
+    int climbStairs(int n) 
     {
-        return;
+        if(n == 0 || n == 1)
+        {
+            return 1;
+        }    
+        return climbStairs(n-1) + climbStairs(n-2);
     }
-    cout << n << " ";
-    backwardCounting(n-1);
-}
+};
+```
 
-int factorial(int n)
-{
-    if(n == 1)
+- Binary Search
+```c++
+class Solution {
+public:
+    int binarySearchRecursive(vector<int>& nums , int target , int start , int end)
     {
-        return 1;
-    }
-    return n * factorial(n-1);
-}
-
-int fibonacci(int term)
-{
-    if(term == 1)
-    {
-        return 0;
-    }
-    if(term == 2)
-    {
-        return 1;
-    }
-    return fibonacci(term-1) + fibonacci(term-2);
-}
-
-int powerOfTwo(int n)
-{
-    if(n == 1)
-    {
-        return 2;
-    }
-    return 2 * powerOfTwo(n-1);
-}
-
-void PrintDigits(int n)
-{
-    if(n == 0)
-    {
-        return;
-    }
-    PrintDigits(n/10);
-    cout << n%10 << " ";
-}
-
-int climbStairs(int n)
-{
-    if(n == 0 || n == 1)
-    {
-        return 1;
-    }
-    return climbStairs(n-1) + climbStairs(n-2);
-}
-
-void printAray(int arr[] , int size , int i)
-{
-    if(i >= size)
-    {
-        return;
-    }
-    cout << arr[i] << " ";
-    printAray(arr , size , i+1);
-}
-
-int max(int arr[] , int size , int i , int maxi)
-{
-    if(i >= size)
-    {
-        return maxi;
-    }
-    if(arr[i] > maxi)
-    {
-        maxi = arr[i];
-    }
-    return max(arr , size , i+1 , maxi);
-}
-
-int min(int arr[] , int size , int i ,  int mini)
-{
-    if(i >= size)
-    {
-        return mini;
-    }
-    if(arr[i] < mini)
-    {
-        mini = arr[i];
-    }
-    return min(arr , size , i+1 , mini);
-}
-
-int search(int arr[] , int size , int i , int key)
-{
-    if(i >= size)
-    {
+        if(start <= end)
+        {
+            int mid = start + (end - start)/2;
+            if(nums[mid] == target)
+            {
+                return mid;
+            }
+            else if(nums[mid] < target)
+            {
+                return binarySearchRecursive(nums , target , mid+1 , end);
+            }
+            else if(nums[mid] > target)
+            {
+                return binarySearchRecursive(nums , target , start , mid-1);
+            }
+        }
         return -1;
     }
-    if(arr[i] == key)
+
+    int search(vector<int>& nums, int target) 
     {
-        return i;
+        return binarySearchRecursive(nums , target , 0 , nums.size()-1);    
     }
-    return search(arr , size , i+1 , key);
-}
+};
+```
 
 
 
