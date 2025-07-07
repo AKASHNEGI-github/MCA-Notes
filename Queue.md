@@ -1,8 +1,8 @@
 # QUEUE
 ---
 
-| Table Of Content |
-| ---------------- |
+| QUEUE |
+| ----- |
 | Queue using Array |
 | Queue using Linked List |
 | Implement Stack using Queues |
@@ -339,13 +339,6 @@ int main()
     }
     return 0;
 }
-```
-
-### DeQueue(Doubly Ended Queue)
-```c++
-// DEQUEUE
-
-
 ```
 
 ### Questions
