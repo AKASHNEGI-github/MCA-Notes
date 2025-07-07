@@ -288,6 +288,77 @@ public:
 };
 ```
 
+- Minimum Cost of ropes
+```c++
+class Solution {
+  public:
+    int minCost(vector<int>& arr) 
+    {
+        int cost = 0;
+        priority_queue<int , vector<int> , greater<int>> pq;
+        for(int i=0 ; i<arr.size() ; i++)
+        {
+            pq.push(arr[i]);
+        }
+        while(pq.size() > 1)
+        {
+            int top1 = pq.top();
+            pq.pop();
+            int top2 = pq.top();
+            pq.pop();
+            int sum = top1 + top2;
+            cost = cost + sum;
+            pq.push(sum);
+        }
+        return cost;
+    }
+};
+```
+
+- Merge two binary Max heaps
+```c++
+class Solution {
+  public:
+    void HeapifyMax(vector<int> &arr , int size , int i)
+    {
+        int largest = i;
+        int left = 2*i + 1;
+        int right = 2*i + 2;
+        if(left < size && arr[largest] < arr[left])
+        {
+            largest = left;
+        }
+        if(right < size && arr[largest] < arr[right])
+        {
+            largest = right;
+        }
+        if(largest != i)
+        {
+            swap(arr[largest] , arr[i]);
+            HeapifyMax(arr , size , largest);
+        }
+    }
+  
+    vector<int> mergeHeaps(vector<int> &a, vector<int> &b, int n, int m) 
+    {
+        vector<int> c;
+        for(int i=0 ; i<n ; i++)
+        {
+            c.push_back(a[i]);
+        }
+        for(int i=0 ; i<m ; i++)
+        {
+            c.push_back(b[i]);
+        }
+        for(int i=(c.size()/2)-1 ; i>=0 ; i--) // 0 - Based Indexing
+        {
+            HeapifyMax(c , c.size() , i);
+        }
+        return c;
+    }
+};
+```
+
 - Check Completeness of a Binary Tree
 ```c++
 class Solution {
@@ -331,6 +402,69 @@ public:
     }
 };
 ```
+
+- Is Binary Tree Heap
+```c++
+class Solution {
+  public:
+    int countTreeNodes(Node* root)
+    {
+        if(root == NULL)
+        {
+            return 0;
+        }
+        int countNodesLeftSubTree = countTreeNodes(root->left);
+        int countNodesRighttSubTree = countTreeNodes(root->right);
+        int totalTreeNodes = countNodesLeftSubTree + countNodesRighttSubTree + 1;
+        return totalTreeNodes;
+    }
+
+    bool isCompleteBinaryTree(Node* root , int index , int totalTreeNodes)
+    {
+        if(root == NULL)
+        {
+            return true;
+        }
+        if(index >= totalTreeNodes)
+        {
+            return false;
+        }
+        bool leftSubTree = isCompleteBinaryTree(root->left , 2*index+1 , totalTreeNodes);
+        bool rightSubTree = isCompleteBinaryTree(root->right , 2*index+2 , totalTreeNodes);
+        return (leftSubTree && rightSubTree);
+    }
+    
+    bool isMaxOrderProperty(Node* root)
+    {
+        if(root->left == NULL && root->right == NULL)
+        {
+            return true;
+        }
+        else if(root->right == NULL)
+        {
+            return (root->data > root->left->data);
+        }
+        else if(root->left != NULL && root->right != NULL)
+        {
+            bool leftSubTree = isMaxOrderProperty(root->left);
+            bool rightSubTree = isMaxOrderProperty(root->right);
+            bool rootGreater = (root->data > root->left->data) && (root->data > root->right->data);
+            return (leftSubTree && rightSubTree && rootGreater);
+        }
+    }
+  
+    bool isHeap(Node* tree) 
+    {
+        Node* root = tree;
+        int index = 0;
+        int totalTreeNodes = countTreeNodes(root);
+        bool isCBT = isCompleteBinaryTree(root , index , totalTreeNodes);
+        bool isMOP = isMaxOrderProperty(root);
+        return (isCBT && isMOP);
+    }
+};
+```
+
 
 
 ---
