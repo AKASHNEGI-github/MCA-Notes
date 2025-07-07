@@ -1,8 +1,8 @@
 # BINARY TREE
 ---
 
-| Table of Content |
-| ---------------- |
+| BINARY TREE |
+| ----------- |
 | Implementation |
 | Preorder Traversal |
 | Inorder Traversal |
