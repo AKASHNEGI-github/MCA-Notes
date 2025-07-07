@@ -2,6 +2,7 @@
 ---
 
 | RECURSION |
+| --------- |
 | Reverse String |
 | Fibonacci Number |
 | Climbing Stairs |
