@@ -5,6 +5,7 @@
 | ---------------- |
 | Implementation |
 | Two Sum |
+| 3Sum |
 
 ---
 ### Implementation
@@ -161,6 +162,27 @@ public:
     vector<int> twoSum(vector<int>& nums, int target) 
     {
         vector<int> ans;
+        for(int i=0 ; i<nums.size() ; i++)
+        {
+            for(int j=(i+1) ; j<nums.size() ; j++)
+            {
+                if(nums[i] + nums[j] == target)
+                {
+                    ans = {i , j};
+                }
+            }
+        }
+        return ans;
+    }
+};
+```
+
+```c++
+class Solution {
+public:
+    vector<int> twoSum(vector<int>& nums, int target) 
+    {
+        vector<int> ans;
         unordered_map<int , int> map;
         for(int i=0 ; i<nums.size() ; i++)
         {
@@ -177,6 +199,46 @@ public:
         return ans;
     }
 };
+```
+
+- 3Sum
+```c++
+class Solution {
+public:
+    vector<vector<int>> threeSum(vector<int>& nums) 
+    {
+        set<vector<int>> s;
+        vector<vector<int>> ans;
+        for(int i=0 ; i<nums.size() ; i++)
+        {
+            for(int j=(i+1) ; j<nums.size() ; j++)
+            {
+                for(int k=(j+1) ; k<nums.size() ; k++)
+                {
+                    if(nums[i] + nums[j] + nums[k] == 0)
+                    {
+                        vector<int> triplet = {nums[i] , nums[j] , nums[k]};
+                        sort(triplet.begin() , triplet.end());
+                        if(s.find(triplet) == s.end())
+                        {
+                            s.insert(triplet);
+                            ans.push_back(triplet);
+                        }
+                    }
+                }
+            }
+        }
+        return ans;
+    }
+};
+```
+
+```c++
+
+```
+
+```c++
+
 ```
 
 - Plus One
