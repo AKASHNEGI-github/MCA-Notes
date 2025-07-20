@@ -48,7 +48,7 @@ Reconciliation is the process through which React updates the Browser DOM and ma
 
 ### What is the difference between Virtual DOM and Real DOM
 | Virtual DOM | Real DOM |
-| ---------------------- |
+| ----------- | -------- |
 | It is a lightweight copy of the original DOM | It is a tree representation of HTML elements |
 | It is maintained by JavaScript libraries | It is maintained by the browser after parsing HTML elements |
 | After manipulation it only re-renders changed elements | After manipulation, it re-render the entire DOM |
@@ -126,7 +126,7 @@ export default App
 
 ### What is the difference between Functional Component and Class Component
 | Functional Component | Class Component |
-| -------------------------------------- |
+| ---------------------| --------------- |
 | It can use Hooks like useState, useReducer | It uses this.state and this.setState() |
 | It uses useEffect Hook for lifecycle methods | It uses traditional lifecycle methods like componentDidMount, componentWillUnmount |
 | Returns JSX directly inside the function | Uses a render() method to return JSX |
@@ -137,7 +137,22 @@ export default App
 | Simple and direct event handling | Requires method binding for event handling |
 
 ### What is the difference between StateFull Component and StateLess Component
+| StateFull Component | StateLess Component |
+| --------------------| ------------------- |
+
 ### What is the difference between Controlled Component and UnCntrolled Component
+| Controlled Component | UnControlled Component |
+| ---------------------| ---------------------- |
+| React state manages the input value | DOM manages the input value |
+| React → DOM (via props/state) | DOM → React (via refs) |
+| Input value bound to state (value prop)	 | Input value uncontrolled by React |
+| onChange updates state on every change	 | Access value on demand via ref |
+| Easy to validate on each keystroke | Validation done on submit or on demand |
+| More code (state + handlers required) | Less code, simpler for quick forms |
+| More re-renders due to state updates | Fewer re-renders, potentially better performance |
+| Complex forms with real-time validation | Simple forms or when instant control isn’t needed |
+| Easy to sync with other UI elements | Difficult to keep in sync without extra work |
+
 ### What is the difference between State and Props
 
 ### Explain Styling in React
