@@ -245,7 +245,43 @@ export default App
 
 ### What is Derived State in React
 ```jsx
+import React from 'react'
+import { useState } from 'react'
+import './App.css'
 
+function DerivedState() {
+  const [students , setStudents] = useState([
+    {name:"Akash" , age:20},
+    {name:"Bharat" , age:21},
+    {name:"Divyanshu" , age:22},
+  ])
+
+  const countStudent = students.length;
+  const averageStudent = students.reduce((acc, curr) => acc + curr.age, 0)/countStudent;
+
+  return (
+    <>
+      <h1>Students</h1>
+      <ul>
+        {students.map((students , index) => (
+          <li key={index}>Name:{students.name} & Age:{students.age}</li>
+        ))}
+      </ul>
+      <p>Total Number of Students : {countStudent}</p>
+      <p>Average of Students : {averageStudent}</p>
+    </>
+  )
+}
+
+function App() {
+  return (
+    <>
+      <DerivedState/>
+    </>
+  )
+}
+
+export default App
 ```
 
 ### What are Hooks in React
