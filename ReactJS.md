@@ -256,7 +256,8 @@ function DerivedState() {
     {name:"Divyanshu" , age:22},
   ])
 
-  const countStudent = students.length;
+  // Derived State -> countStudent & averageStudent
+  const countStudent = students.length; 
   const averageStudent = students.reduce((acc, curr) => acc + curr.age, 0)/countStudent;
 
   return (
