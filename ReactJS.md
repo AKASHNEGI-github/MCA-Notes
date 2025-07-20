@@ -157,6 +157,50 @@ function App() {
 export default App
 ```
 
+### What are Prop Drilling in React
+```jsx
+import React from 'react'
+import { useState } from 'react'
+import './App.css'
+
+function Parent() {
+  return (
+    <>
+      <h1>Parent Component</h1>
+      <Child name="Akash"/>
+    </>
+  )
+}
+
+function Child(props) {
+  return (
+    <>
+      <h1>Child Component</h1>
+      <GrandChild name={props.name}/>
+    </>
+  )
+}
+
+function GrandChild(props) {
+  return (
+    <>
+      <h1>Grand Child Component</h1>
+      <h2>Hello, {props.name}!</h2>
+    </>
+  )
+}
+
+function App() {
+  return (
+    <>
+      <Parent/>
+    </>
+  )
+}
+
+export default App
+```
+
 ### What is State in React
 State of a component is an object that holds some information that may change over the lifetime of the component. Whenever state changes, React re-renders the component to reflect the updated data. This enables you to build dynamic UIs that respond to user interactions.
 
