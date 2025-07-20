@@ -129,6 +129,32 @@ export default App
 ### What is the difference between Controlled Component and UnCntrolled Component
 ### What is the difference between State and Props
 
+### Explain Styling in React
+```jsx
+import React from 'react'
+import { useState } from 'react'
+import './App.css'
+
+function App() {
+  const internal = {
+    color:"green",
+  }
+
+  return (
+    <>
+      {/*Inline CSS*/}
+      <h1 style={{color:'red'}}>Name : Akash</h1>
+      {/*Internal CSS*/}
+      <h2 style={internal}>Age : 20</h2>
+      {/*External CSS*/}
+      <button className='external'>Click Me</button>
+    </>
+  )
+}
+
+export default App
+```
+
 ### What are Props in React
 In React, props (short for "properties") are used to pass information from one component to another. The main purpose of props is to allow a parent component to send data to its child components.
 - Props cannot be modified by the receiving component.
@@ -278,6 +304,53 @@ function App() {
   return (
     <>
       <DerivedState/>
+    </>
+  )
+}
+
+export default App
+```
+
+### What is Lifting State Up in React
+```jsx
+import React from 'react'
+import { useState } from 'react'
+import './App.css'
+
+function LiftingStaeUp() {
+  const [inputValue , setInputValue] = useState("")
+
+  return (
+    <>
+      <h1>Parent Component</h1>
+      <ChildInput inputValue={inputValue} setInputValue={setInputValue}/>
+      <ChildOutput inputValue={inputValue} setInputValue={setInputValue}/>
+    </>
+  )
+}
+
+function ChildInput({inputValue , setInputValue}) {
+  return (
+    <>
+      <h1>Child - Input</h1>
+      <input type='text' placeholder='Enter Name' value={inputValue} onChange={(e) => setInputValue(e.target.value)}></input>
+    </>
+  )
+}
+
+function ChildOutput({inputValue}) {
+  return (
+    <>
+      <h1>Child - Output</h1>
+      <p>Value : {inputValue}</p>
+    </>
+  )
+}
+
+function App() {
+  return (
+    <>
+      <LiftingStaeUp/>
     </>
   )
 }
