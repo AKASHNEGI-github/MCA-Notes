@@ -32,22 +32,82 @@ React was created by Jordan Walke, a software engineer working for Facebook. Rea
 - Too many smaller components leading to over engineering or boilerplate.
 
 ### What is JSX
-_JSX_ stands for _JavaScript XML_ and it is an XML-like syntax extension to ECMAScript. Basically it just provides the syntactic sugar for the `React.createElement(type, props, ...children)` function, giving us expressiveness of JavaScript along with HTML like template syntax.
+_JSX_ stands for _JavaScript XML_ and it is an XML-like syntax extension to ECMAScript. JSX allows us to write HTML-like code directly inside JavaScript, enabling us to create UI components more efficiently.
+
+### What is Virtual DOM
+The Virtual DOM (VDOM) is a lightweight, in-memory representation of the real DOM (Document Object Model). It helps React manage UI updates more efficiently by keeping a virtual version of the UI in memory. When changes occur, React updates only the necessary parts of the real DOM, instead of re-rendering everything.
+
+### How Virtual DOM works
+- Rendering the Virtual DOM: React creates a virtual representation of the UI as a tree of JavaScript objects.
+- Updating State: It generates a new Virtual DOM tree to reflect the updated state when the application state changes.
+- Diffing Algorithm: React compares the new Virtual DOM tree with the previous one using its efficient diffing algorithm to identify the minimal set of changes required.
+- Updating the Real DOM: React applies only the necessary changes to the real DOM, optimizing rendering performance.
+
+### What is Reconciliation
+Reconciliation is the process through which React updates the Browser DOM and makes React work faster. React use a diffing algorithm so that component updates are predictable and faster. React would first calculate the difference between the real DOM and the copy of DOM (Virtual DOM) when there's an update of components. React stores a copy of Browser DOM which is called Virtual DOM. When we make changes or add data, React creates a new Virtual DOM and compares it with the previous one. This comparison is done by Diffing Algorithm. Now React compares the Virtual DOM with Real DOM. It finds out the changed nodes and updates only the changed nodes in Real DOM leaving the rest nodes as it is. This process is called Reconciliation.
+
+### What is the difference between Virtual DOM and Real DOM
+| Virtual DOM | Real DOM |
+| ---------------------- |
+| It is a lightweight copy of the original DOM | It is a tree representation of HTML elements |
+| It is maintained by JavaScript libraries | It is maintained by the browser after parsing HTML elements |
+| After manipulation it only re-renders changed elements | After manipulation, it re-render the entire DOM |
+| Updates are lightweight | Updates are heavyweight |
+| Performance is fast and UX is optimised	 | Performance is slow and the UX quality is low |
+| Highly efficient as it performs batch updates | Less efficient due to re-rendering of DOM after each update |
+
+### What are Fragments
+ReactJS Fragments are a way to group multiple elements without adding an extra node to the DOM. It allows you to return multiple child elements from a component without wrapping them in a parent container like a <div>.
+```jsx
+import React from 'react'
+import { useState } from 'react'
+import './App.css'
+
+function App() {
+  return (
+    <>
+      <h1>Hello, Akash!</h1>
+    </>
+  )
+}
+
+export default App
+```
+
+```jsx
+import React from 'react'
+import { useState } from 'react'
+import './App.css'
+
+function App() {
+  return (
+    <React.Fragment>
+      <h1>Hello, Akash!</h1>
+    </React.Fragment>
+  )
+}
+
+export default App
+```
 
 ### What are Components in React
 Components are the JavaScript functions or reusable piece of code which helps in creating User Interface (UI) in React.
 - **Functional Component** - These are the pure JavaScript functions that accept prop object as one and only one parameter and return React element to render output.
 ```jsx
+import React from 'react'
+import { useState } from 'react'
+import './App.css'
+
 function App() {
   return (
     <>
-      <h1>Akash Negi</h1>
+      <h1>Hello, Akash!</h1>
     </>
   )
 }
+
 export default App
 ```
-
 
 - **Class Component** - These components defiened using class keyword and include extends React.Component and render function.
 ```jsx
@@ -64,15 +124,91 @@ class App extends React.Component {
 export default App
 ```
 
-
-### What are Hooks in React
-Hooks are the reusable functions that provides access to state of the components in React Application. Hooks allow to use state and other React features without writing a class.
-
-### What is State in React
-State of a component is an object that holds some information that may change over the lifetime of the component. The important point is whenever the state object changes, the component re-renders. It is always recommended to make our state as simple as possible and minimize the number of stateful components.
+### What is the difference between Functional Component and Class Component
+### What is the difference between StateFull Component and StateLess Component
+### What is the difference between Controlled Component and UnCntrolled Component
+### What is the difference between State and Props
 
 ### What are Props in React
-Props are inputs to components. They are single values or objects containing a set of values that are passed to components on creation similar to HTML-tag attributes. Here, the data is passed down from a parent component to a child component.
+In React, props (short for "properties") are used to pass information from one component to another. The main purpose of props is to allow a parent component to send data to its child components.
+- Props cannot be modified by the receiving component.
+- They are strictly for reading data and should not be altered.
+- Props can be updated when the parent component’s state changes.
+```jsx
+import { useState } from 'react'
+import './App.css'
+
+function Greet(props) {
+  return (
+    <>
+      <h1>Hello : {props.name}!</h1>
+    </>
+  )
+}
+
+function App() {
+  return (
+    <>
+      <Greet name="Akash"/>
+    </>
+  )
+}
+
+export default App
+```
+
+### What is State in React
+State of a component is an object that holds some information that may change over the lifetime of the component. Whenever state changes, React re-renders the component to reflect the updated data. This enables you to build dynamic UIs that respond to user interactions.
+
+Syntax : const [state, setState] = useState(initialState);
+- state: The current state value.
+- setState: A function that is used to update the state.
+- initialState: The initial value that the state will hold when the component is first rendered.
+```jsx
+import React from 'react'
+import { useState } from 'react'
+import './App.css'
+
+function Counter() {
+  const [count , setCount] = useState(0);
+
+  return (
+    <>
+      <h1>React Counter Application</h1>
+      <h2>Count : {count}</h2>
+      <button onClick={() => setCount(count+1)}>Increament</button>
+      <button onClick={() =>setCount(0)}>Reset</button>
+      <button onClick={() =>setCount(count-1)}>Decreament</button>
+    </>
+  )
+}
+
+function App() {
+  return (
+    <>
+      <Counter/>
+    </>
+  )
+}
+
+export default App
+```
+
+### What are Hooks in React
+React Hooks are functions that allow functional components in React to manage state, handle side effects, and access other React features without needing class components.
+- Simplifies Code: Hooks provide a simpler and cleaner way to write components by using functions instead of classes.
+- State and Side Effects: Hooks allow you to use state (useState) and side effects (useEffect) in functional components.
+- Reusability: Hooks make it easier to share logic across components by creating custom hooks.
+- Readability: Functional components with hooks tend to be more concise and easier to read than class components.
+
+### What is useState Hook
+### What is useEffect Hook
+### What is useCallback Hook
+### What is useRef Hook
+### What is useMemo Hook
+### What is Context Hook
+### What is Performance Hook
+### What is Custom Hook
 
 ### What is the difference between State and Props
 In React, both state and props are plain JavaScript objects and used to manage the data of a component, but they are used in different ways and have different characteristics.
@@ -84,47 +220,13 @@ On the otherhand, props (short for "properties") are passed to a component by it
 ### What are Keys in React
 Key is a special string attribute we need to include whe creating the lists of elements in React. Keys are used to give an identity to the element in the list. It is used to identify which item in the list is changed, updated, removed.
 
-### What is Reconciliation
-Reconciliation is the process through which React updates the Browser DOM and makes React work faster. React use a diffing algorithm so that component updates are predictable and faster. React would first calculate the difference between the real DOM and the copy of DOM (Virtual DOM) when there's an update of components. React stores a copy of Browser DOM which is called Virtual DOM. When we make changes or add data, React creates a new Virtual DOM and compares it with the previous one. This comparison is done by Diffing Algorithm. Now React compares the Virtual DOM with Real DOM. It finds out the changed nodes and updates only the changed nodes in Real DOM leaving the rest nodes as it is. This process is called Reconciliation.
 
-### What is Virtual DOM
-The Virtual DOM (VDOM) is an in-memory representation of Real DOM. The representation of a UI is kept in memory and synced with the "real" DOM. It's a step that happens between the render function being called and the displaying of elements on the screen. This entire process is called reconciliation.
-
-### How Virtual DOM works
-The Virtual DOM works in three simple steps.
-- Whenever any underlying data changes, the entire UI is re-rendered in Virtual DOM representation.
-- Then the difference between the previous DOM representation and the new one is calculated.
-- Once the calculations are done, the real DOM will be updated with only the things that have actually changed.
 
 ### What is the difference between Shadow DOM and Virtual DOM
 The Shadow DOM is a browser technology designed primarily for scoping variables and CSS in web components. 
 The Virtual DOM is a concept implemented by libraries in JavaScript on top of browser APIs.
 
-### What are Fragments
-It's a common pattern or practice in React for a component to return multiple elements. Fragments allow to group a list of children without adding extra nodes to the DOM. You need to use either <Fragment> or a shorter syntax having empty tag (<></>).
-```jsx
-function App() {
-  return (
-    <> {/*Fragments*/}
-      <h1>Akash Negi</h1>
-    </>
-  )
-}
 
-export default App
-```
-
-```jsx
-function App() {
-  return (
-    <React.Fragment> {/*Fragments*/}
-      <h1>Akash Negi</h1>
-    </React.Fragment>
-  )
-}
-
-export default App
-```
 
 ### Why Fragments are better than container divs
 - Fragments are a bit faster and use less memory by not creating an extra DOM node. This only has a real benefit on very large and deep trees.
