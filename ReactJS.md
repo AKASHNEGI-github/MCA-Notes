@@ -181,6 +181,45 @@ function App() {
 export default App
 ```
 
+### Explain Key in React
+A key serves as a unique identifier in React, helping to track which items in a list have changed, been updated, or removed. It is particularly useful when dynamically creating components or when users modify the list.
+```jsx
+import React from 'react'
+import { useState } from 'react'
+import './App.css'
+
+function User() {
+  const [students , setStudents] = useState([
+    {name:"Akash" , age:20},
+    {name:"Bharat" , age:21},
+    {name:"Divyanshu" , age:22},
+  ])
+
+  return (
+    <>
+      <h1>Students</h1>
+      <ul>
+        {students.map((students , index) => (
+          <li key={index}>Name:{students.name} & Age:{students.age}</li>
+        ))}
+      </ul>
+      <p>Total Number of Students : {countStudent}</p>
+      <p>Average of Students : {averageStudent}</p>
+    </>
+  )
+}
+
+function App() {
+  return (
+    <>
+      <User/>
+    </>
+  )
+}
+
+export default App
+```
+
 ### What are Props in React
 In React, props (short for "properties") are used to pass information from one component to another. The main purpose of props is to allow a parent component to send data to its child components.
 - Props cannot be modified by the receiving component.
@@ -210,6 +249,13 @@ export default App
 ```
 
 ### What is Prop Drilling in React
+Prop drilling refers to the practice of passing data through several layers of nested components in React, even though intermediate components don't directly utilize this data. This means that a middle component doesn't necessarily need the data, but it must still pass it down to the next component, creating an unnecessary and sometimes lengthy chain of props.
+
+Solutions
+- Using Context API
+- Using Custom Hooks
+- Global State Management (Redux, Zustand, MobX)
+
 ```jsx
 import React from 'react'
 import { useState } from 'react'
@@ -296,6 +342,7 @@ export default App
 ```
 
 ### What is Derived State in React
+Derived state is a piece of state that can be computed or derived from an existing state or props. Instead of explicitly managing and updating the derived state separately, you calculate it dynamically whenever you need it. Derived state minimizes duplication and ensures your app’s state remains consistent.
 ```jsx
 import React from 'react'
 import { useState } from 'react'
@@ -338,6 +385,8 @@ export default App
 ```
 
 ### What is Lifting State Up in React
+In React, lifting state up refers to the technique of moving a shared state to a common ancestor of the components that need to access or modify it. Instead of maintaining separate state values in each component, the state is kept in the parent component. This parent component then passes the state and any necessary functions as props to its child components.
+By doing this, the child components can access and interact with the shared state, ensuring consistency across the application.
 ```jsx
 import React from 'react'
 import { useState } from 'react'
