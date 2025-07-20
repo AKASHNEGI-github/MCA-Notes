@@ -125,6 +125,17 @@ export default App
 ```
 
 ### What is the difference between Functional Component and Class Component
+| Functional Component | Class Component |
+| -------------------------------------- |
+| It can use Hooks like useState, useReducer | It uses this.state and this.setState() |
+| It uses useEffect Hook for lifecycle methods | It uses traditional lifecycle methods like componentDidMount, componentWillUnmount |
+| Returns JSX directly inside the function | Uses a render() method to return JSX |
+| Faster and more lightweight due to simpler structure | Slightly heavier due to the overhead of class instances |
+| Can use React hooks (useState, useEffect, etc.) | Cannot use hooks; relies on lifecycle methods and state |
+| Does not use this keyword | Uses this to access props and state |
+|Less boilerplate code, easier to write and understand | More boilerplate code, especially for state and methods |
+| Simple and direct event handling | Requires method binding for event handling |
+
 ### What is the difference between StateFull Component and StateLess Component
 ### What is the difference between Controlled Component and UnCntrolled Component
 ### What is the difference between State and Props
