@@ -157,7 +157,7 @@ function App() {
 export default App
 ```
 
-### What are Prop Drilling in React
+### What is Prop Drilling in React
 ```jsx
 import React from 'react'
 import { useState } from 'react'
@@ -201,6 +201,11 @@ function App() {
 export default App
 ```
 
+### What is Context API in React
+```jsx
+
+```
+
 ### What is State in React
 State of a component is an object that holds some information that may change over the lifetime of the component. Whenever state changes, React re-renders the component to reflect the updated data. This enables you to build dynamic UIs that respond to user interactions.
 
@@ -236,6 +241,11 @@ function App() {
 }
 
 export default App
+```
+
+### What is Derived State in React
+```jsx
+
 ```
 
 ### What are Hooks in React
