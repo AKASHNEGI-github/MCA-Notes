@@ -4,6 +4,7 @@
 | Table Of Content |
 | ---------------- |
 | Implementation |
+| Find Missing and Repeated Values |
 | Transpose Matrix |
 | Sum of upper and lower triangles |
 | Multiply 2 matrices |
@@ -134,6 +135,68 @@ int main()
 ```
 
 ### Questions
+
+- Find Missing and Repeated Values
+```c++
+class Solution {
+public:
+    vector<int> findMissingAndRepeatedValues(vector<vector<int>>& grid) 
+    {
+        int repeated = -1;
+        int missing = -1;
+        int n = grid.size();
+        vector<int> v(n*n + 1 , 0);
+        for(int i=0 ; i<n ; i++)
+        {
+            for(int j=0 ; j<n ; j++)
+            {
+                v[grid[i][j]]++;
+            }
+        }
+        for(int i=1 ; i<v.size() ; i++)
+        {
+            if(v[i] > 1)
+            {
+                repeated = i;
+            }
+            else if(v[i] == 0)
+            {
+                missing = i;
+            }
+        }
+        return {repeated , missing};
+    }
+};
+```
+
+```c++
+class Solution {
+public:
+    vector<int> findMissingAndRepeatedValues(vector<vector<int>>& grid) 
+    {
+        int n = grid.size();
+        int nSquare = n*n;
+        long actualSum = 0;
+        long long actualSquareSum = 0;
+        long long expectedSum = 1LL * nSquare * (nSquare + 1)/2; // Expected Sum Of N-Natural Numbers
+        long long expectedSquareSum = 1LL * nSquare * (nSquare + 1) * (2 * nSquare + 1)/6; // Expected Square-Sum Of N-Natural Numbers
+        for(int i=0 ; i<grid.size() ; i++)
+        {
+            for(int j=0 ; j<grid.size() ; j++)
+            {
+                actualSum = actualSum + grid[i][j];
+                actualSquareSum = actualSquareSum + (long long)(grid[i][j] * grid[i][j]);
+            }
+        }
+        long long differenceSum = actualSum - expectedSum; // a - b
+        long long differenceSquareSum = actualSquareSum - expectedSquareSum; // a² - b²
+        long long sum_a_b = differenceSquareSum/differenceSum; // a + b = (a² - b²) / (a - b)
+        int a = (sum_a_b + differenceSum)/2;
+        int b = (sum_a_b - differenceSum)/2;
+        return {a , b};
+    }
+};
+```
 
 - Transpose Matrix
 ```c++
