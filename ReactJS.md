@@ -480,9 +480,169 @@ If the behaviour of a component is independent of its state then it can be terme
 
 ### What are Controlled Components
 Controlled Components are the Form elements like input, select, textarea that are managed by React state. The value of Form element is set and update through React state.
+```jsx
+import React from 'react'
+import { useState } from 'react'
+import './App.css'
+
+function Form1() {
+  const [name , setName] = useState("")
+  const [email , setEmail] = useState("")
+  const [phone , setPhone] = useState("")
+  
+  const handleSubmitForm = (event) => {
+    event.preventDefault();
+    console.log("Form-1 Using useState()");
+    console.log(`Name : ${name} & Email : ${email} & Phone : ${phone}`);
+  }
+
+  return(
+    <>
+      <form onSubmit={handleSubmitForm}>
+        <h2>Form-1 Using useState</h2>
+        <div>
+          <label>Name : </label>
+          <input type="text" placeholder="Enter Name"  name="name" value={name} onChange={(event) => {setName(event.target.value)}}></input>
+        </div>
+        <div>
+          <label>Email : </label>
+          <input type="email" placeholder="Enter Email" name="email" value={email} onChange={(event) => {setEmail(event.target.value)}}></input>
+        </div>
+        <div>
+          <label>Phone Number : </label>
+          <input type="tel" placeholder="Enter Phone Number" name="phone" value={phone} onChange={(event) => {setPhone(event.target.value)}}></input>
+        </div>
+        <div>
+          <button>Submit</button>
+        </div>
+        <h3>Name : {name} | Email : {email} | Phone : {phone}</h3>
+      </form>
+    </>
+  )
+}
+
+function App() {
+  return (
+    <>
+      <Form1/>
+    </>
+  )
+}
+
+export default App
+```
+
+```jsx
+import React from 'react'
+import { useState } from 'react'
+import './App.css'
+
+function Form2() {
+  const [user , setUser] = useState({
+    name : "",
+    email : "",
+    phone : ""
+  }) 
+
+  const handleInputChange = (event) => {
+    const {name , value} = event.target;
+    setUser((prev) => ({...prev , [name] : value}))
+  }
+
+  const handleSubmitForm = (event) => {
+    event.preventDefault();
+    console.log("Form-2 Using Object")
+    console.log(user);
+  }
+
+  return(
+    <>
+      <form onSubmit={handleSubmitForm}>
+        <h2>Form-2 Using Object</h2>
+        <div>
+          <label>Name : </label>
+          <input type="text" placeholder="Enter Name"  name="name" value={user.name} onChange={handleInputChange}></input>
+        </div>
+        <div>
+          <label>Email : </label>
+          <input type="email" placeholder="Enter Email" name="email" value={user.email} onChange={handleInputChange}></input>
+        </div>
+        <div>
+          <label>Phone Number : </label>
+          <input type="tel" placeholder="Enter Phone Number" name="phone" value={user.phone} onChange={handleInputChange}></input>
+        </div>
+        <div>
+          <button>Submit</button>
+        </div>
+          <h3>Name : {user.name} | Email : {user.email} | Phone : {user.phone}</h3>
+      </form>
+    </>
+  )
+}
+
+function App() {
+  return (
+    <>
+      <Form2/>
+    </>
+  )
+}
+
+export default App
+```
 
 ### What are Un-Controlled Components
 Un-Controlled Components are the components that manage their own state internally rather than relying on React state. This approach is useful for simple forms where there is no need to manipulate input data through React state updates.
+```jsx
+import React, { useRef } from 'react'
+import { useState } from 'react'
+import './App.css'
+
+function Form3() {
+  const name = useRef(null)
+  const email = useRef(null)
+  const phone = useRef(null)
+  
+  const handleSubmitForm = (event) => {
+    event.preventDefault();
+    console.log("Form-3 Using useRef()");
+    console.log(`Name : ${name.current.value} & Email : ${email.current.value} & Phone : ${phone.current.value}`);
+  }
+
+  return(
+    <>
+      <form onSubmit={handleSubmitForm}>
+        <h2>Form-3 Using useRef</h2>
+        <div>
+          <label>Name : </label>
+          <input type="text" placeholder="Enter Name"  name="name" ref={name}></input>
+        </div>
+        <div>
+          <label>Email : </label>
+          <input type="email" placeholder="Enter Email" name="email" ref={email}></input>
+        </div>
+        <div>
+          <label>Phone Number : </label>
+          <input type="tel" placeholder="Enter Phone Number" name="phone" ref={phone}></input>
+        </div>
+        <div>
+          <button>Submit</button>
+        </div>
+      </form>
+    </>
+  )
+}
+
+function App() {
+  return (
+    <>
+      <Form3/>
+    </>
+  )
+}
+
+export default App
+```
 
 ### What are Pure Components
 Pure components are the components which render the same output for the same state and props. In function components, you can achieve these pure components through memoized React.memo() API wrapping around the component. This API prevents unnecessary re-renders by comparing the previous props and new props using shallow comparison. So it will be helpful for performance optimizations.
