@@ -11,6 +11,7 @@
 | Rotate Array |
 | Check if Array Is Sorted and Rotated |
 | Container With Most Water |
+| Sort Colors |
 | Find the Duplicate Number |
 | Remove Duplicates from Sorted Array |
 | Remove Duplicates from Unsorted Array |
@@ -351,6 +352,37 @@ public:
 };
 ```
 
+- Sort Colors
+```c++
+class Solution {
+public:
+    void sortColors(vector<int>& nums) // Dutch National Flag Algorithm
+    {
+        int low = 0;
+        int mid = 0;
+        int high = nums.size()-1;
+        while(mid <= high)
+        {
+            if(nums[mid] == 0)
+            {
+                swap(nums[low] , nums[mid]);
+                low++;
+                mid++;
+            }
+            else if(nums[mid] == 1)
+            {
+                mid++;
+            }
+            else if(nums[mid] == 2)
+            {
+                swap(nums[mid] , nums[high]);
+                high--;
+            }
+        }
+    }
+};
+```
+
 - Find the Duplicate Number
 ```c++
 class Solution {
@@ -374,7 +406,7 @@ public:
 ```c++
 class Solution {
 public:
-    int findDuplicate(vector<int>& nums) 
+    int findDuplicate(vector<int>& nums) // Slow & Fast Pointer
     {   
         int slow = 0;
         int fast = 0;
