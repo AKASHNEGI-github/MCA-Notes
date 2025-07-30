@@ -4,8 +4,18 @@
 | Table Of Content |
 | ---------------- |
 | Implementation |
+| Sort an Array |
 | Two Sum |
 | 3Sum |
+| Plus One |
+| Rotate Array |
+| Check if Array Is Sorted and Rotated |
+| Container With Most Water |
+| Find the Duplicate Number |
+| Remove Duplicates from Sorted Array |
+| Remove Duplicates from Unsorted Array |
+| Majority Element |
+| Majority Element II |
 
 ---
 ### Implementation
@@ -135,7 +145,7 @@ public:
 ```c++
 class Solution {
 public:
-    vector<int> sortArray(vector<int>& nums) // Counting Sort
+    vector<int> sortArray(vector<int>& nums) 
     {
         map<int , int> countMap;
         for(int i=0 ; i<nums.size() ; i++) 
@@ -341,6 +351,48 @@ public:
 };
 ```
 
+- Find the Duplicate Number
+```c++
+class Solution {
+public:
+    int findDuplicate(vector<int>& nums) 
+    {
+        int ans;
+        sort(nums.begin() , nums.end());
+        for(int i=0 ; i<nums.size()-1 ; i++)
+        {
+            if(nums[i] == nums[i+1])
+            {
+                ans = nums[i];
+            }
+        }    
+        return ans;
+    }
+};
+```
+
+```c++
+class Solution {
+public:
+    int findDuplicate(vector<int>& nums) 
+    {   
+        int slow = 0;
+        int fast = 0;
+        do{
+            slow = nums[slow];
+            fast = nums[nums[fast]];
+        }while(slow != fast);
+        slow = 0;
+        while(slow != fast)
+        {
+            slow = nums[slow];
+            fast = nums[fast];
+        }
+        return slow;
+    }
+};
+```
+
 - Remove Duplicates from Sorted Array
 ```c++
 class Solution {
@@ -507,6 +559,33 @@ public:
             }
         }
         return element;
+    }
+};
+```
+
+- Majority Element II
+```c++
+class Solution {
+public:
+    vector<int> majorityElement(vector<int>& nums) 
+    {
+        vector<int> ans;
+        map<int , int> m;
+        int elementMajority = (int)(nums.size()/3) + 1;
+        for(int i=0 ; i<nums.size() ; i++)
+        {
+            m[nums[i]]++;
+            if(m[nums[i]] == elementMajority)
+            {
+                ans.push_back(nums[i]);
+            }
+            if(ans.size() == 2)
+            {
+                break;
+            }
+        }   
+        sort(ans.begin() , ans.end());
+        return ans;
     }
 };
 ```
