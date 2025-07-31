@@ -1,7 +1,24 @@
 # BINARY SEARCH
-
 ---
 
+| BINARY SEARCH |
+| ------------- |
+| Binary Search |
+| Search Insert Position |
+| Find First and Last Position of Element in Sorted Array |
+| Peak Index in a Mountain Array |
+| Find Peak Element |
+| Single Element in a Sorted Array |
+| Search in Rotated Sorted Array |
+| Search in Rotated Sorted Array II |
+| Find Minimum in Rotated Sorted Array |
+| Find Minimum in Rotated Sorted Array II |
+| Maximum Candies Allocated to K Children |
+| Koko Eating Bananas |
+| Capacity To Ship Packages Within D Days |
+| Split Array Largest Sum |
+
+---
 ### Questions
 
 - Binary Search
@@ -168,6 +185,62 @@ public:
             }
         }
         return start;   
+    }
+};
+```
+
+- Single Element in a Sorted Array
+```c++
+class Solution {
+public:
+    int singleNonDuplicate(vector<int>& nums) 
+    {
+        int size = nums.size();
+        if(size == 1)
+        {
+            return nums[0];
+        }
+        else if(nums[0] != nums[1])
+        {
+            return nums[0];
+        }
+        else if(nums[size-1] != nums[size-2])
+        {
+            return nums[size-1];
+        }
+        int start = 1;
+        int end = size-2;
+        while(start <= end)
+        {
+            int mid = start + (end - start)/2;
+            if(nums[mid-1] != nums[mid] && nums[mid] != nums[mid+1])
+            {
+                return nums[mid]; 
+            }
+            else if(mid%2 == 0) // mid -> even
+            {
+                if(nums[mid-1] == nums[mid])
+                {
+                    end = mid - 1;
+                }
+                else if(nums[mid] == nums[mid+1])
+                {
+                    start = mid + 1;
+                }
+            }
+            else if(mid%2 != 0) // mid -> odd
+            {
+                if(nums[mid-1] == nums[mid])
+                {
+                    start = mid + 1;
+                }
+                else if(nums[mid] == nums[mid+1])
+                {
+                    end = mid - 1;
+                }
+            }
+        }
+        return -1;
     }
 };
 ```
