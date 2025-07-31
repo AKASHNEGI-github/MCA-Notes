@@ -1,8 +1,8 @@
 # 2D-ARRAY | MATRIX
 ---
 
-| Table Of Content |
-| ---------------- |
+| MATRIX |
+| ------ |
 | Implementation |
 | Find Missing and Repeated Values |
 | Transpose Matrix |
