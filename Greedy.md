@@ -1,7 +1,12 @@
 # GREEDY
-
 ---
 
+| GREEDY |
+| ------ |
+| Assign Cookies |
+| Lemonade Change |
+
+---
 ### Questions
 
 - Assign Cookies
