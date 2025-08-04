@@ -15,6 +15,7 @@
 | Sort Colors |
 | Find the Duplicate Number |
 | Remove Duplicates from Sorted Array |
+| Remove Duplicates from Sorted Array II |
 | Remove Duplicates from Unsorted Array |
 | Majority Element |
 | Majority Element II |
@@ -473,6 +474,32 @@ public:
             }
         }
         return (i+1);
+    }
+};
+```
+
+- Remove Duplicates from Sorted Array II
+```c++
+class Solution {
+public:
+    int removeDuplicates(vector<int>& nums) 
+    {
+        if(nums.size() < 3)
+        {
+            return nums.size();
+        }
+        int left = 2;
+        int right = 2;
+        while(right < nums.size())
+        {
+            if(nums[left-2] != nums[right])
+            {
+                nums[left] = nums[right];
+                left++;
+            }
+            right++;
+        }
+        return left;
     }
 };
 ```
