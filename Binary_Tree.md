@@ -7,6 +7,7 @@
 | Preorder Traversal |
 | Inorder Traversal |
 | Postorder Traversal |
+| Binary Tree Level Order Traversal |
 | Count Leaves in Binary Tree |
 | Count Non-Leaf Nodes in Tree |
 | Identical Trees |
@@ -269,6 +270,44 @@ vector <int> postOrder(Node* root)
     postOrderTraversal(root , ans);
     return ans;
 }
+```
+
+- Binary Tree Level Order Traversal
+```c++
+class Solution {
+public:
+    vector<vector<int>> levelOrder(TreeNode* root) 
+    {    
+        vector<vector<int>> ans;
+        if(root == NULL)
+        {
+            return ans;
+        }
+        queue<TreeNode*> q;
+        q.push(root);
+        while(!q.empty())
+        {
+            vector<int> level;
+            int sizeQ = q.size();
+            for(int i=0 ; i<sizeQ ; i++)
+            {
+                TreeNode* temp = q.front();
+                q.pop();
+                if(temp->left != NULL)
+                {
+                    q.push(temp->left);
+                }
+                if(temp->right != NULL)
+                {
+                    q.push(temp->right);
+                }
+                level.push_back(temp->val);
+            } 
+            ans.push_back(level);
+        } 
+        return ans;
+    }
+};
 ```
 
 - Count Leaves in Binary Tree
