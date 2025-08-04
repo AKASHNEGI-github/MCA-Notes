@@ -301,7 +301,145 @@ export default App
 
 ### What is Context API in React
 ```jsx
+// Step-1:Create Context
+// Step-2:Wrap All Children Inside Context Provider
+// Step-3:Pass Value
+// Step-4:Consume Context
+export const UserContext = React.createContext();
 
+function UserContextProvider({children}) {
+  const [user , setUser] = useState({name:"Akash"});
+  return (
+    <>
+      <UserContext.Provider value={user}>
+        {children}
+      </UserContext.Provider>
+    </>
+  )
+}
+
+function Parent() {
+  
+  return (
+    <>
+      <UserContextProvider>
+        <Child/>
+      </UserContextProvider>
+    </>
+  )
+}
+
+function Child() {
+  return (
+    <>
+      <GrandChild/>
+    </>
+  )
+}
+
+function GrandChild() {
+  const user = useContext(UserContext);
+  return (
+    <>
+      <h2>Hello, {user.name}!</h2>
+    </>
+  )
+}
+
+function App() {
+  return (
+    <>
+      <Parent/>
+    </>
+  )
+}
+
+export default App
+```
+
+- Theme Changer Using ContextAPI
+```jsx
+export const ThemeContext = React.createContext();
+
+function ContextProvider({children}) {
+  const [user , setUser] = useState({name:"Akash"});
+  const [theme , setTheme] = useState("light");
+  return (
+    <>
+      <ThemeContext.Provider value={{user , setUser , theme , setTheme}}>
+        {children}
+      </ThemeContext.Provider>
+    </>
+  )
+}
+
+function Parent() {
+  const {user , setUser , theme , setTheme} = useContext(ThemeContext);
+
+  const container = {
+    height:"200px",
+    width:"200px",
+    border:"2px solid black",
+    backgroundColor: "lightblue",
+    display:"flex",
+    flexDirection:"column",
+    justifyContent: "center",
+    alignItems: "center",
+  };
+
+  const newTheme = {
+    backgroundColor: theme === "light" ? "lightblue" : "black",
+    color: theme === "light" ? "black" : "white"
+  };
+
+  const styling = {...container , ...newTheme};
+
+  return (
+    <>
+      <div style={styling}>
+        <Child/>
+      </div>
+    </>
+  )
+}
+
+function Child() {
+  return (
+    <>
+      <GrandChild/>
+    </>
+  )
+}
+
+function GrandChild() {
+  const {user , setUser , theme , setTheme} = useContext(ThemeContext);
+
+  const toggleTheme = () => {
+    if(theme == "light"){
+      setTheme("dark");
+    }
+    else{
+      setTheme("light");
+    }
+  }
+
+  return (
+    <>
+      <h2>Welcome, {user.name}!</h2>
+      <button onClick={toggleTheme}>Change Theme</button>
+    </>
+  )
+}
+
+function App() {
+  return (
+    <ContextProvider>
+      <Parent />
+    </ContextProvider>
+  );
+}
+
+export default App
 ```
 
 ### What is State in React
