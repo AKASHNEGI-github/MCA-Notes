@@ -8,6 +8,7 @@
 | Two Sum |
 | Two Sum II - Input Array Is Sorted |
 | 3Sum |
+| 3Sum Closest |
 | Plus One |
 | Rotate Array |
 | Check if Array Is Sorted and Rotated |
@@ -278,11 +279,137 @@ public:
 ```
 
 ```c++
-
+class Solution {
+public:
+    vector<vector<int>> threeSum(vector<int>& nums) 
+    {
+        set<vector<int>> uniqueTriplets;
+        for(int i=0 ; i<nums.size() ; i++)
+        {
+            set<int> s;
+            for(int j=(i+1) ; j<nums.size() ; j++)
+            {
+                int first = nums[i];
+                int second = nums[j];
+                int third = -first - second;
+                if(s.find(third) != s.end())
+                {
+                    vector<int> triplet = {first , second , third};
+                    sort(triplet.begin() , triplet.end());
+                    uniqueTriplets.insert(triplet);
+                }
+                s.insert(second);
+            }
+        }
+        vector<vector<int>> ans(uniqueTriplets.begin() , uniqueTriplets.end());
+        return ans;
+    }
+};
 ```
 
 ```c++
+class Solution {
+public:
+    vector<vector<int>> threeSum(vector<int>& nums) 
+    {
+        vector<vector<int>> ans;
+        sort(nums.begin() , nums.end());
+        for(int i=0 ; i<nums.size() ; i++)
+        {
+            if(i > 0 && nums[i] == nums[i-1])
+            {
+                continue;
+            }
+            int j = (i+1);
+            int k = nums.size()-1;
+            while(j < k)
+            {
+                int sum = nums[i]+ nums[j] + nums[k];
+                if(sum == 0)
+                {
+                    ans.push_back({nums[i] , nums[j] , nums[k]});
+                    j++;
+                    k--;
+                    while(j < k && nums[j] == nums[j-1])
+                    {
+                        j++;
+                    }
+                }
+                else if(sum < 0)
+                {
+                    j++;
+                }
+                else if(sum > 0)
+                {
+                    k--;
+                }
+            }
+        }
+        return ans;
+    }
+};
+```
 
+- 3Sum Closest
+```c++
+public:
+    int threeSumClosest(vector<int>& nums, int target) 
+    {
+        int closestSum = INT_MAX/2; // A large value but not overflow
+        for(int i=0 ; i<nums.size() ; i++)
+        {
+            for(int j=(i+1) ; j<nums.size() ; j++)
+            {
+                for(int k=(j+1) ; k<nums.size() ; k++)
+                {
+                    int currentSum = nums[i]+ nums[j] + nums[k];
+                    if(abs(currentSum - target) < abs(closestSum - target))
+                    {
+                        closestSum = currentSum;
+                    }
+                }
+            }
+        }
+        return closestSum;
+    }
+};
+```
+
+```c++
+class Solution {
+public:
+    int threeSumClosest(vector<int>& nums, int target) 
+    {
+        int closestSum = INT_MAX/2; // A large value but not overflow
+        sort(nums.begin() , nums.end());
+        for(int i=0 ; i<nums.size()-2 ; i++)
+        {
+            int j = (i+1);
+            int k = nums.size()-1;
+            while(j < k)
+            {
+                int currentSum = nums[i]+ nums[j] + nums[k];
+                if(abs(currentSum - target) < abs(closestSum - target))
+                {
+                    closestSum = currentSum;
+                }
+                if(currentSum < target)
+                {
+                    j++;
+                }
+                else if(currentSum > target)
+                {
+                    k--;
+                }
+                else
+                {
+                    return closestSum;
+                }
+            }
+        }
+        return closestSum;
+    }
+};
 ```
 
 - Plus One
