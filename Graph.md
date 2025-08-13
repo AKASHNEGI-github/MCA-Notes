@@ -261,15 +261,15 @@ public:
         vector<int> ans;
         while(!q.empty())
         {
-            int temp = q.front();
+            int node = q.front();
             q.pop();
-            ans.push_back(temp);
-            for(int j=0 ; j<adj[temp].size() ; j++)
+            ans.push_back(node);
+            for(int j=0 ; j<adj[node].size() ; j++)
             {
-                if(!visited[adj[temp][j]])
+                if(!visited[adj[node][j]])
                 {
-                    visited[adj[temp][j]] = 1;
-                    q.push(adj[temp][j]);
+                    visited[adj[node][j]] = 1;
+                    q.push(adj[node][j]);
                 }
             }
         }
@@ -280,10 +280,33 @@ public:
 
 - DFS of Graph
 ```c++
-
+class Solution {
+  public:
+    void DFS(int node , vector<vector<int>>adj , vector<bool>& visited , vector<int>& ans)
+    {
+        visited[node] = 1;
+        ans.push_back(node);
+        for(int j=0 ; j<adj[node].size() ; j++)
+        {
+            if(!visited[adj[node][j]])
+            {
+                DFS(adj[node][j] , adj , visited , ans);
+            }
+        }
+    }
+  
+    vector<int> dfs(vector<vector<int>>& adj) 
+    {
+        int V = adj.size();
+        vector<bool> visited(V , 0);
+        vector<int> ans;
+        DFS(0 , adj , visited , ans);
+        return ans;
+    }
+};
 ```
 
-- Detect Cycle using DSU
+- Undirected Graph Cycle
 ```c++
 class Solution{
 public:
@@ -368,5 +391,110 @@ public:
 };
 ```
 
+- Directed Graph Cycle
+```c++
+class Solution {
+  public:
+    bool DetectCycleDFS(int node , vector<vector<int>>& adj , vector<bool>& path , vector<bool>& visited)
+    {
+        visited[node] = 1;
+        path[node] = 1;
+        for(int j=0 ; j<adj[node].size() ; j++)
+        {
+            if(path[adj[node][j]])
+            {
+                return true;
+            }
+            if(visited[adj[node][j]])
+            {
+                continue;
+            }
+            if(!visited[adj[node][j]] && DetectCycleDFS(adj[node][j] , adj , path , visited))
+            {
+                return true;
+            }
+        }
+        path[node] = 0;
+        return false;
+    }
+  
+    bool isCyclic(int V, vector<vector<int>> &edges) // Detect Cycle in a Directed Graph using DFS
+    {
+        // Build adjacency list
+        vector<vector<int>> adj(V);
+        for (auto& edge : edges) 
+        {
+            int u = edge[0];
+            int v = edge[1];
+            adj[u].push_back(v);
+        }
+        
+        vector<bool> path(V , 0);
+        vector<bool> visited(V , 0);
+        for(int i=0 ; i<V ; i++)
+        {
+            if(!visited[i] && DetectCycleDFS(i , adj , path , visited))
+            {
+                return true;
+            }
+        }
+        return false;
+    }
+};
+```
+
+```c++
+class Solution {
+  public:
+    bool isCyclic(int V, vector<vector<int>> &edges) // Detect Cycle in a Directed Graph using BFS
+    {
+        // Build adjacency list
+        vector<vector<int>> adj(V);
+        for (auto& edge : edges) 
+        {
+            int u = edge[0];
+            int v = edge[1];
+            adj[u].push_back(v);
+        }
+        
+        vector<int> InDegree(V , 0);
+        for(int i=0 ; i<V ; i++)
+        {
+            for(int j=0 ; j<adj[i].size() ; j++)
+            {
+                InDegree[adj[i][j]]++;
+            }
+        }
+        queue<int> q;
+        for(int i=0 ; i<V ; i++)
+        {
+            if(!InDegree[i])
+            {
+                q.push(i);
+            }
+        }
+        vector<int> ans;
+        while(!q.empty())
+        {
+            int node = q.front();
+            q.pop();
+            ans.push_back(node);
+            for(int j=0 ; j<adj[node].size() ; j++)
+            {
+                InDegree[adj[node][j]]--;
+                if(!InDegree[adj[node][j]])
+                {
+                    q.push(adj[node][j]);
+                }
+            }
+        }
+        if(ans.size() == V)
+        {
+            return false;
+        }
+        return true;
+    }
+};
+```
 
 ---
