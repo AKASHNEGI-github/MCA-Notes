@@ -1,7 +1,17 @@
 # LINKED LIST
-
 ---
 
+| LINKED LIST |
+| ----------- |
+| Implementation |
+| Middle of the Linked List |
+| Reverse Linked List |
+| Remove Duplicates from Sorted List |
+| Remove Duplicates from Sorted List II |
+| Linked List Cycle |
+| Linked List Cycle II |
+
+---
 ### Single Linked List
 ```c++
 // SINGLE LINKED LIST
@@ -463,7 +473,6 @@ public:
 ```
 
 - Remove Duplicates from Sorted List
-
 ```c++
 class Solution {
 public:
@@ -482,6 +491,37 @@ public:
         }
       }
       return head;
+    }
+};
+```
+
+- Remove Duplicates from Sorted List II
+```c++
+class Solution {
+public:
+    ListNode* deleteDuplicates(ListNode* head) 
+    {
+        ListNode* dummy = new ListNode(-1 , head);
+        ListNode* current = head;
+        ListNode* previous = dummy;
+        while(current != NULL)
+        {
+            if(current->next != NULL && current->val == current->next->val)
+            {
+                int duplicateValue = current->val;
+                while(current != NULL && current->val == duplicateValue)
+                {
+                    current = current->next;
+                }
+                previous->next = current;
+            }
+            else
+            {
+                previous = current;
+                current = current->next;
+            }
+        }
+        return dummy->next;
     }
 };
 ```
@@ -895,3 +935,4 @@ public:
 
 
 ---
+
