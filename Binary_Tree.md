@@ -16,6 +16,7 @@
 | Diameter of a Binary Tree |
 | Balanced Tree Check |
 | Sum Tree |
+| Flatten Binary Tree to Linked List |
 | Construct Binary Tree from Preorder and Inorder Traversal |
 | Construct Binary Tree from Inorder and Postorder Traversal |
 
@@ -838,6 +839,52 @@ public:
         else
         {
             return NULL;
+        }
+    }
+};
+```
+
+- Flatten Binary Tree to Linked List
+```c++
+class Solution {
+public:
+    TreeNode* lastVisitedNode = NULL;
+
+    void flatten(TreeNode* root) 
+    {
+        if(root == NULL)
+        {
+            return;
+        }
+        flatten(root->right);
+        flatten(root->left);
+        root->left = NULL;
+        root->right = lastVisitedNode;
+        lastVisitedNode = root;
+    }
+};
+```
+
+```c++
+class Solution {
+public:
+    void flatten(TreeNode* root) // Morris(pre-order) Traversal
+    {    
+        TreeNode* current = root;
+        while(current != NULL)
+        {
+            if(current->left != NULL)
+            {
+                TreeNode* previous = current->left;
+                while(previous->right != NULL) // Find in-order Predecessor
+                {
+                    previous = previous->right;
+                }
+                previous->right = current->right;
+                current->right = current->left;
+                current->left = NULL;
+            }
+            current = current->right;
         }
     }
 };
