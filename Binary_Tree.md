@@ -459,6 +459,36 @@ class Solution
 
 - Diameter of a Binary Tree
 ```c++
+class Solution {
+  public:
+    int height(Node* node)
+    {
+        if(node == NULL)
+        {
+            return 0;
+        }
+        int heightLeftSubTree = height(node->left);
+        int heightRightSubTree = height(node->right);
+        int ans = max(heightLeftSubTree , heightRightSubTree) + 1;
+        return ans;
+    }
+  
+    int diameter(Node* root) 
+    {
+        if(root == NULL)
+        {
+            return 0;
+        }
+        int diameterLeftSubTree = diameter(root->left);
+        int diameterRightSubTree = diameter(root->right);
+        int fullHeight = height(root->left) + height(root->right) + 1;
+        int ans = max(fullHeight , max(diameterLeftSubTree , diameterRightSubTree));
+        return ans;
+    }
+};
+```
+
+```c++
 class Solution 
 {
   public:
