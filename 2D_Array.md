@@ -13,6 +13,7 @@
 | Find a Peak Element II |
 | Wave Matrix |
 | Spiral Matrix |
+| Spiral Matrix II |
 
 ---
 ### Implementation
@@ -663,6 +664,63 @@ public:
             startCol++;
         }
         return ans;
+    }
+};
+```
+
+- Spiral Matrix II
+```
+class Solution {
+public:
+    vector<vector<int>> generateMatrix(int n) 
+    {
+        int count = 1;
+        int totalElement = n*n;
+
+        int row = n;
+        int col = n;
+        vector<vector<int>> matrix(row , vector<int>(col , 0));
+
+        int startRow = 0;
+        int startCol = 0;
+        int endRow = row-1;
+        int endCol = col-1;
+
+        while(count <= totalElement)
+        {
+            // Starting Row
+            for(int index=startCol ; index<=endCol && (count <= totalElement) ; index++)
+            {
+                matrix[startRow][index] = count;
+                count++;
+            }
+            startRow++;
+
+            // Ending Col
+            for(int index=startRow ; index<=endRow && (count <= totalElement) ; index++)
+            {
+                matrix[index][endCol] = count;
+                count++;
+            }
+            endCol--;
+
+            // Ending Row
+            for(int index=endCol ; index>=startCol && (count <= totalElement) ; index--)
+            {
+                matrix[endRow][index] = count;
+                count++;
+            }
+            endRow--;
+
+            // Starting Col
+            for(int index=endRow ; index>=startRow && (count <= totalElement) ; index--)
+            {
+                matrix[index][startCol] = count;
+                count++;
+            }
+            startCol++;
+        }
+        return matrix;   
     }
 };
 ```
