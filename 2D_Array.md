@@ -669,7 +669,7 @@ public:
 ```
 
 - Spiral Matrix II
-```
+```c++
 class Solution {
 public:
     vector<vector<int>> generateMatrix(int n) 
