@@ -6,6 +6,8 @@
 | Implementation |
 | Middle of the Linked List |
 | Reverse Linked List |
+| Merge Two Sorted Lists |
+| Merge k Sorted Lists |
 | Remove Duplicates from Sorted List |
 | Remove Duplicates from Sorted List II |
 | Linked List Cycle |
@@ -359,6 +361,63 @@ public:
             temp->next = list2;
         }
         return ansHead->next;
+    }
+};
+```
+
+- Merge k Sorted Lists
+```c++
+class Solution {
+public:
+    ListNode* mergeTwoLists(ListNode* list1, ListNode* list2) 
+    {
+        ListNode* ansHead = new ListNode(-1);
+        ListNode* temp = ansHead;
+        while(list1 != NULL && list2 != NULL)
+        {
+            if(list1->val <= list2->val)
+            {
+                temp->next = list1;
+                list1 = list1->next;
+                temp = temp->next;
+            }
+            else
+            {
+                temp->next = list2;
+                list2 = list2->next;
+                temp = temp->next;
+            }
+        }
+        if(list1)
+        {
+            temp->next = list1;
+        }
+        else
+        {
+            temp->next = list2;
+        }
+        return ansHead->next;
+    }
+
+    ListNode* mergeKLists(vector<ListNode*>& lists) 
+    {
+        if(lists.size() == 0)
+        {
+            return NULL;
+        }
+        if(lists.size() == 1)
+        {
+            return lists[0];
+        }
+        ListNode* ans = NULL;
+        ListNode* list1 = lists[0];
+        for(int i=1 ; i<lists.size() ; i++)
+        {
+            ListNode* list2 = lists[i];
+            ans = mergeTwoLists(list1 , list2);
+            list1 = ans;
+        } 
+        return ans;
     }
 };
 ```
@@ -935,4 +994,5 @@ public:
 
 
 ---
+
 
