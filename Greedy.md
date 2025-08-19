@@ -5,6 +5,7 @@
 | ------ |
 | Assign Cookies |
 | Lemonade Change |
+| Bag of Tokens |
 
 ---
 ### Questions
@@ -81,6 +82,57 @@ public:
     }
 };
 ```
+
+- Bag of Tokens
+```c++
+class Solution {
+public:
+    int bagOfTokensScore(vector<int>& tokens, int power) 
+    {
+        int score = 0;
+        int maxScore = 0;
+        int start = 0;
+        int end = tokens.size()-1;
+        sort(tokens.begin() , tokens.end());
+        while(start <= end)
+        {
+            if(power >= tokens[start])
+            {
+                power = power - tokens[start];
+                score++;
+                maxScore = max(score , maxScore);
+                start++;
+            }
+            else if(score >= 1)
+            {
+                power = power + tokens[end];
+                score--;
+                end--;
+            }
+            else
+            {
+                break;
+            }
+        }
+        return maxScore; 
+    }
+};
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
