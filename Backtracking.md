@@ -6,6 +6,8 @@
 | Subsets |
 | Letter Combinations of a Phone Number |
 | Permutations |
+| N-Queens |
+| N-Queens II |
 
 ---
 ### Questions
@@ -111,6 +113,84 @@ public:
         return ans;    
     }
 };
+```
+
+- N-Queens
+```c++
+class Solution {
+public:
+    bool isQueenSafe(vector<string>& board , int row , int col , int n)
+    {
+        // Horizontal
+        for(int j=0 ; j<n ; j++)
+        {
+            if(board[row][j] == 'Q')
+            {
+                return false;
+            }
+        }
+        // Vertical
+        for(int i=0 ; i<n ; i++)
+        {
+            if(board[i][col] == 'Q')
+            {
+                return false;
+            }
+        }
+        // Left Diagonal
+        for(int i=row , j=col ; i>=0 && j>=0 ; i-- , j--)
+        {
+            if(board[i][j] == 'Q')
+            {
+                return false;
+            }
+        }
+        // Right Diagonal
+        for(int i=row , j=col ; i>=0 && j<n ; i-- , j++)
+        {
+            if(board[i][j] == 'Q')
+            {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    void nQueens(vector<string>& board , vector<vector<string>>& ans , int row , int n)
+    {
+        // Base Case
+        if(row == n)
+        {
+            ans.push_back({board});
+            return;
+        }
+        for(int j=0 ; j<n ; j++)
+        {
+            if(isQueenSafe(board , row , j , n))
+            {
+                // Include
+                board[row][j] = 'Q';
+                nQueens(board , ans , row+1 , n);
+                // Exclude
+                board[row][j] = '.'; // Backtrack
+            }
+        }
+    }
+
+    vector<vector<string>> solveNQueens(int n) 
+    {
+        int row = 0;
+        vector<vector<string>> ans;
+        vector<string> board(n , string(n , '.'));
+        nQueens(board , ans , row , n);
+        return ans;    
+    }
+};
+```
+
+- N-Queens II
+```c++
+
 ```
 
 
