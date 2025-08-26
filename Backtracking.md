@@ -8,6 +8,7 @@
 | Permutations |
 | N-Queens |
 | N-Queens II |
+| Sudoku Solver |
 
 ---
 ### Questions
@@ -191,6 +192,89 @@ public:
 - N-Queens II
 ```c++
 
+```
+
+- Sudoku Solver
+```c++
+class Solution {
+public:
+    bool isDigitSafe(vector<vector<char>>& board , int row , int col , char digit)
+    {
+        // Horizontal
+        for(int j=0 ; j<9 ; j++)
+        {
+            if(board[row][j] == digit)
+            {
+                return false;
+            }
+        }
+        // Vertical
+        for(int i=0 ; i<9 ; i++)
+        {
+            if(board[i][col] == digit)
+            {
+                return false;
+            }
+        }
+        // Grid
+        int startRow = (row/3)*3;
+        int startCol = (col/3)*3;
+        for(int i=startRow ; i<(startRow+3) ; i++)
+        {
+            for(int j=startCol ; j<(startCol+3) ; j++)
+            {
+                if(board[i][j] == digit)
+                {
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
+
+    bool sudokuSolver(vector<vector<char>>& board , int row , int col)
+    {
+        // Base Case
+        if(row == 9)
+        {
+            return true;
+        }
+        int nextRow = row;
+        int nextCol = col+1;
+        if(nextCol == 9)
+        {
+            nextRow = row+1;
+            nextCol = 0;
+        }
+        if(board[row][col] != '.')
+        {
+            return sudokuSolver(board , nextRow , nextCol);
+        }
+        // Place the digit
+        for(char digit='1' ; digit<='9' ; digit++)
+        {
+            if(isDigitSafe(board , row , col , digit))
+            {
+                // Include
+                board[row][col] = digit;
+                if(sudokuSolver(board , nextRow , nextCol))
+                {
+                    return true;
+                }
+                // Exclude
+                board[row][col] = '.'; // Backtrack
+            }
+        }
+        return false;
+    }
+
+    void solveSudoku(vector<vector<char>>& board) 
+    {
+        int row = 0;
+        int col = 0;
+        sudokuSolver(board , row , col);
+    }
+};
 ```
 
 
