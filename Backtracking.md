@@ -8,7 +8,9 @@
 | Permutations |
 | N-Queens |
 | N-Queens II |
+| Check Knight Tour Configuration |
 | Sudoku Solver |
+| Valid Sudoku |
 
 ---
 ### Questions
@@ -194,6 +196,11 @@ public:
 
 ```
 
+- Check Knight Tour Configuration
+```c++
+
+```
+
 - Sudoku Solver
 ```c++
 class Solution {
@@ -276,6 +283,87 @@ public:
     }
 };
 ```
+
+- Valid Sudoku
+```c++
+class Solution {
+public:
+    bool isDigitValid(vector<vector<char>>& board , int row , int col , char digit)
+    {
+        // Horizontal
+        for(int j=0 ; j<9 ; j++)
+        {
+            if(board[row][j] == digit)
+            {
+                return false;
+            }
+        }
+        // Vertical
+        for(int i=0 ; i<9 ; i++)
+        {
+            if(board[i][col] == digit)
+            {
+                return false;
+            }
+        }
+        // Grid
+        int startRow = (row/3)*3;
+        int startCol = (col/3)*3;
+        for(int i=startRow ; i<(startRow+3) ; i++)
+        {
+            for(int j=startCol ; j<(startCol+3) ; j++)
+            {
+                if(board[i][j] == digit)
+                {
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
+
+    bool isValidSudoku(vector<vector<char>>& board) 
+    {
+        for(int i=0 ; i<9 ; i++)
+        {
+            for(int j=0 ; j<9 ; j++)
+            {
+                if(board[i][j] != '.')
+                {
+                    int row = i;
+                    int col = j;
+                    char digit = board[i][j];
+                    board[i][j] = '.'; // Temporarily remove the digit
+                    bool valid = isDigitValid(board , row , col , digit);
+                    if(valid)
+                    {
+                        board[i][j] = digit; // Restore the digit
+                    }
+                    else
+                    {
+                        return false;
+                    }
+                }
+            }
+        }
+        return true;
+    }
+};
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
