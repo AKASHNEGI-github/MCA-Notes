@@ -198,7 +198,40 @@ public:
 
 - Check Knight Tour Configuration
 ```c++
+class Solution {
+public:
+    bool isKnightValid(vector<vector<int>>& grid , int n , int row , int col , int expectedMove)
+    {
+        // Base Case
+        if(expectedMove == n*n)
+        {
+            return true;
+        }
+        if(row < 0 || col < 0 || row >= n || col >= n || grid[row][col] != expectedMove)
+        {
+            return false;
+        }
+        // 8 - Possible Moves
+        bool ans1 = isKnightValid(grid , n , row-1 , col-2 , expectedMove+1);
+        bool ans2 = isKnightValid(grid , n , row-2 , col-1 , expectedMove+1);
+        bool ans3 = isKnightValid(grid , n , row-2 , col+1 , expectedMove+1);
+        bool ans4 = isKnightValid(grid , n , row-1 , col+2 , expectedMove+1);
+        bool ans5 = isKnightValid(grid , n , row+1 , col+2 , expectedMove+1);
+        bool ans6 = isKnightValid(grid , n , row+2 , col+1 , expectedMove+1);
+        bool ans7 = isKnightValid(grid , n , row+2 , col-1 , expectedMove+1);
+        bool ans8 = isKnightValid(grid , n , row+1 , col-2 , expectedMove+1);
+        return (ans1 || ans2 || ans3 || ans4 || ans5 || ans6 || ans7 || ans8);
+    }
 
+    bool checkValidGrid(vector<vector<int>>& grid) 
+    {   
+        int row = 0;
+        int col = 0;
+        int expectedMove = 0;
+        int n = grid.size();
+        return isKnightValid(grid , n , row , col , expectedMove);
+    }
+};
 ```
 
 - Sudoku Solver
