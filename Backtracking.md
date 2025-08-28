@@ -4,11 +4,14 @@
 | BACKTRACKING |
 | ------------ |
 | Subsets |
+| Subsets II |
 | Letter Combinations of a Phone Number |
 | Permutations |
+| Permutations II |
 | N-Queens |
 | N-Queens II |
 | Check Knight Tour Configuration |
+| Word Search |
 | Sudoku Solver |
 | Valid Sudoku |
 
@@ -42,6 +45,44 @@ public:
         vector<vector<int>> ans;
         getSubsets(nums , ans , subset , index);
         return ans;
+    }
+};
+```
+
+- Subsets II
+```c++
+class Solution {
+public:
+    void getSubsets(vector<int>& nums , vector<vector<int>>& ans , vector<int> subset , int index)
+    {
+        // Base Case
+        if(index == nums.size())
+        {
+            ans.push_back(subset);
+            return;
+        }
+        // Include
+        subset.push_back(nums[index]);
+        getSubsets(nums , ans , subset , index+1);
+        // Exclude
+        subset.pop_back(); // Backtrack
+        int nextIndex = index+1;
+        // Skip Duplicates
+        while(nextIndex < nums.size() && nums[nextIndex] == nums[nextIndex-1])
+        {
+            nextIndex++;
+        }
+        getSubsets(nums , ans , subset , nextIndex);
+    }
+
+    vector<vector<int>> subsetsWithDup(vector<int>& nums) 
+    {
+        int index = 0;
+        vector<int> subset;
+        vector<vector<int>> ans;
+        sort(nums.begin() , nums.end());
+        getSubsets(nums , ans , subset , index);
+        return ans;   
     }
 };
 ```
@@ -116,6 +157,11 @@ public:
         return ans;    
     }
 };
+```
+
+- Permutations II
+```c++
+
 ```
 
 - N-Queens
@@ -193,7 +239,77 @@ public:
 
 - N-Queens II
 ```c++
+class Solution {
+public:
+    bool isQueenSafe(vector<string>& board , int row , int col , int n)
+    {
+        // Horizontal
+        for(int j=0 ; j<n ; j++)
+        {
+            if(board[row][j] == 'Q')
+            {
+                return false;
+            }
+        }
+        // Vertical
+        for(int i=0 ; i<n ; i++)
+        {
+            if(board[i][col] == 'Q')
+            {
+                return false;
+            }
+        }
+        // Left Diagonal
+        for(int i=row , j=col ; i>=0 && j>=0 ; i-- , j--)
+        {
+            if(board[i][j] == 'Q')
+            {
+                return false;
+            }
+        }
+        // Right Diagonal
+        for(int i=row , j=col ; i>=0 && j<n ; i-- , j++)
+        {
+            if(board[i][j] == 'Q')
+            {
+                return false;
+            }
+        }
+        return true;
+    }
 
+    void nQueens(vector<string>& board , vector<vector<string>>& ans , int& total , int row , int n)
+    {
+        // Base Case
+        if(row == n)
+        {
+            total++;
+            ans.push_back({board});
+            return;
+        }
+        for(int j=0 ; j<n ; j++)
+        {
+            if(isQueenSafe(board , row , j , n))
+            {
+                // Include
+                board[row][j] = 'Q';
+                nQueens(board , ans , total , row+1 , n);
+                // Exclude
+                board[row][j] = '.'; // Backtrack
+            }
+        }
+    }
+
+    int totalNQueens(int n) 
+    {
+        int row = 0;
+        int total = 0;
+        vector<vector<string>> ans;
+        vector<string> board(n , string(n , '.'));
+        nQueens(board , ans , total , row , n);
+        return total;        
+    }
+};
 ```
 
 - Check Knight Tour Configuration
@@ -230,6 +346,60 @@ public:
         int expectedMove = 0;
         int n = grid.size();
         return isKnightValid(grid , n , row , col , expectedMove);
+    }
+};
+```
+
+- Word Search
+```c++
+class Solution {
+public:
+    bool isWordExist(vector<vector<char>>& board , string word , int row , int col , int wordIndex)
+    {
+        if(wordIndex == word.size())
+        {
+            return true;
+        }
+        if(row < 0 || col < 0 || row >= board.size() || col >= board[0].size() || board[row][col] != word[wordIndex] || board[row][col] == '.')
+        {
+            return false;
+        }
+        // Include
+        char currentCharacter = board[row][col];
+        board[row][col] = '.';
+        // 4 - Possible Moves
+        bool ans1 = isWordExist(board , word , row-1 , col , wordIndex+1);    
+        bool ans2 = isWordExist(board , word , row , col+1 , wordIndex+1);    
+        bool ans3 = isWordExist(board , word , row+1 , col , wordIndex+1);    
+        bool ans4 = isWordExist(board , word , row , col-1 , wordIndex+1);    
+        if(ans1 || ans2 || ans3 || ans4)
+        {
+            return true;
+        }
+        // Exclude
+        board[row][col] = currentCharacter; // Backtrack
+        return false;
+    }
+
+    bool exist(vector<vector<char>>& board, string word) 
+    {
+        int row = board.size();
+        int col = board[0].size();
+        int wordIndex = 0;
+        for(int i=0 ; i<row ; i++)
+        {
+            for(int j=0 ; j<col ; j++)
+            {
+                if(board[i][j] == word[wordIndex])
+                {
+                    if(isWordExist(board , word , i , j , wordIndex))
+                    {
+                        return true;
+                    }
+                }  
+            }
+        }
+        return false;    
     }
 };
 ```
