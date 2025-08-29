@@ -14,6 +14,7 @@
 | Word Search |
 | Sudoku Solver |
 | Valid Sudoku |
+| Combination Sum |
 
 ---
 ### Questions
@@ -550,6 +551,49 @@ public:
             }
         }
         return true;
+    }
+};
+```
+
+- Combination Sum
+```c++
+class Solution {
+public:
+    void getCombinations(vector<int>& nums , int target , set<vector<int>>& s , vector<int>& combination , vector<vector<int>>& ans , int index , int sum)
+    {
+        // Base Case
+        if(sum == target)
+        {
+            if(s.find(combination) == s.end()) // Skip Duplicate Combinations
+            {
+                ans.push_back(combination);
+                s.insert(combination);
+            }
+            return;
+        }
+        if(index == nums.size() || sum > target)
+        {
+            return;
+        }
+        combination.push_back(nums[index]);
+        // Include Single Time
+        getCombinations(nums , target , s , combination , ans , index+1 , sum+nums[index]);
+        // Include Multiple Time
+        getCombinations(nums , target , s , combination , ans , index , sum+nums[index]);
+        // Exclude
+        combination.pop_back(); // Backtrack
+        getCombinations(nums , target , s , combination , ans , index+1 , sum);
+    }
+
+    vector<vector<int>> combinationSum(vector<int>& nums, int target) 
+    {    
+        int index = 0;
+        int sum = 0;
+        set<vector<int>> s;
+        vector<int> combination;
+        vector<vector<int>> ans;
+        getCombinations(nums , target , s , combination , ans , index , sum);
+        return ans;
     }
 };
 ```
