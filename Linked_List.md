@@ -4,6 +4,7 @@
 | LINKED LIST |
 | ----------- |
 | Implementation |
+| Design Linked List |
 | Middle of the Linked List |
 | Reverse Linked List |
 | Merge Two Sorted Lists |
@@ -252,6 +253,108 @@ int main()
 ```
 
 ### Questions
+
+- Design Linked List
+```c++
+class Node {
+public:
+    int val;
+    Node* next;
+
+    Node(int val) {
+        this->val = val;
+        this->next = NULL;
+    }
+};
+
+class MyLinkedList {
+public:
+    Node* head;
+    int size;
+
+    MyLinkedList() {
+        head = NULL;
+        size = 0;
+    }
+    
+    int get(int index) {
+        if(index < 0 || index >= size || head == NULL) {
+            return -1;
+        }
+        Node* ptr = head;
+        for(int i=0 ; i<index ; i++) {
+            ptr = ptr->next;
+        }
+        return ptr->val;
+    }
+    
+    void addAtHead(int val) {
+        Node* new_node = new Node(val);
+        new_node->next = head;
+        head = new_node;
+        size++;
+    }
+    
+    void addAtTail(int val) {
+        Node* ptr = head;
+        if(ptr == NULL) {
+            head = new Node(val);
+        }
+        else {
+            while(ptr->next != NULL) {
+                ptr = ptr->next;
+            }
+            ptr->next = new Node(val);
+        }
+        size++;
+    }
+    
+    void addAtIndex(int index, int val) {
+        if(index < 0 || index > size) {
+            return;
+        }
+        if(index == 0) {
+            Node* new_node = new Node(val);
+            new_node->next = head;
+            head = new_node;
+        }
+        else {
+            Node* ptr = head;
+            for(int i=0 ; i<index-1 ; i++) {
+                ptr = ptr->next;
+            }
+            Node* new_node = new Node(val);
+            new_node->next = ptr->next;
+            ptr->next = new_node;
+        }
+        size++;
+    }
+    
+    void deleteAtIndex(int index) {
+        if(index < 0 || index >= size) {
+            return;
+        }
+        Node* ptr = head;
+        if(index == 0) {
+            head = head->next;
+            delete ptr;
+        }
+        else {
+            for(int i=0 ; i<index-1 ; i++) {
+                ptr = ptr->next;
+            }
+            Node* temp = ptr->next;
+            ptr->next = ptr->next->next;
+            delete temp;
+        }
+        size--;
+    }
+};
+```
+
+```c++
+
+```
 
 - Middle of the Linked List
 ```c++
@@ -994,5 +1097,6 @@ public:
 
 
 ---
+
 
 
