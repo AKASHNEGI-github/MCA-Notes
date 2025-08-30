@@ -14,7 +14,9 @@
 | Word Search |
 | Sudoku Solver |
 | Valid Sudoku |
+| Combinations |
 | Combination Sum |
+| Combination Sum II |
 
 ---
 ### Questions
@@ -555,6 +557,41 @@ public:
 };
 ```
 
+- Combinations
+```c++
+class Solution {
+public:
+    void getCombinations(int& n , int& k , vector<int>& combination , vector<vector<int>>& ans , int index)
+    {
+        // Base Case
+        if(combination.size() == k)
+        {
+            ans.push_back({combination});
+            return;
+        }
+        if(index > n)
+        {
+            return;
+        }
+        // Include 
+        combination.push_back(index);
+        getCombinations(n , k , combination , ans , index+1);
+        // Exclude
+        combination.pop_back(); // Backtrack
+        getCombinations(n , k , combination , ans , index+1);
+    }
+
+    vector<vector<int>> combine(int n, int k) 
+    {
+        int index = 1;
+        vector<int> combination;
+        vector<vector<int>> ans;
+        getCombinations(n , k , combination , ans , index);
+        return ans;    
+    }
+};
+```
+
 - Combination Sum
 ```c++
 class Solution {
@@ -593,6 +630,49 @@ public:
         vector<int> combination;
         vector<vector<int>> ans;
         getCombinations(nums , target , s , combination , ans , index , sum);
+        return ans;
+    }
+};
+```
+
+- Combination Sum II
+```c++
+class Solution {
+public:
+    void getCombinations(vector<int>& nums , int target , vector<int>& combination , vector<vector<int>>& ans , int index , int sum)
+    {
+        // Base Case
+        if(sum == target)
+        {
+            ans.push_back({combination});
+            return;
+        }
+        if(index == nums.size() || sum > target)
+        {
+            return;
+        }
+        combination.push_back(nums[index]);
+        // Include 
+        getCombinations(nums , target , combination , ans , index+1 , sum+nums[index]);
+        // Exclude
+        combination.pop_back(); // Backtrack
+        // Skip Duplicates
+        int nextIndex = index+1;
+        while(nextIndex < nums.size() && nums[nextIndex] == nums[nextIndex-1])
+        {
+            nextIndex++;
+        }
+        getCombinations(nums , target , combination , ans , nextIndex , sum);
+    }
+
+    vector<vector<int>> combinationSum2(vector<int>& nums, int target) 
+    {   
+        int index = 0;
+        int sum = 0;
+        vector<int> combination;
+        vector<vector<int>> ans;
+        sort(nums.begin() , nums.end());
+        getCombinations(nums , target , combination , ans , index , sum);
         return ans;
     }
 };
