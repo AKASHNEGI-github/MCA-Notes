@@ -5,6 +5,8 @@
 | ------------ |
 | Subsets |
 | Subsets II |
+| Generate Binary Strings Without Adjacent Zeros |
+| Letter Case Permutation |
 | Letter Combinations of a Phone Number |
 | Permutations |
 | Permutations II |
@@ -86,6 +88,80 @@ public:
         sort(nums.begin() , nums.end());
         getSubsets(nums , ans , subset , index);
         return ans;   
+    }
+};
+```
+
+- Generate Binary Strings Without Adjacent Zeros
+```c++
+class Solution {
+public:
+    void getValidPermutations(int& n , vector<string>& ans , string s)
+    {
+        // Base Case
+        if(s.size() == n)
+        {
+            ans.push_back(s);
+            return;
+        }
+        // If s has '0' as the last character, we can only append '1', whereas if the last character is '1', we can append both '0' and '1'
+        if(s.size() > 0 && s[s.size()-1] == '0')
+        {
+            s = s + '1';
+            getValidPermutations(n , ans , s);
+            return;
+        }
+        // Include -> '0'
+        s = s + '0';
+        getValidPermutations(n , ans , s);
+        // Exclude
+        s.pop_back(); // Backtrack
+        // Include -> '1'
+        s = s + '1';
+        getValidPermutations(n , ans , s);
+    }
+
+    vector<string> validStrings(int n) 
+    {
+        string s;
+        vector<string> ans;        
+        getValidPermutations(n , ans , s);
+        return ans;
+    }
+};
+```
+
+- Letter Case Permutation
+```c++
+class Solution {
+public:
+    void getPermutations(string& s , vector<string>& ans , int index)
+    {
+        // Base Case
+        if(index == s.size())
+        {
+            ans.push_back(s);
+            return;
+        }
+        if(isdigit(s[index])) // Move to Next Character
+        {
+            getPermutations(s , ans , index + 1);
+            return;
+        }
+        // Include Uppercase
+        s[index] = (char)toupper(s[index]);
+        getPermutations(s , ans , index+1);
+        // Include Lowercase
+        s[index] = (char)tolower(s[index]);
+        getPermutations(s , ans , index+1);
+    }
+
+    vector<string> letterCasePermutation(string s) 
+    {
+        int index = 0;
+        vector<string> ans;
+        getPermutations(s , ans , index);
+        return ans;    
     }
 };
 ```
