@@ -3,7 +3,14 @@
 
 | STACK |
 | ----- |
-| Trapping Rain Water |
+| Remove All Adjacent Duplicates In String |
+| Clear Digits |
+| Valid Parentheses |
+| Implement two stacks in an array |
+| Min Stack |
+| Next Greater Element I |
+| Next Greater Element II |
+| Largest Rectangle in Histogram |
 
 ---
 ### Stack using Array
@@ -397,40 +404,6 @@ class MinStack
 };
 ```
 
-- Next Greater Element I
-```c++
-class Solution {
-public:
-    vector<int> nextGreaterElement(vector<int>& nums1, vector<int>& nums2) \
-    {
-        stack<int> st;
-        unordered_map<int , int> map;
-        for(int i=nums2.size()-1 ; i>=0 ; i--)    
-        {
-            while(!st.empty() && st.top() <= nums2[i])
-            {
-                st.pop();
-            }
-            if(st.empty())
-            {
-                map[nums2[i]] = -1;
-            }
-            else
-            {
-                map[nums2[i]] = st.top();
-            }
-            st.push(nums2[i]);
-        }
-        vector<int> ans;
-        for(int i=0 ; i<nums1.size() ; i++)
-        {
-            ans.push_back(map[nums1[i]]);
-        }
-        return ans;
-    }
-};
-```
-
 - Delete Mid of a Stack
 ```c++
 class Solution 
@@ -486,90 +459,134 @@ void SortedStack :: sort()
 }
 ```
 
-- Trapping Rain Water
+- Next Greater Element I
 ```c++
 class Solution {
 public:
-    int trap(vector<int>& height) // Brute-Force Solution
+    vector<int> nextGreaterElement(vector<int>& nums1, vector<int>& nums2) \
     {
-        int n = height.size();
-        int waterTrapped = 0;
-        for(int i=0 ; i<(n-1) ; i++)
+        stack<int> st;
+        unordered_map<int , int> map;
+        for(int i=nums2.size()-1 ; i>=0 ; i--)    
         {
-            int leftMax = 0;
-            int rightMax = 0;
-            // Find the highest bar to the left of i (including i)
-            for(int j=0 ; j<=i ; j++) 
+            while(!st.empty() && st.top() <= nums2[i])
             {
-                leftMax = max(leftMax , height[j]);
+                st.pop();
             }
-            // Find the highest bar to the right of i (including i)
-            for(int j=i ; j<n ; j++) 
+            if(st.empty())
             {
-                rightMax = max(rightMax , height[j]);
-            }
-            // Water trapped on top of height[i]
-            waterTrapped = waterTrapped + (min(leftMax , rightMax) - height[i]);
-        }
-        return waterTrapped;
-    }
-};
-```
-
-```c++
-class Solution {
-public:
-    int trap(vector<int>& height) // Better Solution
-    {
-        int n = height.size();
-        vector<int> leftMax(n , 0);
-        vector<int> rightMax(n , 0);
-        leftMax[0] = height[0];
-        rightMax[n-1] = height[n-1];
-        int waterTrapped = 0;
-        for(int i=1 ; i<n ; i++)
-        {
-            leftMax[i] = max(leftMax[i-1] , height[i]);
-        }
-        for(int j=(n-2) ; j>=0 ; j--)
-        {
-            rightMax[j] = max(rightMax[j+1] , height[j]);
-        }
-        for(int k=0 ; k<n ; k++)
-        {
-            waterTrapped = waterTrapped + (min(leftMax[k] , rightMax[k]) - height[k]);
-        }
-        return waterTrapped;
-    }
-};
-```
-
-```c++
-class Solution {
-public:
-    int trap(vector<int>& height) // Optimal Solution -> Two Pointer
-    {
-        int left = 0;
-        int right = height.size()-1;
-        int leftMax = 0;
-        int rightMax = 0;
-        int waterTrapped = 0;
-        while(left < right)
-        {
-            leftMax = max(leftMax , height[left]);
-            rightMax = max(rightMax , height[right]);
-            if(leftMax < rightMax)
-            {
-                waterTrapped = waterTrapped + leftMax - height[left];
-                left++;
+                map[nums2[i]] = -1;
             }
             else
             {
-                waterTrapped = waterTrapped + rightMax - height[right];
-                right--;
+                map[nums2[i]] = st.top();
             }
+            st.push(nums2[i]);
         }
-        return waterTrapped;
+        vector<int> ans;
+        for(int i=0 ; i<nums1.size() ; i++)
+        {
+            ans.push_back(map[nums1[i]]);
+        }
+        return ans;
+    }
+};
+```
+
+- Next Greater Element II
+```c++
+
+```
+
+- Largest Rectangle in Histogram
+```c++
+class Solution {
+public:
+    int largestRectangleArea(vector<int>& heights) // Brute-Force Solution
+    {
+        int maxArea = 0;
+        int n = heights.size();
+        for(int i=0 ; i<n ; i++) 
+        {
+            int left = i;
+            int right = i;
+            // Expand to the Left
+            while(left > 0 && heights[left-1] >= heights[i]) 
+            {
+                left--;
+            }
+            // Expand to the Right
+            while(right < (n-1) && heights[right+1] >= heights[i]) 
+            {
+                right++;
+            }
+            // Calculate area
+            int width = right - left + 1;
+            int area = heights[i] * width;
+            maxArea = max(maxArea , area);
+        }
+        return maxArea;    
+    }
+};
+```
+
+```c++
+class Solution {
+public:
+    int largestRectangleArea(vector<int>& heights) // Optimal Solution
+    {
+        int maxArea = 0;
+        int n = heights.size();
+        stack<int> st;
+        vector<int> left(n , 0);
+        vector<int> right(n , 0);
+        // Nearest Right Smaller
+        for(int i=(n-1) ; i>=0 ; i--)
+        {
+            while(st.size() > 0 && heights[st.top()] >= heights[i])
+            {
+                st.pop();
+            }
+            if(st.empty())
+            {
+                right[i] = n;
+            }
+            else
+            {
+                right[i] = st.top();
+            }
+            st.push(i);
+        }
+        // Empty Stack
+        while(!st.empty())
+        {
+            st.pop();
+        }
+        // Nearest Left Smaller
+        for(int i=0 ; i<n ; i++) 
+        {
+            while(st.size() > 0 && heights[st.top()] >= heights[i])
+            {
+                st.pop();
+            }
+            if(st.empty())
+            {
+                left[i] = -1;
+            }
+            else
+            {
+                left[i] = st.top();
+            }
+            st.push(i);
+        }
+        // Calculate Area
+        for(int i=0 ; i<n ; i++)
+        {
+            int width = right[i] - left[i] - 1;
+            int area = heights[i] * width;
+            maxArea = max(area , maxArea);
+        }
+        return maxArea;    
     }
 };
 ```
