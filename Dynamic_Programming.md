@@ -8,7 +8,46 @@
 ```c++
 class Solution {
 public:
-    int climbStairs(int n) // Tabulation
+    int climbStairs(int n) // Recursion
+    {
+        if(n == 0 || n == 1)
+        {
+            return 1;
+        }
+        return climbStairs(n-1) + climbStairs(n-2);
+    }
+};
+```
+
+```c++
+class Solution {
+public:
+    int memoization(vector<int> dp , int n)
+    {
+        if(n == 0 || n == 1)
+        {
+            return 1;
+        }
+        if(dp[n] != -1)
+        {
+            return dp[n];
+        }
+        dp[n] = memoization(dp , n-1) + memoization(dp , n-2);
+        return dp[n];
+    }
+
+    int climbStairs(int n) // Memoization(Top-Down)
+    {
+        vector<int> dp(n+1 , -1);
+        return memoization(dp , n);
+    }
+};
+```
+
+```c++
+class Solution {
+public:
+    int climbStairs(int n) // Tabulation(Bottom-Up)
     {
         vector<int> dp(n+1);
         dp[0] = 1;
