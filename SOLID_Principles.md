@@ -2,6 +2,7 @@
 ---
 
 | SOLID |
+| ----- |
 | Single Responsibility Principle |
 | Open Closed Principle |
 | Liskov's Substitution Principle |
