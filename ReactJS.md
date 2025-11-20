@@ -153,6 +153,101 @@ export default App
 | Complex forms with real-time validation | Simple forms or when instant control isn’t needed |
 | Easy to sync with other UI elements | Difficult to keep in sync without extra work |
 
+### What are Higher-Order Components
+Higher-order components (HOC) are an advanced technique in React that is used for reusing component logic. It is the function that takes the original component and returns the new enhanced component.
+It doesn’t modify the input component directly. Instead, they return a new component with enhanced behavior.
+They allow you to reuse component logic across multiple components without duplicating it.
+They are pure functions that accept a component and return a new component.
+
+A Higher Order Component (HOC) is like a wrapper that adds extra features to your React components. Think of it like putting a case on your phone - the case adds new features (like water protection) without changing the phone itself.
+
+- Adding a Border
+```jsx
+import React from 'react'
+
+// Component without Border
+function Greeting({ name }) {
+  return (
+    <h1>Hello, {name}!</h1>
+  )
+}
+
+// Higher Order Component that adds Border to any Component
+function withBorder(WrappedComponent) {
+  return function NewComponent(props) {
+    return (
+      <div style={{ border: '2px solid blue', padding: '10px' }}>
+        <WrappedComponent {...props} />
+      </div>
+    );
+  };
+}
+
+// Create New Component with Border
+const GreetingWithBorder = withBorder(Greeting);
+
+function App() {
+  return (
+    <>
+      <Greeting name="Akash" />
+      <hr/>
+      <GreetingWithBorder name="Akash" />
+    </>
+  );
+}
+
+export default App
+```
+
+```jsx
+import React, { useState } from 'react'
+import './App.css'
+
+function Counter({ count , increament , decreament , reset }) {
+  return (
+    <>
+      <h1>React Counter Application</h1>
+      <h2>Count : {count}</h2>
+      <button onClick={increament}>Increament</button>
+      <button onClick={reset}>Reset</button>
+      <button onClick={decreament}>Decreament</button>
+    </>
+  )
+}
+
+function withCounter(WrappedComponent) {
+  return function WithCounter(props) {
+    const [count, setCount] = useState(0);
+
+    const increament = () => setCount((prev) => prev + 1);
+    const decreament = () => setCount((prev) => prev - 1);
+    const reset = () => setCount(0);
+    return (
+      <WrappedComponent
+        count={count}
+        increament={increament}
+        decreament={decreament}
+        reset={reset}
+        {...props}
+      />
+    );
+  };
+};
+
+// Create New Component with Border
+const EnhancedCounter = withCounter(Counter);
+
+function App() {
+  return (
+    <>
+      <EnhancedCounter/>
+    </>
+  );
+}
+
+export default App
+```
+
 ### What is the difference between State and Props
 
 ### Explain Styling in React
@@ -300,6 +395,13 @@ export default App
 ```
 
 ### What is Context API in React
+The useContext hook in React allows components to consume values from the React context. React’s context API is primarily designed to pass data down the component tree without manually passing props at every level. useContext is a part of React's hooks system, introduced in React 16.8, that enables functional components to access context values.
+It helps avoid the problem of "prop drilling," where props are passed down multiple levels from parent to child components.
+- useContext hook consumes values from a React Context, making them accessible to functional components.
+- First, create a Context object using React.createContext(), which holds the shared state.
+- Use useContext to access the context value in any component that needs it, avoiding prop drilling.
+- When the value of the Context updates, all components consuming that context automatically re-render with the new value.
+
 ```jsx
 // Step-1:Create Context
 // Step-2:Wrap All Children Inside Context Provider
