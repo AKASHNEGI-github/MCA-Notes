@@ -333,18 +333,65 @@ Periodic Index Maintenance: Indexes need to be periodically maintained, especial
 Query Optimization: Indexes play a critical role in query optimization. The DBMS query optimizer uses indexes to determine the most efficient execution plan for a query.
 Handling Fragmentation: Index fragmentation can reduce the effectiveness of an index. Regular defragmentation can help maintain optimal performance.
 
-### What is Sharding in DBMS
-Sharding is a very important concept that helps the system to keep data in different resources according to the sharding process. The word “Shard” means "a small part of a whole". Hence Sharding means dividing a larger part into smaller parts. In DBMS, Sharding is a type of DataBase partitioning in which a large database is divided or partitioned into smaller data and different nodes. These shards are not only smaller, but also faster and hence easily manageable. 
-
 ### What is Scaling in DBMS
 Scaling alters the size of a system. In the scaling process, we either compress or expand the system to meet the expected needs. The scaling operation can be achieved by adding resources to meet the smaller expectation in the current system, by adding a new system to the existing one, or both. 
 
 Types of Scaling - 
-- **Vertical Scaling** : When new resources are added to the existing system to meet the expectation, it is known as vertical scaling. 
-Example - Consider a rack of servers and resources that comprises the existing system. (as shown in the figure). Now when the existing system fails to meet the expected needs, and the expected needs can be met by just adding resources, this is considered vertical scaling. Vertical scaling is based on the idea of adding more power(CPU, RAM) to existing systems, basically adding more resources.
+- Vertical Scaling : When new resources are added to the existing system to meet the expectation, it is known as vertical scaling. 
+Consider a rack of servers and resources that comprises the existing system. (as shown in the figure). Now when the existing system fails to meet the expected needs, and the expected needs can be met by just adding resources, this is considered vertical scaling. Vertical scaling is based on the idea of adding more power(CPU, RAM) to existing systems, basically adding more resources.
 Vertical scaling is not only easy but also cheaper than Horizontal Scaling. It also requires less time to be fixed. 
  
-- **Horizontal Scaling** : When new server racks are added to the existing system to meet the higher expectation, it is known as horizontal scaling. 
-Example - Consider a rack of servers and resources that comprises the existing system. (as shown in the figure). Now when the existing system fails to meet the expected needs, and the expected needs cannot be met by just adding resources, we need to add completely new servers. This is considered horizontal scaling. Horizontal scaling is based on the idea of adding more machines to our pool of resources. Horizontal scaling is difficult and also costlier than Vertical Scaling. It also requires more time to be fixed. 
+- Horizontal Scaling : When new server racks are added to the existing system to meet the higher expectation, it is known as horizontal scaling. 
+Consider a rack of servers and resources that comprises the existing system. (as shown in the figure). Now when the existing system fails to meet the expected needs, and the expected needs cannot be met by just adding resources, we need to add completely new servers. This is considered horizontal scaling. Horizontal scaling is based on the idea of adding more machines to our pool of resources. Horizontal scaling is difficult and also costlier than Vertical Scaling. It also requires more time to be fixed.
+
+| Horizontal Scaling | Vertical Scaling |
+|--------------------|------------------|
+| When new server racks are added to the existing system to meet higher expectations, it is known as horizontal scaling. | When new resources are added to the existing system to meet expectations, it is known as vertical scaling. |
+| It expands the size of the existing system horizontally. | It expands the size of the existing system vertically. |
+| It is easier to upgrade. | It is harder to upgrade and may involve downtime. |
+| It is difficult to implement. | It is easy to implement. |
+| It is costlier, as new server racks comprise many resources. | It is cheaper as we just need to add new resources. |
+| It takes more time to be done. | It takes less time to be done. |
+| High resilience and fault tolerance. | Single point of failure. |
+| Examples of databases that can be easily scaled: Cassandra, MongoDB, Google Cloud Spanner | Examples of databases that can be easily scaled: MySQL, Amazon RDS |
+
+### What is Sharding in DBMS
+Sharding is a very important concept that helps the system to keep data in different resources according to the sharding process. The word “Shard” means "a small part of a whole". Hence Sharding means dividing a larger part into smaller parts. In DBMS, Sharding is a type of DataBase partitioning in which a large database is divided or partitioned into smaller data and different nodes. These shards are not only smaller, but also faster and hence easily manageable. 
+
+Database sharding is a technique for horizontal scaling of databases, where the data is split across multiple database instances, or shards, to improve performance and reduce the impact of large amounts of data on a single database.
+
+It is basically a database architecture pattern in which we split a large dataset into smaller chunks (logical shards) and we store/distribute these chunks in different machines/database nodes (physical shards).
+
+- Each chunk/partition is known as a "shard" and each shard has the same database schema as the original database.
+- We distribute the data in such a way that each row appears in exactly one shard.
+- It's a good mechanism to improve the scalability of an application.
+
+Methods of Sharding
+1. Key Based Sharding
+Key Based Sharding is a technique is also known as hash-based sharding. Here, we take the value of an entity such as customer ID, customer email, IP address of a client, zip code, etc and we use this value as an input of the hash function. This process generates a hash value which is used to determine which shard we need to use to store the data.
+
+We need to keep in mind that the values entered into the hash function should all come from the same column (shard key) just to ensure that data is placed in the correct order and in a consistent manner.
+Basically, shard keys act like a primary key or a unique identifier for individual rows.
+For example : You have 3 database servers and each request has an application id which is incremented by 1 every time a new application is registered.
+To determine which server data should be placed on, we perform a modulo operation on these applications id with the number 3. Then the remainder is used to identify the server to store our data.
+
+2. Horizontal or Range Based Sharding 
+In Horizontal or Range Based Sharding, we divide the data by separating it into different parts based on the range of a specific value within each record. Let's say you have a database of your online customers' names and email information. You can split this information into two shards.
+
+In one shard you can keep the info of customers whose first name starts with A-P
+In another shard, keep the information of the rest of the customers. 
+
+3. Vertical Sharding
+In Vertical Sharding, we split the entire column from the table and we put those columns into new distinct tables. Data is totally independent of one partition to the other ones. Also, each partition holds both distinct rows and columns. We can split different features of an entity in different shards on different machines.
+
+For example : On Twitter users might have a profile, number of followers, and some tweets posted by his/her own. We can place the user profiles on one shard, followers in the second shard, and tweets on a third shard.
+
+4. Directory-Based Sharding
+In Directory-Based Sharding, we create and maintain a lookup service or lookup table for the original database. Basically we use a shard key for lookup table and we do mapping for each entity that exists in the database. This way we keep track of which database shards hold which data.
+
+The lookup table holds a static set of information about where specific data can be found. In the above image, you can see that we have used the delivery zone as a shard key:
+
+Firstly the client application queries the lookup service to find out the shard (database partition) on which the data is placed.
+When the lookup service returns the shard it queries/updates that shard.  
 
 ---
