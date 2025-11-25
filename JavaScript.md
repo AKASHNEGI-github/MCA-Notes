@@ -255,6 +255,8 @@ console.log("Sum :" , sum);
 ```
 
 ### What is Call
+The call() method of Function instances calls this function with a given this value and arguments provided individually.
+Normally, when calling a function, the value of this inside the function is the object that the function was accessed on. With call(), you can assign an arbitrary value as this when calling an existing function, without first attaching the function to the object as a property. This allows you to use methods of one object as generic utility functions.
 ```js
 let user = {
     name:"Akash",
@@ -300,6 +302,9 @@ print.call(user , "Dehradun" , "India"); // Akash Dehradun India
 ```
 
 ### What is Apply
+The apply() method of Function instances calls this function with a given this value, and arguments provided as an array (or an array-like object).
+Normally, when calling a function, the value of this inside the function is the object that the function was accessed on. With apply(), you can assign an arbitrary value as this when calling an existing function, without first attaching the function to the object as a property. This allows you to use methods of one object as generic utility functions.
+
 ```js
 let user = {
     name:"Akash"
@@ -311,6 +316,9 @@ print.apply(user , ["Dehradun" , "India"]); // Akash Dehradun India
 ```
 
 ### What is Bind
+The bind() method of Function instances creates a new function that, when called, calls this function with its this keyword set to the provided value, and a given sequence of arguments preceding any provided when the new function is called.
+The bind() function creates a new bound function. Calling the bound function generally results in the execution of the function it wraps, which is also called the target function. The bound function will store the parameters passed — which include the value of this and the first few arguments — as its internal state. These values are stored in advance, instead of being passed at call time. You can generally see const boundFn = fn.bind(thisArg, arg1, arg2) as being equivalent to const boundFn = (...restArgs) => fn.call(thisArg, arg1, arg2, ...restArgs) for the effect when it's called (but not when boundFn is constructed).
+
 ```js
 let user = {
     name:"Akash"
@@ -849,6 +857,21 @@ Promise.all([promise1, promise2]).then(function(result){
 });
 ```
 
+### What is Async-Await
+Async/Await is a simpler way to work with Promises in JavaScript. It lets you write code that handles tasks which take time, like fetching data, in a way like regular, step-by-step code. The async keyword is used to create a function that returns a Promise, while the await keyword pauses the function's execution until the Promise is done.
+- Async Functions: An async function returns a Promise. It allows the use of the await keyword inside it.
+- Await: The await keyword pauses the execution of the async function until the Promise is resolved or rejected.
+
+### Promise vs Async/Await
+| Promise | Async/Await |
+|------------|------------------|
+| A Promise represents an intermediate state of an operation and is guaranteed to complete its execution at some point in the future. | Async/Await is syntactic sugar for Promises, making asynchronous code behave more synchronously. |
+| Promise has 3 states – resolved, rejected, and pending. | It does not have states of its own. It simply returns a Promise that will be resolved or rejected. |
+| If the function `fxn1` is to be executed after the promise, then `promise.then(fxn1)` continues execution of the current function after adding `fxn1` to the callback chain. | If `fxn1` is to be executed after `await`, then `await X()` suspends execution of the current function and then `fxn1` is executed. |
+| Error handling is done using `.then()` and `.catch()` methods. | Error handling is done using `try` and `catch` blocks. |
+| Promise chains can become difficult to understand sometimes. | Async/Await makes it easier to read and understand the flow of the program compared to promise chains. |
+
+
 ### Explain Fetch API
 The Fetch API provides a JavaScript interface for making HTTP requests and processing the responses.
 
@@ -885,6 +908,50 @@ async function getAPI() {
 }
 getAPI(); // (data is the response from the API)
 ```
+
+### What is Debouncing
+Debouncing, in the context of programming, means to discard operations that occur too close together during a specific interval, and consolidate them into a single invocation.
+
+Debouncing is very similar to throttling. The key difference is that throttling enforces limits on continuous operations, while debouncing waits for invocations to stop for a specific time to consolidate many noisy invocations into one single invocation.
+
+A typical use case of debouncing is when responding to user input. When the user is typing, no other action should be taken to avoid the UI becoming laggy. When the user pauses typing, we can start processing the input, such as filtering results, giving suggestions, etc. If the function search is debounced by 10 milliseconds, it means:
+- The first call to search is known as the leading edge.
+- For every next call to search, if it is within 10 milliseconds from the previous call, it is in the same "batch" as the previous call.
+- After 10 milliseconds have elapsed from the last call to search, if no other calls have happened, we have reached the trailing edge.
+Usually, search is executed once on the trailing edge only, although sometimes it might be executed on the leading edge, or even both edges, depending on the specific use case. If executed on both edges, the debouncing implementation usually also ensures that the next leading edge invocation doesn't fire at least 10 milliseconds after the previous trailing edge.
+
+```js
+
+```
+
+### What is Throttling
+Throttling originally meant slowing down the rate of fluid flow using an obstruction. In the context of programming, it refers to slowing down a process such that an operation can only be performed at a certain rate.
+
+Throttling is very similar to debouncing. The key difference is that when invocations happen continuously, throttling ensures that the operation is still performed at a certain maximum rate, while debouncing waits indefinitely until the invocations stop for a certain amount of time.
+
+A typical use case of throttling is when synchronizing with another constantly-updating state. Consider a function onScrolled, which listens for the scroll event. The scroll event may fire as often as every pixel scrolled, so the function will be called in very short intervals. If onScrolled is computationally expensive, earlier invocations might block later invocations from happening on time, or block other things from executing in the meantime, leading to a noticeable jank. In this case, we can throttle onScrolled, such that it can only be called at most once every 10 milliseconds:
+
+The first call to onScrolled is known as the leading edge.
+For every next call to onScrolled, if it is within 10 milliseconds from the first call, it is in the same "batch" as the first call.
+After 10 milliseconds have elapsed from the first call to onScrolled, we have reached the trailing edge.
+Usually, onScrolled is executed once on the leading edge only, although sometimes it might be executed on the trailing edge, or even both edges, depending on the specific use case. If executed on both edges, the throttling implementation usually also ensures that the next leading edge invocation doesn't fire at least 10 milliseconds after the previous trailing edge.
+
+Via throttling, the effect of onScrolled is still continuously updated and applied — for example, if it moves another DOM element based on the document's scroll position, that DOM element is still continuously moved while the page is scrolling — but it isn't executed more often than necessary.
+
+Network throttling means to simulate a slower network connection by only allowing a certain amount of data to be transferred at a time. Throttling a timer means to coarsen the timer's precision such that when reading the timer (such as Date.now()) continuously, the timer's value only changes at a certain maximum rate. Both are specific applications of the general concept of throttling.
+
+```js
+
+```
+
+### Debouncing vs Throttling
+| Aspect | Debouncing | Throttling |
+|--------|-------------------------|
+| Definition | Delays execution until a period of inactivity | Limits execution to a fixed rate |
+| Execution Timing | Executes once after the last event | Executes at regular intervals |
+| Use Case | Ideal for events with intermittent pauses (e.g., typing, resizing) | Ideal for events with constant activity (e.g., scrolling, mouse move) |
+| Advantage | Reduces number of executions, improving performance and reducing unnecessary operations | Ensures function executes at a controlled rate, preventing performance degradation |
+| Disadvantage | Delays execution; may miss immediate feedback | May miss events if the throttle interval is too long |
 
 ### What are Events
 Events are "things" that happen to HTML elements. When JavaScript is used in HTML pages, JavaScript can react on these events. 
