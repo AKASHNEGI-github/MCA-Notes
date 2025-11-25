@@ -946,7 +946,7 @@ Network throttling means to simulate a slower network connection by only allowin
 
 ### Debouncing vs Throttling
 | Aspect | Debouncing | Throttling |
-|--------|-------------------------|
+|--------|----------- |------------|
 | Definition | Delays execution until a period of inactivity | Limits execution to a fixed rate |
 | Execution Timing | Executes once after the last event | Executes at regular intervals |
 | Use Case | Ideal for events with intermittent pauses (e.g., typing, resizing) | Ideal for events with constant activity (e.g., scrolling, mouse move) |
