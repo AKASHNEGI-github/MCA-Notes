@@ -1094,6 +1094,30 @@ int main()
 }
 ```
 
+### Abstraction vs Encapsulation
+| Abstraction | Encapsulation |
+|-------------|---------------|
+| Abstraction is the process of hiding implementation details and showing only the functionality to the users. | Encapsulation is the process of binding data and methods together in a single unit, providing controlled access to data. |
+| Main feature: reduces complexity, promotes maintainability, and provides a clear separation between interface and implementation. | Main feature: data hiding, access control, and modularity. |
+| Problems are solved at the design or interface level. | Problems are solved at the implementation level. |
+| Implemented using abstract classes and interfaces. | Implemented using access modifiers (private, protected, public) and nested classes. |
+| Implementation complexities are hidden using abstract classes and interfaces. | Uses private access modifiers to hide data and provides controlled access via getters and setters. |
+| Objects that help to perform abstraction are encapsulated. | Objects that result from encapsulation need not be abstracted. |
+| Provides access to specific parts of data. | Hides data completely and prevents direct access (data hiding). |
+| Focuses on "what" the object does. | Focuses on "how" the object does it. |
+| Example: A car — the driver only needs to know how to drive it, not how the engine or gearbox works. | Example: A bank class — customers access their information through methods (getters/setters), while internal data is hidden. |
+
+### Inheritance vs Polymorphism
+| Inheritance | Polymorphism |
+|-------------|--------------|
+| Inheritance is a mechanism in which a new class (derived class) is created that inherits features from an existing class (base class). | Polymorphism refers to something that can take multiple forms. |
+| It is applied to classes. | It is applied to functions or methods. |
+| Supports reusability and reduces code length in object-oriented programming. | Allows objects to decide which form of a function to execute: compile-time (overloading) or run-time (overriding). |
+| Can be single, hybrid, multiple, hierarchical, or multilevel inheritance. | Can be compile-time polymorphism (overloading) or run-time polymorphism (overriding). |
+| Used in pattern designing. | Also used in pattern designing. |
+| Example: A `Bike` class can inherit from `TwoWheeler`, which in turn is a subclass of `Vehicle`. | Example: A `Bike` class may have a `set_color()` method that behaves differently depending on the color passed. |
+
+
 ### What is Pure Virtual Function
 In c++, A pure virtual function (or abstract function) is a virtual function that doesn’t contain any statements and is declared by assigning 0 in the declaration. We must override that function in the derived class, otherwise, the derived class will also become an abstract class.
 ```c++
@@ -1346,3 +1370,4 @@ In C++, multithreading is supported by the <thread> library introduced in C++11,
 Garbage collection refers to this mechanism of handling the memory in the program. Through garbage collection, the unwanted memory is freed up by removing the objects that are no longer needed.
 
 ---
+
