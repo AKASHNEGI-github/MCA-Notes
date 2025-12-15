@@ -27,11 +27,9 @@
 ```c++
 class Solution {
 public:
-    void getSubsets(vector<int>& nums , vector<vector<int>>& ans , vector<int> subset , int index)
-    {
+    void getSubsets(vector<int>& nums , vector<vector<int>>& ans , vector<int> subset , int index) {
         // Base Case
-        if(index == nums.size())
-        {
+        if(index == nums.size()) {
             ans.push_back(subset);
             return;
         }
@@ -43,8 +41,7 @@ public:
         getSubsets(nums , ans , subset , index+1);
     }
 
-    vector<vector<int>> subsets(vector<int>& nums) 
-    {
+    vector<vector<int>> subsets(vector<int>& nums) {
         int index = 0;
         vector<int> subset;
         vector<vector<int>> ans;
@@ -58,11 +55,9 @@ public:
 ```c++
 class Solution {
 public:
-    void getSubsets(vector<int>& nums , vector<vector<int>>& ans , vector<int> subset , int index)
-    {
+    void getSubsets(vector<int>& nums , vector<vector<int>>& ans , vector<int> subset , int index) {
         // Base Case
-        if(index == nums.size())
-        {
+        if(index == nums.size()) {
             ans.push_back(subset);
             return;
         }
@@ -73,15 +68,13 @@ public:
         subset.pop_back(); // Backtrack
         int nextIndex = index+1;
         // Skip Duplicates
-        while(nextIndex < nums.size() && nums[nextIndex] == nums[nextIndex-1])
-        {
+        while(nextIndex < nums.size() && nums[nextIndex] == nums[nextIndex-1]) {
             nextIndex++;
         }
         getSubsets(nums , ans , subset , nextIndex);
     }
 
-    vector<vector<int>> subsetsWithDup(vector<int>& nums) 
-    {
+    vector<vector<int>> subsetsWithDup(vector<int>& nums) {
         int index = 0;
         vector<int> subset;
         vector<vector<int>> ans;
