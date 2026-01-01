@@ -233,7 +233,35 @@ public:
 
 - Permutations II
 ```c++
+class Solution {
+public:
+    void getPermutationsUnique(vector<int> nums , vector<vector<int>>& ans , int index) {
+        // Base Case
+        if(index == nums.size()) {
+            ans.push_back(nums);
+            return;
+        }
+        unordered_set<int> u_set;
+        for(int i=index ; i<nums.size() ; i++) {
+            if(u_set.find(nums[i]) != u_set.end()) {
+                continue; // skip duplicates
+            }
+            u_set.insert(nums[i]);
+            // Include
+            swap(nums[index] , nums[i]);
+            getPermutationsUnique(nums , ans , index+1);
+            // Exclude
+            swap(nums[index] , nums[i]); // Backtrack
+        }
+    }
 
+    vector<vector<int>> permuteUnique(vector<int>& nums) {
+        int index = 0;
+        vector<vector<int>> ans;
+        getPermutationsUnique(nums , ans , index);
+        return ans;   
+    }
+};
 ```
 
 - N-Queens
