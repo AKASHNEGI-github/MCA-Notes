@@ -17,6 +17,7 @@
 | Koko Eating Bananas |
 | Capacity To Ship Packages Within D Days |
 | Split Array Largest Sum |
+| Median of Two Sorted Arrays |
 
 ---
 ### Questions
@@ -540,6 +541,148 @@ public:
         return high; // return low
     }
 };
+```
+
+- Median of Two Sorted Arrays
+```c++
+class Solution {
+public:
+    double findMedianSortedArrays(vector<int>& nums1, vector<int>& nums2) 
+    {
+        double ans = 0;
+        int m = nums1.size();
+        int n = nums2.size();
+        int size = (m + n);
+        vector<int> nums3(size);
+        int i = 0;
+        int j = 0;
+        int k = 0;
+        while(i < m && j < n)
+        {
+            if(nums1[i] < nums2[j])
+            {
+                nums3[k] = nums1[i];
+                i++;
+                k++;
+            }
+            else 
+            {
+                nums3[k] = nums2[j];
+                j++;
+                k++;
+            }
+        } 
+        while(i < m)
+        {
+            nums3[k] = nums1[i];
+            i++;
+            k++;
+        }  
+        while(j < n)
+        {
+            nums3[k] = nums2[j];
+            j++;
+            k++;
+        } 
+        if(size % 2 != 0)
+        {
+            ans = nums3[size/2];
+        }
+        else if(size % 2 == 0)
+        {
+            ans = (nums3[(size/2)-1] + nums3[size/2])/2.0;
+        }
+        return ans;
+    }
+};
+```
+
+```c++
+class Solution {
+public:
+    double findMedianSortedArrays(vector<int>& nums1, vector<int>& nums2) 
+    {
+        double ans = -1;
+        int m = nums1.size();
+        int n = nums2.size();
+        int size = (m + n);
+        int indexFirst = size/2 -1;
+        int indexSecond = size/2;
+        int elementFirst = -1;
+        int elementSecond = -1;
+        int i = 0;
+        int j = 0;
+        int k = 0;
+        while(i < m && j < n)
+        {
+            if(nums1[i] < nums2[j])
+            {
+                if(k == indexFirst)
+                {
+                    elementFirst = nums1[i];
+                }
+                else if(k == indexSecond)
+                {
+                    elementSecond = nums1[i];
+                }
+                i++;
+                k++;
+            }
+            else 
+            {
+                if(k == indexFirst)
+                {
+                    elementFirst = nums2[j];
+                }
+                else if(k == indexSecond)
+                {
+                    elementSecond = nums2[j];
+                }
+                j++;
+                k++;
+            }
+        } 
+        while(i < m)
+        {
+            if(k == indexFirst)
+            {
+                elementFirst = nums1[i];
+            }
+            else if(k == indexSecond)
+            {
+                elementSecond = nums1[i];
+            }
+            i++;
+            k++;
+        }  
+        while(j < n)
+        {
+            if(k == indexFirst)
+            {
+                elementFirst = nums2[j];
+            }
+            else if(k == indexSecond)
+            {
+                elementSecond = nums2[j];
+            }
+            j++;
+            k++;
+        } 
+        if(size % 2 == 1)
+        {
+            ans = elementSecond;
+        }
+        else if(size % 2 == 0)
+        {
+            ans = (elementFirst + elementSecond)/2.0;
+        }
+        return ans;
+    }
+};
+```
+
+```c++
+
 ```
 
 
