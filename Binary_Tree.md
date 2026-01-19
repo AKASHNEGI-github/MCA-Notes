@@ -233,6 +233,45 @@ vector<int> preorder(Node* root)
 }
 ```
 
+```c++
+class Solution {
+public:
+    vector<int> preorderTraversal(TreeNode* root) // Morris PreOrder Traversal
+    {
+        vector<int> ans;
+        TreeNode* current = root;
+        while(current != NULL)
+        {
+            if(current->left == NULL)
+            {
+                ans.push_back(current->val);
+                current = current->right;
+            }
+            else
+            {
+                TreeNode* previous = current->left;
+                while(previous->right != NULL && previous->right != current)
+                {
+                    previous = previous->right;
+                }
+                if(previous->right == NULL)
+                {
+                    ans.push_back(current->val);
+                    previous->right = current;
+                    current = current->left;
+                }
+                else
+                {
+                    previous->right = NULL;
+                    current = current->right;
+                }
+            }
+        }
+        return ans;   
+    }
+};
+```
+
 - Inorder Traversal
 ```c++
 void inOrderTraversal(Node* root , vector<int> &ans)
@@ -253,6 +292,45 @@ vector<int> inOrder(Node* root)
 }
 ```
 
+```c++
+class Solution {
+public:
+    vector<int> inorderTraversal(TreeNode* root) // Morris InOrder Traversal
+    {
+        vector<int> ans;
+        TreeNode* current = root;
+        while(current != NULL)
+        {
+            if(current->left == NULL)
+            {
+                ans.push_back(current->val);
+                current = current->right;
+            }
+            else
+            {
+                TreeNode* previous = current->left;
+                while(previous->right != NULL && previous->right != current)
+                {
+                    previous = previous->right;
+                }
+                if(previous->right == NULL)
+                {
+                    previous->right = current;
+                    current = current->left;
+                }
+                else
+                {
+                    previous->right = NULL;
+                    ans.push_back(current->val);
+                    current = current->right;
+                }
+            }
+        }
+        return ans;
+    }
+};
+```
+
 - Postorder Traversal
 ```c++
 void postOrderTraversal(Node* root , vector<int> &ans)
@@ -271,6 +349,46 @@ vector <int> postOrder(Node* root)
     postOrderTraversal(root , ans);
     return ans;
 }
+```
+
+```c++
+class Solution {
+public:
+    vector<int> postorderTraversal(TreeNode* root) // Morris PostOrder Traversal
+    {
+        vector<int> ans;
+        TreeNode* current = root;
+        while(current != NULL)
+        {
+            if(current->right == NULL)
+            {
+                ans.push_back(current->val);
+                current = current->left;
+            }
+            else
+            {
+                TreeNode* previous = current->right;
+                while(previous->left != NULL && previous->left != current)
+                {
+                    previous = previous->left;
+                }
+                if(previous->left == NULL)
+                {
+                    ans.push_back(current->val);
+                    previous->left = current;
+                    current = current->right;
+                }
+                else
+                {
+                    previous->left = NULL;
+                    current = current->left;
+                }
+            }
+        }
+        reverse(ans.begin() , ans.end());
+        return ans;   
+    }
+};
 ```
 
 - Binary Tree Level Order Traversal
