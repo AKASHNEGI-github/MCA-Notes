@@ -30,9 +30,26 @@ This document tests every rendering feature supported by GitFolio — alerts, ta
 
 ## Code Tabs
 
-The following example demonstrates the same task—adding two integers—in multiple programming languages. GitFolio automatically groups consecutive code blocks into a single tabbed interface.
+The following example adds two integers using different approaches and languages. GitFolio groups consecutive fenced code blocks into a single tabbed interface, using the text inside `[]` as the tab title.
 
-```cpp
+```cpp [Brute Force]
+#include <iostream>
+using namespace std;
+
+int main() {
+    int a = 10, b = 20;
+    int sum = 0;
+
+    // Brute force: increment sum one by one
+    for (int i = 0; i < a; i++) sum++;
+    for (int i = 0; i < b; i++) sum++;
+
+    cout << sum << endl;
+    return 0;
+}
+```
+
+```cpp [Direct Addition]
 #include <iostream>
 using namespace std;
 
@@ -43,21 +60,21 @@ int main() {
 }
 ```
 
-```python
+```python [Python]
 a = 10
 b = 20
 
 print(a + b)
 ```
 
-```javascript
+```javascript [JavaScript]
 const a = 10;
 const b = 20;
 
 console.log(a + b);
 ```
 
-```java
+```java [Java]
 public class Main {
     public static void main(String[] args) {
         int a = 10;
@@ -65,19 +82,6 @@ public class Main {
 
         System.out.println(a + b);
     }
-}
-```
-
-```go
-package main
-
-import "fmt"
-
-func main() {
-	a := 10
-	b := 20
-
-	fmt.Println(a + b)
 }
 ```
 
