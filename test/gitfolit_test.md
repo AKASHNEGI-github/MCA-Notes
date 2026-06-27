@@ -32,23 +32,6 @@ This document tests every rendering feature supported by GitFolio — alerts, ta
 
 The following example adds two integers using different approaches and languages. GitFolio groups consecutive fenced code blocks into a single tabbed interface, using the text inside `[]` as the tab title.
 
-```cpp [Brute Force]
-#include <iostream>
-using namespace std;
-
-int main() {
-    int a = 10, b = 20;
-    int sum = 0;
-
-    // Brute force: increment sum one by one
-    for (int i = 0; i < a; i++) sum++;
-    for (int i = 0; i < b; i++) sum++;
-
-    cout << sum << endl;
-    return 0;
-}
-```
-
 ```cpp [Direct Addition]
 #include <iostream>
 using namespace std;
