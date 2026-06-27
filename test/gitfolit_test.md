@@ -28,37 +28,57 @@ This document tests every rendering feature supported by GitFolio — alerts, ta
 
 ---
 
-## Code Tabs — CommonJS vs ESM
+## Code Tabs
 
-The server setup looks identical in both module systems:
+The following example demonstrates the same task—adding two integers—in multiple programming languages. GitFolio automatically groups consecutive code blocks into a single tabbed interface.
 
-```cjs
-const express = require('express')
-const app = express()
-const port = 3000
+```cpp
+#include <iostream>
+using namespace std;
 
-app.get('/', (req, res) => {
-  res.send('Hello World!')
-})
-
-app.listen(port, () => {
-  console.log(`Server running on port ${port}`)
-})
+int main() {
+    int a = 10, b = 20;
+    cout << a + b << endl;
+    return 0;
+}
 ```
 
-```mjs
-import express from 'express'
+```python
+a = 10
+b = 20
 
-const app = express()
-const port = 3000
+print(a + b)
+```
 
-app.get('/', (req, res) => {
-  res.send('Hello World!')
-})
+```javascript
+const a = 10;
+const b = 20;
 
-app.listen(port, () => {
-  console.log(`Server running on port ${port}`)
-})
+console.log(a + b);
+```
+
+```java
+public class Main {
+    public static void main(String[] args) {
+        int a = 10;
+        int b = 20;
+
+        System.out.println(a + b);
+    }
+}
+```
+
+```go
+package main
+
+import "fmt"
+
+func main() {
+	a := 10
+	b := 20
+
+	fmt.Println(a + b)
+}
 ```
 
 ---
