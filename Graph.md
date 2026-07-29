@@ -580,6 +580,88 @@ class Solution {
 };
 ```
 
+### Questions
 
+- Is Graph Bipartite?
+```c++
+class Solution {
+public:
+    bool isBipartite(vector<vector<int>>& graph) // Check Bipartite Graph using BFS
+    {
+        int V = graph.size();
+        vector<int> color(V, -1);
+        queue<int> q;
+        for(int i=0; i<V; i++)
+        {
+            if(color[i] == -1)
+            {
+                color[i] = 0;
+                q.push(i);
+                while(!q.empty())
+                {
+                    int node = q.front();
+                    q.pop();
+                    for(int j=0; j<graph[node].size(); j++)
+                    {
+                        if(color[graph[node][j]] == -1)
+                        {
+                            color[graph[node][j]] = (color[node] + 1) % 2;
+                            q.push(graph[node][j]);
+                        }
+                        else if(color[graph[node][j]] == color[node])
+                        {
+                            return false;
+                        }
+                    }
+                }
+            }
+        }
+        return true;
+    }
+};
+```
+
+```c++
+class Solution {
+public:
+    bool DFS(int node, vector<vector<int>>& graph,  vector<int>& color)
+    {
+        for(int j=0; j<graph[node].size(); j++)
+        {
+            if(color[graph[node][j]] == -1)
+            {
+                color[graph[node][j]] = (color[node] + 1) % 2;
+                if(DFS(graph[node][j], graph, color) == false)
+                {
+                    return false;
+                }
+            }
+            else if(color[graph[node][j]] == color[node])
+            {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    bool isBipartite(vector<vector<int>>& graph) // Check Bipartite Graph using DFS
+    {
+        int V = graph.size();
+        vector<int> color(V, -1);
+        for(int i=0; i<V; i++)
+        {
+            if(color[i] == -1)
+            {
+                color[i] = (color[i] + 1) % 2;
+                if(DFS(i, graph, color) == false)
+                {
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
+};
+```
 
 ---
