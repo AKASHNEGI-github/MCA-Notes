@@ -514,8 +514,17 @@ class Solution {
         st.push(node);
     }
 
-    vector<int> topoSort(int V, vector<vector<int>>& adj) 
+    vector<int> topoSort(int V, vector<vector<int>>& edges) 
     {
+		// Convert Adjacency Matrix to Adjacency List
+		vector<int> adj[V];
+        for (int i=0; i<edges.size(); i++) 
+        {
+            int u = edges[i][0];
+            int v = edges[i][1];
+            adj[u].push_back(v);
+        }
+
         stack<int> st;
         vector<int> visited(V, 0);
         for(int i=0; i<V; i++)
@@ -536,12 +545,69 @@ class Solution {
 };
 ```
 
+```c++
+class Solution {
+  public:
+    void DFS(int node, vector<int>& visited, vector<int> (&adj)[], stack<int>& st)
+    {
+        visited[node] = 1;
+        for(int j=0; j<adj[node].size(); j++)
+        {
+            if(!visited[adj[node][j]])
+            {
+                DFS(adj[node][j], visited, adj, st);
+            }
+        }
+        st.push(node);
+    }
+  
+    vector<int> topoSort(int V, vector<vector<int>>& edges) 
+    {
+		// Convert Adjacency Matrix to Adjacency List
+        vector<int> adj[V];
+        for (int i = 0; i < edges.size(); i++) 
+        {
+            int u = edges[i][0];
+            int v = edges[i][1];
+            adj[u].push_back(v);
+        }
+        
+        stack<int> st;
+        vector<int> visited(V, 0);
+        for(int i=0; i<V; i++)
+        {
+            if(!visited[i])
+            {
+                DFS(i, visited, adj, st);
+            }
+        }
+        vector<int> ans;
+        while(!st.empty())
+        {
+            ans.push_back(st.top());
+            st.pop();
+        }
+        return ans;
+    }
+};
+
+```
+
 - Topological Sort using BFS (Kahn's Algorithm)
 ```c++
 class Solution {
   public:
-    vector<int> topoSort(int V, vector<vector<int>>& adj) 
+    vector<int> topoSort(int V, vector<vector<int>>& edges) 
     {
+		// Convert Adjacency Matrix to Adjacency List
+		vector<int> adj[V];
+        for (int i=0; i<edges.size(); i++) 
+        {
+            int u = edges[i][0];
+            int v = edges[i][1];
+            adj[u].push_back(v);
+        }
+
         queue<int> q;
         vector<int> inDegree(V, 0);
         for(int i=0; i<V; i++)
@@ -578,6 +644,59 @@ class Solution {
         return ans;
     }
 };
+```
+
+```c++
+class Solution {
+  public:
+    vector<int> topoSort(int V, vector<vector<int>>& edges) 
+    {
+        // Convert Adjacency Matrix to Adjacency List
+        vector<int> adj[V];
+        for (int i = 0; i < edges.size(); i++) 
+        {
+            int u = edges[i][0];
+            int v = edges[i][1];
+            adj[u].push_back(v);
+        }
+        
+        queue<int> q;
+        vector<int> inDegree(V, 0);
+        for(int i=0; i<V; i++)
+        {
+            for(int j=0; j<adj[i].size(); j++)
+            {
+                inDegree[adj[i][j]]++;
+            }
+        }
+        
+        for(int i=0; i<V; i++)
+        {
+            if(inDegree[i] == 0)
+            {
+                q.push(i);
+            }
+        }
+        
+        vector<int> ans;
+        while(!q.empty())
+        {
+            int node = q.front();
+            q.pop();
+            ans.push_back(node);
+            for(int j=0; j<adj[node].size(); j++)
+            {
+                inDegree[adj[node][j]]--;
+                if(inDegree[adj[node][j]] == 0)
+                {
+                    q.push(adj[node][j]);
+                }
+            }
+        }
+        return ans;
+    }
+};
+
 ```
 
 ### Questions
