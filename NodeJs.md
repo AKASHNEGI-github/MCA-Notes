@@ -120,11 +120,145 @@ The Event Loop is essential in Node.js because it allows non-blocking, asynchron
 - Close Callbacks Phase : This phase executes callbacks for closed connections like sockets, streams, and event emitters. The server listens for incoming connections. When a socket is closed, the 'close' event is emitted, and the corresponding callback is executed in the close callbacks phase.
 
 
-  
+### What is Middleware in Express.js?
+Middleware in Express.js is a function that runs between receiving a request from the client and sending a response back to the client. It has access to the request object (req), the response object (res), and a next() function. Middleware is mainly used for tasks such as logging requests, authentication, validating data, parsing JSON, handling errors, and modifying the request or response objects. When a middleware finishes its work, it calls next() to pass control to the next middleware or route handler. If it doesn't call next() or send a response, the request can remain hanging.
 
+```js
+const express = require("express");
 
+const app = express();
 
+app.use((req, res, next) => {
+  console.log("Request received:", req.method, req.url);
 
+  next(); // Pass control to the next middleware
+});
+
+app.get("/", (req, res) => {
+  res.send("Hello World");
+});
+
+app.listen(3000);
+```
+
+**Types of Middleware in Express.js**
+- Application-level middleware
+- Router-level middleware
+- Built-in middleware
+- Third-party middleware
+- Error-handling middleware.
+
+**Application-Level Middleware:** Application-level middleware is attached directly to the Express application using app.use() or methods such as app.get(), app.post(), etc. It can run for every request or only for requests matching a particular path.
+
+```js
+// Since app.use() doesn't specify a path, this middleware runs for every incoming request.
+const express = require("express");
+const app = express();
+
+app.use((req, res, next) => {
+  console.log("Middleware executed");
+  next();
+});
+
+app.get("/", (req, res) => {
+  res.send("Home Page");
+});
+```
+
+```js
+// Here, the middleware runs only for requests starting with /admin.
+app.use("/admin", (req, res, next) => {
+  console.log("Admin middleware");
+  next();
+});
+
+app.get("/admin/dashboard", (req, res) => {
+  res.send("Admin Dashboard");
+});
+
+```
+
+**Router-Level Middleware:** Router-level middleware works similarly to application-level middleware, but it is attached to an Express Router object instead of the main application. It is useful when your application has different modules or routes, such as users, products, and orders.
+
+```js
+// When the client requests: 'GET /users/profile' the router-level middleware executes before the /profile route handler.
+const express = require("express");
+
+const app = express();
+const userRouter = express.Router();
+
+userRouter.use((req, res, next) => {
+  console.log("User router middleware");
+  next();
+});
+
+userRouter.get("/profile", (req, res) => {
+  res.send("User Profile");
+});
+
+app.use("/users", userRouter);
+
+app.listen(3000);
+```
+
+**Built-in Middleware:** Built-in middleware is middleware that comes with Express itself, so you don't need to install a separate package. Common examples are express.json(), express.urlencoded(), and express.static().
+
+```js
+// express.json() is used to parse JSON data sent in the request body.
+app.use(express.json());
+
+app.post("/users", (req, res) => {
+  console.log(req.body);
+
+  res.json({
+    message: "User received",
+    data: req.body
+  });
+});
+
+```
+
+```js
+// This allows Express to serve files such as HTML, CSS, JavaScript, and images from the public directory.
+app.use(express.static("public"));
+```
+
+**Third-Party Middleware:** Third-party middleware is middleware created by external developers or organizations and installed separately using npm. It is commonly used for logging, security, authentication, cookies, CORS, and other functionality.
+
+```js
+// morgan is commonly used for HTTP request logging.
+const express = require("express");
+const morgan = require("morgan");
+
+const app = express();
+
+app.use(morgan("dev"));
+
+app.get("/", (req, res) => {
+  res.send("Hello");
+});
+
+app.listen(3000);
+```
+
+**Error-Handling Middleware:** Error-handling middleware is specifically used to catch and handle errors in an Express application. The important thing to remember for an interview is that error-handling middleware has four parameters: err, req, res, and next.
+
+```js
+// Notice the four parameters: `(err, req, res, next)` Express recognizes this function as error-handling middleware because of its four arguments.
+app.get("/user", (req, res, next) => {
+  const error = new Error("User not found");
+
+  next(error);
+});
+
+app.use((err, req, res, next) => {
+  console.error(err.message);
+
+  res.status(500).json({
+    message: err.message
+  });
+});
+```
 
 
 
