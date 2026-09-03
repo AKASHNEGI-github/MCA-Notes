@@ -673,14 +673,14 @@ function App() {
 export default App
 ```
 
-### What are Hooks in React
+### What are Hooks in React?
 React Hooks are functions that allow functional components in React to manage state, handle side effects, and access other React features without needing class components.
 - Simplifies Code: Hooks provide a simpler and cleaner way to write components by using functions instead of classes.
 - State and Side Effects: Hooks allow you to use state (useState) and side effects (useEffect) in functional components.
 - Reusability: Hooks make it easier to share logic across components by creating custom hooks.
 - Readability: Functional components with hooks tend to be more concise and easier to read than class components.
 
-### What is useState Hook
+### What is useState Hook?
 The React useState Hook allows us to track state in a function component. State generally refers to data or properties that need to be tracking in an application. `useState` accepts an initial state and returns two values: The current state and A function that updates the state.
 
 ```jsx
@@ -773,7 +773,7 @@ createRoot(document.getElementById('root')).render(
 );
 ```
 
-### What is useEffect Hook
+### What is useEffect Hook?
 The useEffect Hook allows you to perform side effects in your components. Some examples of side effects are: fetching data, directly updating the DOM, and timers. useEffect accepts two arguments. The second argument is optional. useEffect(<function>, <dependency>).
 
 - No dependency passed
@@ -894,12 +894,253 @@ createRoot(document.getElementById('root')).render(
 );
 ```
 
-### What is useContext Hook
+### What is useContext Hook?
+React Context is a way to manage state globally. It can be used together with the useState Hook to share state between deeply nested components more easily than with useState alone.
 
+- Problem
+State should be held by the highest parent component in the stack that requires access to the state. To illustrate, we have many nested components. The component at the top and bottom of the stack need access to the state. To do this without Context, we will need to pass the state as "props" through each nested component. This is called "prop drilling". Even though component 2 did not need the state, it had to pass the state along so that it could reach component 3.
+
+```jsx
+import { useState } from 'react';
+import { createRoot } from 'react-dom/client';
+
+function Component1() {
+  const [user, setUser] = useState("Linus");
+
+  return (
+    <>
+      <h1>{`Hello ${user}!`}</h1>
+      <Component2 user={user} />
+    </>
+  );
+}
+
+function Component2({ user }) {
+  return (
+    <>
+      <h1>Component 2</h1>
+      <Component3 user={user} />
+    </>
+  );
+}
+
+function Component3({ user }) {
+  return (
+    <>
+      <h1>Component 3</h1>
+      <h2>{`Hello ${user} again!`}</h2>
+    </>
+  );
+}
+
+createRoot(document.getElementById('root')).render(
+  <Component1 />
+);
+```
+
+- Solution
+The solution is to create context.
+
+Step-1: Create Context
+To create context, you must Import createContext and initialize it:
+```jsx
+import { useState, createContext, useContext } from 'react';
+import { createRoot } from 'react-dom/client';
+
+const UserContext = createContext();
+```
+Next we'll use the Context Provider to wrap the tree of components that need the state Context.
+
+Step-2: Context Provider
+Wrap child components in the Context Provider and supply the state value.
+```jsx
+function Component1() {
+  const [user, setUser] = useState("Linus");
+
+  return (
+    <UserContext.Provider value={user}>
+      <h1>{`Hello ${user}!`}</h1>
+      <Component2 />
+    </UserContext.Provider>
+  );
+}
+```
+Now, all components in this tree will have access to the user Context.
+
+Step-3: Use the useContext Hook
+In order to use the Context in a child component, we need to access it using the useContext Hook.
+
+First, include the useContext in the import statement:
+```jsx
+import { useState, createContext, useContext } from "react";
+```
+Then you can access the user Context in all components:
+```jsx
+function Component3() {
+  const user = useContext(UserContext);
+
+  return (
+    <>
+      <h1>Component 3</h1>
+      <h2>{`Hello ${user} again!`}</h2>
+    </>
+  );
+}
+```
+
+- Full Solution
+```jsx
+import { useState, createContext, useContext } from 'react';
+import { createRoot } from 'react-dom/client';
+
+const UserContext = createContext();
+
+function Component1() {
+  const [user, setUser] = useState("Linus");
+
+  return (
+    <UserContext.Provider value={user}>
+      <h1>{`Hello ${user}!`}</h1>
+      <Component2 />
+    </UserContext.Provider>
+  );
+}
+
+function Component2() {
+  return (
+    <>
+      <h1>Component 2</h1>
+      <Component3 />
+    </>
+  );
+}
+
+function Component3() {
+  const user = useContext(UserContext);
+
+  return (
+    <>
+      <h1>Component 3</h1>
+      <h2>{`Hello ${user} again!`}</h2>
+    </>
+  );
+}
+
+createRoot(document.getElementById('root')).render(
+  <Component1 />
+);
+```
 
 ### What is useCallback Hook
 ### What is useRef Hook
-### What is useMemo Hook
+
+### What is useMemo Hook?
+The React useMemo Hook returns a memoized value. Think of memoization as caching a value so that it does not need to be recalculated. The useMemo Hook only runs when one of its dependencies update. This can improve performance. The useMemo and useCallback Hooks are similar: useMemo returns a memoized value. useCallback returns a memoized function.
+
+- Without useMemo
+The useMemo Hook can be used to keep expensive, resource intensive functions from needlessly running. In this example, we have an expensive function that runs on every render. When changing the count or adding a todo, you will notice a delay in execution. Example: A poor performing function. The expensiveCalculation function runs on every render:
+
+```jsx
+import { useState } from 'react';
+import { createRoot } from 'react-dom/client';
+
+const App = () => {
+  const [count, setCount] = useState(0);
+  const [todos, setTodos] = useState([]);
+  const calculation = expensiveCalculation(count);
+
+  const increment = () => {
+    setCount((c) => c + 1);
+  };
+  const addTodo = () => {
+    setTodos((t) => [...t, "New Todo"]);
+  };
+
+  return (
+    <div>
+      <div>
+        <h2>My Todos</h2>
+        {todos.map((todo, index) => {
+          return <p key={index}>{todo}</p>;
+        })}
+        <button onClick={addTodo}>Add Todo</button>
+      </div>
+      <hr />
+      <div>
+        Count: {count}
+        <button onClick={increment}>+</button>
+        <h2>Expensive Calculation</h2>
+        {calculation}
+        <p>Note that this example executes the expensive function also when you click on the Add Todo button.</p>
+      </div>
+    </div>
+  );
+};
+
+const expensiveCalculation = (num) => {
+  console.log("Calculating...");
+  for (let i = 0; i < 1000000000; i++) {
+    num += 1;
+  }
+  return num;
+};
+
+createRoot(document.getElementById('root')).render(
+  <App />
+);
+```
+
+- Use useMemo
+To fix this performance issue, we can use the useMemo Hook to memoize the expensiveCalculation function. This will cause the function to only run when needed. We can wrap the expensive function call with useMemo. The useMemoHook accepts a second parameter to declare dependencies. The expensive function will only run when its dependencies have changed. In the following example, the expensive function will only run when count is changed and not when todo's are added. Example: Performance example using the useMemo Hook:
+
+```jsx
+import { useState, useMemo } from 'react';
+import { createRoot } from 'react-dom/client';
+
+const App = () => {
+  const [count, setCount] = useState(0);
+  const [todos, setTodos] = useState([]);
+  const calculation = useMemo(() => expensiveCalculation(count), [count]);
+
+  const increment = () => {
+    setCount((c) => c + 1);
+  };
+  const addTodo = () => {
+    setTodos((t) => [...t, "New Todo"]);
+  };
+
+  return (
+    <div>
+      <div>
+        <h2>My Todos</h2>
+        {todos.map((todo, index) => {
+          return <p key={index}>{todo}</p>;
+        })}
+        <button onClick={addTodo}>Add Todo</button>
+      </div>
+      <hr />
+      <div>
+        Count: {count}
+        <button onClick={increment}>+</button>
+        <h2>Expensive Calculation</h2>
+        {calculation}
+      </div>
+    </div>
+  );
+};
+
+const expensiveCalculation = (num) => {
+  console.log("Calculating...");
+  for (let i = 0; i < 1000000000; i++) {
+    num += 1;
+  }
+  return num;
+};
+
+createRoot(document.getElementById('root')).render(
+  <App />
+);
+```
 
 ### What is Performance Hook
 ### What is Custom Hook
