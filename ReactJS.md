@@ -681,11 +681,226 @@ React Hooks are functions that allow functional components in React to manage st
 - Readability: Functional components with hooks tend to be more concise and easier to read than class components.
 
 ### What is useState Hook
+The React useState Hook allows us to track state in a function component. State generally refers to data or properties that need to be tracking in an application. `useState` accepts an initial state and returns two values: The current state and A function that updates the state.
+
+```jsx
+import { useState } from 'react';
+import { createRoot } from 'react-dom/client';
+
+function FavoriteColor() {
+  const [color, setColor] = useState("red");
+
+  return (
+    <>
+      <h1>My favorite color is {color}!</h1>
+      <button
+        type="button"
+        onClick={() => setColor("blue")}
+      >Blue</button>
+    </>
+  )
+}
+
+createRoot(document.getElementById('root')).render(
+  <FavoriteColor />
+);
+```
+
+```jsx
+import { useState } from 'react';
+import { createRoot } from 'react-dom/client';
+
+function MyCar() {
+  const [car, setCar] = useState({
+    brand: "Ford",
+    model: "Mustang",
+    year: "1964",
+    color: "red"
+  });
+
+  return (
+    <>
+      <h1>My {car.brand}</h1>
+      <p>
+        It is a {car.color} {car.model} from {car.year}.
+      </p>
+    </>
+  )
+}
+
+createRoot(document.getElementById('root')).render(
+  <MyCar />
+);
+```
+
+- Updating Objects and Arrays in State
+When state is updated, the entire state gets overwritten. What if we only want to update the color of our car? If we only called setCar({color: "blue"}), this would remove the brand, model, and year from our state. We can use the JavaScript spread operator to help us.
+
+```jsx
+import { useState } from 'react';
+import { createRoot } from 'react-dom/client';
+
+function MyCar() {
+  const [car, setCar] = useState({
+    brand: "Ford",
+    model: "Mustang",
+    year: "1964",
+    color: "red"
+  });
+
+  const updateColor = () => {
+    setCar(previousState => {
+      return { ...previousState, color: "blue" }
+    });
+  }
+
+  return (
+    <>
+      <h1>My {car.brand}</h1>
+      <p>
+        It is a {car.color} {car.model} from {car.year}.
+      </p>
+      <button
+        type="button"
+        onClick={updateColor}
+      >Blue</button>
+    </>
+  )
+}
+
+createRoot(document.getElementById('root')).render(
+  <MyCar />
+);
+```
+
 ### What is useEffect Hook
+The useEffect Hook allows you to perform side effects in your components. Some examples of side effects are: fetching data, directly updating the DOM, and timers. useEffect accepts two arguments. The second argument is optional. useEffect(<function>, <dependency>).
+
+- No dependency passed
+```jsx
+useEffect(() => {
+  //Runs on every render
+});
+```
+
+```jsx
+```jsx
+import { useState, useEffect } from 'react';
+import { createRoot } from 'react-dom/client';
+
+function Timer() {
+  const [count, setCount] = useState(0);
+
+  useEffect(() => {
+    setTimeout(() => {
+      setCount((count) => count + 1);
+    }, 1000);
+  });
+
+  return <h1>I've rendered {count} times!</h1>;
+}
+
+createRoot(document.getElementById('root')).render(
+  <Timer />
+);
+```
+
+- An empty array
+```jsx
+useEffect(() => {
+  //Runs only on the first render
+}, []);
+```
+
+```jsx
+import { useState, useEffect } from 'react';
+import { createRoot } from 'react-dom/client';
+
+function Timer() {
+  const [count, setCount] = useState(0);
+
+  useEffect(() => {
+    setTimeout(() => {
+      setCount((count) => count + 1);
+    }, 1000);
+  }, []); // <- add empty brackets here
+
+  return <h1>I've rendered {count} times!</h1>;
+}
+
+createRoot(document.getElementById('root')).render(
+  <Timer />
+);
+```
+
+- Props or state values
+```jsx
+useEffect(() => {
+  //Runs on the first render
+  //And any time any dependency value changes
+}, [prop, state]);
+```
+
+```jsx
+import { useState, useEffect } from 'react';
+import { createRoot } from 'react-dom/client';
+
+function Counter() {
+  const [count, setCount] = useState(0);
+  const [calculation, setCalculation] = useState(0);
+
+  useEffect(() => {
+    setCalculation(() => count * 2);
+  }, [count]); // <- add the count variable here
+
+  return (
+    <>
+      <p>Count: {count}</p>
+      <button onClick={() => setCount((c) => c + 1)}>+</button>
+      <p>Calculation: {calculation}</p>
+    </>
+  );
+}
+
+createRoot(document.getElementById('root')).render(
+  <Counter />
+);
+```
+
+- Effect Cleanup
+Some effects require cleanup to reduce memory leaks. Timeouts, subscriptions, event listeners, and other effects that are no longer needed should be disposed. We do this by including a return function at the end of the useEffect Hook.
+
+Clean up the timer at the end of the useEffect Hook:
+```jsx
+import { useState, useEffect } from 'react';
+import { createRoot } from 'react-dom/client';
+
+function Timer() {
+  const [count, setCount] = useState(0);
+
+  useEffect(() => {
+    let timer = setTimeout(() => {
+      setCount((count) => count + 1);
+    }, 1000);
+
+    return () => clearTimeout(timer)
+  }, []);
+
+  return <h1>I've rendered {count} times!</h1>;
+}
+
+createRoot(document.getElementById('root')).render(
+  <Timer />
+);
+```
+
+### What is useContext Hook
+
+
 ### What is useCallback Hook
 ### What is useRef Hook
 ### What is useMemo Hook
-### What is Context Hook
+
 ### What is Performance Hook
 ### What is Custom Hook
 
