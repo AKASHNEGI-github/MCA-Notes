@@ -245,6 +245,155 @@ void quickSort(int arr[] , int start , int end)
 }
 ```
 
+```c++
+int partition(int arr[], int start, int end)
+{
+    int pivot = arr[end];
+    int count = 0;
+    // Count elements smaller than or equal to pivot
+    for(int i = start; i < end; i++)
+    {
+        if(arr[i] <= pivot)
+        {
+            count++;
+        }
+    }
+    // Place pivot at its correct position
+    int pivot_index = start + count;
+    swap(arr[end], arr[pivot_index]);
+
+    int i = start;
+    int j = end;
+    while(i < pivot_index && j > pivot_index)
+    {
+        // Find element greater than pivot on the left
+        while(arr[i] <= pivot)
+        {
+            i++;
+        }
+        // Find element smaller than or equal to pivot on the right
+        while(arr[j] > pivot)
+        {
+            j--;
+        }
+        if(i < pivot_index && j > pivot_index)
+        {
+            swap(arr[i++], arr[j--]);
+        }
+    }
+
+    return pivot_index;
+}
+
+void quickSort(int arr[], int start, int end)
+{
+    if(start < end)
+    {
+        int p = partition(arr, start, end);
+
+        quickSort(arr, start, p - 1);
+        quickSort(arr, p + 1, end);
+    }
+}
+```
+
+```c++
+#include <cstdlib>
+#include <ctime>
+using namespace std;
+
+int partition(int arr[], int start, int end)
+{
+    // Select a random index
+    int random_index = start + rand() % (end - start + 1);
+
+    // Move random pivot to the start
+    swap(arr[start], arr[random_index]);
+
+    int pivot = arr[start];
+    int count = 0;
+
+    // Count elements smaller than or equal to pivot
+    for(int i = start + 1; i <= end; i++)
+    {
+        if(arr[i] <= pivot)
+        {
+            count++;
+        }
+    }
+
+    // Place pivot at its correct position
+    int pivot_index = start + count;
+    swap(arr[start], arr[pivot_index]);
+
+    int i = start;
+    int j = end;
+    while(i < pivot_index && j > pivot_index)
+    {
+        // Find element greater than pivot on the left
+        while(arr[i] <= pivot)
+        {
+            i++;
+        }
+        // Find element smaller than or equal to pivot on the right
+        while(arr[j] > pivot)
+        {
+            j--;
+        }
+        if(i < pivot_index && j > pivot_index)
+        {
+            swap(arr[i++], arr[j--]);
+        }
+    }
+
+    return pivot_index;
+}
+
+void quickSort(int arr[], int start, int end)
+{
+    if(start < end)
+    {
+        int p = partition(arr, start, end);
+
+        quickSort(arr, start, p - 1);
+        quickSort(arr, p + 1, end);
+    }
+}
+
+int main()
+{
+    srand(time(0));
+
+    int arr[] = {10, 7, 8, 9, 1, 5};
+    int n = sizeof(arr) / sizeof(arr[0]);
+
+    quickSort(arr, 0, n - 1);
+
+    for(int i = 0; i < n; i++)
+    {
+        cout << arr[i] << " ";
+    }
+
+    return 0;
+}
+```
+
+```
+Array:
+[10, 7, 8, 9, 1, 5]
+      ↑
+   random pivot
+
+Suppose random index = 3
+
+Swap arr[0] and arr[3]:
+
+[9, 7, 8, 10, 1, 5]
+ ↑
+pivot is now at start
+
+```
+
 ### Heap Sort
 ```c++
 #include<bits/stdc++.h>
