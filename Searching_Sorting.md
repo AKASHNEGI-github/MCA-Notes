@@ -197,6 +197,54 @@ void mergeSort(int arr[] , int start , int end)
 }
 ```
 
+```c++
+void merge(int arr[], int start, int mid, int end)
+{
+    int i = start;
+    int j = mid + 1;
+
+    while(i <= mid && j <= end)
+    {
+        if(arr[i] <= arr[j])
+        {
+            i++;
+        }
+        else
+        {
+            int value = arr[j];
+            int index = j;
+
+            // Shift elements to the right
+            while(index > i)
+            {
+                arr[index] = arr[index - 1];
+                index--;
+            }
+
+            arr[i] = value;
+
+            // Update all indices because elements were shifted
+            i++;
+            mid++;
+            j++;
+        }
+    }
+}
+
+void mergeSort(int arr[], int start, int end)
+{
+    if(start < end)
+    {
+        int mid = start + (end - start) / 2;
+
+        mergeSort(arr, start, mid);
+        mergeSort(arr, mid + 1, end);
+
+        merge(arr, start, mid, end);
+    }
+}
+```
+
 ### Quick Sort
 ```c++
 int partition(int arr[] , int start , int end)
